@@ -1,0 +1,11 @@
+Teacher.create!(user_name: "profbill",
+                password_digest: "password",
+                last_login: Time.now,
+                full_name: "Professor Bill",
+                screen_name: "profbill",
+                icon: "apple",
+                color: "red",
+                email: "wtktriger@noctrl.edu",
+                description: "Super user",
+                powers: "admin",
+                school_id: 0)

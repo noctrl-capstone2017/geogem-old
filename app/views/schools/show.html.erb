@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @school.full_name %>
+</p>
+
+<p>
+  <strong>Screen name:</strong>
+  <%= @school.screen_name %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @school.icon %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @school.color %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @school.email %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @school.website %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @school.description %>
+</p>
+
+<%= link_to 'Edit', edit_school_path(@school) %> |
+<%= link_to 'Back', schools_path %>

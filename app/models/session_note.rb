@@ -1,0 +1,2 @@
+class SessionNote < ApplicationRecord
+end

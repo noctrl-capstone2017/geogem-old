@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User name:</strong>
+  <%= @teacher.user_name %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @teacher.password_digest %>
+</p>
+
+<p>
+  <strong>Last login:</strong>
+  <%= @teacher.last_login %>
+</p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @teacher.full_name %>
+</p>
+
+<p>
+  <strong>Screen name:</strong>
+  <%= @teacher.screen_name %>
+</p>
+
+<p>
+  <strong>Icon:</strong>
+  <%= @teacher.icon %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @teacher.color %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @teacher.email %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @teacher.description %>
+</p>
+
+<p>
+  <strong>Powers:</strong>
+  <%= @teacher.powers %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @teacher.school_id %>
+</p>
+
+<%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<%= link_to 'Back', teachers_path %>
