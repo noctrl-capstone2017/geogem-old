@@ -1,7 +1,17 @@
+# author: Kevin M, Tommy B
+# 
 class Teacher < ApplicationRecord
+  ###REGEX###
+  #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  
+  #Prohibits any whitespace character (spaces, tabs, ¶, etc)
+  VALID_USER_NAME_REGEX = /\A[\S]+\z/
+  
+  #Alphanumerical stuff only.
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
   
+  ###VALIDAITONS###
   validates :user_name,  presence: true, length: { maximum: 75 }
     #Commented out until login stuff is put in place. -KM
   #validates :password_digest, presence: true, length: {minimum: 6 }
