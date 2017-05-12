@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
   # GET /sessions/1
   # GET /sessions/1.json
   def show
+    #Rolando modified with these lines
     @session_note = SessionNote.new
+    ##############################
   end
 
   # GET /sessions/new
