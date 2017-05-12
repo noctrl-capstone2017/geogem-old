@@ -1,3 +1,11 @@
+School.create!(full_name: "North Central",
+               screen_name: "noctrl",
+               icon: "apple",
+               color: "red",
+               email: "noctrl@noctrl.edu",
+               website: "noctrl.edu",
+               description: "It's North Central!")
+
 Teacher.create!(user_name: "profbill",
                 password_digest: "password",
                 last_login: Time.now,

@@ -29,5 +29,8 @@ class Teacher < ApplicationRecord
   validates :description, presence: true
   validates :powers, presence: true
   validates :school_id, presence: true
+  
+  has_secure_password
+  
 end
 
