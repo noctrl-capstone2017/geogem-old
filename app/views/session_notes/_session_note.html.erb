@@ -1,0 +1,7 @@
+<li id="note-<%= session.id %>">
+  <span class="session"><%= link_to session_note.session.id, session_note.session %></span>
+  <span class="note"><%= session_note.note %></span>
+  <span class="timestamp">
+    Created <%= time_ago_in_words(session_note.created_at) %> ago.
+  </span>
+</li>

@@ -7,7 +7,8 @@ class SessionNoteTest < ActiveSupport::TestCase
   
   def setup
     @session = sessions(:one)
-    @session_note = SessionNote.new(note: "Lorem ipsum", session_id: @session.id)
+    @session_note = @session.session_notes.build(note: "Lorem ipsum")
+    #@session_note = SessionNote.new(note: "Lorem ipsum", session_id: @session.id)
   end
   
   test "should be valid" do
