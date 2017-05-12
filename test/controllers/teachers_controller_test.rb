@@ -32,4 +32,11 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to teachers_url
   end
+  
+  test "should properly load existing info when loading a profile" do
+    get edit_teacher_url(@teacher)
+    assert_template "teachers/edit"
+    #This is all that's necessary, since if one part of it fails, all of it does.
+    assert_select 'h2', text: 'Teacher profile for ' + @teacher.full_name
+  end
 end

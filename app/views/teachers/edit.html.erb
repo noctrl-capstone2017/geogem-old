@@ -1,7 +1,7 @@
 <!--Adapted for use by Kevin M. -->
 <div class="page-header cap17-header vertical-align">
 	<div class="col-xs-11">
-		<h2>Teacher profile for <%= @teacher.screen_name %></h2>
+		<h2>Teacher profile for <%= @teacher.full_name %></h2>
 	</div>
 	<div class="col-xs-1 ">
 		<div class="header-sq i-ltblue" >
@@ -115,13 +115,21 @@
 	</div>
 
 	<!--Action Icons -->
+	<!--Figured out span link_to from http://stackoverflow.com/questions/7563911/adding-span-tag-in-rails-link-to -->
 <div class="row action-icon-row" style="margin-top: 40px;">
 	<div class="col-xs-2 col-xs-offset-1 text-center" title="Student Roster">
 		<div class ="action-sq i-red center-block">
-			<a href="teacher4.html"><span class="fa fa-child fa-4x student-icon"></span></a>
+			<%= link_to teacher_path(@teacher.id) do %>
+    		<span class="fa fa-child fa-4x student-icon">
+			<% end %>
 		</div>
-		<p><a href="teacher4.html"><span class="student-icon-text">Student Roster</span></a></p>
+		<p><%= link_to teacher_path(@teacher.id) do %>
+    <span class="student-icon-text">Student Roster</span>
+		<% end %></p>
 	</div>
+	
+	
+	
 	<div class="col-xs-2 col-xs-offset-1 text-center" title="Change Password">
 		<div class ="action-sq i-navy center-block">
 			<a href="teacher5.html"><span class="fa fa-key fa-4x student-icon"></span></a>
@@ -129,7 +137,6 @@
 		<p><a href="teacher5.html"><span class="student-icon-text">Change Password</span></a></p>
 	</div>
 	
-	<p>Note from Kevin M: Still working out how to turn these into links while preserving the icons. 
-	Use teachers/id or teachers/id/pword to reach these pages, respectively.</p>
+	<p>Note from Kevin M: Change password link doesn't work yet. Do /teachers/(id)/pword to see it.</p>
 	
 </div>
