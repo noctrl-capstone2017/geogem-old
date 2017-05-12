@@ -20,5 +20,18 @@
   <%= @session.session_student %>
 </p>
 
+<div class="row">
+    <aside class="col-md-4">
+      <section class="note">
+        <%= form_for(@session_note) do |f| %>
+          <div class="field">
+            <%= f.text_area :note, placeholder: "Compose new note..." %>
+          </div>
+          <%= f.submit "Create", class: "btn btn-primary" %>
+        <% end %>
+      </section>
+    </aside>
+</div>
+
 <%= link_to 'Edit', edit_session_path(@session) %> |
 <%= link_to 'Back', sessions_path %>
