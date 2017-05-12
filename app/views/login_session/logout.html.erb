@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<%= csrf_meta_tags %>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- 1. Meta tags: The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<!-- Note from Kevin M: I compressed the meta tags into that Rails shortcut above. If it causes any trouble, just replace it with the original. -->
 	<title>Operation Dinner Out</title>
 	<meta name="description" content="Capstone 2017 project">
 
 	<!-- 2. Bootstrap CSS: From CDN www.bootstrapcdn.com -->
-	<!-- Note from Kevin M: Bootstrap stuff is now imported into general.scss under assets. -->
-	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- 3. Favicon + my CSS: these are optional -->
 	<link rel="icon" href="favicon.ico">
-	<!-- Note from Kevin M: The CSS stylesheet links that were here are applied automagically. They're in assets/stylesheets. -->
-	<%= stylesheet_link_tag    'application', media: 'all',
-                                            'data-turbolinks-track': 'reload' %>
+	<!--<link href="style.css" rel="stylesheet">-->
+	<link href="../css/general.css" rel="stylesheet">
 	<script src="https://use.fontawesome.com/6ac119a099.js"></script>	
 	
 	<!-- 4. Old Explorer support: HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,38 +28,51 @@
 </head>
 
 <body>
-<nav class="navbar navbar-static-top">
-	<div class="container">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<!--<a class="navbar-brand" href="">Dinner Out</a>-->
-		<%= link_to "Dinner Out", about1_path, class: "navbar-brand" %>
-	</div>
-	<div id="navbar" class="collapse navbar-right navbar-collapse">
-		<ul class="nav navbar-nav ">
-			<li><a href="">Help</a></li>
-			<li><a href="">Admin</a></li>
-			<li><a href="">Profile</a></li>
-			<li><%= link_to "Logout", logout_path %></li>
-		</ul>
-	</div>		<!-- end nav-collapse -->
-</div>		<!-- end navbar -->
-</nav>
 
-<div class="container">
 	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
-    <%= yield %>
-  </div><!--End content col-->
-</div><!--End container-->
+
+		<!-- page header -->
+		<div id="navbar" class="collapse navbar-right navbar-collapse">
+		<ul class="nav navbar-nav ">
+			<li><%= link_to "Back to Login", login_path%></li>
+		</ul>
+		</div>
+		
+		<div class="page-header vertical-align">
+			<div class="col-xs-11">
+				<h2>Logged Out<small> - thank you for using Dinner Out</small></h2><!-- Dynamically fills in with school id -->
+			</div>
+			<div class="col-xs-1 center-block">
+				
+			</div>
+		</div><!--End page header-->
+
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4 text-center logout-art">
+				
+				<!-- Print out the Student Art -->
+				<!--    By: Meagan Moore     -->
+        <%= image_tag(random_student_art, height: "400", alt: "Student Art") %>
+
+				
+				<br>
+				<div class="logout-art-text">
+					<p>
+						<!-- Print out the corresponding description -->
+						<!--            By: Meagan Moore             -->
+						<!--         regex: (?<=\_)(.*?)(?=\.)       -->
+            Student art by <%= random_student_art %>
+						<br>
+						<a <%= link_to "About Our Student Art", about2_path%></a>
+					</p>
+				</div>
+			</div>   <!-- col -->
+		</div>   <!-- row -->
+
+	</div><!--End content col-->
 	
 	<!-- 5. Jquery: jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
 	<!-- 6. Bootstrap Javascript: Include all compiled plugins (below), or include individual files as needed -->
 	<!-- Got this from CDN: https://www.bootstrapcdn.com/ -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -73,6 +86,5 @@
 		  window.location = this.dataset.link
 		})
 	</script>
-
 </body>
 </html>
