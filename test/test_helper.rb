@@ -4,8 +4,10 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require "minitest/reporters"
-Minitest::Reporters.use!
+#Commented out by KM: Made testing impossible.
+  #`require': cannot load such file -- minitest/reporters (LoadError)
+#require "minitest/reporters"
+#Minitest::Reporters.use!
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
