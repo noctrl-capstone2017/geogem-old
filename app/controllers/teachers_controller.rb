@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
 
   # GET /teachers
   # GET /teachers.json
@@ -19,6 +19,12 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1/edit
   def edit
+  end
+  
+  # GET /teachers/1/pword
+  # When sessions and stuff are in place, only the teacher that this is for will
+  # be able to access it. Not fully working yet.
+  def pword
   end
 
   # POST /teachers
@@ -69,6 +75,7 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:user_name, :password_digest, :last_login, :full_name, :screen_name, :icon, :color, :email, :description, :powers, :school_id)
+      params.require(:teacher).permit(:user_name, :password_digest, :last_login,
+      :full_name, :screen_name, :icon, :color, :email, :description, :powers, :school_id)
     end
 end
