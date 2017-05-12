@@ -1,6 +1,7 @@
 # author: Kevin M, Tommy B
 # Teacher model validation.
 class Teacher < ApplicationRecord
+  before_save   :downcase_email
   ###REGEX###
   #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -32,5 +33,11 @@ class Teacher < ApplicationRecord
   
   has_secure_password
   
+  private
+
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
 end
 
