@@ -7,5 +7,5 @@ Teacher.create!(user_name: "profbill",
                 color: "red",
                 email: "wtktriger@noctrl.edu",
                 description: "Super user",
-                powers: "admin",
+                powers: "Admin",
                 school_id: 0)

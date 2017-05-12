@@ -1,5 +1,5 @@
 # author: Kevin M, Tommy B
-# 
+# Teacher model validation.
 class Teacher < ApplicationRecord
   ###REGEX###
   #Only allows legit email formatting
