@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'login_session#new'
 
   get 'teachers/:id/pword' => 'teachers#pword'
+  get 'static_pages/help'
 
   resources :roster_students
   resources :roster_squares
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
   resources :students
   resources :teachers
   resources :schools
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   # Login Session Controller
