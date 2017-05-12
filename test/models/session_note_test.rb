@@ -6,8 +6,6 @@ class SessionNoteTest < ActiveSupport::TestCase
   # end
   
   def setup
-    @teacher = teachers(:one)
-    @student = students(:two)
     @session = sessions(:one)
     @session_note = SessionNote.new(note: "Lorem ipsum", session_id: @session.id)
   end
@@ -18,6 +16,11 @@ class SessionNoteTest < ActiveSupport::TestCase
   
   test "session id should be present" do
     @session_note.session_id = nil
+    assert_not @session_note.valid?
+  end
+  
+  test "content should be present" do
+    @session_note.note = "   "
     assert_not @session_note.valid?
   end
 end
