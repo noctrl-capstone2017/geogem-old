@@ -7,7 +7,7 @@ School.create!(full_name: "North Central",
                description: "It's North Central!")
 
 Teacher.create!(user_name: "profbill",
-                password_digest: "password",
+                password_digest: Teacher.digest("password"),
                 last_login: Time.now,
                 full_name: "Professor Bill",
                 screen_name: "profbill",
