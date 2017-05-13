@@ -6,28 +6,19 @@
     	<h1 class="login-header-text">Dinner Out V0.2</h1>
 			<br>
 			
+			<!--                Login Area                  -->
+			<!--   Author: Meagan Moore & Steven Royster    -->
 			
-				<!--                Login Area                  -->
-				<!--   Author: Meagan Moore & Steven Royster    -->
-							
-							<%= form_for(:login_session, url: login_path) do |f| %>
+			<%= form_for(:login_session, url: login_path) do |f| %>
+				<%= f.label :user_name %>
+				<%= f.text_field :user_name, class: 'form-control'%>
 				
-				      <%= f.label :user_name %>
-				      <%= f.text_field :user_name, class: 'form-control'%>
+				<%= f.label :password %>
+			  <%= f.password_field :password, class: 'form-control' %>
 				
-				      <%= f.label :password %>
-				      <%= f.password_field :password, class: 'form-control' %>
-				
-				      <%= f.label :remember_me, class: "checkbox inline" do %>
-				        <%= f.check_box :remember_me %>
-				        <span>Remember me on this computer</span>
-				      <% end %>
-				
-				      <%= f.submit "Log in", class: "btn btn-primary" %>
-				    <% end %>
-				    
+				<%= f.submit "Log in", class: "btn btn-primary" %>
+			<% end %>
 
-				
 			<br>
 
 		</div>   <!-- end col --> 

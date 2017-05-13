@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
+  before_action :admin, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
