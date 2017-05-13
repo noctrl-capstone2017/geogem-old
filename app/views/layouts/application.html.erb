@@ -43,16 +43,18 @@
 	<div id="navbar" class="collapse navbar-right navbar-collapse">
 		<ul class="nav navbar-nav ">
 			<li><a href="">Help</a></li>
-			<li><a href="">Admin</a></li>
-			<li><a href="">Profile</a></li>
-			<li><%= link_to "Logout", logout_path %></li>
+			<% if logged_in? %>
+				<li><%= link_to 'Admin', admin_path %></li>
+				<li><%= link_to 'Profile', teachers_path %></li>
+				<li><%= link_to "Logout", logout_path %></li>
+			<% end %>
 		</ul>
 	</div>		<!-- end nav-collapse -->
 </div>		<!-- end navbar -->
 </nav>
 
 <div class="container">
-	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 ">
     <%= yield %>
   </div><!--End content col-->
 </div><!--End container-->

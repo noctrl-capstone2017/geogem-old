@@ -1,4 +1,7 @@
+# author: Kevin M, Tommy B
+# Teacher model validation.
 class Teacher < ApplicationRecord
+<<<<<<< HEAD
 
   
   #Creates the relationship of what students belong to the teacher
@@ -10,6 +13,9 @@ class Teacher < ApplicationRecord
   has_many :students, through: :active_relationships, source: :student 
 
 
+=======
+  
+>>>>>>> 2b80b7e5c413d5d53fe8ebbc65463b4f9c8920bb
   before_save   :downcase_email
   ###REGEX###
   #Only allows legit email formatting
@@ -49,5 +55,14 @@ class Teacher < ApplicationRecord
   
   private
 
+<<<<<<< HEAD
 
+=======
+    # Converts email to all lower-case.
+    def downcase_email
+      self.email = email.downcase
+    end
+    
+>>>>>>> 2b80b7e5c413d5d53fe8ebbc65463b4f9c8920bb
 end
+

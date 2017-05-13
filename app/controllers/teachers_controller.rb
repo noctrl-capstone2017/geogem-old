@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
+  before_action :is_admin, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
@@ -91,8 +92,26 @@ class TeachersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+    
   private
+  
+    # Author: Steven Royster
+    # If the teacher is not an admin then they 
+    #  will flashed an unauthorized prompt and redirected to home
+    def is_admin
+      if is_admin?
+        flash[:danger] = "Unauthorized"
+        redirect_to home1_path
+      end
+    end
+    
+    # Author: Steven Royster
+    # Checks to see if the current teacher has admin status
+    # Returns true if the teacher is an admin
+    def is_admin?
+      current_teacher && current_teacher.power == Admin
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
