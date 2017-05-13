@@ -1,0 +1,26 @@
+@charset "utf-8";
+/***********************************************************
+* Login CSS Stylesheet Document 
+* Written by: Andrew Alonso-Emanuel
+************************************************************/
+
+/*********************************************************
+*  LOGIN STYLING
+*********************************************************/
+
+.login-row {
+	margin-top: 7%;
+}
+
+.login-col {
+	background-color: rgba(36,88,183,0.2);
+	border-radius: 10px;
+	border: 1px solid #2458B7;
+}
+
+.login-header-text {
+	font-family: "Rubik", sans-serif;
+	font-size: 3.0em;
+	text-align: center;
+	color: #444444;
+}
