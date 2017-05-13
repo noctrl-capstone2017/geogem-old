@@ -4,6 +4,9 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+
+#Commented out by KM: Made testing impossible.
+  #`require': cannot load such file -- minitest/reporters (LoadError)
 #require "minitest/reporters"
 #Minitest::Reporters.use!
 
