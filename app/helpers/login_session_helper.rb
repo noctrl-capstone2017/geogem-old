@@ -58,11 +58,11 @@ module LoginSessionHelper
   
   # Redirects if user is not admin & is trying to do
   # something they don't have permission to 
-  # def admin
-  #   if !admin?
-  #     flash[:danger] = "Unauthorized"
-  #     redirect_to home1_path
-  #   end
-  # end
+  def admin
+    if !is_admin?
+      flash[:danger] = "Unauthorized"
+      redirect_to home1_path
+    end
+  end
   
 end
