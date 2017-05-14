@@ -61,6 +61,11 @@ class Teacher < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  # Forgets a user --added by DJ
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+
   # Returns the hash digest of the given string.
   def Teacher.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

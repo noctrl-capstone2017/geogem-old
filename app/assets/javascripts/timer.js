@@ -24,8 +24,8 @@ window.onload = function () {
   {
 	  ts = timerSquares[i];
 	  timerSquares[i].buttonStart.onclick = beginTimer.bind(this, ts);
-  }
-  
+  }  
+
   var counterDivs = document.getElementsByClassName("frequency");
   var counterSquares = [];
   for (var i = 0; i < counterDivs.length; i++)
@@ -42,11 +42,21 @@ window.onload = function () {
 	  cs = counterSquares[i];
 	  counterSquares[i].countButton.onclick = count.bind(this, cs.countLabel);
   }
-  
-  
+ 
+
   function count(cLabel)
   {
 	cLabel.innerText = (parseInt(cLabel.innerText) + 1);  
+
+//   var buttonCount = document.getElementById('counter');
+//   var countLabel = document.getElementById('count')
+  
+//   buttonCount.onclick = function(){count(countLabel)};
+  
+//   function count(cLabel)
+//   {
+// 	cLabel.innerText = (parseInt(countLabel.innerText) + 1);  
+
   }
 
   function beginTimer(timerSq) 
@@ -153,6 +163,7 @@ function timeStamp() {
 
 // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
+
 }
 
 function timeOnlyStamp() {
@@ -173,4 +184,5 @@ function timeOnlyStamp() {
   }
 // Return the formatted string
   return time.join(":") + " " + suffix;
+
 }
