@@ -15,8 +15,6 @@ class Teacher < ApplicationRecord
   
   ###VALIDAITONS###
   validates :user_name,  presence: true, length: { maximum: 75 }
-    #Commented out until login stuff is put in place. -KM
-  #validates :password_digest, presence: true, length: {minimum: 6 }
   
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },
@@ -76,6 +74,5 @@ class Teacher < ApplicationRecord
     def downcase_email
       self.email = email.downcase
     end
-    
 end
 
