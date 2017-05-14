@@ -21,6 +21,12 @@ class SchoolsController < ApplicationController
   def edit
   end
 
+  # RH
+  #make the list of schools available at /super
+  def super
+    @schools = School.all
+  end
+  
   # POST /schools
   # POST /schools.json
   def create
