@@ -1,12 +1,15 @@
+//@author Matthew O
 window.onload = function () {
   //Add JAlert prompt http://labs.abeautifulsite.net/archived/jquery-alerts/demo/
-  var durationDivs = document.getElementsByClassName("durationDiv");
+  var startTime = document.getElementById("start_time");
+  startTime.innerHTML = timeOnlyStamp();
+  var durationDivs = document.getElementsByClassName("duration");
   var timerSquares = [];
   for (var i = 0; i < durationDivs.length; i++)
   {
 	  var timerSquare = new Object();
 	  timerSquare.Interval;
-	  timerSquare.durationLog =  durationDivs[i].querySelector(".durationLog");
+	  timerSquare.durationLog =  document.getElementById("eventLog");
 	  timerSquare.buttonStart =  durationDivs[i].querySelector((".button-start"));
 	  timerSquare.tensTxt = durationDivs[i].querySelector("#tens");
 	  timerSquare.secondsTxt = durationDivs[i].querySelector("#seconds");
@@ -21,16 +24,39 @@ window.onload = function () {
   {
 	  ts = timerSquares[i];
 	  timerSquares[i].buttonStart.onclick = beginTimer.bind(this, ts);
+  }  
+
+  var counterDivs = document.getElementsByClassName("frequency");
+  var counterSquares = [];
+  for (var i = 0; i < counterDivs.length; i++)
+  {
+	  var counterSquare = new Object();
+	  counterSquare.countLabel =  counterDivs[i].querySelector(".count");
+	  counterSquare.countLog = document.getElementById("eventLog");
+	  counterSquare.countButton =  counterDivs[i].querySelector((".counter"));	  
+	  counterSquares.push(counterSquare);
   }
   
-  var buttonCount = document.getElementById('counter');
-  var countLabel = document.getElementById('count')
-  
-  buttonCount.onclick = function(){count(countLabel)};
-  
+  for(var i = 0; i < counterSquares.length; i++)
+  {
+	  cs = counterSquares[i];
+	  counterSquares[i].countButton.onclick = count.bind(this, cs.countLabel);
+  }
+ 
+
   function count(cLabel)
   {
-	cLabel.innerText = (parseInt(countLabel.innerText) + 1);  
+	cLabel.innerText = (parseInt(cLabel.innerText) + 1);  
+
+//   var buttonCount = document.getElementById('counter');
+//   var countLabel = document.getElementById('count')
+  
+//   buttonCount.onclick = function(){count(countLabel)};
+  
+//   function count(cLabel)
+//   {
+// 	cLabel.innerText = (parseInt(countLabel.innerText) + 1);  
+
   }
 
   function beginTimer(timerSq) 
@@ -137,4 +163,26 @@ function timeStamp() {
 
 // Return the formatted string
   return date.join("/") + " " + time.join(":") + " " + suffix;
+
+}
+
+function timeOnlyStamp() {
+// Create a date object with the current time
+  var now = new Date();
+  var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+// Determine AM or PM suffix based on the hour
+  var suffix = ( time[0] < 12 ) ? "AM" : "PM";
+// Convert hour from military time
+  time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+// If hour is 0, set it to 12
+  time[0] = time[0] || 12;
+// If seconds and minutes are less than 10, add a zero
+  for ( var i = 1; i < 3; i++ ) {
+    if ( time[i] < 10 ) {
+      time[i] = "0" + time[i];
+    }
+  }
+// Return the formatted string
+  return time.join(":") + " " + suffix;
+
 }

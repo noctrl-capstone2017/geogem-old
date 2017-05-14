@@ -80,4 +80,3 @@ class Teacher < ApplicationRecord
       self.email = email.downcase
     end
 end
-

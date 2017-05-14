@@ -2,7 +2,7 @@
 <!-- page header -->
 <div class="page-header vertical-align">
 	<div class="col-xs-11">
-		<h2>Home<small> - student roster for teacher <%= @teacher.teacher_icon_name %></small></h2><!-- Dynamically fills in with school id -->
+		<h2>Home<small> - student roster for teacher <%= @teacher.screen_name %></small></h2><!-- Dynamically fills in with school id -->
 	</div>
 	<div class="col-xs-1 pull-right">
 		<div class="header-sq i-plum" >
@@ -19,9 +19,9 @@
 		<% end %>
 		<div class="col-xs-3 text-center">
       <div class =" square i-<%= student.color %> center-block">
-          <span class="fa fa-<%= student.student_icon %> fa-5x student-icon "></span>
+          <span class="fa fa-<%= student.icon %> fa-5x student-icon "></span>
       </div>
-      <p><span class="student-icon-text"><%= student.student_name%></span></p>
+      <p><span class="student-icon-text"><%= student.full_name%></span></p>
     </div>    <!-- col -->
     <% if index == 3 || index == 7 || index == (@top_students.size-1) %>
     	</div>   <!-- row -->
@@ -37,7 +37,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="email">Student:</label>
 				<div class="col-sm-4">
-					<%= select_tag 'student_id', options_from_collection_for_select(@teacher.students, 'id', 'student_name'), {:required => true} %>
+					<%= select_tag 'student_id', options_from_collection_for_select(@teacher.students, 'id', 'full_name'), {:required => true} %>
 				</div>
 			</div>
 		</div>
