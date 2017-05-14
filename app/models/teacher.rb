@@ -74,9 +74,4 @@ class Teacher < ApplicationRecord
     def downcase_email
       self.email = email.downcase
     end
-<<<<<<< HEAD
 end
-=======
-end
-
->>>>>>> d09b1f7f25d68368b39db55827bdc36aef5bb9be

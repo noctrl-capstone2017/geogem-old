@@ -47,7 +47,7 @@ class TeachersController < ApplicationController
 
    #author: Matthew O & Alex P
   def home
-    @teacher = current_teacher
+    @teacher = Teacher.find(params[:id])
     @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
     if params[:start_session]
         @session = Session.new

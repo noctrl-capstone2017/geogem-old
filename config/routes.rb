@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   get 'static_pages/testing'
   get 'teachers/:id/pword' => 'teachers#pword'
-
+  get "teachers/:id/home",  to: 'teachers#home'
+  
   resources :roster_students
   resources :roster_squares
   resources :session_notes
