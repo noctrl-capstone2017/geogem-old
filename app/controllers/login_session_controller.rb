@@ -4,10 +4,12 @@
 
 class LoginSessionController < ApplicationController
 
+  # The teacher can only log out if they are actually logged in
+  before_action :logged_in, only: [:destroy]
+  
   # login page
   def new
   end
-  
   
   # logs in the teacher if successful, flashes a danger if invalid log in info
   def create

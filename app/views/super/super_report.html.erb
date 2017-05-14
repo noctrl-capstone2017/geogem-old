@@ -1,0 +1,9 @@
+<h1>Super Report</h1>
+<h2>System report for the Super User</h2>
+<p>Coming soon... stats about Dinner Out</p>
+<p>@Session.session_event.count</p>
+<p>@teacher.active_relationships.count</p>
+<p>@teacher.students.count</p>
+<%= Teacher.first.students.count %>
+<%= Teacher.first.active_relationships.count %>
+<%= link_to 'Return to Super Dashboard', schools_path %>

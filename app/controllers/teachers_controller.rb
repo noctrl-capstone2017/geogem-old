@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
+  before_action :is_admin, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
@@ -43,6 +44,31 @@ class TeachersController < ApplicationController
     end
   end
 
+
+   #author: Matthew O & Alex P
+  def home
+    @teacher = current_teacher
+    @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
+    if params[:start_session]
+        @session = Session.new
+        @session.session_teacher = @teacher.id
+        @session.session_student = params[:student_id]
+        @session.start_time = Time.now
+        respond_to do |format|
+          if @session.save
+            format.html { redirect_to @session, notice: 'Session was successfully created.' }
+            format.json { render :show, status: :created, location: @session }
+          else
+            format.html { render :new }
+            format.json { render json: @session.errors, status: :unprocessable_entity }
+          end
+        end
+    elsif params[:analyze]
+        # Currently unimplemented will direct to analysis page for the selected student
+    end
+  end
+  
+  
   # PATCH/PUT /teachers/1
   # PATCH/PUT /teachers/1.json
   def update
@@ -66,8 +92,26 @@ class TeachersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+    
   private
+  
+    # Author: Steven Royster
+    # If the teacher is not an admin then they 
+    #  will flashed an unauthorized prompt and redirected to home
+    def is_admin
+      if is_admin?
+        flash[:danger] = "Unauthorized"
+        redirect_to home1_path
+      end
+    end
+    
+    # Author: Steven Royster
+    # Checks to see if the current teacher has admin status
+    # Returns true if the teacher is an admin
+    def is_admin?
+      current_teacher && current_teacher.power == Admin
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
