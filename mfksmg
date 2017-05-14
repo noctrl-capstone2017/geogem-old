@@ -1,0 +1,278 @@
+[1mdiff --git a/Gemfile b/Gemfile[m
+[1mindex f321f0b..6e8eda6 100644[m
+[1m--- a/Gemfile[m
+[1m+++ b/Gemfile[m
+[36m@@ -20,7 +20,7 @@[m [mgem 'turbolinks', '~> 5'[m
+ gem 'jbuilder', '~> 2.5'[m
+ [m
+ group :development, :test do[m
+[31m-  gem 'rails-controller-testing'[m
+[32m+[m[32m  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.1'[m
+   gem 'sqlite3', '1.3.12'[m
+   gem 'byebug', platform: :mri[m
+ end[m
+[36m@@ -36,23 +36,12 @@[m [mgroup :production do[m
+   gem 'pg', '0.18.4'[m
+ end[m
+ [m
+[31m-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem[m
+[31m-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby][m
+[31m-[m
+[31m-[m
+[31m-group :development, :test do[m
+[31m-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console[m
+[31m-  gem 'byebug', platform: :mri[m
+[31m-end[m
+[31m-[m
+[31m-group :development do[m
+[31m-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.[m
+[31m-  gem 'web-console', '>= 3.3.0'[m
+[31m-  gem 'listen', '~> 3.0.5'[m
+[31m-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring[m
+[31m-  gem 'spring'[m
+[31m-  gem 'spring-watcher-listen', '~> 2.0.0'[m
+[32m+[m[32mgroup :test do[m
+[32m+[m[32m  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.1'[m
+[32m+[m[32m  gem 'minitest-reporters',       '1.1.9'[m
+[32m+[m[32m  gem 'guard',                    '2.13.0'[m
+[32m+[m[32m  gem 'guard-minitest',           '2.4.4'[m[41m [m
+ end[m
+ [m
+ # Windows does not include zoneinfo files, so bundle the tzinfo-data gem[m
+[31m-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby][m
+[32m+[m[32mgem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby][m
+\ No newline at end of file[m
+[1mdiff --git a/Gemfile.lock b/Gemfile.lock[m
+[1mindex 283c430..0d55a78 100644[m
+[1m--- a/Gemfile.lock[m
+[1m+++ b/Gemfile.lock[m
+[36m@@ -38,6 +38,7 @@[m [mGEM[m
+       i18n (~> 0.7)[m
+       minitest (~> 5.1)[m
+       tzinfo (~> 1.1)[m
+[32m+[m[32m    ansi (1.5.0)[m
+     arel (7.1.4)[m
+     autoprefixer-rails (7.0.1)[m
+       execjs[m
+[36m@@ -50,6 +51,7 @@[m [mGEM[m
+       will_paginate[m
+     builder (3.2.3)[m
+     byebug (9.0.6)[m
+[32m+[m[32m    coderay (1.1.1)[m
+     coffee-rails (4.2.1)[m
+       coffee-script (>= 2.2.0)[m
+       railties (>= 4.0.0, < 5.2.x)[m
+[36m@@ -63,8 +65,22 @@[m [mGEM[m
+     faker (1.6.6)[m
+       i18n (~> 0.5)[m
+     ffi (1.9.18)[m
+[32m+[m[32m    formatador (0.2.5)[m
+     globalid (0.4.0)[m
+       activesupport (>= 4.2.0)[m
+[32m+[m[32m    guard (2.13.0)[m
+[32m+[m[32m      formatador (>= 0.2.4)[m
+[32m+[m[32m      listen (>= 2.7, <= 4.0)[m
+[32m+[m[32m      lumberjack (~> 1.0)[m
+[32m+[m[32m      nenv (~> 0.1)[m
+[32m+[m[32m      notiffany (~> 0.0)[m
+[32m+[m[32m      pry (>= 0.9.12)[m
+[32m+[m[32m      shellany (~> 0.0)[m
+[32m+[m[32m      thor (>= 0.18.1)[m
+[32m+[m[32m    guard-compat (1.2.1)[m
+[32m+[m[32m    guard-minitest (2.4.4)[m
+[32m+[m[32m      guard-compat (~> 1.2)[m
+[32m+[m[32m      minitest (>= 3.0)[m
+     i18n (0.8.1)[m
+     jbuilder (2.6.4)[m
+       activesupport (>= 3.0.0)[m
+[36m@@ -78,6 +94,7 @@[m [mGEM[m
+       rb-inotify (~> 0.9, >= 0.9.7)[m
+     loofah (2.0.3)[m
+       nokogiri (>= 1.5.9)[m
+[32m+[m[32m    lumberjack (1.0.11)[m
+     mail (2.6.5)[m
+       mime-types (>= 1.16, < 4)[m
+     method_source (0.8.2)[m
+[36m@@ -86,11 +103,24 @@[m [mGEM[m
+     mime-types-data (3.2016.0521)[m
+     mini_portile2 (2.1.0)[m
+     minitest (5.10.2)[m
+[32m+[m[32m    minitest-reporters (1.1.9)[m
+[32m+[m[32m      ansi[m
+[32m+[m[32m      builder[m
+[32m+[m[32m      minitest (>= 5.0)[m
+[32m+[m[32m      ruby-progressbar[m
+     multi_json (1.12.1)[m
+[32m+[m[32m    nenv (0.3.0)[m
+     nio4r (2.0.0)[m
+     nokogiri (1.7.2)[m
+       mini_portile2 (~> 2.1.0)[m
+[32m+[m[32m    notiffany (0.1.1)[m
+[32m+[m[32m      nenv (~> 0.1)[m
+[32m+[m[32m      shellany (~> 0.0)[m
+     pg (0.18.4)[m
+[32m+[m[32m    pry (0.10.4)[m
+[32m+[m[32m      coderay (~> 1.1.0)[m
+[32m+[m[32m      method_source (~> 0.8.1)[m
+[32m+[m[32m      slop (~> 3.4)[m
+     puma (3.8.2)[m
+     rack (2.0.2)[m
+     rack-test (0.6.3)[m
+[36m@@ -126,6 +156,7 @@[m [mGEM[m
+     rb-fsevent (0.9.8)[m
+     rb-inotify (0.9.8)[m
+       ffi (>= 0.5.0)[m
+[32m+[m[32m    ruby-progressbar (1.8.1)[m
+     sass (3.4.23)[m
+     sass-rails (5.0.6)[m
+       railties (>= 4.0.0, < 6)[m
+[36m@@ -133,6 +164,8 @@[m [mGEM[m
+       sprockets (>= 2.8, < 4.0)[m
+       sprockets-rails (>= 2.0, < 4.0)[m
+       tilt (>= 1.1, < 3)[m
+[32m+[m[32m    shellany (0.0.1)[m
+[32m+[m[32m    slop (3.6.0)[m
+     spring (2.0.1)[m
+       activesupport (>= 4.2)[m
+     spring-watcher-listen (2.0.1)[m
+[36m@@ -176,13 +209,16 @@[m [mDEPENDENCIES[m
+   byebug[m
+   coffee-rails (~> 4.2)[m
+   faker (= 1.6.6)[m
+[32m+[m[32m  guard (= 2.13.0)[m
+[32m+[m[32m  guard-minitest (= 2.4.4)[m
+   jbuilder (~> 2.5)[m
+   jquery-rails[m
+   listen (~> 3.0.5)[m
+[32m+[m[32m  minitest-reporters (= 1.1.9)[m
+   pg (= 0.18.4)[m
+   puma (~> 3.0)[m
+   rails (~> 5.0.1)[m
+[31m-  rails-controller-testing[m
+[32m+[m[32m  rails-controller-testing (~> 1.0, >= 1.0.1)[m
+   sass-rails (~> 5.0)[m
+   spring[m
+   spring-watcher-listen (~> 2.0.0)[m
+[1mdiff --git a/app/controllers/sessions_controller.rb b/app/controllers/sessions_controller.rb[m
+[1mindex db5df58..51a6068 100644[m
+[1m--- a/app/controllers/sessions_controller.rb[m
+[1m+++ b/app/controllers/sessions_controller.rb[m
+[36m@@ -10,6 +10,9 @@[m [mclass SessionsController < ApplicationController[m
+   # GET /sessions/1[m
+   # GET /sessions/1.json[m
+   def show[m
+[32m+[m[32m    #Rolando modified with these lines[m
+[32m+[m[32m    @session_note = SessionNote.new[m
+[32m+[m[32m    ##############################[m
+   end[m
+ [m
+   # GET /sessions/new[m
+[1mdiff --git a/app/models/session_note.rb b/app/models/session_note.rb[m
+[1mindex 1d543b1..3732528 100644[m
+[1m--- a/app/models/session_note.rb[m
+[1m+++ b/app/models/session_note.rb[m
+[36m@@ -1,2 +1,5 @@[m
+ class SessionNote < ApplicationRecord[m
+[32m+[m[32m    belongs_to :session[m
+[32m+[m[32m    validates :session_id, presence: true[m
+[32m+[m[32m    validates :note, presence: true[m
+ end[m
+[1mdiff --git a/app/views/session_notes/_session_note.html.erb b/app/views/session_notes/_session_note.html.erb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a6f70ce[m
+[1m--- /dev/null[m
+[1m+++ b/app/views/session_notes/_session_note.html.erb[m
+[36m@@ -0,0 +1,7 @@[m
+[32m+[m[32m<li id="note-<%= session.id %>">[m
+[32m+[m[32m  <span class="session"><%= link_to session_note.session.id, session_note.session %></span>[m
+[32m+[m[32m  <span class="note"><%= session_note.note %></span>[m
+[32m+[m[32m  <span class="timestamp">[m
+[32m+[m[32m    Created <%= time_ago_in_words(session_note.created_at) %> ago.[m
+[32m+[m[32m  </span>[m
+[32m+[m[32m</li>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/views/sessions/realshow.html.erb b/app/views/sessions/realshow.html.erb[m
+[1mnew file mode 100644[m
+[1mindex 0000000..6db5da8[m
+[1m--- /dev/null[m
+[1m+++ b/app/views/sessions/realshow.html.erb[m
+[36m@@ -0,0 +1,24 @@[m
+[32m+[m[32m<p id="notice"><%= notice %></p>[m
+[32m+[m
+[32m+[m[32m<p>[m
+[32m+[m[32m  <strong>Start time:</strong>[m
+[32m+[m[32m  <%= @session.start_time %>[m
+[32m+[m[32m</p>[m
+[32m+[m
+[32m+[m[32m<p>[m
+[32m+[m[32m  <strong>End time:</strong>[m
+[32m+[m[32m  <%= @session.end_time %>[m
+[32m+[m[32m</p>[m
+[32m+[m
+[32m+[m[32m<p>[m
+[32m+[m[32m  <strong>Session teacher:</strong>[m
+[32m+[m[32m  <%= @session.session_teacher %>[m
+[32m+[m[32m</p>[m
+[32m+[m
+[32m+[m[32m<p>[m
+[32m+[m[32m  <strong>Session student:</strong>[m
+[32m+[m[32m  <%= @session.session_student %>[m
+[32m+[m[32m</p>[m
+[32m+[m
+[32m+[m[32m<%= link_to 'Edit', edit_session_path(@session) %> |[m
+[32m+[m[32m<%= link_to 'Back', sessions_path %>[m
+\ No newline at end of file[m
+[1mdiff --git a/app/views/sessions/show.html.erb b/app/views/sessions/show.html.erb[m
+[1mindex 513df23..bf44ecd 100644[m
+[1m--- a/app/views/sessions/show.html.erb[m
+[1m+++ b/app/views/sessions/show.html.erb[m
+[36m@@ -20,5 +20,18 @@[m
+   <%= @session.session_student %>[m
+ </p>[m
+ [m
+[32m+[m[32m<div class="row">[m
+[32m+[m[32m    <aside class="col-md-4">[m
+[32m+[m[32m      <section class="note">[m
+[32m+[m[32m        <%= form_for(@session_note) do |f| %>[m
+[32m+[m[32m          <div class="field">[m
+[32m+[m[32m            <%= f.text_area :note, placeholder: "Compose new note..." %>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m          <%= f.submit "Create", class: "btn btn-primary" %>[m
+[32m+[m[32m        <% end %>[m
+[32m+[m[32m      </section>[m
+[32m+[m[32m    </aside>[m
+[32m+[m[32m</div>[m
+[32m+[m
+ <%= link_to 'Edit', edit_session_path(@session) %> |[m
+ <%= link_to 'Back', sessions_path %>[m
+[1mdiff --git a/test/models/session_note_test.rb b/test/models/session_note_test.rb[m
+[1mindex 608af6e..b7a2396 100644[m
+[1m--- a/test/models/session_note_test.rb[m
+[1m+++ b/test/models/session_note_test.rb[m
+[36m@@ -4,4 +4,24 @@[m [mclass SessionNoteTest < ActiveSupport::TestCase[m
+   # test "the truth" do[m
+   #   assert true[m
+   # end[m
+[31m-end[m
+[32m+[m[41m  [m
+[32m+[m[32m  def setup[m
+[32m+[m[32m    @session = sessions(:one)[m
+[32m+[m[32m    @session_note = @session.session_notes.build(note: "Lorem ipsum")[m
+[32m+[m[32m    #@session_note = SessionNote.new(note: "Lorem ipsum", session_id: @session.id)[m
+[32m+[m[32m  end[m
+[32m+[m[41m  [m
+[32m+[m[32m  test "should be valid" do[m
+[32m+[m[32m    assert @session_note.valid?[m
+[32m+[m[32m  end[m
+[32m+[m[41m  [m
+[32m+[m[32m  test "session id should be present" do[m
+[32m+[m[32m    @session_note.session_id = nil[m
+[32m+[m[32m    assert_not @session_note.valid?[m
+[32m+[m[32m  end[m
+[32m+[m[41m  [m
+[32m+[m[32m  test "content should be present" do[m
+[32m+[m[32m    @session_note.note = "   "[m
+[32m+[m[32m    assert_not @session_note.valid?[m
+[32m+[m[32m  end[m
+[32m+[m[32mend[m
+\ No newline at end of file[m
