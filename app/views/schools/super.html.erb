@@ -17,7 +17,7 @@
 	 <form action="/updateFocus" method="post">
 			<select required>
 				<% @schools.each do |school| %>
-					<option value="<%= school.school_name %>"><%= school.school_name %></option>
+					<option value="<%= school.full_name %>"><%= school.full_name %></option>
 		   		<% end %>
 			</select> 
 	   <input type="submit" value="Change Focus School">
