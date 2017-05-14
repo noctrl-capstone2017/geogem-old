@@ -1,4 +1,4 @@
-# author: Kevin M and Tommy B
+# author: Kevin M, Tommy B
 # Testing Teachers
 
 require 'test_helper'
