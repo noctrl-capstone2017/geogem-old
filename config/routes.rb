@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'teachers/:id/pword' => 'teachers#pword'
   get "teachers/:id/home",  to: 'teachers#home'
+  get "teachers/analysis"
   
   resources :roster_students
   resources :roster_squares
