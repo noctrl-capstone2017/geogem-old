@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
   before_action :is_admin, except: [:update, :edit]
-  before_action :is_super, except: [:update, :edit]
+  #before_action :is_super, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
@@ -113,9 +113,9 @@ class TeachersController < ApplicationController
       current_teacher && current_teacher.powers == "Admin"
     end
     
-    def is_super?
-      current_teacher && current_teacher.id == 1
-    end
+    #def is_super?
+    #  current_teacher && current_teacher.id == 1
+    #end
     
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
