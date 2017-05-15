@@ -100,6 +100,16 @@ body
 	transform:scale(1.1);
 }
 
+.sq-studSesh
+{
+	height: 8em;
+	width: 8em;
+	display: flex;
+	flex-flow:column;
+	align-items: center;
+	justify-content: center;
+}
+
 .sq-active
 {
 	border-color: #97EDEC;
@@ -115,6 +125,25 @@ body
 {
 	color:#FFFFFF;
 }
+
+@media only screen and (max-width: 767px){
+	.square
+	{
+		height: 6em;
+		width: 6em;
+		border-radius: 10px;
+	}
+}
+
+@media only screen and (max-width: 375px){
+	.square
+	{
+		height: 4.5em;
+		width: 4.5em;
+		border-radius: 10px;
+	}
+}
+
 .student-icon
 {
 	font-size: 5em;

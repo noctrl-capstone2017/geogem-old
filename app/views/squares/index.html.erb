@@ -1,37 +1,76 @@
+<!--Ricky Perez & Michael Loptien-->
+
 <p id="notice"><%= notice %></p>
 
-<h1>Squares</h1>
+<!-- page header -->
+<div class="page-header vertical-align">
+  <div class="col-xs-11">
+	  <h2>All Squares<small> - manage behavior squares at [SCHOOL NAME HERE]</small></h2><!-- Dynamically fills in with school id -->
+	</div>
+	<div class="col-xs-1 center-block">
+	  <div class="header-sq i-ltblue" title="Turning Point Autism Foundation"> <!--Need to add code for teachers icon-->
+		  <span class="fa fa-home fa-3x teacher-icon"></span>
+		</div>
+  </div>
+</div><!--End page header-->
 
-<table>
+<!-- New Square Button -->
+		<div class="row first-content-row">
+			<div class="col-xs-3 col-xs-offset-1">
+				<form  action="/squares/new.html">
+					<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success">
+						<span class="fa fa-plus-square-o"></span> New Square
+					</button>
+				</form>
+			</div>   <!-- col -->
+		</div>   <!-- row -->
+
+<!-- Squares Table Header-->
+<table class= "table table-striped table-hover table-responsive schools-table">
   <thead>
-    <tr>
-      <th>Full name</th>
-      <th>Screen name</th>
-      <th>Color</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>School</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+	  <tr>
+			<th>Icon</th>
+		  <th>ID</th>
+			<th>Type</th>
+			<th>Description</th>
+			<th>Added by</th>
+		</tr>
+	</thead>
 
+<!-- Squares Table Body -->
   <tbody>
     <% @squares.each do |square| %>
-      <tr>
-        <td><%= square.full_name %></td>
+    
+    <!--SOURCE for data-link: http://stackoverflow.com/questions/9945620/making-a-table-row-into-a-link-in-rails-->
+      <tr data-link = "<%= edit_square_path(square) %>">
+        
+        <!-- Square Color -->
+        <td>
+          <div class="table-sq i-<%= square.color %>">
+				    <i class="fa fa-square-o fa-2x table-icon"></i>
+				  </div>
+				</td>
         <td><%= square.screen_name %></td>
-        <td><%= square.color %></td>
-        <td><%= square.type %></td>
+        
+        <!-- If statement for translating  square type int into string -->
+        <td><% if square.tracking_type == 1 %>
+              <p class="listText">Duration</p>
+            <% elsif square.tracking_type == 2 %>
+              <p class="listText">Frequency</p>
+            <% else %>
+              <p class="listText">Interval</p>
+            <% end %>
+        </td>
+        
+        <!-- Square Description -->
         <td><%= square.description %></td>
-        <td><%= square.school_id %></td>
-        <td><%= link_to 'Show', square %></td>
-        <td><%= link_to 'Edit', edit_square_path(square) %></td>
-        <td><%= link_to 'Destroy', square, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        
+        <!-- Square Created By -->
+        <td>***User Name***</td>                  <!-- Not yet supported -->
+        <!--<td><%= link_to 'Destroy', square, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Square', new_square_path %>
