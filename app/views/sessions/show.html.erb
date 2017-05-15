@@ -5,7 +5,7 @@
 <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="col-md-12 text-center">
-        <div class ="square i-<%= @student.color %> center-block">
+        <div class ="sq-studSesh i-<%= @student.color %> center-block">
              <span class="fa fa-<%= @student.icon %> fa-5x student-icon"></span>
         </div>
         <h3><%= @student.full_name %></h3>
@@ -20,7 +20,7 @@
     <div class="col-xs-1">
         <span onclick="openNav()"><i class="fa fa-chevron-circle-left fa-2x"></i></span>
     </div>
-    <div class="col-xs-4 pull-right">
+    <div class="col-xs-6  col-md-4 pull-right">
         <button class="btn btn-lg btn-secondary noteBtn"><i class="fa fa-pencil-square-o icon-white fa-lg"></i> Notes</button>
         <%= button_tag(type: 'submit', class: "btn btn-lg btn-primary", name: 'end_session') do %>
            End Session
@@ -35,7 +35,7 @@
             <% if index == 0 || index.even? %>
                 <div class="row behavior-row">
             <% end %>
-                <div class="col-sm-offset-1 col-xs-4 col-md-3">
+                <div class="col-xs-3 col-sm-offset-1 col-md-3 col-md-offset-0">
                     <% if square.tracking_type == 2 %>
                         <div class="wrapper frequency" name="<%= square.id %>">
                             <button class="counter">
