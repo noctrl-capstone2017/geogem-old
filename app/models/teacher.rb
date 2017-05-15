@@ -29,9 +29,8 @@ class Teacher < ApplicationRecord
   validates :description, presence: true
   validates :powers, presence: true
   validates :school_id, presence: true
-  
-  
-  validates :password_digest, presence: true, length: {minimum: 6 }
+
+  validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
   
   #Creates the relationship of what students belong to the teacher
