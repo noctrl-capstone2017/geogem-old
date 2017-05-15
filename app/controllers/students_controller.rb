@@ -5,8 +5,8 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     # @school = School.where(teacher.school_id)
-    # @students = Student.where(school_id: @school.id)
-    @students = Student.all
+    @students = Student.where(school_id: current_teacher.school_id)
+    # @students = Student.all
   end
 
   # GET /students/1

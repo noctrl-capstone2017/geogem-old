@@ -62,6 +62,18 @@ Teacher.create!(user_name: "admin",
                     full_name: name)
 end
 
+2.times do |n|
+  name  = Faker::Name.name
+  Student.create!(  screen_name: "temp",
+                    contact_info: "student contact info",
+                    description: "student description",
+                    icon: "bicycle",
+                    color: "green",
+                    session_interval: 20,
+                    school_id: 0,
+                    full_name: name)
+end
+
 # Seed the database with 10 faked Squares
 10.times do |n|
   name  = Faker::Name.name
