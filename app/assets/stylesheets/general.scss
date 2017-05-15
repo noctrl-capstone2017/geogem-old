@@ -89,12 +89,26 @@ body
 	align-items: center;
 	justify-content: center;
 	border-radius: 25px;
+	
+	transition: all .2s ease-in-out;
 }
 .square:hover
 {
-	-webkit-filter: brightness(90%);
-	-moz-filter: brightness(90%);
-	-o-filter:brightness(90%);
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-o-transform:scale(1.1);
+	transform:scale(1.1);
+}
+
+.sq-active
+{
+	border-color: #97EDEC;
+	border-style: solid;
+	border-width:3px;
+	
+  -webkit-box-shadow: 0px 0px 7px #4195fc;
+  -moz-box-shadow: 0px 0px 7px #4195fc;
+  box-shadow: 0px 0px 7px #4195fc;
 }
 
 .square h1, .square h2,.square h3, .square h4, .square p
@@ -283,7 +297,7 @@ transition: all .2s ease-in-out;
 	background-color:#97EDEC;
 }
 
-.i-ltorange
+.i-orange
 {
 	background-color:#F8BD28;
 }
@@ -314,5 +328,4 @@ transition: all .2s ease-in-out;
 .i-aqua
 {
 	background-color:#50C0E8;
-}.fa-3x {
 }
