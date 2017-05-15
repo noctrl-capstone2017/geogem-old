@@ -1,5 +1,6 @@
 class SessionNotesController < ApplicationController
   before_action :set_session_note,  only: [:show, :edit, :update, :destroy]
+  
 
   # GET /session_notes
   # GET /session_notes.json
@@ -10,6 +11,9 @@ class SessionNotesController < ApplicationController
   # GET /session_notes/1
   # GET /session_notes/1.json
   def show
+  end
+  
+  def testfunc
   end
 
   # GET /session_notes/new
@@ -69,6 +73,6 @@ class SessionNotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_note_params
-      params.require(:session_note).permit(:note, :session_id, :created_at)
+      params.require(:session_note).permit(:note, :session_id, :created_at, :updated_at)
     end
 end

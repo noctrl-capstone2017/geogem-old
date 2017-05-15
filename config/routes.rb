@@ -35,6 +35,5 @@ Rails.application.routes.draw do
   get    '/super_report',    to: 'teachers#super_report'
   get    '/admin',    to: 'teachers#admin'
   get    '/super',    to: 'schools#super'
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
