@@ -15,7 +15,7 @@ one:
 
 two:
   user_name: MyString
-  password_digest: MyString
+  password_digest: password,
   last_login: 2017-05-10 22:01:20
   full_name: MyString
   screen_name: MyString

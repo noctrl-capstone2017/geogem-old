@@ -1,4 +1,4 @@
-# author: Kevin M and Tommy B
+# author: Kevin M, Tommy B
 # Testing Teachers
 
 require 'test_helper'
@@ -7,7 +7,8 @@ class TeacherTest < ActiveSupport::TestCase
   setup do
     #Using setup here instead of fixtures because fixtures cause errors.
     @teacher = Teacher.new(user_name: "profbill",
-                password_digest: "password",
+                password: "password",
+                password_confirmation: "password",
                 last_login: Time.now,
                 full_name: "Professor Bill",
                 screen_name: "profbill",
