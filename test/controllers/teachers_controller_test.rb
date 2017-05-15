@@ -1,4 +1,5 @@
 # author: Kevin M, Tommy B
+# Teacher controller testing.
 
 require 'test_helper'
 
@@ -6,6 +7,8 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @teacher = teachers(:one)
   end
+
+  # This section tests for the correct links to other pages
 
   test "should get index" do
     get teachers_url
@@ -27,6 +30,9 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # End of testing links
+
+  # Tests deleting a teacher
   test "should destroy teacher" do
     assert_difference('Teacher.count', -1) do
       delete teacher_url(@teacher)
@@ -35,6 +41,7 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to teachers_url
   end
   
+  # Tests loading of the teacher's data when editing a teacher
   test "should properly load existing info when loading a profile" do
     get edit_teacher_url(@teacher)
     assert_template "teachers/edit"

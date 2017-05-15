@@ -1,5 +1,5 @@
 # author: Kevin M, Tommy B
-# Testing Teachers
+# Teacher model testing.
 
 require 'test_helper'
 
@@ -19,70 +19,84 @@ class TeacherTest < ActiveSupport::TestCase
                 school_id: 0)
   end
   
+  # Tests the teacher against the validations from the model file
   test "should be valid" do
     assert @teacher.valid?
   end
   
+  # Tests what happens when we remove the user_name
   test "user_name should be present" do
     @teacher.user_name = ""
     assert_not @teacher.valid?
   end
   
+  # Tests what happens when we remove the full_name
   test "full_name should be present" do
     @teacher.full_name = ""
     assert_not @teacher.valid?
   end
   
+  # Remove screen_name and test
   test "screen_name should be present" do
     @teacher.screen_name = ""
     assert_not @teacher.valid?
   end
   
+  # Remove icon and test
   test "icon should be present" do
     @teacher.icon = ""
     assert_not @teacher.valid?
   end
   
+  # Remove color and test
   test "color should be present" do
     @teacher.color = ""
     assert_not @teacher.valid?
   end
   
+  # Remove email and test
   test "email should be present" do
     @teacher.email = ""
     assert_not @teacher.valid?
   end
   
+  # Remove description and test
   test "description should be present" do
     @teacher.description = ""
     assert_not @teacher.valid?
   end
   
-  test "power should be present" do
+  # Remove powers and test
+  test "powers should be present" do
     @teacher.powers = ""
     assert_not @teacher.valid?
   end
   
+  # Remove school_id and test
   test "school_id should be present" do
     @teacher.school_id = ""
     assert_not @teacher.valid?
   end
   
+  # Test length of user_name
   test "user_name should not be too long" do
     @teacher.user_name = "a" * 76
     assert_not @teacher.valid?
   end
   
+  # Test length of full_name
   test "full_name should not be too long" do
     @teacher.full_name = "a" * 76
     assert_not @teacher.valid?
   end
   
+  # Test length of screen_name
   test "screen_name should not be too long" do
     @teacher.screen_name = "a" * 76
     assert_not @teacher.valid?
   end
   
+  # Test that every screen_name is unique
   test "screen_name should be unique" do
     duplicate_user = @teacher.dup
     duplicate_user.screen_name = @teacher.screen_name.upcase
@@ -90,11 +104,13 @@ class TeacherTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
   
+  # Test length of email
   test "email should not be too long" do
     @teacher.email = "a" * 256
     assert_not @teacher.valid?
   end
   
+  # Test for valid email address
   test "email validation should accept valid addresses" do
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
                          first.last@foo.jp alice+bob@baz.cn]
@@ -104,6 +120,7 @@ class TeacherTest < ActiveSupport::TestCase
     end
   end
   
+  # Test for rejecting invalid addresses
   test "email validation should reject invalid addresses" do
     invalid_addresses = %w[user@example,com user_at_foo.org user.name@example.
                            foo@bar_baz.com foo@bar+baz.com]
@@ -113,6 +130,7 @@ class TeacherTest < ActiveSupport::TestCase
     end
   end
   
+  # Test for unique email addresses
   test "email addresses should be unique" do
     duplicate_user = @teacher.dup
     duplicate_user.email = @teacher.email.upcase
@@ -120,6 +138,7 @@ class TeacherTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
   
+  # Test for email addresses saving as all lowercase
   test "email addresses should be saved as lower-case" do
     mixed_case_email = "Foo@ExAMPle.CoM"
     @teacher.email = mixed_case_email
