@@ -1,4 +1,5 @@
 class SessionNotesController < ApplicationController
+  before_action :logged_in_teacher, only: [:create, :destroy]  
   before_action :set_session_note,  only: [:show, :edit, :update, :destroy]
   
 
@@ -32,6 +33,7 @@ class SessionNotesController < ApplicationController
 
     respond_to do |format|
       if @session_note.save
+        @session_note.new_record?
         format.html { redirect_to @session_note, notice: 'Session note was successfully created.' }
         format.json { render :show, status: :created, location: @session_note }
       else
