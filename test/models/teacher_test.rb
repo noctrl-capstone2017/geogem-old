@@ -127,4 +127,9 @@ class TeacherTest < ActiveSupport::TestCase
     assert_equal mixed_case_email.downcase, @teacher.reload.email
   end
   
+  # Steven Royster
+  test "authenticated? should return false for a teacher with nil digest" do
+    assert_not @teacher.authenticated?('')
+  end
+  
 end
