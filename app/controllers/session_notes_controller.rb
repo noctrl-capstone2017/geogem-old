@@ -1,7 +1,5 @@
 class SessionNotesController < ApplicationController
-  before_action :logged_in_teacher, only: [:create, :destroy]  
   before_action :set_session_note,  only: [:show, :edit, :update, :destroy]
-  
 
   # GET /session_notes
   # GET /session_notes.json
@@ -12,9 +10,6 @@ class SessionNotesController < ApplicationController
   # GET /session_notes/1
   # GET /session_notes/1.json
   def show
-  end
-  
-  def testfunc
   end
 
   # GET /session_notes/new
@@ -33,7 +28,6 @@ class SessionNotesController < ApplicationController
 
     respond_to do |format|
       if @session_note.save
-        @session_note.new_record?
         format.html { redirect_to @session_note, notice: 'Session note was successfully created.' }
         format.json { render :show, status: :created, location: @session_note }
       else
@@ -75,6 +69,6 @@ class SessionNotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_note_params
-      params.require(:session_note).permit(:note, :session_id, :created_at, :updated_at)
+      params.require(:session_note).permit(:note, :session_id, :created_at)
     end
 end
