@@ -94,12 +94,14 @@ class TeachersController < ApplicationController
     end
   end
    
-     # POST /super
+   #Robert Herrera
+   # POST /super
   def updateFocus
-    teacher = Teacher.find(0)
+    teacher = Teacher.find(1)
     
     if teacher.update(focus_school_params)
       format.html { redirect_to teachers_url, notice: 'Super School was successfully switched.' }
+      teacher.full_name = params[full_name]
     else
       format.html { redirect_to teachers_url, notice: 'error' }
     end

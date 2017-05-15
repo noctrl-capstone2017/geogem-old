@@ -26,7 +26,12 @@ class School < ApplicationRecord
   validates :description, presence: true, length: { maximum: 255 }
   validates :color, presence: true
   
-
+    
+  #has_many :active_relationships, class_name:  "Teacher",
+   #                                foreign_key: "student_id",
+   #                                dependent:   :destroy
+ # has_many :teachers, through: :active_relationships, source: :teachers
+    
   private
 
     # Converts email to all lower-case.
