@@ -18,16 +18,17 @@
 				
 				<!-- Print out the Student Art -->
 				<!--    By: Meagan Moore     -->
-        <%= image_tag(random_student_art, height: "400", alt: "Student Art") %>
-
+				<% image = random_student_art%>
+        <%= image_tag(image, height: "400", alt: "Student Art") %>
 				
 				<br>
 				<div class="logout-art-text">
-					<p>
-						<!-- Print out the corresponding description -->
-						<!--            By: Meagan Moore             -->
-						<!--         regex: (?<=\_)(.*?)(?=\.)       -->
-            Student art by <%= random_student_art %>
+					<p> 
+						<!--               Print out the corresponding description            -->
+						<!--                         By: Meagan Moore                         -->
+						<!-- Using Regex to get just the name part of the string, super cool! -->
+						<% image.gsub!(/.*?(?=\d_)(\d_)/, ' ') %>
+            Student art by: <%= image.gsub(/(?=\.)(\W.*)/, ' ') %>
 						<br>
 						<a <%= link_to "About Our Student Art", about2_path%></a>
 					</p>
