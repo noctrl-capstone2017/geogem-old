@@ -4,12 +4,15 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
+    # @school = School.where(teacher.school_id)
+    # @students = Student.where(school_id: @school.id)
     @students = Student.all
   end
 
   # GET /students/1
   # GET /students/1.json
   def show
+    @student = Student.find(params[:id])
   end
 
   # GET /students/new
@@ -28,8 +31,8 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
-        format.json { render :show, status: :created, location: @student }
+        format.html { redirect_to students_url, notice: 'Student was successfully created.' }
+        format.json { render :index, status: :created, location: @student }
       else
         format.html { render :new }
         format.json { render json: @student.errors, status: :unprocessable_entity }
@@ -42,8 +45,8 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
-        format.json { render :show, status: :ok, location: @student }
+        format.html { redirect_to students_url, notice: 'Student was successfully updated.' }
+        format.json { render :index, status: :ok, location: @student }
       else
         format.html { render :edit }
         format.json { render json: @student.errors, status: :unprocessable_entity }
