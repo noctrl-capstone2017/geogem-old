@@ -48,4 +48,12 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
     #This is all that's necessary, since if one part of it fails, all of it does.
     assert_select 'h2', text: 'Teacher profile for ' + @teacher.full_name
   end
+  
+  # Steven Royster
+  # Inspired by previous capstone class
+  test "should show superadmin" do
+    log_in_as(teachers(:one))
+    get :show, id: @teacher
+    assert_response :success
+  end
 end

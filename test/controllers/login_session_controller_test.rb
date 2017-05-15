@@ -5,10 +5,10 @@
 require 'test_helper'
 
 class LoginSessionControllerTest < ActionDispatch::IntegrationTest
-
+  
   # check if login path exists 
   test "should get new" do
-    get login_session_new_url     #was login_path...
+    get login_path     #was login_path...
     assert_response :success
   end
 

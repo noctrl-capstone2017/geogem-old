@@ -40,10 +40,20 @@
 }
 
 /* Added styling for text */
-.sidenav p, h1, h2, h3, h4
+.sidenav p, .sidenav h1, .sidenav h2, .sidenav h3, .sidenav h4
 {
 	color:#FFFFFF;
 }
+
+/*Note from Carolyn C- for some reason, some of the headers don't work unless it is in here. 
+Hopefully we can move this later but for right now, it is what makes the CSS look right.*/
+@import url('https://fonts.googleapis.com/css?family=Hind|Rubik');
+h1, h2, h3, h4, h5, h6
+{
+	font-family: "Rubik", sans-serif;
+}
+
+
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
     position: absolute;

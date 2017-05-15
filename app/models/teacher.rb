@@ -16,8 +16,6 @@ class Teacher < ApplicationRecord
   
   ###VALIDAITONS###
   validates :user_name,  presence: true, length: { maximum: 75 }
-    #Commented out until login stuff is put in place. -KM
-  #validates :password_digest, presence: true, length: {minimum: 6 }
   
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },
@@ -32,9 +30,8 @@ class Teacher < ApplicationRecord
   validates :description, presence: true
   validates :powers, presence: true
   validates :school_id, presence: true
-  
-  
-  validates :password_digest, presence: true, length: {minimum: 6 }
+
+  validates :password, presence: true, length: { minimum: 6 }
   has_secure_password
   
   #Creates the relationship of what students belong to the teacher
@@ -64,6 +61,13 @@ class Teacher < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  # Commented out by Steven Royster
+  #    We are not implementing a remember me feature
+  # Forgets a user --added by DJ
+  # def forget
+  #   update_attribute(:remember_digest, nil)
+  # end
+
   # Returns the hash digest of the given string.
   def Teacher.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -77,6 +81,4 @@ class Teacher < ApplicationRecord
     def downcase_email
       self.email = email.downcase
     end
-    
 end
-

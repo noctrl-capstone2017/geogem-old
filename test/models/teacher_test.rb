@@ -7,7 +7,8 @@ class TeacherTest < ActiveSupport::TestCase
   setup do
     #Using setup here instead of fixtures because fixtures cause errors.
     @teacher = Teacher.new(user_name: "profbill",
-                password_digest: "password",
+                password: "password",
+                password_confirmation: "password",
                 last_login: Time.now,
                 full_name: "Professor Bill",
                 screen_name: "profbill",
@@ -144,6 +145,11 @@ class TeacherTest < ActiveSupport::TestCase
     @teacher.email = mixed_case_email
     @teacher.save
     assert_equal mixed_case_email.downcase, @teacher.reload.email
+  end
+  
+  # Steven Royster
+  test "authenticated? should return false for a teacher with nil digest" do
+    assert_not @teacher.authenticated?('')
   end
   
 end
