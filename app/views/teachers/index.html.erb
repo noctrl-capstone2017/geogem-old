@@ -32,20 +32,31 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% @teachers.each do |teacher| %>
-		<tr data-link=<%= edit_teacher_path(teacher.id) %>>
-			<td>
-				<div class="table-sq i-plum" title="<%= teacher.user_name %>">
-					<span class="fa fa-apple fa-2x table-icon"></span>
-				</div>
-			</td>
-			<td><p class="listText"><%= teacher.user_name %></p></td>
-			<td><p class="listText"><span><%= teacher.screen_name %></span></p></td>
-			<td><p class="listText"><span><%= teacher.powers %></span></p></td>
-			<!--This will hold the teacher's last logged in date.-->
-			<td><p class="listText"><span></span></p>
-			</td>
-		</tr>
-		<% end %>
+		<%= will_paginate %>
+			<% @teachers.each do |teacher| %>
+				<tr data-link=<%= edit_teacher_path(teacher.id) %>>
+					<td>
+						<div class="table-sq i-plum" title="<%= teacher.user_name %>">
+							<div class="table-sq i-<%= teacher.color%>">
+										<i class="fa fa-<%= teacher.icon%> fa-2x table-icon"></i>
+							</div>
+						</div>
+					</td>
+					<td><p class="listText"><%= teacher.user_name %></p></td>
+					<td><p class="listText"><span><%= teacher.screen_name %></span></p></td>
+					<td><p class="listText"><span><%= teacher.powers %></span></p></td>
+					<!--Last Login. If the user has never logged in, list Never.-->
+					<td><p class="listText"><span> 
+						<% if teacher.last_login.nil? %>
+						Never
+						<% else %>
+						<%= teacher.last_login %>
+						<% end %>
+					</span></p></td>
+					<td><p class="listText"><span></span></p>
+					</td>
+				</tr>
+			<% end %>
+		<%= will_paginate %>
 	</tbody>
 </table>

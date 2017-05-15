@@ -4,7 +4,7 @@ class SchoolsController < ApplicationController
   # GET /schools
   # GET /schools.json
   def index
-    @schools = School.all
+    @schools = School.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /schools/1
@@ -21,6 +21,12 @@ class SchoolsController < ApplicationController
   def edit
   end
 
+  # RH
+  #make the list of schools available at /super
+  def super
+    @schools = School.all
+  end
+  
   # POST /schools
   # POST /schools.json
   def create
