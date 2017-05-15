@@ -1,5 +1,5 @@
 class SessionNotesController < ApplicationController
-  before_action :set_session_note, only: [:show, :edit, :update, :destroy]
+  before_action :set_session_note,  only: [:show, :edit, :update, :destroy]
 
   # GET /session_notes
   # GET /session_notes.json

@@ -44,7 +44,7 @@ module LoginSessionHelper
   
   # Forgets a persistent session.
   def forget(teacher)
-    teacher.forget
+    #teacher.forget
     cookies.delete(:teacher_id)
     cookies.delete(:remember_token)
   end

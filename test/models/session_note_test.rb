@@ -24,4 +24,12 @@ class SessionNoteTest < ActiveSupport::TestCase
     @session_note.note = "   "
     assert_not @session_note.valid?
   end
+  
+  ##test "associated notes should be destroyed" do
+    #@session.save
+    ##@session.session_notes.create!(note: "Lorem ipsum")
+    #assert_difference 'SessionNote.count', -1 do
+     # @session.destroy
+    ##nd
+  #end  
 end
