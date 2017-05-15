@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
-  before_action :is_admin, except: [:update, :edit]
-  before_action :is_super, except: [:update, :edit]
+  #before_action :is_admin, except: [:update, :edit]
+  #before_action :is_super, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
@@ -98,9 +98,19 @@ class TeachersController < ApplicationController
   
     # Author: Steven Royster
     # If the teacher is not an admin then they 
-    #  will flashed an unauthorized prompt and redirected to home
+    #  will be flashed an unauthorized prompt and redirected to home
     def is_admin
       if is_admin?
+        flash[:danger] = "Unauthorized"
+        redirect_to home1_path
+      end
+    end
+    
+    # Author: Steven Royster
+    # If the teacher is not a super user then they 
+    #  will be flashed an unauthorized prompt and redirected to home
+    def is_super
+      if is_super?
         flash[:danger] = "Unauthorized"
         redirect_to home1_path
       end
