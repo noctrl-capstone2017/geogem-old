@@ -93,3 +93,19 @@ SessionEvent.create!(behavior_square_id: 1,
 # Seed the database with a Session Note for the seeded Session               
 SessionNote.create!(note: "sample note",
                 session_id: 1,)
+                
+#School seeds added by - Dakota B
+30.times do |n|
+  color = Faker::Commerce.color
+  email = "example-#{n+1}@railstutorial.org"
+  desc = Faker::Lorem.sentence
+  pre = Faker::Address.city_suffix
+  pos = Faker::Address.city_prefix
+  School.create!(full_name: pre + pos + "University",
+                 screen_name: "test",
+                 icon: pre,
+                 color: color,
+                 email: email,
+                 website: "www.example.edu",
+                 description: desc)
+end
