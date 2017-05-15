@@ -1,12 +1,12 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
-  before_action :is_admin, except: [:update, :edit]
-  before_action :is_super, except: [:update, :edit]
+  #before_action :is_admin, except: [:update, :edit]
+  #before_action :is_super, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /teachers/1
@@ -120,7 +120,7 @@ class TeachersController < ApplicationController
     # If the teacher is not a super user then they 
     #  will be flashed an unauthorized prompt and redirected to home
     def is_super
-      if is_super?
+      if !is_super?
         flash[:danger] = "Unauthorized"
         redirect_to home1_path
       end
@@ -138,6 +138,7 @@ class TeachersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
       params.require(:teacher).permit(:user_name, :password_digest, :last_login,
-      :full_name, :screen_name, :icon, :color, :email, :description, :powers, :school_id)
+      :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
+      :school_id, :password, :password_digest)
     end
 end
