@@ -1,3 +1,5 @@
+# author: Kevin M, Tommy B
+
 require 'test_helper'
 
 class TeachersControllerTest < ActionDispatch::IntegrationTest
