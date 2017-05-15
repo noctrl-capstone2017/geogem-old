@@ -1,54 +1,82 @@
-<!-- Robert Herrera changes-->
-
-<!-- page header -->
-<div class="page-header vertical-align">
-	<div class="col-xs-11">
-		<h2>Admin Dashboard<small> - manage school TPTE</small></h2><!-- Dynamically fills in with school id -->
-	</div>
-		<div class="col-xs-1 center-block">
-			<div class="header-sq i-plum" title="Bianca17">
-				<span class="fa fa-apple fa-3x teacher-icon"></span>
+<!-- Andy A and UX team -->
+	<nav class="navbar navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="home1.html">Dinner Out</a>
 			</div>
-		</div>
-</div><!--End page header-->
+			<div id="navbar" class="collapse navbar-right navbar-collapse">
+				<ul class="nav navbar-nav ">
+					<li><a href="help1.html">Help</a></li>
+					<li><a href="admin1.html">Admin</a></li>
+				  <li><a href="teacher2.html">Profile</a></li>
+					<li><a href="logout1.html">Logout</a></li>
+				</ul>
+			</div>		<!-- end nav-collapse -->
+		</div>		
+	</nav>	<!-- end navbar -->
 
-<!-- Will use current_user to create dynamic links -->
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x teacher-icon"></span>
-</div>
-<div>
-<form action='schools/2'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span> 
-	School Profile</button>
-</form>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
 
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-</div>
-<form action='students'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	All Students</button>
-</form>
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x teacher-icon"></span>
-</div>
+			<!-- page header -->
+			<div class="page-header cap17-header">
+				<h2>Admin Dashboard <small> - manage school teachers, students, squares, etc
+					<div class ="header-sq i-plum pull-right" title="Admin Bianca17">
+						<span class="fa fa-apple fa-2x header-icon"></span>
+					</div>
+				</small>
+				</h2>
+			</div>   <!--page header-->
 
-<form action='teachers'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	All Teachers</button>
-</form>
 
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x students-icon"></span>
-</div>
-<form action='squares'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	All Squares</button>
-</form>
+			<!-- action icons, first row -->		
+			<div class="row">
 
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x students-icon"></span>
-</div>
-<form action='students/show'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	Admin Report</button>
-</form>
+				<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit school attributes">
+					<div class ="action-sq i-navy center-block" >
+						<a href="school2.html"><span class="fa fa-home fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="school2.html"><span class="student-icon-text">School profile</span></a></p>
+				</div> <!-- col -->
+
+				<div class="col-xs-2 text-center" title="School stats and more">
+					<div class ="action-sq i-pink center-block" >
+						<a href="admin2.html"><span class="fa fa-file-text-o fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="admin2.html"><span class="student-icon-text">Admin report</span></a></p>
+				</div> <!-- col -->
+			</div>   <!-- row -->
+
+			<!-- action icons, second row -->
+			<div class="row action-icon-row">
+				<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit all students">
+					<div class ="action-sq i-red center-block" >
+						<a href="student1.html"><span class="fa fa-child fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="student1.html"><span class="student-icon-text">All students</span></a></p>
+				</div> <!-- col -->
+
+				<div class="col-xs-2 text-center" title="View/edit all teachers">
+					<div class ="action-sq i-yellow center-block" >
+						<a href="teacher1.html"><span class="fa fa-apple fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="teacher1.html"><span class="student-icon-text">All teachers</span></a></p>
+				</div> <!-- col -->
+
+				<div class="col-xs-2 text-center" title="View/edit all behavior squares">
+					<div class ="action-sq i-ltblue center-block" >
+						<a href="square1.html"><span class="fa fa-square-o fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="sqaure1.html"><span class="student-icon-text">All squares</span></a></p>
+				</div> <!-- col -->
+
+		</div>   <!-- col -->
+	</div>   <!-- row -->
+</div>   <!-- container -->
