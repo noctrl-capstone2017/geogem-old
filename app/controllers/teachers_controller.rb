@@ -6,7 +6,7 @@ class TeachersController < ApplicationController
   # GET /teachers
   # GET /teachers.json
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /teachers/1
@@ -135,6 +135,7 @@ class TeachersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
       params.require(:teacher).permit(:user_name, :password_digest, :last_login,
-      :full_name, :screen_name, :icon, :color, :email, :description, :powers, :school_id)
+      :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
+      :school_id, :password, :password_digest)
     end
 end
