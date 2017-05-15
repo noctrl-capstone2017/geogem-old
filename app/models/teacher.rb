@@ -14,7 +14,8 @@ class Teacher < ApplicationRecord
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
   
   ###VALIDAITONS###
-  validates :user_name,  presence: true, length: { maximum: 75 }
+  validates :user_name,  presence: true, length: { maximum: 75 },
+                         uniqueness: { case_sensitive: false}  
   
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },

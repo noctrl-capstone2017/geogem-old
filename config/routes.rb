@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   get    'home1'   => 'static_pages#home1'
   post   'home1'   => 'static_pages#home1'
   
+  get    'admin1'   => 'admin#home'
+  get    'admin2'   => 'admin#show'
+  
   get    '/super_report',    to: 'teachers#super_report'
   get    '/admin',    to: 'teachers#admin'
   get    '/super',    to: 'schools#super'
