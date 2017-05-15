@@ -1,4 +1,4 @@
-# author: Kevin M and Tommy B
+# author: Kevin M, Tommy B
 # Testing Teachers
 
 require 'test_helper'
@@ -125,6 +125,11 @@ class TeacherTest < ActiveSupport::TestCase
     @teacher.email = mixed_case_email
     @teacher.save
     assert_equal mixed_case_email.downcase, @teacher.reload.email
+  end
+  
+  # Steven Royster
+  test "authenticated? should return false for a teacher with nil digest" do
+    assert_not @teacher.authenticated?('')
   end
   
 end
