@@ -7,8 +7,8 @@ end
 
 gem 'bcrypt', '3.1.11'
 gem 'bootstrap-sass', '3.3.6'
-gem 'will_paginate', '3.1.0'
-gem 'bootstrap-will_paginate', '0.0.10'
+gem 'bootstrap-will_paginate'
+gem 'will_paginate'
 gem 'rails', '~> 5.0.1'
 gem 'faker',  '1.6.6'
 gem 'puma', '~> 3.0'
@@ -18,8 +18,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'prawn'
+gem 'prawn-table', '~> 0.1.0'
 
 group :development, :test do
+  gem 'rails-controller-testing'
   gem 'sqlite3', '1.3.12'
   gem 'byebug', platform: :mri
 end
