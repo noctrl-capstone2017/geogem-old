@@ -54,4 +54,13 @@ class TeachersLoginLogoutTest < ActionDispatch::IntegrationTest
   #   log_in_as(@teacher, remember_me: '0')
   #   assert_empty cookies['remember_token']
   # end
+  
+  # Steven Royster
+  test "should flash incorrect username/password combination" do
+    get login_path
+    assert_template 'login_session/new'
+    post login_path, login_session: { user_name: "", password: "" }
+    assert_template 'login_session/new'
+    assert_not flash.empty?
+  end
 end
