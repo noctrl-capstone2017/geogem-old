@@ -15,3 +15,11 @@
 	min-width: 0;
 	height:200px;
 }
+
+.image-radio input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+    border: 1px solid red;
+}

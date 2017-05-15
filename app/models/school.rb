@@ -3,7 +3,7 @@
 # model validation authors: Kevin M, Tommy B
  
 class School < ApplicationRecord
-  
+
   #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   
@@ -12,7 +12,7 @@ class School < ApplicationRecord
   
   #Alphanumerical stuff only.
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
-  
+
   validates :screen_name,  presence: true, length: { maximum: 8 }
                     #format: { with: VALID_SCREEN_NAME_REGEX },
                    # uniqueness: { case_sensitive: false}

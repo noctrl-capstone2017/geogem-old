@@ -1,3 +1,5 @@
+<!--Ricky Perez & Michael Loptien-->
+
 <%= form_for(square) do |f| %>
   <% if square.errors.any? %>
     <div id="error_explanation">
@@ -11,37 +13,70 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :full_name %>
-    <%= f.text_field :full_name %>
-  </div>
+  <!-- ID field -->
+  <div class="row form-row">
+  	<div class="col-sm-1 col-sm-offset-1">
+  		<h4> ID:</h4>
+  	</div> 
+  	<div class="col-sm-1">
+      <%= f.text_field :screen_name, class: "form-control" %>
+  	</div>
+  </div>   <!-- form-row -->
 
-  <div class="field">
-    <%= f.label :screen_name %>
-    <%= f.text_field :screen_name %>
-  </div>
+  <!-- Show Type Field -->
+  <div class="row form-row">
+  	<div class="col-sm-1 col-sm-offset-1">
+  		<h4>Type: </h4>
+  	</div>
+  	<div class="col-md-offset-0 col-sm-offset-0 col-sm-2">
+      <%= f.select :tracking_type,[['Duration',1],['Frequency',2],['Interval',3]] %>
+  	</div>
+  </div>   <!-- form-row -->
 
-  <div class="field">
-    <%= f.label :color %>
-    <%= f.text_field :color %>
-  </div>
+  <!-- Show Square Color Field -->
+  <div class="row form-row">
+		<div class="col-xs-1 col-xs-offset-1">
+		  <h4>Color: </h4>
+		</div>
+		<div class="col-sm-4 col-md-offset-0 col-sm-offset-0">
+      <%= f.select :color, ['gray', 'navy','red','yellow',
+      ['ligh blue', 'ltblue'],['light orange','ltorange'],'green','lavendar','plum','mint','pink',
+      ['dark orange','dkorange'],'aqua']%>
+		</div>
+	</div>
 
-  <div class="field">
-    <%= f.label :type %>
-    <%= f.number_field :type %>
-  </div>
+  <div class="" form-spacer="">	&nbsp;</div>
+	
+	<!-- Square Description field -->
+	<div class="row form-row">
+		<div class="col-sm-2 col-sm-offset-1">
+			<h4>Description:</h4>
+		</div>
+		<div class="col-sm-4">
+		  <%= f.text_area :description, class:"form-control" %>	
+		</div>
+	</div>   <!-- form-row -->
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-
-  <div class="field">
+<!-- This needs to be an invisible field pulling data from logged in teacher / admin -->
+<!--  <div class="field">
     <%= f.label :school_id %>
     <%= f.number_field :school_id %>
-  </div>
+  </div>-->
 
-  <div class="actions">
-    <%= f.submit %>
+  <!-- This area displays the save or cancel buttons
+   It uses an If statment to test a passed in value "isNew"
+   to determine which button text will show -->
+  <div class="row action-buttons-row">
+	  <div class="col-xs-4 col-xs-offset-1 text-center"> 
+      <% if local_assigns[:isNew] %>
+        <%= f.submit "Add New Square", class: "btn btn-success"%>
+						&nbsp; &nbsp; &nbsp;
+	      <%= link_to 'Cancel', squares_path, class: "btn btn-danger" %>
+      <% else %>
+        <%= f.submit "Save Changes", class: "btn btn-success"%>
+						&nbsp; &nbsp; &nbsp;
+	      <%= link_to 'Cancel', squares_path, class: "btn btn-danger" %>        
+      <% end %>
+    </div>
   </div>
 <% end %>

@@ -34,6 +34,11 @@ module LoginSessionHelper
     !current_teacher.nil?
   end
   
+  # Returns true if the teacher is logged in, false otherwise.
+  def logged_out?
+    current_teacher.nil?
+  end
+  
   # Redirects the teacher to the login page if they are not logged in.
   def logged_in
     if !logged_in?
