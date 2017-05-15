@@ -20,6 +20,34 @@ Teacher.create!(user_name: "profbill",
                 description: "Super user",
                 powers: "Admin",
                 school_id: 0)
+                
+# Seed the database with a general teacher login
+Teacher.create!(user_name: "teacher",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "teacher",
+                screen_name: "teacher",
+                icon: "apple",
+                color: "green",
+                email: "teacher@noctrl.edu",
+                description: "General teacher login",
+                powers: "Teacher",
+                school_id: 1)
+                
+# Seed the database with a general teacher login
+Teacher.create!(user_name: "admin",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "admin",
+                screen_name: "admin",
+                icon: "apple",
+                color: "green",
+                email: "admin@noctrl.edu",
+                description: "General admin login",
+                powers: "Admin",
+                school_id: 1)
 
 # Seed the database with 10 faked Students                
 10.times do |n|
