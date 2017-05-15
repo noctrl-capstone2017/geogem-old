@@ -1,0 +1,46 @@
+<!-- Edited by Dakota B -->
+			<!-- page header -->
+			<div class="page-header cap17-header">
+				<h2>All Schools <small> - view/edit all schools
+					<div class ="header-sq i-navy pull-right" title="All schools">
+						<span class="fa fa-home fa-2x header-icon"></span>
+					</div>
+				</small>
+				</h2>
+			</div>   <!--page header-->
+
+			<!-- new school button -->
+			<div class="row">
+				<div class="col-xs-3 col-xs-offset-1">
+					<form  action="school3.html">
+						<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success">
+							<i class="fa fa-plus-square-o"></i> New School
+						</button>
+					</form>
+				</div>   <!-- col -->
+    	</div>   <!-- row -->
+
+			<!-- all school table -->
+	    <table class="table table-striped table-hover table-responsive schools-table">
+	   		<thead>
+	   			<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				
+				<!-- This section is responsible for listing all of the schools in the database into the schools index page -->
+						<tbody>
+							<%= will_paginate %>
+				            <% @schools.each do |school| %>
+						  					<tr data-link="/schools/<%= school.id %>">
+												<td><p class="listText">
+										    <p class="fa fa-home school-icon">&nbsp;&nbsp;&nbsp;<span> <%= school.icon %></span> </p></td>
+										    <td><p class="listText"><span> <%= school.screen_name %></span> </p></td>
+										    <td><p class="listText"><span> <%= school.description %></span> </p></td>
+				  		      		</tr>
+				  		      <% end %>
+							</tbody>
+						</table>
+		  		<%= will_paginate %>

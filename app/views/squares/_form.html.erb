@@ -1,0 +1,47 @@
+<%= form_for(square) do |f| %>
+  <% if square.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(square.errors.count, "error") %> prohibited this square from being saved:</h2>
+
+      <ul>
+      <% square.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :full_name %>
+    <%= f.text_field :full_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :screen_name %>
+    <%= f.text_field :screen_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= f.label :type %>
+    <%= f.number_field :type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :school_id %>
+    <%= f.number_field :school_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

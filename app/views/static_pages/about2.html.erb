@@ -1,0 +1,27 @@
+		<div class="page-header vertical-align">
+			
+			<div class="col-xs-11">
+				<h2>About student art<small> - artwork contributed to Dinner Out</small></h2><!-- Dynamically fills in with school id -->
+				<% if logged_out? %>
+					<%= link_to "Back to login", login_path%>
+				<% end %>
+			</div>
+			<div class="col-xs-1 center-block">
+				<div class="header-sq i-lavendar" title="About out student art">
+					<span class="fa fa-paint-brush fa-3x teacher-icon"></span>
+				</div>
+			</div>
+		</div><!--End page header-->
+
+		<div class="row content-text">
+			<br>
+			<p>
+				Describe the artwork feature/program. 
+			</p>
+			<p>
+				Include an email to send us more cool student artwork.
+			</p>
+				
+			<!-- bottom padding for demo only -->
+			<p style="padding-bottom: 100px;"></p>
+		</div>   <!-- row -->

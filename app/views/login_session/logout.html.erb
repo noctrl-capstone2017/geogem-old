@@ -1,0 +1,39 @@
+<div class="container">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
+		
+		<div class="page-header vertical-align">
+			<div class="col-xs-11">
+				<h2>Logged Out<small> - thank you for using Dinner Out</small></h2><!-- Dynamically fills in with school id -->
+				<% if logged_out? %>
+					<%= link_to "Back to login", login_path%>
+				<% end %>
+			</div>
+			<div class="col-xs-1 center-block">
+				
+			</div>
+		</div><!--End page header-->
+
+		<div class="row">
+			<div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4 text-center logout-art">
+				
+				<!-- Print out the Student Art -->
+				<!--    By: Meagan Moore     -->
+        <%= image_tag(random_student_art, height: "400", alt: "Student Art") %>
+
+				
+				<br>
+				<div class="logout-art-text">
+					<p>
+						<!-- Print out the corresponding description -->
+						<!--            By: Meagan Moore             -->
+						<!--         regex: (?<=\_)(.*?)(?=\.)       -->
+            Student art by <%= random_student_art %>
+						<br>
+						<a <%= link_to "About Our Student Art", about2_path%></a>
+					</p>
+				</div>
+			</div>   <!-- col -->
+		</div>   <!-- row -->
+
+	</div><!--End content col-->
+</div><!--End container -->	

@@ -1,0 +1,60 @@
+<!--Adapted for use by Kevin M. -->
+<!-- page header -->
+<div class="page-header vertical-align">
+	<div class="col-xs-11">
+		<h2>All Teachers<small> - manage teachers at TPTE</small></h2><!-- Dynamically fills in with school id -->
+	</div>
+	<div class="col-xs-1 center-block">
+		<div class="header-sq i-plum" title="Bianca17">
+			<span class="fa fa-apple fa-3x teacher-icon"></span>
+		</div>
+	</div>
+</div><!--End page header-->
+
+	<!--New Teacher Button-->
+<div class="row first-content-row">
+	<div class="col-xs-3">
+		<p><%= notice %></p>
+		<%= button_to "New Teacher", new_teacher_path,
+    :class => "col-sm-offset-1 btn btn-lg btn-success", :method => :get %>
+	</div><!--End col-->
+</div><!--End row -->
+
+ <!--Teacher display area -->
+<table class="table table-striped table-hover table-responsive teachers-table">
+	<thead>
+		<tr>
+			<th class="col-xs-1">Icon</th>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Admin</th>
+			<th>Last Login</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @teachers.each do |teacher| %>
+		<tr data-link=<%= edit_teacher_path(teacher.id) %>>
+			<td>
+				<div class="table-sq i-plum" title="<%= teacher.user_name %>">
+					<div class="table-sq i-<%= teacher.color%>">
+								<i class="fa fa-<%= teacher.icon%> fa-2x table-icon"></i>
+					</div>
+				</div>
+			</td>
+			<td><p class="listText"><%= teacher.user_name %></p></td>
+			<td><p class="listText"><span><%= teacher.screen_name %></span></p></td>
+			<td><p class="listText"><span><%= teacher.powers %></span></p></td>
+			<!--Last Login. If the user has never logged in, list Never.-->
+			<td><p class="listText"><span> 
+				<% if teacher.last_login.nil? %>
+				Never
+				<% else %>
+				<%= teacher.last_login %>
+				<% end %>
+			</span></p></td>
+			<td><p class="listText"><span></span></p>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

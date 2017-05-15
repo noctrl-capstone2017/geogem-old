@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Session Notes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Note</th>
+      <th>Session</th>
+      <th>Created at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @session_notes.each do |session_note| %>
+      <tr>
+        <td><%= session_note.note %></td>
+        <td><%= session_note.session_id %></td>
+        <td><%= session_note.created_at %></td>
+        <td><%= link_to 'Show', session_note %></td>
+        <td><%= link_to 'Edit', edit_session_note_path(session_note) %></td>
+        <td><%= link_to 'Destroy', session_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Session Note', new_session_note_path %>
