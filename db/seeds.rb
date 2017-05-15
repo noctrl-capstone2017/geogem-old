@@ -9,7 +9,8 @@ School.create!(full_name: "North Central",
 
 # Seed the database with an initial Super user
 Teacher.create!(user_name: "profbill",
-                password_digest: Teacher.digest("password"),
+                password: "password",
+                password_confirmation: "password",
                 last_login: Time.now,
                 full_name: "Professor Bill",
                 screen_name: "profbill",
@@ -21,8 +22,6 @@ Teacher.create!(user_name: "profbill",
                 school_id: 0)
 
 # Seed the database with 10 faked Students                
-                
-                
 10.times do |n|
   name  = Faker::Name.name
   Student.create!(  screen_name: "temp",
@@ -108,4 +107,5 @@ SessionNote.create!(note: "sample note",
                  email: email,
                  website: "www.example.edu",
                  description: desc)
+    
 end
