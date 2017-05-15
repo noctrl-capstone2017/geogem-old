@@ -15,14 +15,34 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create student" do
-    assert_difference('Student.count') do
-      post students_url, params: { student: { color: @student.color, contact_info: @student.contact_info, description: @student.description, full_name: @student.full_name, icon: @student.icon, school_id: @student.school_id, screen_name: @student.screen_name, session_interval: @student.session_interval } }
+test "should create student" do
+        assert_difference('Student.count') do
+          post students_url, params: { student: { color: "red", school_id: "1", 
+          contact_info: "hey", 
+          description: "Hey", 
+          icon: "bug", screen_name: "hey", 
+          full_name: "James S"} }
     end
-
-    assert_redirected_to student_url(Student.last)
+    assert_redirected_to students_url
   end
 
+  test "should not create student. Empty name." do
+    assert_no_difference('Student.count') do
+      post students_url, params: { student: { color: "red", school_id: "1", 
+      contact_info: "hey", 
+      description: "Hey", 
+      icon: "bug", screen_name: "hey", 
+      full_name: ""} }
+    end
+  end
+  
+  test "should not create student" do
+    assert_no_difference('Student.count') do
+      duplicate_item = @student.dup
+      assert_not duplicate_item.valid?
+    end
+  end
+  
   test "should show student" do
     get student_url(@student)
     assert_response :success
@@ -34,8 +54,20 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update student" do
-    patch student_url(@student), params: { student: { color: @student.color, contact_info: @student.contact_info, description: @student.description, full_name: @student.full_name, icon: @student.icon, school_id: @student.school_id, screen_name: @student.screen_name, session_interval: @student.session_interval } }
-    assert_redirected_to student_url(@student)
+    patch student_url(@student), params: { student: { color: "red", school_id: "1", 
+      contact_info: "hey", 
+      description: "Hey", 
+      icon: "bug", screen_name: "hey", 
+      full_name: "James L"} }
+      assert_redirected_to students_url
+  end
+  
+  test "should not update student. Empty name." do
+    patch student_url(@student), params: { student: { color: "red", school_id: "1", 
+      contact_info: "hey", 
+      description: "Hey", 
+      icon: "bug", screen_name: "hey", 
+      full_name: ""} }
   end
 
   test "should destroy student" do
