@@ -5,7 +5,7 @@
 <!-- page header -->
 <div class="page-header vertical-align">
 	<div class="col-xs-11">
-		<h2>School Profile<small> - view information for school <%= @school.school_icon_name %></small></h2><!-- Dynamically fills in with school id -->
+		<h2>School Profile<small> - view information for school <%= @school.screen_name %></small></h2><!-- Dynamically fills in with school id -->
 	</div>
 	<div class="col-xs-1 pull-right">
 		<div class="header-sq i-plum" >
@@ -19,20 +19,20 @@
 
 <p>
   <strong>School ID:</strong>
-  <%= @school.school_icon_name %>
+  <%= @school.screen_name %>
 
   <strong>Name:</strong>
-  <%= @school.school_name %>
+  <%= @school.full_name %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @school.school_email %>
+  <%= @school.email %>
 </p>
 
 <p>
   <strong>Website:</strong>
-  <%= @school.school_website %>
+  <%= @school.website %>
 </p>
 <p>
   <strong>Color:</strong>
@@ -40,7 +40,7 @@
 </p>
 <p>
   <strong>School description:</strong>
-  <%= @school.school_description %>
+  <%= @school.description %>
 </p>
 
 
