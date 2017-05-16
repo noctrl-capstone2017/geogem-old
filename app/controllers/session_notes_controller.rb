@@ -1,5 +1,5 @@
 class SessionNotesController < ApplicationController
-  before_action :set_session_note,  only: [:show, :edit, :update, :destroy]
+  #before_action :set_session_note,  only: [:show, :edit, :update, :destroy]
 
   # GET /session_notes
   # GET /session_notes.json
@@ -62,10 +62,10 @@ class SessionNotesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_session_note
-      @session_note = SessionNote.find(params[:id])
-    end
+    # # Use callbacks to share common setup or constraints between actions.
+    # def set_session_note
+    #   @session_note = SessionNote.find(params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def session_note_params

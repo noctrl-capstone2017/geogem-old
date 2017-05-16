@@ -20,6 +20,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'prawn'
 gem 'prawn-table', '~> 0.1.0'
+gem "font-awesome-rails"
 
 group :development, :test do
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.1'

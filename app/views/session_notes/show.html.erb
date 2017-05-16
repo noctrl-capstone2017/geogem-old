@@ -1,19 +1,69 @@
-<p id="notice"><%= notice %></p>
+<!-- Author: Rolando Medrano-->
+<style>
 
-<p>
-  <strong>Note:</strong>
-  <%= @session_note.note %>
-</p>
+.wrapper, .app {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 46px;
+    min-width: 960px;
+}
+    .sidebar {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 360px;
+    border-right: 1px solid #f0f0f0;
+}
 
-<p>
-  <strong>Session:</strong>
-  <%= @session_note.session_id %>
-</p>
+.note {
+    position: absolute;
+    right: 0px;
+    left: 361px;
+    bottom: 0px;
+    top: 71px;
+    padding-top: 4px;
+    padding-bottom: 0px;
+    line-height: 1.4em;
+}
 
-<p>
-  <strong>Created at:</strong>
-  <%= @session_note.created_at %>
-</p>
+.note #txtarea {
+    resize: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    line-height: 1.4em;
+    color: #333;
+    box-sizing: border-box;
+    padding-left: 60px;
+    padding-right: 140px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+}
+    
+</style>
+<%= javascript_include_tag "sidebar.js" %>
 
-<%= link_to 'Edit', edit_session_note_path(@session_note) %> |
-<%= link_to 'Back', session_notes_path %>
+<div class = "wrapper">
+    <div class = "session_note">
+        <div class = "sidebar">
+            <ul class = "sideview">
+                <li style="float:right;display:none" class="notecount">0 Notes</li>
+                <li class = "tagmenu button popover">
+                    <span id = "tagmenu">Tags</span>
+                    <div class = "menu tags">...</div>
+                </li>
+            </ul>
+        </div>
+        <div class = "noteArea">
+            <textarea id = "textarea" style = "display: block;"></textarea>
+        </div>
+    </div>
+</div>
