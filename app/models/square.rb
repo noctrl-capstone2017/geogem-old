@@ -1,7 +1,7 @@
 class Square < ApplicationRecord
         
     # Ensures that none of the fields are empty
-    validates :screen_name, presence: true, uniqueness: true
+    validates :screen_name, presence: true
     validates :tracking_type, presence: true
     validates :color, presence: true
     validates :description, presence: true    

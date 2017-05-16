@@ -19,14 +19,12 @@ class Teacher < ApplicationRecord
   
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },
-                    format: { with: VALID_SCREEN_NAME_REGEX },
-                    uniqueness: { case_sensitive: false}
+                    format: { with: VALID_SCREEN_NAME_REGEX }
   validates :icon,  presence: true
   validates :color, presence: true
   
   validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+                    format: { with: VALID_EMAIL_REGEX }
   validates :description, presence: true
   validates :powers, presence: true
   validates :school_id, presence: true
