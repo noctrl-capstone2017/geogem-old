@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
   def index
     @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
-
+  
   # GET /teachers/1
   # GET /teachers/1.json
   def show
@@ -103,7 +103,8 @@ class TeachersController < ApplicationController
       format.html { redirect_to teachers_url, notice: 'Super School was successfully switched.' }
       teacher.full_name = params[full_name]
     else
-      format.html { redirect_to teachers_url, notice: 'error' }
+      flash[:danger] = "Unauthorized"
+        redirect_to home1_path
     end
   end
  
@@ -160,8 +161,8 @@ class TeachersController < ApplicationController
       :school_id, :password, :password_digest)
     end
     
-        # Switching the focus school only requires full_name
-    def focus_school_params
-      params.require(:school).permit(:full_name)
+        # Switching the focus school 
+    def focus_school_params 
+      params.require(:full_name).permit(:school_id)
     end 
 end

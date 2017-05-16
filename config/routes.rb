@@ -31,13 +31,13 @@ Rails.application.routes.draw do
   get    'home1'   => 'static_pages#home1'
   post   'home1'   => 'static_pages#home1'
   
+  # Robert Herrera
   get    '/super_report',    to: 'teachers#super_report'
   get    '/admin',    to: 'teachers#admin'
+  get    '/admin_report',    to: 'teachers#admin_report' 
   get    '/super',    to: 'schools#super'
 
   post   '/super',    to: 'teachers#updateFocus'
-  
-
   get    '/schools', to: 'schools#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
