@@ -74,7 +74,15 @@
 		<div class="col-sm-offset-1 col-sm-2"><h4>Password: </h4></div>
 
 		<div class="col-sm-4 col-sm-offset-0">
-			<!--<input type="password" class="form-control" id="password"> Temporarily commented out.-->
+			<%= f.password_field :password, class: 'form-control'%>
+		</div>
+	</div>
+	
+	<div class="row form-row">
+		<div class="col-sm-offset-1 col-sm-2"><h4>Confirm Password: </h4></div>
+
+		<div class="col-sm-4 col-sm-offset-0">
+			<%= f.password_field :password_confirmation, class: 'form-control'%>
 		</div>
 	</div>
 	
@@ -125,6 +133,8 @@
 		<div class="col-sm-1 col-sm-offset-1"><br></div>
 	</div>
 	
+	<!--One button is in the form, one is out-- it's because the cancel button is
+	    just a link to return, while the add button is the submit.-->
 	<div class="row action-buttons-row">
 		<div class="col-sm-1 col-sm-offset-1"> 
 			<%= f.submit "Add New Teacher", class: "btn btn-success" %>

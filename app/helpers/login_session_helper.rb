@@ -20,6 +20,7 @@ module LoginSessionHelper
   def current_teacher
     if (teacher_id = session[:teacher_id])
       @current_teacher ||= Teacher.find_by(id: teacher_id)
+      #current_teacher.last_login = Time.now
     elsif (teacher_id = cookies.signed[:teacher_id])
       teacher = Teacher.find_by(id: teacher_id)
       if teacher && teacher.authenticated?(cookies[:remember_token])

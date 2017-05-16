@@ -1,12 +1,29 @@
 <!-- @author: Matthew O & Alex P -->
+
+<!-- Control the selection and unselection of the student roster -->
+<script>
+	$(document).ready(function() {
+		$(".image-radio").click(function(){
+		     $(this).attr('checked',true);
+		     $("select[name='student_id']").val($(this).attr('id'));
+		 });
+		 $('#student_id').change(function(){ 
+		    $('input[name="student_roster"]').prop('checked', false);
+		    var button = "student" + $(this).val();
+		     $(button).attr('checked',true);
+		});
+	});
+</script>
+
+
 <!-- page header -->
 <div class="page-header vertical-align">
 	<div class="col-xs-11">
 		<h2>Home<small> - student roster for teacher <%= @teacher.screen_name %></small></h2><!-- Dynamically fills in with school id -->
 	</div>
 	<div class="col-xs-1 pull-right">
-		<div class="header-sq i-plum" >
-			<span class="fa fa-apple fa-3x teacher-icon"></span>
+		<div class="header-sq i-<%= @teacher.color %>" >
+			<span class="fa fa-<%= @teacher.icon %> fa-3x teacher-icon"></span>
 		</div>
 	</div>
 </div><!--End page header-->
@@ -17,12 +34,19 @@
 		<% if index == 0 || index == 4 %>
 			<div class="row students-row">
 		<% end %>
+
 		<div class="col-xs-3 text-center">
-      <div class =" square i-<%= student.color %> center-block">
-          <span class="fa fa-<%= student.icon %> fa-5x student-icon "></span>
-      </div>
-      <p><span class="student-icon-text"><%= student.full_name%></span></p>
+			<input name="student_roster" id="student<%= student.id %>" value="student<%= student.id %>" style="display:none;" type="radio"/>
+			<label for="student<%= student.id %>">
+				<div class="image-radio" id="<%= student.id %>">
+		      <div class ="square i-<%= student.color %> center-block">
+		          <span class="fa fa-<%= student.icon %> fa-5x student-icon home-center"></span>
+		      </div>
+	      </div>
+      </label>
+      <p><span class="student-icon-text" id="<%= student.id %>"><%= student.full_name%></span></p>
     </div>    <!-- col -->
+
     <% if index == 3 || index == 7 || index == (@top_students.size-1) %>
     	</div>   <!-- row -->
     <% end %>
@@ -55,3 +79,4 @@
 		</div>
 	</form>
 </div>   <!-- row -->
+

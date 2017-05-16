@@ -22,11 +22,16 @@ class SchoolsController < ApplicationController
   end
 
   # RH
-  #make the list of schools available at /super
+  # make the list of schools available at /super
   def super
     @schools = School.all
   end
   
+  def super_report
+  end
+  
+
+
   # POST /schools
   # POST /schools.json
   def create
@@ -57,6 +62,7 @@ class SchoolsController < ApplicationController
     end
   end
 
+
   # DELETE /schools/1
   # DELETE /schools/1.json
   def destroy
@@ -69,12 +75,15 @@ class SchoolsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_school
-      @school = School.find(params[:id])
-    end
 
+   def set_school
+      @school = School.find(params[:id])
+   end
+   
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
       params.require(:school).permit(:full_name, :screen_name, :icon, :color, :email, :website, :description)
     end
+    
+ 
 end

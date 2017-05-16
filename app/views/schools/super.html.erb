@@ -14,12 +14,28 @@
 		</div>
 <!--End page header-->
 <tbody>
-	 <form action="/updateFocus" method="post">
+	<!-- submits HTTP Post request to the super_controller. The super_controller determines which action to use. -->
+	 <form action="/super" method="post">
+	 
 			<select required>
 				<% @schools.each do |school| %>
-					<option value="<%= school.full_name %>"><%= school.full_name %></option>
+					<option name ="<%= school.full_name %>" value="<%= school.full_name %>"><%= school.full_name %></option>
 		   		<% end %>
 			</select> 
 	   <input type="submit" value="Change Focus School">
 	</form>
 </tbody>
+
+<br>
+
+	<div class="table-sq " >
+		<span class="fa fa-home fa-3x"></span>  <!--Always the Bootstrap glyph school Icon-->
+	</div>
+	
+<%= link_to 'All Schools', schools_path, class: "btn btn-success" %>
+
+	<div class="table-sq " >
+		<span class="fa fa-home fa-3x"></span>  <!--Always the Bootstrap glyph school Icon-->
+	</div>
+	
+<%= link_to 'Super Report', super_report_path, class: "btn btn-success" %>
