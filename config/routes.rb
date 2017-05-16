@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
   root 'login_session#new'
 
-  get 'teachers/:id/password' => 'teachers#password'
+  #get 'teachers/:id/password' => 'teachers#password'
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
+  
+  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  resources :teachers do
+  member do
+    get :edit_password
+    put :update_password
+    end
+  end
   
   resources :roster_students
   resources :roster_squares
@@ -13,7 +21,7 @@ Rails.application.routes.draw do
   resources :sessions
   resources :squares
   resources :students
-  resources :teachers
+  
   resources :schools
   get    '/report1',  to: 'reports#report1'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -43,8 +51,12 @@ Rails.application.routes.draw do
   get    '/admin_report',    to: 'teachers#admin_report' 
   get    '/super',    to: 'schools#super'
 
-  post   '/super',    to: 'teachers#updateFocus'
-  get    '/schools', to: 'schools#index'
+  get    '/allSchools', to: 'schools#index'
+  get    '/schools/new', to: 'schools#new'
+  get    '/schools/new', to: 'schools#create'
+
+  #post   '/super',    to: 'teachers#updateFocus'
+  #get    '/schools', to: 'schools#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
