@@ -1,5 +1,5 @@
 # author: Kevin M, Tommy B
-# Teacher model validation.
+# Teacher model validation, methods, and more!
 
 class Teacher < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
@@ -59,13 +59,6 @@ class Teacher < ApplicationRecord
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
   end
-
-  # Commented out by Steven Royster
-  #    We are not implementing a remember me feature
-  # Forgets a user --added by DJ
-  # def forget
-  #   update_attribute(:remember_digest, nil)
-  # end
 
   # Returns the hash digest of the given string.
   def Teacher.digest(string)
