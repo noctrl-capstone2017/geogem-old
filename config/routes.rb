@@ -51,8 +51,12 @@ Rails.application.routes.draw do
   get    '/admin_report',    to: 'teachers#admin_report' 
   get    '/super',    to: 'schools#super'
 
-  post   '/super',    to: 'teachers#updateFocus'
-  get    '/schools', to: 'schools#index'
+  get    '/allSchools', to: 'schools#index'
+  get    '/schools/new', to: 'schools#new'
+  get    '/schools/new', to: 'schools#create'
+
+  #post   '/super',    to: 'teachers#updateFocus'
+  #get    '/schools', to: 'schools#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
