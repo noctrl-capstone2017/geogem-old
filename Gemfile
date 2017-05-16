@@ -25,6 +25,7 @@ gem 'time_difference'
 group :development, :test do
   gem 'rails-controller-testing'
   gem 'sqlite3', '1.3.12'
+  gem 'pdf-inspector', require: "pdf/inspector"
   gem 'byebug', platform: :mri
 end
 
