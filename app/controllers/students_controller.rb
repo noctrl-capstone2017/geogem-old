@@ -4,8 +4,13 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    set_school
-    @students = Student.where(school_id: current_teacher.school_id)
+    
+    if current_teacher.school_id == 0
+      @students = Student.all
+    else
+      set_school
+      @students = Student.where(school_id: current_teacher.school_id)
+    end
   end
 
   # GET /students/1
