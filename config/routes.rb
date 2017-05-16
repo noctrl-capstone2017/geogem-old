@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'login_session#new'
 
-  get 'teachers/:id/pword' => 'teachers#pword'
+  get 'teachers/:id/password' => 'teachers#password'
   get "/home" , to: 'teachers#home'
   get "teachers/analysis"
   get 'static_pages/help'
