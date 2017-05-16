@@ -51,11 +51,11 @@ module LoginSessionHelper
   #    We are not implementing a remember me feature
   # Forgets a persistent session.
 
-  def forget(teacher)
-    #teacher.forget
-    cookies.delete(:teacher_id)
-    cookies.delete(:remember_token)
-  end
+  # def forget(teacher)
+  #   #teacher.forget
+  #   cookies.delete(:teacher_id)
+  #   cookies.delete(:remember_token)
+  # end
 
   
   # Logs out the current teacher.
