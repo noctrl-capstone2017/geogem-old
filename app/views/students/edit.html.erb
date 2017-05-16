@@ -6,8 +6,9 @@
 				<h2>Student Profile <small>- view/edit information for student <%= @student.full_name %></small></h2>
 			</div>
 			<div class="col-xs-1 center-block">
-				<div class="header-sq i-<%= @student.color %>" title="<%= @student.screen_name %>"> 															<!--this will be for teacher color-->
-					<span class="fa fa-<%= @student.icon %> fa-3x teacher-icon"></span> <!--this will be for teacher icon-->
+				<!-- Student icon, color, & float over name -->
+				<div class="header-sq i-<%= @student.color %>" title="<%= @student.screen_name %>">
+					<span class="fa fa-<%= @student.icon %> fa-3x teacher-icon"></span>
 				</div>
 			</div>
 		</div>

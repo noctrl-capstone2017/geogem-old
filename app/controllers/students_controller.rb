@@ -4,9 +4,8 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    # @school = School.where(teacher.school_id)
+    set_school
     @students = Student.where(school_id: current_teacher.school_id)
-    # @students = Student.all
   end
 
   # GET /students/1
@@ -17,11 +16,13 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
+    set_school
     @student = Student.new
   end
 
   # GET /students/1/edit
   def edit
+    set_school
   end
 
   # POST /students
@@ -68,6 +69,11 @@ class StudentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+    end
+    
+    # Used for getting the school values for the logged in teacher 
+    def set_school
+      @school = School.find(current_teacher.school_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

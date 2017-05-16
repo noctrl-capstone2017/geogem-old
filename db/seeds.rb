@@ -62,6 +62,7 @@ Teacher.create!(user_name: "admin",
                     full_name: name)
 end
 
+# Two students with different school id's than the rest
 2.times do |n|
   name  = Faker::Name.name
   Student.create!(  screen_name: "temp",
