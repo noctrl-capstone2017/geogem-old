@@ -80,6 +80,14 @@ body
 /*********************************************************
 *  ICON STYLING
 *********************************************************/
+.home-center
+{
+	position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
+
 .square
 {
 	height: 8em;
