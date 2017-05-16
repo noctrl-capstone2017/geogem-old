@@ -23,7 +23,7 @@ end
 
 pdf.grid([0,0], [0,1]).bounding_box do
   pdf.text " "
-  pdf.text  "Student Name:" + student.full_name , :align => :left
+  pdf.text "Student Name: " + student.full_name , :align => :left
   pdf.text "Teacher Name: " + teacher.full_name , :align => :left
 end
 
@@ -262,8 +262,9 @@ pdf.table table3, :header => true,
 #table2.push(r2)  
 #end
 
+# Change by Nate V. - Switched from file download to page display of pdf file
 send_data pdf.render, :filename => "Report1.pdf", :type =>
- "application/pdf"
+ "application/pdf", disposition: 'inline'
 
 end
 

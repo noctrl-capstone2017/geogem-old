@@ -104,18 +104,6 @@ end
   RosterSquare.create!(square_id: bsid,
                         student_id: 1)
 end
-
-# Seed the database with a Session
-Session.create!(start_time: Time.now,
-               end_time: Time.now + (2.0/24),
-               session_teacher: 1,
-               session_student: 1)
-               
-# Seed the database with a Session Event for the seeded Session               
-SessionEvent.create!(behavior_square_id: 1,
-                square_press_time: Time.now + (1.0/24),
-                duration_end_time: Time.now + (1.5/24),
-                session_id: 1)
                 
 # Seed the database with a Session Note for the seeded Session               
 SessionNote.create!(note: "sample note",
