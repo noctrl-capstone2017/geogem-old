@@ -5,7 +5,7 @@
 require 'test_helper'
 require 'login_session_helper'
 
-class TeachersLoginLogoutTest < ActionDispatch::IntegrationTest
+class TeachersLoginTest < ActionDispatch::IntegrationTest
   def setup
     @teacher = teachers(:one)
   end
