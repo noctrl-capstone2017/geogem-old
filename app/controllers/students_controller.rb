@@ -1,12 +1,16 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_school
+  
   # GET /students
   # GET /students.json
   def index
-    # @school = School.where(teacher.school_id)
-    # @students = Student.where(school_id: @school.id)
-    @students = Student.all
+    # Check for Super User, shool_id == 0, list ALL students
+    if current_teacher.school_id == 0
+      @students = Student.all
+    else
+      @students = Student.where(school_id: current_teacher.school_id)
+    end
   end
 
   # GET /students/1
@@ -65,9 +69,24 @@ class StudentsController < ApplicationController
   end
 
   private
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.find(params[:id])
+    end
+    
+    # Used for getting the school values for the logged in teacher 
+    def set_school
+      if current_teacher.school_id == 0       #Super User
+        @color  = current_teacher.color
+        @full_name = current_teacher.full_name
+        @icon = current_teacher.icon
+      else                                    #Admin for school
+        @school = School.find(current_teacher.school_id)
+        @color  = @school.color
+        @full_name = @school.full_name
+        @icon = @school.icon
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
