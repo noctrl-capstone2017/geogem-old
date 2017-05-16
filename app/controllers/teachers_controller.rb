@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
-  #before_action :is_admin, except: [:update, :edit]
-  #before_action :is_super, except: [:update, :edit]
+  before_action :is_admin, except: [:update, :edit]
+  before_action :is_super, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
@@ -102,11 +102,8 @@ class TeachersController < ApplicationController
     def is_admin
       if !is_admin?
         flash[:danger] = "Unauthorized"
-        redirect_to home1_path
-      else
-        redirect_to admin1_path
+        redirect_to login_path
       end
-      
     end
     
     # Author: Steven Royster
@@ -126,6 +123,9 @@ class TeachersController < ApplicationController
       end
     end
     
+     # Author: Steven Royster
+    # Checks to see if the current teacher has super user status
+    # Returns true if the teacher is a super user
     def is_super?
       current_teacher && current_teacher.id == 1
     end
