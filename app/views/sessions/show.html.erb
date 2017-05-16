@@ -38,7 +38,7 @@
                 <div class="col-xs-3 col-sm-offset-1 col-md-3 col-md-offset-0">
                     <% if square.tracking_type == 2 %>
                         <div class="wrapper frequency" name="<%= square.id %>">
-                            <button class="counter">
+                            <button class="counter square i-<%= square.color %>">
                                 <div class="square i-<%= square.color %> text-center">
                                     <div class="col-xs-12">
                                             <h4><%= square.screen_name %> <label class="count">0</label></h4>
@@ -49,7 +49,7 @@
                         <% end %>
                         <% if square.tracking_type == 1 %>
                         <div class="wrapper interval" name="<%= square.id %>">
-                            <button class="counter">
+                            <button class="counter square i-<%= square.color %>">
                                 <div class="square i-<%= square.color %> text-center">
                                     <div class="col-xs-12">
                                             <h4><%= square.screen_name %> <label class="count">0</label></h4>
@@ -60,7 +60,7 @@
                         <% end %>
                         <% if square.tracking_type == 0 %>
                         <div class="wrapper duration" name="<%= square.id %>">
-                            <button class="button-start" id="button-start1">
+                            <button class="button-start square i-<%= square.color %>" id="button-start1">
                                 <div class="square i-<%= square.color %> text-center">
                                     <div class="col-xs-12">
                                             <h4><%= square.screen_name %> </h4>

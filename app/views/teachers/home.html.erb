@@ -1,5 +1,6 @@
 <!-- @author: Matthew O & Alex P -->
-<!-- page header -->
+
+<!-- Control the selection and unselection of the student roster -->
 <script>
 	$(document).ready(function() {
 		$(".image-radio").click(function(){
@@ -8,9 +9,14 @@
 		 });
 		 $('#student_id').change(function(){ 
 		    $('input[name="student_roster"]').prop('checked', false);
+		    var button = "student" + $(this).val();
+		     $(button).attr('checked',true);
 		});
 	});
 </script>
+
+
+<!-- page header -->
 <div class="page-header vertical-align">
 	<div class="col-xs-11">
 		<h2>Home<small> - student roster for teacher <%= @teacher.screen_name %></small></h2><!-- Dynamically fills in with school id -->
