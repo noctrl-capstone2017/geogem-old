@@ -22,8 +22,8 @@
 		<h2>Home<small> - student roster for teacher <%= @teacher.screen_name %></small></h2><!-- Dynamically fills in with school id -->
 	</div>
 	<div class="col-xs-1 pull-right">
-		<div class="header-sq i-plum" >
-			<span class="fa fa-apple fa-3x teacher-icon"></span>
+		<div class="header-sq i-<%= @teacher.color %>" >
+			<span class="fa fa-<%= @teacher.icon %> fa-3x teacher-icon"></span>
 		</div>
 	</div>
 </div><!--End page header-->
@@ -34,17 +34,17 @@
 		<% if index == 0 || index == 4 %>
 			<div class="row students-row">
 		<% end %>
-		<div class=" col-xs-3 text-center" id="<%= student.id %>">
-			<input name="student_roster" id="student<%= student.id %>" value="student<%= student.id %>" style="display:none" type="radio"/>
+
+		<div class="image-radio col-xs-3 text-center" id="<%= student.id %>">
+			<input name="student_roster" id="student<%= student.id %>" value="student<%= student.id %>" style="display:none;" type="radio"/>
 			<label for="student<%= student.id %>">
-				<div class="image-radio" id="<%= student.id %>">
-			      <div class ="square i-<%= student.color %> center-block">
-			          <span class="fa fa-<%= student.icon %> fa-5x student-icon "></span>
-			      </div>
-			    </div>
-	      	</label>
-      		<p><span class="student-icon-text" id="<%= student.id %>"><%= student.full_name%></span></p>
-    	</div>    <!-- col -->
+	      <div class ="square i-<%= student.color %> center-block">
+	          <span class="fa fa-<%= student.icon %> fa-5x student-icon home-center"></span>
+	      </div>
+      <p><span class="student-icon-text" id="<%= student.id %>"><%= student.full_name%></span></p>
+      </label>
+    </div>    <!-- col -->
+
     <% if index == 3 || index == 7 || index == (@top_students.size-1) %>
     	</div>   <!-- row -->
     <% end %>

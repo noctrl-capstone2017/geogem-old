@@ -80,6 +80,15 @@ body
 /*********************************************************
 *  ICON STYLING
 *********************************************************/
+/*Solves centering issues on home and session pages*/
+.home-center
+{
+	position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+}
+
 .square
 {
 	height: 8em;
@@ -105,9 +114,7 @@ body
 	height: 8em;
 	width: 8em;
 	display: flex;
-	flex-flow:column;
-	align-items: center;
-	justify-content: center;
+	border-radius: 25px;
 }
 
 .sq-active
@@ -146,12 +153,10 @@ body
 
 .student-icon
 {
-	font-size: 5em;
 	color: #FFFFFF;
 }
 .teacher-icon
 {
-	font-size: 5em;
 	color: #FFFFFF;
 }
 .icon-white

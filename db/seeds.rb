@@ -124,13 +124,6 @@ end
   RosterSquare.create!(square_id: bsid,
                         student_id: 1)
 end
-
-# Seed the database with a Session
-Session.create!(start_time: Time.now,
-               end_time: Time.now + (2.0/24),
-               session_teacher: 1,
-               session_student: 1)
-               
                 
 #School seeds added by - Dakota B
 30.times do |n|
