@@ -1,12 +1,15 @@
+# author: Kevin M, Tommy B
+# Teacher methods.
 class TeachersController < ApplicationController
 
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
-  #before_action :is_admin, except: [:update, :edit]
-  #before_action :is_super, except: [:update, :edit]
+  before_action :is_admin, except: [:update, :edit]
+  before_action :is_super, except: [:update, :edit]
 
   # GET /teachers
   # GET /teachers.json
   def index
+    @current_teacher = current_teacher
     @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
   
@@ -25,9 +28,31 @@ class TeachersController < ApplicationController
   end
   
   # GET /teachers/1/password
-  # When sessions and stuff are in place, only the teacher that this is for will
-  # be able to access it. Not fully working yet.
-  def password
+  #author: Tommy B
+  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  def edit_password
+    @teacher = Teacher.find(params[:id])
+  end
+  
+  #author: Tommy B
+  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  
+  # Note from Tommy B: the redirects need to be changed
+  def update_password
+    teacher = Teacher.find(params[:id])
+    # also in here i'm calling the authenticate method that usually is present in bcrypt.
+    if teacher and teacher.authenticate(params[:old_password])
+      if params[:password] == params[:password_confirmation]
+        teacher.password = BCrypt::Password.create(params[:password])
+        if teacher.save!
+          redirect_to @teacher, notice: "Password changed."
+        end
+      else
+        redirect_to @teacher, notice: "Incorrect Password."
+      end
+    else
+      redirect_to @teacher, notice: "Incorrect Password."
+    end
   end
 
   # POST /teachers
@@ -47,7 +72,8 @@ class TeachersController < ApplicationController
   end
 
 
-   #author: Matthew O & Alex P
+  #author: Matthew O & Alex P
+  #home page for teachers, display top 8 most used students, route to anaylze or new session
   def home
     @teacher = current_teacher
     @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
@@ -66,7 +92,6 @@ class TeachersController < ApplicationController
           end
         end
     elsif params[:analyze]
-        # Currently unimplemented will direct to analysis page for the selected student
         redirect_to analysis_path
     end
   end
