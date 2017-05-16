@@ -19,7 +19,8 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'prawn'
-gem 'prawn-table', '~> 0.1.0'
+gem 'prawn-table'
+gem 'time_difference'
 
 group :development, :test do
   gem 'rails-controller-testing'
