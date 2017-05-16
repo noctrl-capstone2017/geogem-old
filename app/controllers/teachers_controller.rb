@@ -27,6 +27,14 @@ class TeachersController < ApplicationController
   def edit
   end
   
+  def admin_report
+    @current_teacher = current_teacher
+    @students = Student.where(school_id: current_teacher.school_id)
+    @teachers = Teacher.where(school_id: current_teacher.school_id)
+    @squares = Square.where(school_id: current_teacher.school_id)
+    
+  end
+  
   # GET /teachers/1/password
   #author: Tommy B
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
