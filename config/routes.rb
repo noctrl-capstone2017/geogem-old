@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'login_session#new'
 
-  get 'teachers/:id/pword' => 'teachers#pword'
-  get "teachers/:id/home",  to: 'teachers#home'
+  get 'teachers/:id/password' => 'teachers#password'
+  get "/home" , to: 'teachers#home'
+  get "teachers/analysis"
+  get 'static_pages/help'
   
   resources :roster_students
   resources :roster_squares
@@ -30,6 +32,9 @@ Rails.application.routes.draw do
   
   get    'home1'   => 'static_pages#home1'
   post   'home1'   => 'static_pages#home1'
+  
+  get    'admin1'   => 'admin#home'
+  get    'admin2'   => 'admin#show'
   
   get    '/super_report',    to: 'teachers#super_report'
   get    '/admin',    to: 'teachers#admin'
