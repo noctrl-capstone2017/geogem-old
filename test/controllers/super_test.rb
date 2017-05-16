@@ -12,14 +12,4 @@ class SchoolsControllerTest < ActionDispatch::IntegrationTest
     get super_url
     assert_response :success
   end
-  
-end
-  
-  
-  
-  
-  
-  
-  
-  
 end
