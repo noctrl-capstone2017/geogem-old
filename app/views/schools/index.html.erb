@@ -34,11 +34,19 @@
 						<tbody>
 							<%= will_paginate %>
 				            <% @schools.each do |school| %>
-						  					<tr data-link="/schools/<%= school.id %>">
-												<td><p class="listText">
-										    <p class="fa fa-home school-icon">&nbsp;&nbsp;&nbsp;<span> <%= school.icon %></span> </p></td>
-										    <td><p class="listText"><span> <%= school.screen_name %></span> </p></td>
-										    <td><p class="listText"><span> <%= school.description %></span> </p></td>
+						  			<tr data-link="/schools/<%= school.id %>">
+											<td><div class="table-sq i-<%= school.color %>">
+												<p class="listText">
+										   		 <p class="fa fa-home fa-3x ">
+										   		 	<span> </span></p>
+										    </div>	
+										    </td>
+										    <td>
+										    	<p class="listText"><span> <%= school.screen_name %></span> </p>
+										    </td>
+										    <td>
+										    	<p class="listText"><span> <%= school.description %></span> </p>
+										    </td>
 				  		      		</tr>
 				  		      <% end %>
 							</tbody>
