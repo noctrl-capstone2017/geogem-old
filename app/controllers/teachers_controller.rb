@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :password]
   #before_action :is_admin, except: [:update, :edit]
   #before_action :is_super, except: [:update, :edit]
 
@@ -23,10 +23,10 @@ class TeachersController < ApplicationController
   def edit
   end
   
-  # GET /teachers/1/pword
+  # GET /teachers/1/password
   # When sessions and stuff are in place, only the teacher that this is for will
   # be able to access it. Not fully working yet.
-  def pword
+  def password
   end
 
   # POST /teachers
@@ -48,7 +48,7 @@ class TeachersController < ApplicationController
 
    #author: Matthew O & Alex P
   def home
-    @teacher = Teacher.find(params[:id])
+    @teacher = current_teacher
     @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
     if params[:start_session]
         @session = Session.new
