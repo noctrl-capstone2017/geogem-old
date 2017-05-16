@@ -67,6 +67,7 @@ class TeachersController < ApplicationController
         end
     elsif params[:analyze]
         # Currently unimplemented will direct to analysis page for the selected student
+        redirect_to analysis_path
     end
   end
   

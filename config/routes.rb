@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'teachers/:id/password' => 'teachers#password'
   get "/home" , to: 'teachers#home'
-  get "teachers/analysis"
+  get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
   resources :roster_students

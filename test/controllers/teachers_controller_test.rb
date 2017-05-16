@@ -14,6 +14,13 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
     get teachers_url
     assert_response :success
   end
+  
+  #Authors: Alex P Debra J Matthew O
+  # test the home screen
+  test "should get home" do
+    get home_teacher_url
+    assert_response :success
+ end
 
   test "should get new" do
     get new_teacher_url
