@@ -23,8 +23,17 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to session_url(Session.last)
   end
 
+  #Authors: Alex P Debra J Matthew O
+  #get the show screen 
   test "should show session" do
     get session_url(@session)
+    assert_response :success
+  end
+  
+  #Authors: Alex P Debra J Matthew O
+  #get the end screen 
+  test "should show end" do
+    get end_session_url
     assert_response :success
   end
 

@@ -9,7 +9,7 @@ class TeachersController < ApplicationController
   def index
     @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
-
+  
   # GET /teachers/1
   # GET /teachers/1.json
   def show
@@ -67,6 +67,7 @@ class TeachersController < ApplicationController
         end
     elsif params[:analyze]
         # Currently unimplemented will direct to analysis page for the selected student
+        redirect_to analysis_path
     end
   end
   
@@ -94,7 +95,21 @@ class TeachersController < ApplicationController
       format.json { head :no_content }
     end
   end
+   
+   #Robert Herrera
+   # POST /super
+  def updateFocus
+    teacher = Teacher.find(1)
     
+    if teacher.update(focus_school_params)
+      format.html { redirect_to teachers_url, notice: 'Super School was successfully switched.' }
+      teacher.full_name = params[full_name]
+    else
+      flash[:danger] = "Unauthorized"
+        redirect_to home1_path
+    end
+  end
+ 
   private
   
     # Author: Steven Royster
@@ -123,7 +138,7 @@ class TeachersController < ApplicationController
         redirect_to home1_path
       end
     end
-    
+
      # Author: Steven Royster
     # Checks to see if the current teacher has super user status
     # Returns true if the teacher is a super user
@@ -142,4 +157,9 @@ class TeachersController < ApplicationController
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
       :school_id, :password, :password_digest)
     end
+    
+        # Switching the focus school 
+    def focus_school_params 
+      params.require(:full_name).permit(:school_id)
+    end 
 end
