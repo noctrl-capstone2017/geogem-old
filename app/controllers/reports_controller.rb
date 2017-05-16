@@ -315,6 +315,7 @@ pdf.table table3, :header => true, :cell_style => { :border_color => "FFFFFF" },
 
 
 # Change by Nate V. - Switched from file download to page display of pdf file
+# To revert back to downloading a file, remove "disposition: 'inline'"
 send_data pdf.render, :filename => "Report1.pdf", :type =>
  "application/pdf", disposition: 'inline'
 

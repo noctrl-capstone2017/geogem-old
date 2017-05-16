@@ -47,7 +47,8 @@ class TeachersController < ApplicationController
   end
 
 
-   #author: Matthew O & Alex P
+  #author: Matthew O & Alex P
+  #home page for teachers, display top 8 most used students, route to anaylze or new session
   def home
     @teacher = current_teacher
     @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
@@ -66,7 +67,6 @@ class TeachersController < ApplicationController
           end
         end
     elsif params[:analyze]
-        # Currently unimplemented will direct to analysis page for the selected student
         redirect_to analysis_path
     end
   end
