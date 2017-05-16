@@ -2,6 +2,7 @@ require 'test_helper'
 
 class StudentsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    log_in_as(teachers(:one))
     @student = students(:one)
   end
 
@@ -15,7 +16,7 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-test "should create student" do
+  test "should create student" do
         assert_difference('Student.count') do
           post students_url, params: { student: { color: "red", school_id: "1", 
           contact_info: "hey", 
@@ -54,7 +55,8 @@ test "should create student" do
   end
 
   test "should update student" do
-    patch student_url(@student), params: { student: { color: "red", school_id: "1", 
+    patch student_url(@student), params: { student: { color: "red",
+      school_id: "1", 
       contact_info: "hey", 
       description: "Hey", 
       icon: "bug", screen_name: "hey", 
@@ -63,18 +65,12 @@ test "should create student" do
   end
   
   test "should not update student. Empty name." do
-    patch student_url(@student), params: { student: { color: "red", school_id: "1", 
+    patch student_url(@student), params: { student: { color: "red",
+      school_id: "1", 
       contact_info: "hey", 
       description: "Hey", 
       icon: "bug", screen_name: "hey", 
       full_name: ""} }
   end
 
-  test "should destroy student" do
-    assert_difference('Student.count', -1) do
-      delete student_url(@student)
-    end
-
-    assert_redirected_to students_url
-  end
 end
