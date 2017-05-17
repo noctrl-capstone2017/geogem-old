@@ -19,11 +19,13 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'prawn'
-gem 'prawn-table', '~> 0.1.0'
+gem 'prawn-table'
+gem 'time_difference'
 
 group :development, :test do
   gem 'rails-controller-testing'
   gem 'sqlite3', '1.3.12'
+  gem 'pdf-inspector', require: "pdf/inspector"
   gem 'byebug', platform: :mri
 end
 

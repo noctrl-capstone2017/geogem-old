@@ -5,8 +5,8 @@
 		<h2>All Teachers<small> - manage teachers at TPTE</small></h2><!-- Dynamically fills in with school id -->
 	</div>
 	<div class="col-xs-1 center-block">
-		<div class="header-sq i-plum" title="Bianca17">
-			<span class="fa fa-apple fa-3x teacher-icon"></span>
+		<div class="table-sq i-<%= @current_teacher.color%>" title=<%= @current_teacher.screen_name %>>
+			<span class="fa fa-<%= @current_teacher.icon%> fa-2x teacher-icon"></span>
 		</div>
 	</div>
 </div><!--End page header-->
@@ -32,13 +32,15 @@
 		</tr>
 	</thead>
 	<tbody>
+		
 		<%= will_paginate %>
 			<% @teachers.each do |teacher| %>
+			
 				<tr data-link=<%= edit_teacher_path(teacher.id) %>>
 					<td>
 						<div class="table-sq i-plum" title="<%= teacher.user_name %>">
 							<div class="table-sq i-<%= teacher.color%>">
-										<i class="fa fa-<%= teacher.icon%> fa-2x table-icon"></i>
+									<i class="fa fa-<%= teacher.icon%> fa-2x table-icon"></i>
 							</div>
 						</div>
 					</td>
@@ -56,7 +58,9 @@
 					<td><p class="listText"><span></span></p>
 					</td>
 				</tr>
+				
 			<% end %>
 		<%= will_paginate %>
+		
 	</tbody>
 </table>

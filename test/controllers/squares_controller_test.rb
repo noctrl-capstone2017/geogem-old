@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SquaresControllerTest < ActionDispatch::IntegrationTest
   setup do
+    log_in_as(teachers(:one))
     @square = squares(:one)
   end
 
@@ -17,8 +18,9 @@ class SquaresControllerTest < ActionDispatch::IntegrationTest
 
   test "should create square" do
     assert_difference('Square.count') do
-      post squares_url, params: { square: { color: "red", school_id: 
-      "1", description: "Desc", 
+      post squares_url, params: { square: { color: "red",
+      school_id: "1",
+      description: "Desc", 
       screen_name: "CT", tracking_type: 1} }
     end
 
@@ -27,9 +29,11 @@ class SquaresControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create square. Empty Desc" do
     assert_no_difference('Square.count') do
-      post squares_url, params: { square: { color: "red", school_id: 
-      "1", description: "", 
-      screen_name: "CT", tracking_type: 1} }
+      post squares_url, params: { square: { color: "red",
+      school_id: "1",
+      description: "", 
+      screen_name: "CT",
+      tracking_type: 1} }
     end
   end
 
@@ -51,9 +55,11 @@ class SquaresControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update square" do
-    patch square_url(@square), params: { square: { color: "red", school_id: 
-      "1", description: "Desc", 
-      screen_name: "CT", tracking_type: 1} }
+    patch square_url(@square), params: { square: { color: "red",
+    school_id: "1",
+    description: "Desc",
+    screen_name: "CT",
+    tracking_type: 1} }
     assert_redirected_to squares_url
   end
 

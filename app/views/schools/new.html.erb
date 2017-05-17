@@ -1,5 +1,85 @@
-<h1>New School</h1>
+<!--Edited by Dakota B-->
+			<!-- page header -->
+			<div class="page-header cap17-header">
+				<h2>New School <small> - add a new school to Dinner Out
+					<div class ="header-sq i-gray pull-right" title="Some new school">
+						<span class="fa fa-home fa-2x header-icon"></span>
+					</div>
+				</small>
+				</h2>
+			</div>   <!--page header-->
 
-<%= render 'form', school: @school %>
 
-<%= link_to 'Back', schools_path %>
+			<!--School profile form -->
+			<form class="form-horizontal" action="schools.html">
+			  <%= form_for(@school, url: new_path) do |f| %>
+			
+				<!-- School ID field -->
+    		<div class="row form-row">
+    			<div class="col-xs-2 col-xs-offset-1"><h4> School Name: </h4></div>
+       		<div class="col-xs-2">
+    				<%= f.text_field :full_name, class: 'form-control' %>
+    			</div>
+    		</div>
+    		
+    		<!-- school name field -->
+    		<div class="row form-row">
+       		<div class="col-xs-1 col-xs-offset-1"><h4> Screen Name: </h4></div>
+       		<div class="col-xs-4 col-xs-offset-1">
+    				<%= f.text_field :screen_name, class: 'form-control' %>
+    			</div>
+    		</div>   <!-- row -->
+
+				<!-- a little extra space after name/email -->
+				<div class=""form-spacer>	&nbsp;</div>
+
+				<!-- School email field -->
+    		<div class="row form-row">
+    			<div class="col-xs-1 col-xs-offset-1"><h4>Email: </h4></div>
+    			<div class="col-xs-4 col-xs-offset-1">
+    				<%= f.text_field :email, class: 'form-control' %>
+    			</div>
+    		</div>   <!-- row -->
+    
+    		<!-- School website field -->
+    		<div class="row form-row">
+    			<div class="col-xs-1 col-xs-offset-1"><h4>Website: </h4></div>
+    			<div class="col-xs-4 col-xs-offset-1">
+   					<%= f.text_field :website, class: 'form-control' %>
+   				</div>
+    		</div>   <!-- row -->
+
+				<!-- School color field -->
+   			<div class="row form-row">
+    			<div class="col-xs-1 col-xs-offset-1"><h4>Color: </h4></div>
+    			<div class="col-xs-4 col-xs-offset-1">
+    				<select name="colors">
+        			<option value="Cyan">Cyan</option>
+    					<option value="Blue">Blue</option>
+    					<option value="Red">Red</option>
+    					<option value="Yellow">Yellow</option>
+  					</select>
+        	</div>
+    		</div>
+     
+     		<!-- School description field -->
+    		<div class="row form-row">
+    			<div class="col-xs-1 col-xs-offset-1"><h4>Description: </h4></div>
+    			<div class="col-xs-6 col-xs-offset-1">
+    				<%= f.text_field :website, class: 'form-control' %>
+    			</div>
+    		</div>     <!-- row -->
+
+				<!-- Action buttons -->
+    		<div class="row action-buttons-row">
+    			<div class="col-xs-8 col-xs-offset-1 text-center"> 
+    			  <%= f.submit "Add New School", class: "btn btn-success" %>
+						&nbsp; &nbsp; &nbsp;
+						<button type="submit" class="btn btn-danger">Cancel</button></div>
+    		</div>
+			</form>
+      <% end %>
+
+		</div>   <!-- col -->
+	</div>   <!-- row -->
+</div>   <!-- container -->

@@ -4,15 +4,22 @@
 
 <!-- page header -->
 <div class="page-header vertical-align">
+
+  <!-- Dynamically fills in with school full name -->
   <div class="col-xs-11">
-	  <h2>All Squares<small> - manage behavior squares at [SCHOOL NAME HERE]</small></h2><!-- Dynamically fills in with school id -->
+	  <h2>All Squares<small> - manage behavior squares at  <%= @full_name %></small></h2>
 	</div>
+	
+	<!-- Dynamically fills in with school color, icon, and title of school -->
 	<div class="col-xs-1 center-block">
-	  <div class="header-sq i-ltblue" title="Turning Point Autism Foundation"> <!--Need to add code for teachers icon-->
-		  <span class="fa fa-home fa-3x teacher-icon"></span>
+		<div class="header-sq i-<%= @color %>" title="<%= @full_name%>">
+					<span class="fa fa-<%= @icon %> fa-3x teacher-icon"></span>
 		</div>
-  </div>
-</div><!--End page header-->
+	</div>
+</div>
+<!--End page header-->
+
+<br>
 
 <!-- New Square Button -->
 		<div class="row first-content-row">
@@ -40,7 +47,6 @@
 <!-- Squares Table Body -->
   <tbody>
     <% @squares.each do |square| %>
-    
     <!--SOURCE for data-link: http://stackoverflow.com/questions/9945620/making-a-table-row-into-a-link-in-rails-->
       <tr data-link = "<%= edit_square_path(square) %>">
         
@@ -67,7 +73,6 @@
         
         <!-- Square Created By -->
         <td>***User Name***</td>                  <!-- Not yet supported -->
-        <!--<td><%= link_to 'Destroy', square, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       </tr>
     <% end %>
   </tbody>

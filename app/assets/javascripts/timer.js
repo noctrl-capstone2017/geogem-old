@@ -8,6 +8,8 @@ window.onload = function () {
   for (var i = 0; i < durationDivs.length; i++)
   {
 	  var timerSquare = new Object();
+	  timerSquare.startEventTime;
+	  timerSquare.endEventTime;
 	  timerSquare.Interval;
 	  timerSquare.durationLog =  document.getElementById("eventLog");
 	  timerSquare.buttonStart =  durationDivs[i].querySelector((".button-start"));
@@ -31,6 +33,8 @@ window.onload = function () {
   for (var i = 0; i < counterDivs.length; i++)
   {
 	  var counterSquare = new Object();
+	  counterSquare.startEventTime;
+	  counterSquare.endEventTime;
 	  counterSquare.countLabel =  counterDivs[i].querySelector(".count");
 	  counterSquare.countLog = document.getElementById("eventLog");
 	  counterSquare.countButton =  counterDivs[i].querySelector((".counter"));	  
@@ -40,23 +44,13 @@ window.onload = function () {
   for(var i = 0; i < counterSquares.length; i++)
   {
 	  cs = counterSquares[i];
-	  counterSquares[i].countButton.onclick = count.bind(this, cs.countLabel);
+	  counterSquares[i].countButton.onclick = count.bind(this, cs);
   }
  
 
-  function count(cLabel)
+  function count(cs)
   {
-	cLabel.innerText = (parseInt(cLabel.innerText) + 1);  
-
-//   var buttonCount = document.getElementById('counter');
-//   var countLabel = document.getElementById('count')
-  
-//   buttonCount.onclick = function(){count(countLabel)};
-  
-//   function count(cLabel)
-//   {
-// 	cLabel.innerText = (parseInt(countLabel.innerText) + 1);  
-
+	  cs.countLabel.innerText = (parseInt(cs.countLabel.innerText) + 1);  
   }
 
   function beginTimer(timerSq) 
@@ -74,7 +68,6 @@ window.onload = function () {
 	  timerSq.durationLog.innerHTML += timerSq.minutesTxt.innerHTML + ":" + timerSq.secondsTxt.innerHTML + ":" + timerSq.tensTxt.innerHTML + "," + timeStamp() + "\n" ;
 	  resetTimer(timerSq);
 	  timerSq.buttonStart.onclick = function(){beginTimer(timerSq)};
-	  timerSq.buttonStart.style.backgroundColor = "limegreen";
   }
   
 

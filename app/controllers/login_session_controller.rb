@@ -17,7 +17,7 @@ class LoginSessionController < ApplicationController
     if teacher && teacher.authenticate(params[:login_session][:password])
       log_in teacher
      # params[:login_session][:remember_me] == '1' ? remember(teacher) : forget(teacher)
-      redirect_to home1_path
+      redirect_to home_path
       
     else
       flash.now[:danger] = 'Invalid username/password combination'

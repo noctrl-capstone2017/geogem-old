@@ -1,54 +1,74 @@
-<!-- Robert Herrera changes-->
+<!-- Andy A and UX team  Edited by Robert Herrera -->
 
-<!-- page header -->
-<div class="page-header vertical-align">
-	<div class="col-xs-11">
-		<h2>Admin Dashboard<small> - manage school TPTE</small></h2><!-- Dynamically fills in with school id -->
-	</div>
-		<div class="col-xs-1 center-block">
-			<div class="header-sq i-plum" title="Bianca17">
-				<span class="fa fa-apple fa-3x teacher-icon"></span>
-			</div>
-		</div>
-</div><!--End page header-->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
 
-<!-- Will use current_user to create dynamic links -->
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x teacher-icon"></span>
-</div>
-<div>
-<form action='schools/2'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span> 
-	School Profile</button>
-</form>
+			<!-- page header -->
+			<div class="page-header cap17-header">
+				<h2>Admin Dashboard <small> - manage school teachers, students, squares, etc
+					<div class ="header-sq i-plum pull-right" title="Admin Bianca17">
+						<span class="fa fa-apple fa-4x header-icon"></span>
+					</div>
+				</small>
+				</h2>
+			</div>   <!--page header-->
 
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-</div>
-<form action='students'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	All Students</button>
-</form>
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x teacher-icon"></span>
-</div>
 
-<form action='teachers'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	All Teachers</button>
-</form>
+			<!-- action icons, first row -->		
+			<div class="row">
 
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x students-icon"></span>
-</div>
-<form action='squares'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	All Squares</button>
-</form>
+				<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit school attributes">
+					<div class ="action-sq i-navy center-block" >
+						<a href="school2.html">
+							<span class="fa fa-home fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="school2.html"><span class="student-icon-text">
+						<%= link_to 'School Profile', edit_school_path(@current_teacher) %>
+					</span></a></p>
+				</div> <!-- col -->
 
-<div class="header-sq i-ltblue" title="Turning Pointe Autism Foundation"> <!--Need to add code for teachers icon-->
-	<span class="fa fa-home fa-3x students-icon"></span>
-</div>
-<form action='students/show'>
-	<button type="submit" class="col-sm-offset-1 btn btn-lg btn-success"></span>  
-	Admin Report</button>
-</form>
+				<div class="col-xs-2 text-center" title="School stats and more">
+					<div class ="action-sq i-pink center-block" >
+						<a href="admin_report.html"><span class="fa fa-file-text-o fa-4x action-icon" ></span></a>
+					</div>
+					<p><form action='students/show'><span class="student-icon-text">
+						<%= link_to 'Super Report', super_report_path(@current_teacher) %>
+					</span></form></p>
+				</div> <!-- col -->
+			</div>   <!-- row -->
+
+			<!-- action icons, second row -->
+			<div class="row action-icon-row">
+				<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit all students">
+					<div class ="action-sq i-red center-block" >
+						<a href="student1.html"><span class="fa fa-child fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="student1.html"><span class="student-icon-text">
+						<%= link_to 'All Students', students_path(@current_teacher) %>
+					</span></a></p>
+				</div> <!-- col -->
+
+				<div class="col-xs-2 text-center" title="View/edit all teachers">
+					<div class ="action-sq i-yellow center-block" >
+						<a href="teacher1.html"><span class="fa fa-apple fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="teacher1.html"><span class="student-icon-text">
+						<%= link_to 'All Teachers', teachers_path(@current_teacher) %>
+					</span></a></p>
+				</div> <!-- col -->
+
+				<div class="col-xs-2 text-center" title="View/edit all behavior squares">
+					<div class ="action-sq i-ltblue center-block" >
+						<a href="square1.html"><span class="fa fa-square-o fa-4x action-icon" ></span></a>
+					</div>
+					<p><a href="sqaure1.html"><span class="student-icon-text">
+						<%= link_to 'All Squares', roster_squares_path(@current_teacher) %>
+					</span></a></p>
+				</div> <!-- col -->
+
+		</div>   <!-- col -->
+	</div>   <!-- row -->
+</div>   <!-- container -->
+
+
