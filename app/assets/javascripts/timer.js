@@ -162,7 +162,7 @@ function timeStamp() {
 function timeOnlyStamp() {
 // Create a date object with the current time
   var now = new Date();
-  var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
+  var time = [ now.getHours(), now.getMinutes()];
 // Determine AM or PM suffix based on the hour
   var suffix = ( time[0] < 12 ) ? "AM" : "PM";
 // Convert hour from military time
@@ -176,6 +176,6 @@ function timeOnlyStamp() {
     }
   }
 // Return the formatted string
-  return time.join(":") + " " + suffix;
+  return time.join(":") + " " +suffix;
 
 }
