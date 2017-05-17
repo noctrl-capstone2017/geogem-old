@@ -33,7 +33,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   #Authors: Alex P Debra J Matthew O
   #get the end screen 
   test "should show end" do
-    get end_session_url
+    get '/end'
     assert_response :success
   end
 
