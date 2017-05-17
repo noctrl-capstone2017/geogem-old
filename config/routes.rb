@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
+  get "/end",to:'sessions#end'
+  
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   resources :teachers do
   member do
