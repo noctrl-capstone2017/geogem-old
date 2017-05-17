@@ -30,22 +30,27 @@ $(function() {
 	</div>
 </div><!--End page header-->
 
+
+
+<!--New Note-->
+
 <div id="newNote">New Note</div>
 
 <div id="newNoteForm">
-
   <h1>Add a new Note</h1>  
-  <form action="session_notes" method: "POST">
-    <textarea placeholder="add notes" value="notes"></textarea>
-    <input class="formBtn" type="submit" />
-    <input class="formBtn" type="reset" />
-  </form>
+	<%= form_for @session_note, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+	  <%= f.text_area :note, size: "60x12" %>
+	  <%= number_field(:session_note, :session_id) %>
+	  <%= f.submit "Save" %>
+	<% end %>
 </div>
 
 <table class="table table-striped table-hover session_note-responsive session_note-table">
 	<thead>
 		<tr>
+			<th>Student</th>
 			<th>Note</th>
+			<th>Date</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -53,10 +58,10 @@ $(function() {
 			<% @session_notes.each do |session_note| %>
 				<tr data-link=<%= edit_session_note_path(session_note.note) %>>
 					<td>
-						<div class="table-sq i-plum" title="<%= session_note.id %>">
-						</div>
+						<div class="table-sq i-plum" title="<%= session_note.session_id %>"></div>
 					</td>
-					<td><p class="listText"><%= session_note.note %></p></td>
+					<td><p class="listText"><%= truncate(session_note.note, :length => 80)%></p></td>
+					<td><p class="listText"><%= session_note.created_at %></p></td>
 					<td><p class="listText"><span></span></p>
 					</td>
 				</tr>

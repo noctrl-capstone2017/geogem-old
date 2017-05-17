@@ -4,6 +4,7 @@ class SessionNotesController < ApplicationController
   # GET /session_notes
   # GET /session_notes.json
   def index
+    @session_note = SessionNote.new
     @session_notes = SessionNote.paginate(page: params[:page])
   end
 
@@ -28,7 +29,7 @@ class SessionNotesController < ApplicationController
 
     respond_to do |format|
       if @session_note.save
-        format.html { redirect_to @session_note, notice: 'Session note was successfully created.' }
+        format.html { redirect_to session_notes_url, notice: 'Session note was successfully created.' }
         format.json { render :index, status: :created, location: @session_note }
       else
         format.html { render :new }
