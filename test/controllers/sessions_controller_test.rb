@@ -33,7 +33,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   #Authors: Alex P Debra J Matthew O
   #get the end screen 
   test "should show end" do
-    get end_session_url
+    get '/end'
     assert_response :success
   end
 
@@ -51,7 +51,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Session.count', -1) do
       delete session_url(@session)
     end
-
     assert_redirected_to sessions_url
   end
 end
