@@ -129,8 +129,8 @@ class TeachersController < ApplicationController
     end
   end
    
-   #Robert Herrera
-   # POST /super
+  # Robert Herrera
+  # POST /super
   def updateFocus
     teacher = Teacher.find(1)
     
@@ -139,7 +139,6 @@ class TeachersController < ApplicationController
       teacher.full_name = params[full_name]
     else
       flash[:danger] = "Unauthorized"
-        redirect_to home1_path
     end
   end
  

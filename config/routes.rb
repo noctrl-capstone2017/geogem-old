@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   get    '/schools/new', to: 'schools#new'
   get    '/schools/new', to: 'schools#create'
 
-  #post   '/super',    to: 'teachers#updateFocus'
+  post   '/super',    to: 'teachers#updateFocus'
   #get    '/schools', to: 'schools#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
