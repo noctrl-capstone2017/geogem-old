@@ -1,10 +1,16 @@
 class SquaresController < ApplicationController
   before_action :set_square, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_school         #set up the school info for the logged in teacher
+  
   # GET /squares
   # GET /squares.json
   def index
-    @squares = Square.all
+    # Check for Super User, shool_id == 0, list ALL squares
+    if current_teacher.school_id == 0
+      @squares = Square.all
+    else                      #school admin. Only list that schools students
+      @squares = Square.where(school_id: current_teacher.school_id)
+    end
   end
 
   # GET /squares/1
@@ -67,6 +73,20 @@ class SquaresController < ApplicationController
       @square = Square.find(params[:id])
     end
 
+    # Used for getting the school values for the logged in teacher 
+    def set_school
+      if current_teacher.school_id == 0       #Super User
+        @color  = current_teacher.color
+        @full_name = current_teacher.full_name
+        @icon = current_teacher.icon
+      else                                    #Admin for school
+        @school = School.find(current_teacher.school_id)
+        @color  = @school.color
+        @full_name = @school.full_name
+        @icon = @school.icon
+      end
+    end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def square_params
       params.require(:square).permit(:full_name, :screen_name, :color, :tracking_type, :description, :school_id)
