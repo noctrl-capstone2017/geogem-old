@@ -2,9 +2,10 @@
 # Teacher methods.
 class TeachersController < ApplicationController
 
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :pword]
-  before_action :is_admin, except: [:update, :edit]
-  before_action :is_super, except: [:update, :edit]
+  # Note from Tommy B: these lines will be changed soon - working on ownership of pages
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :edit_password, :update_password]
+  before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
+  before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
 
   # GET /teachers
   # GET /teachers.json
