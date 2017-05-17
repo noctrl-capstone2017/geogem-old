@@ -51,7 +51,6 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Session.count', -1) do
       delete session_url(@session)
     end
-
     assert_redirected_to sessions_url
   end
 end
