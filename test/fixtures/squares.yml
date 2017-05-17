@@ -4,7 +4,7 @@ one:
   full_name: MyString
   screen_name: MyString
   color: MyString
-  #type: 1
+  tracking_type: 1
   description: MyText
   school_id: 1
 
@@ -12,6 +12,6 @@ two:
   full_name: MyString
   screen_name: MyString
   color: MyString
-  #type: 1
+  tracking_type: 1
   description: MyText
   school_id: 1
