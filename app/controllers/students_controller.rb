@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-  before_action :set_school
+  before_action :set_school         #set up the school info for the logged in teacher
   
   # GET /students
   # GET /students.json
@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     # Check for Super User, shool_id == 0, list ALL students
     if current_teacher.school_id == 0
       @students = Student.all
-    else
+    else                      #school admin. Only list that schools students
       @students = Student.where(school_id: current_teacher.school_id)
     end
   end
