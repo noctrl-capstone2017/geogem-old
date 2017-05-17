@@ -40,7 +40,7 @@
 		</div>
 		<div class="col-sm-4 col-md-offset-0 col-sm-offset-0">
       <%= f.select :color, ['gray', 'navy','red','yellow',
-      ['ligh blue', 'ltblue'],['light orange','ltorange'],'green','lavendar','plum','mint','pink',
+      ['ligh blue', 'ltblue'],'green','lavendar','plum','mint','pink',
       ['dark orange','dkorange'],'aqua']%>
 		</div>
 	</div>
@@ -57,11 +57,10 @@
 		</div>
 	</div>   <!-- form-row -->
 
-<!-- This needs to be an invisible field pulling data from logged in teacher / admin -->
-<!--  <div class="field">
-    <%= f.label :school_id %>
-    <%= f.number_field :school_id %>
-  </div>-->
+  <!-- Hidden field for school id, set via logged in teachers school id -->
+  <% if local_assigns[:isNew] %>
+    <%= f.hidden_field :school_id, :value => current_teacher.school_id%>
+  <% end %>
 
   <!-- This area displays the save or cancel buttons
    It uses an If statment to test a passed in value "isNew"

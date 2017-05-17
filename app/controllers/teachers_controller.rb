@@ -1,5 +1,3 @@
-# author: Kevin M, Tommy B
-# Teacher methods.
 class TeachersController < ApplicationController
 
   # Note from Tommy B: these lines will be changed soon - working on ownership of pages
@@ -7,10 +5,10 @@ class TeachersController < ApplicationController
   before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
 
+
   # GET /teachers
   # GET /teachers.json
   def index
-    @current_teacher = current_teacher
     @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
   
@@ -28,32 +26,18 @@ class TeachersController < ApplicationController
   def edit
   end
   
-  # GET /teachers/1/password
-  #author: Tommy B
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  def edit_password
-    @teacher = Teacher.find(params[:id])
+  def admin_report
+    @current_teacher = current_teacher
+    @students = Student.where(school_id: current_teacher.school_id)
+    @teachers = Teacher.where(school_id: current_teacher.school_id)
+    @squares = Square.where(school_id: current_teacher.school_id)
+    
   end
   
-  #author: Tommy B
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  
-  # Note from Tommy B: the redirects need to be changed
-  def update_password
-    teacher = Teacher.find(params[:id])
-    # also in here i'm calling the authenticate method that usually is present in bcrypt.
-    if teacher and teacher.authenticate(params[:old_password])
-      if params[:password] == params[:password_confirmation]
-        teacher.password = BCrypt::Password.create(params[:password])
-        if teacher.save!
-          redirect_to @teacher, notice: "Password changed."
-        end
-      else
-        redirect_to @teacher, notice: "Incorrect Password."
-      end
-    else
-      redirect_to @teacher, notice: "Incorrect Password."
-    end
+  # GET /teachers/1/password
+  # When sessions and stuff are in place, only the teacher that this is for will
+  # be able to access it. Not fully working yet.
+  def password
   end
 
   # POST /teachers
@@ -73,8 +57,7 @@ class TeachersController < ApplicationController
   end
 
 
-  #author: Matthew O & Alex P
-  #home page for teachers, display top 8 most used students, route to anaylze or new session
+   #author: Matthew O & Alex P
   def home
     @teacher = current_teacher
     @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
@@ -93,6 +76,7 @@ class TeachersController < ApplicationController
           end
         end
     elsif params[:analyze]
+        # Currently unimplemented will direct to analysis page for the selected student
         redirect_to analysis_path
     end
   end
@@ -122,8 +106,8 @@ class TeachersController < ApplicationController
     end
   end
    
-   #Robert Herrera
-   # POST /super
+  # Robert Herrera
+  # POST /super
   def updateFocus
     teacher = Teacher.find(1)
     
@@ -132,7 +116,6 @@ class TeachersController < ApplicationController
       teacher.full_name = params[full_name]
     else
       flash[:danger] = "Unauthorized"
-        redirect_to home1_path
     end
   end
  
