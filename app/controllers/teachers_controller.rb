@@ -1,6 +1,8 @@
 # author: Kevin M, Tommy B
 # Teacher methods.
 class TeachersController < ApplicationController
+  
+  include TeachersHelper
 
   before_action :set_teacher, only: [:show, :edit, :update, :destroy, :edit_password, :update_password]
   before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
@@ -137,39 +139,42 @@ class TeachersController < ApplicationController
  
   private
   
+  
+    #NOTE FROM CAROLYN C: Prof Bill and I moved these to the teachers_helper and included a TeacherHelper in here for navbar purposes.
+    
     # Author: Steven Royster
     # If the teacher is not an admin then they 
     #  will be flashed an unauthorized prompt and redirected to home
-    def is_admin
-      if !is_admin?
-        flash[:danger] = "Unauthorized"
-        redirect_to login_path
-      end
-    end
+    # def is_admin
+    #   if !is_admin?
+    #     flash[:danger] = "Unauthorized"
+    #     redirect_to login_path
+    #   end
+    # end
     
     # Author: Steven Royster
     # Checks to see if the current teacher has admin status
     # Returns true if the teacher is an admin
-    def is_admin?
-      current_teacher && current_teacher.powers == "Admin"
-    end
+    # def is_admin?
+    #   current_teacher && current_teacher.powers == "Admin"
+    # end
     
     # Author: Steven Royster
     # If the teacher is not a super user then they 
     #  will be flashed an unauthorized prompt and redirected to home
-    def is_super
-      if !is_super?
-        flash[:danger] = "Unauthorized"
-        redirect_to home1_path
-      end
-    end
+    # def is_super
+    #   if !is_super?
+    #     flash[:danger] = "Unauthorized"
+    #     redirect_to home1_path
+    #   end
+    # end
 
      # Author: Steven Royster
     # Checks to see if the current teacher has super user status
     # Returns true if the teacher is a super user
-    def is_super?
-      current_teacher && current_teacher.id == 1
-    end
+    # def is_super?
+    #   current_teacher && current_teacher.id == 1
+    # end
     
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
