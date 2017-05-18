@@ -6,6 +6,7 @@ class LoginSessionController < ApplicationController
 
   # The teacher can only log out if they are actually logged in
   before_action :logged_in, only: [:destroy]
+  skip_before_filter :require_login
   
   # login page
   def new
@@ -16,6 +17,7 @@ class LoginSessionController < ApplicationController
     teacher = Teacher.find_by(:user_name => params[:login_session][:user_name].downcase)
     if teacher && teacher.authenticate(params[:login_session][:password])
       log_in teacher
+      teacher.update_attribute(:last_login, Time.now)
      # params[:login_session][:remember_me] == '1' ? remember(teacher) : forget(teacher)
       redirect_to home_path
       

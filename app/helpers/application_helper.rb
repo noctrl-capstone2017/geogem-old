@@ -8,7 +8,7 @@ module ApplicationHelper
   # Returns random artwork path
   def random_student_art
     images = [ "student_art/art1_Jimmy.jpg", "student_art/art2_Janey.jpg", 
-          "student_art/art3_Fred.jpg", "student_art/art4_Trudy.jpg" ]
+          "student_art/art3_Steven.jpg", "student_art/art4_Trudy.jpg" ]
     images[rand(images.size)]
   end
   
