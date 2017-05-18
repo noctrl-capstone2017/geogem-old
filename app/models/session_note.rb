@@ -5,5 +5,4 @@ class SessionNote < ApplicationRecord
     validates :session_id, presence: true
     validates :note, presence: true
     
-
 end
