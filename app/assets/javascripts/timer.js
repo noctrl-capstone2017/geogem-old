@@ -11,6 +11,7 @@ window.onload = function () {
 	  timerSquare.startEventTime;
 	  timerSquare.endEventTime;
 	  timerSquare.Interval;
+	  timerSquare.behaviorId = $(durationDivs[i]).attr('name');
 	  timerSquare.durationLog =  document.getElementById("eventLog");
 	  timerSquare.buttonStart =  durationDivs[i].querySelector((".button-start"));
 	  timerSquare.tensTxt = durationDivs[i].querySelector("#tens");
@@ -35,6 +36,7 @@ window.onload = function () {
 	  var counterSquare = new Object();
 	  counterSquare.startEventTime;
 	  counterSquare.endEventTime;
+	  counterSquare.behaviorId = $(counterDivs[i]).attr('name');
 	  counterSquare.countLabel =  counterDivs[i].querySelector(".count");
 	  counterSquare.countLog = document.getElementById("eventLog");
 	  counterSquare.countButton =  counterDivs[i].querySelector((".counter"));	  
@@ -51,6 +53,9 @@ window.onload = function () {
   function count(cs)
   {
 	  cs.countLabel.innerText = (parseInt(cs.countLabel.innerText) + 1);  
+	  cs.startEventTime = timeStamp();
+	  cs.endEventTime = timeStamp();
+	  createSessionEvent(cs);
   }
 
   function beginTimer(timerSq) 
@@ -58,14 +63,16 @@ window.onload = function () {
      clearInterval(timerSq.Interval);
 	 timerSq.Interval = setInterval(function(){startTimer(timerSq)}, 10);
 	 timerSq.buttonStart.onclick = function(){stopTimer(timerSq)};
-	 timerSq.buttonStart.style.backgroundColor = "red";
+	 timerSq.startEventTime = timeStamp();
 	 
   }
   
   function stopTimer(timerSq)
   {
-      clearInterval(timerSq.Interval);
+    clearInterval(timerSq.Interval);
 	  timerSq.durationLog.innerHTML += timerSq.minutesTxt.innerHTML + ":" + timerSq.secondsTxt.innerHTML + ":" + timerSq.tensTxt.innerHTML + "," + timeStamp() + "\n" ;
+	  timerSq.endEventTime = timeStamp();
+	  createSessionEvent(timerSq);
 	  resetTimer(timerSq);
 	  timerSq.buttonStart.onclick = function(){beginTimer(timerSq)};
   }
@@ -133,7 +140,7 @@ function timeStamp() {
   var now = new Date();
 
 // Create an array with the current month, day and time
-  var date = [ now.getMonth() + 1, now.getDate(), now.getFullYear() ];
+  var date = [now.getFullYear(), now.getMonth() + 1, now.getDate()];
 
 // Create an array with the current hour, minute and second
   var time = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
@@ -141,11 +148,6 @@ function timeStamp() {
 // Determine AM or PM suffix based on the hour
   var suffix = ( time[0] < 12 ) ? "AM" : "PM";
 
-// Convert hour from military time
-  time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
-
-// If hour is 0, set it to 12
-  time[0] = time[0] || 12;
 
 // If seconds and minutes are less than 10, add a zero
   for ( var i = 1; i < 3; i++ ) {
@@ -178,4 +180,34 @@ function timeOnlyStamp() {
 // Return the formatted string
   return time.join(":") + " " +suffix;
 
+}
+
+function createSessionEvent(sessionEvent)
+{
+    
+		$.ajax({
+        url:'/session_events',
+        type:'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType:'json',
+        data:{
+             behavior_id: sessionEvent.behaviorId,
+             start_time: sessionEvent.startEventTime,
+             end_time: sessionEvent.endEventTime,
+             session_id: getSessionId()
+        },
+        success:function(data){
+            alert("success");
+        },
+        error:function(data){
+            alert("fail");
+        }
+    });
+}
+
+function getSessionId(sessionEvent)
+{
+  url = window.location.href;
+  number = parseInt(url.match(/(\d+)$/g));
+	return number;
 }
