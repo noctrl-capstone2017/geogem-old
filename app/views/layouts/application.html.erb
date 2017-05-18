@@ -2,63 +2,11 @@
 <html>
 <%= render 'layouts/header' %>
 <body>
-<nav class="navbar navbar-static-top">
-	<div class="container">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<!--<a class="navbar-brand" href="">Dinner Out</a>-->
-		<%= link_to about1_path, class: "navbar-brand" do%>
-		<span class="glyphicon glyphicon-home"></span>
-  		Dinner Out
-		<% end %>
-	</div>
-	<div id="navbar" class="collapse navbar-right navbar-collapse">
-		<ul class="nav navbar-nav ">
-			<% if logged_in? %>
-			
-				<li><%= link_to help_path :class =>"navIcon" do %>
-  				<span class="fa fa-h-square"></span>
-  				Help
-				<% end %>
-				</li>
-				
-				<!-- Note from Carolyn C: Navbar Icons mixed with Ruby on Rails: Source:http://stackoverflow.com/questions/4837824/can-i-use-a-link-to-to-generate-a-link-with-a-span-inside -->
-				<li><%= link_to admin_path :class =>"navIcon" do %>
-  				<span class="fa fa-font"></span>
-  				Admin
-				<% end %>
-				</li>
-				
-				<li><%= link_to super_path :class =>"navIcon" do %>
-  				<span class="fa fa-superpowers"></span>
-  				Super
-				<% end %>
-				</li>
-				
-				<li><%= link_to teachers_path :class =>"navIcon" do %>
-				<span class="fa fa-user-circle"></span>
-  				Profile
-				<% end %>
-				</li>
-				
-				<li><%= link_to logout_path :class =>"navIcon" do %>
-				<span class="fa fa-sign-out"></span>
-  				Logout
-				<% end %>
-				</li>
-				
-			<% else %>
-				<li><a href="about1.html">About</a></li>
-			<% end %>
-		</ul>
-	</div>		<!-- end nav-collapse -->
-</div>		<!-- end navbar -->
-</nav>
+<% if logged_in? %>
+	<%= render 'layouts/navbar1' %>
+<% else %>
+	<%= render 'layouts/navbar2' %>
+<% end %>
 
 <!-- Another note from Carolyn C: again, if you are working on a page that you see while NOT logged in, you need to manually add the container and the div associated.-->
 <% if logged_in? %>
@@ -77,8 +25,5 @@
 </div>
 <% end %>
 <%= debug(params) if Rails.env.development? %>
-	
-	
-
 </body>
 </html>
