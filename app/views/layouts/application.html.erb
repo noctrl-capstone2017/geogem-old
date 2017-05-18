@@ -2,26 +2,23 @@
 <html>
 <%= render 'layouts/header' %>
 <body>
+<!--Note from Carolyn C - logged in pages all have this container col structure-->
 <% if logged_in? %>
 	<%= render 'layouts/navbar1' %>
+<div class="container">
+	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
+<% end %>
+
+<%= yield %>
+
+<!-- Note from Carolyn C- end the divs -->
+<% if logged_in? %>
+	</div>
+</div>
 <% end %>
 
 <!-- Another note from Carolyn C: again, if you are working on a page that you see while NOT logged in, you need to manually add the container and the div associated.-->
-<% if logged_in? %>
-<div class="container">
-<% end %>
-	<!--Note from Carolyn C: If you are working on a page that you see when NOT logged in (excluding the login page), make sure to manually add the content the content col below -->
-	<% if logged_in? %>
-	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
-		<%= yield %>
-  	</div>
-	<% else %>
-	<!--if not logged in -->
-	<%= yield %>
-	<% end %>
-<% if logged_in? %>
-</div>
-<% end %>
+
 <%= debug(params) if Rails.env.development? %>
 </body>
 </html>
