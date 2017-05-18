@@ -118,7 +118,7 @@ range = startI.to_i..endI.to_i
     
     
     #FREQUENCY CODE
-    if(pressed.tracking_type == 1)
+    if(pressed.tracking_type == 2)
       
     row.push(eventsArray.count { |x| x.behavior_square_id == pressed.id && 
                                           (range === x.square_press_time.to_i ||
@@ -128,7 +128,7 @@ range = startI.to_i..endI.to_i
     
     
     #INTERVAL CODE
-    if(pressed.tracking_type == 2)
+    if(pressed.tracking_type == 3)
       
       y = eventsArray.count { |x| x.behavior_square_id == pressed.id && 
                                           (range === x.square_press_time.to_i ||
@@ -148,7 +148,7 @@ range = startI.to_i..endI.to_i
     
     
     #DURATION CODE
-    if(pressed.tracking_type == 0)
+    if(pressed.tracking_type == 1)
       
     z = eventsArray.count { |x| x.behavior_square_id == pressed.id && 
                                           (range === x.square_press_time.to_i ||
@@ -207,7 +207,7 @@ durSquares = Array.new
 #header is all the SQUARES that happened in the event
 header.each do |h|
 
-if(h.tracking_type == 0)
+if(h.tracking_type == 1)
  durSquares.push(h)  
   
 end
@@ -287,13 +287,13 @@ keyRow.push(s.screen_name.to_s)
 keyRow.push(" = ")
 keyRow.push(s.description.to_s)
 
-if(s.tracking_type == 0)
+if(s.tracking_type == 1)
   keyRow.push("Duration")
 else 
-  if(s.tracking_type == 1)
+  if(s.tracking_type == 2)
   keyRow.push("Frequency")
   else 
-    if(s.tracking_type == 2)
+    if(s.tracking_type == 3)
       keyRow.push("Interval")
     end
   end
@@ -312,6 +312,8 @@ pdf.stroke_horizontal_rule
 pdf.move_down 10
 pdf.table table3, :header => true, :cell_style => { :border_color => "FFFFFF" },
   :column_widths => { 0 => 40, 1 => 25, 2 => 200, 3 => 100},:position => :left
+
+
 
 
 # Change by Nate V. - Switched from file download to page display of pdf file
