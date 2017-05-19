@@ -15,6 +15,12 @@ class TeachersController < ApplicationController
     @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
   end
   
+  def admin_report
+    @students = Student.all
+    @teachers = Teacher.all
+    @squares = Square.all
+  end
+  
   # GET /teachers/1
   # GET /teachers/1.json
   def show

@@ -1,27 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_name: profbill,
-  password_digest: <%= Teacher.digest('password') %>,
-  last_login: 2017-05-10 22:01:20,
-  full_name: Professor Bill,
-  screen_name: profbill,
-  icon: apple,
-  color: red,
-  email: wtktriger@noctrl.edu,
-  description: Super user,
-  powers: Admin,
+  user_name: profbill2
+  password_digest: <%= Teacher.digest('password') %>
+  last_login: 2017-05-10 22:01:20
+  full_name: Professor Bill
+  screen_name: profbill
+  icon: apple
+  color: red
+  email: wtktriger@noctrl.edu
+  description: Super user
+  powers: Admin
   school_id: 0
 
 two:
-  user_name: MyString
-  password_digest: password,
+  user_name: Joe8
+  password_digest: <%= Teacher.digest('password') %>
   last_login: 2017-05-10 22:01:20
-  full_name: MyString
-  screen_name: MyString
-  icon: MyString
-  color: MyString
+  full_name: Joseph Smtih
+  screen_name: Joe8
+  icon: apple
+  color: red
   email: MyString2@mystring.com
   description: MyText
-  powers: MyString
+  powers: Admin
   school_id: 1

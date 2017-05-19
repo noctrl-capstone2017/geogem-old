@@ -6,6 +6,9 @@ class SessionsController < ApplicationController
   def index
     @sessions = Session.all
   end
+  
+  def end_session
+  end
 
   # GET /sessions/1
   # GET /sessions/1.json
