@@ -66,16 +66,14 @@
    It uses an If statment to test a passed in value "isNew"
    to determine which button text will show -->
   <div class="row action-buttons-row">
-	  <div class="col-xs-4 col-xs-offset-1 text-center"> 
+	  <div class="col-xs-6 col-xs-offset-1 text-center"> 
       <% if local_assigns[:isNew] %>
         <%= f.submit "Add New Square", class: "btn btn-success"%>
-						&nbsp; &nbsp; &nbsp;
-	      <%= link_to 'Cancel', squares_path, class: "btn btn-danger" %>
       <% else %>
         <%= f.submit "Save Changes", class: "btn btn-success"%>
-						&nbsp; &nbsp; &nbsp;
-	      <%= link_to 'Cancel', squares_path, class: "btn btn-danger" %>        
       <% end %>
+        		&nbsp; &nbsp; &nbsp;
+	      <%= link_to 'Cancel', squares_path, class: "btn btn-danger" %>
     </div>
   </div>
 <% end %>
