@@ -40,7 +40,8 @@ class Teacher < ApplicationRecord
                                   dependent:   :destroy
 
   has_many :students, through: :active_relationships, source: :student
-  
+
+
   ### METHODS ###
   # Returns a random token.
   def Teacher.new_token
