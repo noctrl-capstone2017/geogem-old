@@ -1,14 +1,14 @@
 #Written by Debra Jensen
 module UxHelper
   #Returns array of student icon string names for selections, these are the same as the fa class names
-  def studIcons
+  def studentIcons
     icons = new Array;
     icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o", "gamepad","heart", "leaf","paper-plane","paw","star","graduation-cap"];
     return icons;
   end
   
   #Returns array of teacher icon string names for selections, these are the same as the fa class names
-  def teachIcons
+  def teacherIcons
     icons = new Array;
     icons = ["apple", "book", "pencil", "calculator"];
     return icons;
