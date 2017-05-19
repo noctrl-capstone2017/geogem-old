@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
-  get "/end",to:'sessions#end'
+  get "sessions/end",to:'sessions#end_session'
   
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   resources :teachers do
@@ -16,11 +16,17 @@ Rails.application.routes.draw do
     end
   end
   
+  #allow for custom controller function
+  resources :sessions do
+    member do
+      get :end_session
+    end
+  end
+  
   resources :roster_students
   resources :roster_squares
-  resources :session_notes
+  resources :session_notes 
   resources :session_events
-  resources :sessions
   resources :squares
   resources :students
   
