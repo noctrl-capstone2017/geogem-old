@@ -56,8 +56,7 @@ Rails.application.routes.draw do
   get    '/admin',           to: 'teachers#admin'
   get    '/super',           to: 'schools#super'
   post   '/super',           to: 'teachers#updateFocus'
-  get    '/schools',         to: 'schools#index'
-  
+
   
   
   get    'help'   => 'static_pages#help'

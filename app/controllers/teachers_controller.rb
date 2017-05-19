@@ -129,22 +129,20 @@ class TeachersController < ApplicationController
     end
   end
    
+   # make list of all schools available here so I can query them and set the super users schools attr 
+   def super
+    @schools = School.all
+   end
    #Robert Herrera
    # POST /super
   def updateFocus
     teacher = Teacher.find(1)
-    
-    if teacher.update(focus_school_params)
-      format.html { redirect_to teachers_url, notice: 'Super School was successfully switched.' }
-      teacher.full_name = params[full_name]
-    else
-      flash[:danger] = "Unauthorized"
-        redirect_to home1_path
-    end
+    schoolName = params[full_name]
+    teacher.full_name = schoolName
+
   end
  
   private
-  
   
     #NOTE FROM CAROLYN C: Prof Bill and I moved these to the teachers_helper and included a TeacherHelper in here for navbar purposes.
     
