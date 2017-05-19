@@ -1,4 +1,7 @@
+#Author: Taylor Spino
 class ReportsController < ApplicationController
+#This code is complex & maybe ugly, but I am 99.9% sure everything works. 
+#I fixed anything that I knew was buggy/broken.
 
 def report1
 #Eventually going to refactor this so this type of report is in its own class
@@ -14,7 +17,7 @@ pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
 
                       # -------Session Data---------#
 #for now, just grab the first seeded session
-session = Session.find(1)
+session = Session.first
 student = Student.find(session.session_teacher)
 teacher = Teacher.find(session.session_student)
 
@@ -84,12 +87,14 @@ end
 header.sort! { |a,b| a.tracking_type  <=> b.tracking_type}
 
 #Let's start doing some actual data rows for our table
-#Right now, just assume a 15 minute interval
 
 startI = session.start_time
 
-#adds 15 minutes to the start time
-endI = session.start_time + 15*60
+#Grab student interval time
+stud_interval = student.session_interval 
+
+#adds stud_interval minutes to the start time
+endI = session.start_time + stud_interval*60
 
 eventsArray = Array.new
 
@@ -106,11 +111,6 @@ while endI <= session.end_time
 row = Array.new
 row.push(startI.strftime("%I:%M%p") + " - " + endI.strftime("%I:%M%p"))
 
-#WE'LL HAVE TO DITCH THIS SOON. THIS DOES AN INTERVAL LIKE THIS [START,FINISH]
-#WE DOUBLE COUNT WHEN START OR END OF AN EVENT IS EQUAL TO A START OR END OF AN INTERVAL
-#I know how to fix this, but I will do this later.
-range = startI.to_i..endI.to_i
-
 
 #in each loop, we need to make a row of data for the specific
 #interval we are dealing with (startI, endI)
@@ -121,8 +121,8 @@ range = startI.to_i..endI.to_i
     if(pressed.tracking_type == 2)
       
     row.push(eventsArray.count { |x| x.behavior_square_id == pressed.id && 
-                                          (range === x.square_press_time.to_i ||
-                    x.square_press_time <= startI && startI <= x.duration_end_time)})
+                    (startI <= x.square_press_time &&  x.square_press_time<endI||
+                    x.square_press_time <= startI && startI < x.duration_end_time)})
     
     end
     
@@ -131,8 +131,8 @@ range = startI.to_i..endI.to_i
     if(pressed.tracking_type == 3)
       
       y = eventsArray.count { |x| x.behavior_square_id == pressed.id && 
-                                          (range === x.square_press_time.to_i ||
-                    x.square_press_time <= startI && startI <= x.duration_end_time)}
+                    (startI <= x.square_press_time &&  x.square_press_time<endI||
+                    x.square_press_time <= startI && startI < x.duration_end_time)}
                                           
       if(y > 0)
          
@@ -151,8 +151,8 @@ range = startI.to_i..endI.to_i
     if(pressed.tracking_type == 1)
       
     z = eventsArray.count { |x| x.behavior_square_id == pressed.id && 
-                                          (range === x.square_press_time.to_i ||
-                    x.square_press_time <= startI && startI <= x.duration_end_time)}
+                    (startI <= x.square_press_time &&  x.square_press_time<endI||
+                    x.square_press_time <= startI && startI < x.duration_end_time)}
       if(z > 0)
          
          row.push("D")
@@ -168,8 +168,8 @@ range = startI.to_i..endI.to_i
   end
 
   rows.push(row)
-  startI = startI + 15*60
-  endI = endI + 15*60
+  startI = startI + stud_interval*60
+  endI = endI + stud_interval*60
   
 end
 
