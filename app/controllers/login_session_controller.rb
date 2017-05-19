@@ -30,5 +30,5 @@ class LoginSessionController < ApplicationController
   def logout
       log_out if logged_in?
   end
-  
+
 end

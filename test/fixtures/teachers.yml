@@ -2,7 +2,7 @@
 
 one:
   user_name: profbill,
-  password_digest: password,
+  password_digest: <%= Teacher.digest('password') %>,
   last_login: 2017-05-10 22:01:20,
   full_name: Professor Bill,
   screen_name: profbill,

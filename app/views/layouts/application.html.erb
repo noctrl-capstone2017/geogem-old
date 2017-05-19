@@ -20,8 +20,14 @@
 	<div id="navbar" class="collapse navbar-right navbar-collapse">
 		<ul class="nav navbar-nav ">
 			<% if logged_in? %>
+			
 				<li><a href="help1.html" title="Help!"><span class="fa fa-question-circle"></span> Help</a></li>
-				<li><a href="#"><span class="fa fa-superpowers"></span> Super</a></li>
+				
+				<li><%= link_to super_path :class =>"navIcon" do %>
+					<span class="fa fa-superpowers"></span> 
+					Super
+				<% end %>
+				</li>
 				
 				<!-- Note from Carolyn C: Navbar Icons mixed with Ruby on Rails: Source:http://stackoverflow.com/questions/4837824/can-i-use-a-link-to-to-generate-a-link-with-a-span-inside -->
 				<li><%= link_to admin_path :class =>"navIcon" do %>
@@ -31,13 +37,13 @@
 				</li>
 				
 				<li><%= link_to teachers_path :class =>"navIcon" do %>
-				<span class="fa fa-user-circle"></span>
+					<span class="fa fa-user-circle"></span>
   				Profile
 				<% end %>
 				</li>
 				
 				<li><%= link_to logout_path :class =>"navIcon" do %>
-				<span class="fa fa-sign-out"></span>
+					<span class="fa fa-sign-out"></span>
   				Logout
 				<% end %>
 				</li>
