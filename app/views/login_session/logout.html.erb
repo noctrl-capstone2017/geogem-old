@@ -1,12 +1,9 @@
+<%= render 'layouts/navbar3' %>
 <div class="container">
-	
-		
+	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">	
 		<div class="page-header vertical-align">
 			<div class="col-xs-11">
 				<h2>Logged Out<small> - thank you for using Dinner Out</small></h2><!-- Dynamically fills in with school id -->
-				<% if logged_out? %>
-					<%= link_to "Back to login", login_path%>
-				<% end %>
 			</div>
 			<div class="col-xs-1 center-block">
 				
@@ -35,6 +32,6 @@
 				</div>
 			</div>   <!-- col -->
 		</div>   <!-- row -->
-
+	</div> <!-- end content-col -->
 	
 </div><!--End container -->	
