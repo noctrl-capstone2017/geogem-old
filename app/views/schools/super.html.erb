@@ -40,18 +40,23 @@
 		</div>
 		<!-- action icons -->
 		<div class="row action-icon-row" style="margin-top: 40px;">
+			<%= link_to schools_path(@schools) do %>
 			<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit schools">
 				<div class ="action-sq i-navy center-block" >
-				<span class="fa fa-home fa-4x action-icon" ></span>
+					<span class="fa fa-home fa-4x action-icon" ></span>
 				</div>
-				<p><span class="student-icon-text"><%= link_to 'All Schools', schools_path %></span></p>
+				<p><span class="student-icon-text">All Schools</span></p>
+			<% end %>
+
 			</div> <!-- col -->
+			<%= link_to super_report_path(@schools) do %>
 			<div class="col-xs-2 text-center" title="Stats++ for the Super User">
 				<div class ="action-sq i-pink center-block">
 					<span class="fa fa-file-text fa-4x action-icon"></span>
 				</div>
-				<p><span class="student-icon-text"><%= link_to 'Super Report', super_report_path %></span></p>
+				<p><span class="student-icon-text">Super Report</span></p>
 			</div><!-- col -->
+			<% end %>
 		</div><!-- row -->
 
 		<!-- action icons, row 2 -->
