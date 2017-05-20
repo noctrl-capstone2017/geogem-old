@@ -1,5 +1,3 @@
-<!--Kevin M: This code sets up the current teacher, so their profile URL can be linked.-->
-<% teacher = current_teacher %>
 <!--Note from Carolyn C: this is the main navbar used on all screens when you are logged in-->
 <navbar1 class="navbar1">
     <nav class="navbar navbar-static-top">
@@ -28,7 +26,8 @@
 				<li><%= link_to admin_path do %><span class="fa fa-font fa-fw"></span>Admin<% end %></li>
 			<% end %>
 			
-				<li><%= link_to edit_teacher_path(teacher.id) do %><span class="fa fa-user-circle fa-fw"></span>Profile<% end %></li>
+				<!--Check login_session_helper for more on current_teacher! Very handy. -KM-->
+				<li><%= link_to edit_teacher_path(current_teacher.id) do %><span class="fa fa-user-circle fa-fw"></span>Profile<% end %></li>
 				
 				<li><%= link_to logout_path  do %><span class="fa fa-sign-out fa-fw"></span>Logout<% end %></li>
 		</ul>
