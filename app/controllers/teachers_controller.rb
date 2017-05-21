@@ -24,6 +24,12 @@ class TeachersController < ApplicationController
   # GET /teachers/1
   # GET /teachers/1.json
   def show
+    @teacher = Teacher.find(params[:id])
+    @students = @teacher.students
+    @all_students_at_school = Student.where(school_id: @teacher.school_id)
+    #Note from Tommy B: Needs to be implemented still. I'm working on it!
+    #@students_not_in_roster_but_at_school = 
+
   end
 
   # GET /teachers/new
@@ -44,7 +50,6 @@ class TeachersController < ApplicationController
   
   #author: Tommy B
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  
   # Note from Tommy B: the redirects need to be changed
   def update_password
     teacher = Teacher.find(params[:id])

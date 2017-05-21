@@ -74,9 +74,9 @@ Teacher.create!(user_name: "admin",
                 powers: "Admin",
                 school_id: 1)
 
-# Seed the database with 10 faked Students
+# Seed the database with 30 faked Students
 # They go to North Central College
-10.times do |n|
+30.times do |n|
   name  = Faker::Name.first_name + " " + Faker::Name.last_name
   Student.create!(  screen_name: "temp",
                     contact_info: "student contact info",
@@ -115,10 +115,10 @@ end
 end
 
 
-#So far, there are 10 students created for North Central College.
-#Put 5 of them on profbill's roster.
-5.times do |n|
-  RosterStudent.create!(teacher_id: 1,  #1st teach is super prof bill,
+#So far, there are 30 students created for North Central College.
+#Put 23 of them on profbill's roster.
+23.times do |n|
+  RosterStudent.create!(teacher_id: 1,  #1st teacher is super prof bill,
                                         #2nd is general teacher
                         student_id: n+1)
 end
