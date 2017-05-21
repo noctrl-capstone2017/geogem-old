@@ -80,15 +80,6 @@ body
 /*********************************************************
 *  ICON STYLING
 *********************************************************/
-/*Solves centering issues on home and session pages*/
-.home-center
-{
-	position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
-}
-
 .square
 {
 	height: 8em;
@@ -492,14 +483,7 @@ input[type="radio"]:checked + label {
 
 .school-icon
 {
-	font-size: em;
-	/*position: absolute;
-    top: 40%;
-    left: 50%;
-    height: 30%;
-    width: 50%;
-    margin: -15% 0 0 -25%;*/
-	color: #000000;
+	color: #FFFFFF; /*This should be white, don't change to black*/
 }
 
 /*Note from Carolyn C- took this from login*/
@@ -522,4 +506,71 @@ input[type="radio"]:checked + label {
 	font-size: 3.0em;
 	text-align: center;
 	color: #444444;
+}
+
+/*********************************************************
+*  SESSION SIDEBAR STYLING
+*  W3 Schools Tutorial: How TO - Side Navigation
+*  https://www.w3schools.com/howto/howto_js_sidenav.asp
+*  Modified by: Debra Jensen
+*********************************************************/
+/* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 250 width - changes to 0 with JavaScript close */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #737373;/*Gray*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+	margin-top:50px;
+}
+
+#mySidenav
+{
+	width:250px;
+}
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #FFFFFF;
+    display: block;
+    transition: 0.3s
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus{
+    color: #97EDEC; /*Light Blue*/
+}
+
+/* Added styling for text */
+.sidenav p, .sidenav h1, .sidenav h2, .sidenav h3, .sidenav h4
+{
+	color:#FFFFFF;
+}
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#session-main {
+    transition: margin-left .5s;
+    padding: 20px;
+	margin-left: 250px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }

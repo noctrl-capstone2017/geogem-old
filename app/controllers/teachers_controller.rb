@@ -24,6 +24,12 @@ class TeachersController < ApplicationController
   # GET /teachers/1
   # GET /teachers/1.json
   def show
+    @teacher = Teacher.find(params[:id])
+    @students = @teacher.students
+    @all_students_at_school = Student.where(school_id: @teacher.school_id)
+    #Note from Tommy B: Needs to be implemented still. I'm working on it!
+    #@students_not_in_roster_but_at_school = 
+
   end
 
   # GET /teachers/new
@@ -44,7 +50,6 @@ class TeachersController < ApplicationController
   
   #author: Tommy B
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  
   # Note from Tommy B: the redirects need to be changed
   def update_password
     teacher = Teacher.find(params[:id])
@@ -129,22 +134,20 @@ class TeachersController < ApplicationController
     end
   end
    
+   # make list of all schools available here so I can query them and set the super users schools attr 
+   def super
+    @schools = School.all
+   end
    #Robert Herrera
    # POST /super
   def updateFocus
     teacher = Teacher.find(1)
-    
-    if teacher.update(focus_school_params)
-      format.html { redirect_to teachers_url, notice: 'Super School was successfully switched.' }
-      teacher.full_name = params[full_name]
-    else
-      flash[:danger] = "Unauthorized"
-        redirect_to home1_path
-    end
+    schoolName = params[full_name]
+    teacher.full_name = schoolName
+
   end
  
   private
-  
   
     #NOTE FROM CAROLYN C: Prof Bill and I moved these to the teachers_helper and included a TeacherHelper in here for navbar purposes.
     

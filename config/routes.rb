@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'login_session#new'
 
-  #get 'teachers/:id/password' => 'teachers#password'
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
@@ -49,22 +48,15 @@ Rails.application.routes.draw do
   get    'home1'   => 'static_pages#home1'
   post   'home1'   => 'static_pages#home1'
   
-
   # Robert Herrera
-  get    'admin1'   => 'admin#home'
-  get    'admin2'   => 'admin#show'
-
-  get    '/super_report',    to: 'teachers#super_report'
-  get    '/admin',    to: 'teachers#admin'
+  # Proper routes for super, admin, and schools
   get    '/admin_report',    to: 'teachers#admin_report' 
-  get    '/super',    to: 'schools#super'
+  get    '/super_report',    to: 'teachers#super_report'
+  get    '/admin',           to: 'teachers#admin'
+  get    '/super',           to: 'schools#super'
+  post   '/super',           to: 'teachers#updateFocus'
 
-  get    '/allSchools', to: 'schools#index'
-  get    '/schools/new', to: 'schools#new'
-  get    '/schools/new', to: 'schools#create'
-
-  post   '/super',    to: 'teachers#updateFocus'
-  #get    '/schools', to: 'schools#index'
+  
   
   get    'help'   => 'static_pages#help'
   
