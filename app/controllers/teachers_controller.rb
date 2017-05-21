@@ -59,13 +59,13 @@ class TeachersController < ApplicationController
       if params[:password] == params[:password_confirmation]
         teacher.password = BCrypt::Password.create(params[:password])
         if teacher.save!
-          redirect_to @teacher, notice: "Password changed."
+          redirect_to @teacher, :flash => { :notice => "Password changed." }
         end
       else
-        redirect_to @teacher, notice: "Incorrect Password."
+        redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
       end
     else
-      redirect_to @teacher, notice: "Incorrect Password."
+      redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
     end
   end
 
@@ -76,7 +76,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
+        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new }
