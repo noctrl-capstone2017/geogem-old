@@ -7,7 +7,7 @@ require 'login_session_helper'
 
 class TeachersLoginTest < ActionDispatch::IntegrationTest
   def setup
-    @teacher = teachers(:one)
+    @teacher = teachers(:two)
   end
   
   test "login with invalid information" do

@@ -192,9 +192,9 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:user_name, :password_digest, :last_login,
+      params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_digest)
+      :school_id, :password, :password_confirmation)
     end
     
         # Switching the focus school 
