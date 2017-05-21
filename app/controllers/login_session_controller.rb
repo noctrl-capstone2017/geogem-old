@@ -10,6 +10,11 @@ class LoginSessionController < ApplicationController
   
   # login page
   def new
+    #Edit by Kevin M:
+    #redirects to home page if already logged in
+    if current_teacher
+      redirect_to home_path
+    end
   end
   
   # logs in the teacher if successful, flashes a danger if invalid log in info
