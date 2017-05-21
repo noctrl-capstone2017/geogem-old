@@ -5,6 +5,7 @@ class TeachersController < ApplicationController
   include TeachersHelper
 
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :same_school, only: [:show, :edit, :update, :destroy]
   before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
 
@@ -12,7 +13,7 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     @current_teacher = current_teacher
-    @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
+    @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
   end
   
   def admin_report
@@ -197,7 +198,14 @@ class TeachersController < ApplicationController
       :school_id, :password, :password_confirmation)
     end
     
-        # Switching the focus school 
+    #Can only access teachers and info from the same school
+    def same_school
+      if current_teacher.school_id != Teacher.find(params[:id]).school_id
+        redirect_to home_path, notice: "You can't access other schools."
+      end
+    end
+    
+    # Switching the focus school 
     def focus_school_params 
       params.require(:full_name).permit(:school_id)
     end 

@@ -3,7 +3,7 @@
 
 class Teacher < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email
+  before_save   :downcase_email, :colorcheck
   ###REGEX###
   #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -73,5 +73,12 @@ class Teacher < ApplicationRecord
     # Converts email to all lower-case.
     def downcase_email
       self.email = email.downcase
+    end
+    
+    # Converts light blue to ltblue.
+    def colorcheck
+      if self.color == 'light blue'
+        self.color = 'ltblue'
+      end
     end
 end
