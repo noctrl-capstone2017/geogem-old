@@ -6,7 +6,7 @@ class LoginSessionController < ApplicationController
 
   # The teacher can only log out if they are actually logged in
   before_action :logged_in, only: [:destroy]
-  skip_before_filter :require_login
+  skip_before_action :require_login
   
   # login page
   def new
