@@ -56,9 +56,10 @@ Rails.application.routes.draw do
   get    '/admin',           to: 'teachers#admin'
   get    '/super',           to: 'schools#super'
   post   '/super',           to: 'teachers#updateFocus'
-
-  
-  
+  get    '/backup',          to: 'schools#backup'
+  get    '/suspend',         to: 'schools#suspend'  
+  get    '/restore',        to: 'schools#restore'   
+   
   get    'help'   => 'static_pages#help'
   
   get    'notes' => 'session_notes#index'
