@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
-  get "sessions/end",to:'sessions#end_session'
+  #Might still be used 
+  #get "sessions/end",to:'sessions#end_session'
+  #get "sessions/:id/end",to:'sessions#end_session'
+  
+  #route to end session page
+  post 'sessions/:id/end_session' => 'sessions#end_session', as: :end_session
   
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   resources :teachers do
