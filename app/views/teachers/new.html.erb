@@ -24,17 +24,8 @@
     </div>
   <% end %>
   
-	<!-- Placeholder school_id input. REMOVE LATER!! -->
-	<div class="row form-row">
-	<div class="col-xs-1 col-xs-offset-1"><h4>school_id<br>placeholder</h4></div>
-	<div class="col-xs-4 col-xs-offset-1">
-			<%= f.number_field :school_id, class: 'form-control'%>
-		</div>
-	</div>   <!-- row -->
-	
-	<p>Note from Kevin M: The school_id will not be here in the future.</p>
-	<p>We're going to pull the ID from the admin accessing this page.</p>
-	<p>In the meantime, just so you can make teachers, it's an option here.</p>
+	<!-- school_id fetched from admin -->
+	<%= f.hidden_field :school_id, :value => current_teacher.school_id %>
 	
 	<div class="row form-row">
 		<!-- Teacher ID -->
