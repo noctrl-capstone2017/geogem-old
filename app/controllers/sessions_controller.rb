@@ -13,14 +13,15 @@ class SessionsController < ApplicationController
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
     
-   # @teacher = Session.current_teacher
   end
 
   # GET /sessions/1
   # GET /sessions/1.json
+  # Alex P + Matthew OS
   def show
     @student = Student.find(@session.session_student)
-   # @teacher = Teacher.find(@session.session_teacher)
+    @teacher = Teacher.find(@session.session_teacher)
+    
    if params[:end_session]
     respond_to do |format|
             format.html { redirect_to @session, notice: 'Session was successfully created.' }
