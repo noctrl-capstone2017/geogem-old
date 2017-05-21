@@ -5,14 +5,15 @@ class TeachersController < ApplicationController
   include TeachersHelper
 
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
+  before_action :same_school, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
+  before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
 
   # GET /teachers
   # GET /teachers.json
   def index
     @current_teacher = current_teacher
-    @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
+    @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
   end
   
   def admin_report
@@ -58,13 +59,13 @@ class TeachersController < ApplicationController
       if params[:password] == params[:password_confirmation]
         teacher.password = BCrypt::Password.create(params[:password])
         if teacher.save!
-          redirect_to @teacher, notice: "Password changed."
+          redirect_to @teacher, :flash => { :notice => "Password changed." }
         end
       else
-        redirect_to @teacher, notice: "Incorrect Password."
+        redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
       end
     else
-      redirect_to @teacher, notice: "Incorrect Password."
+      redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
     end
   end
 
@@ -75,7 +76,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
+        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new }
@@ -149,42 +150,6 @@ class TeachersController < ApplicationController
  
   private
   
-    #NOTE FROM CAROLYN C: Prof Bill and I moved these to the teachers_helper and included a TeacherHelper in here for navbar purposes.
-    
-    # Author: Steven Royster
-    # If the teacher is not an admin then they 
-    #  will be flashed an unauthorized prompt and redirected to home
-    # def is_admin
-    #   if !is_admin?
-    #     flash[:danger] = "Unauthorized"
-    #     redirect_to login_path
-    #   end
-    # end
-    
-    # Author: Steven Royster
-    # Checks to see if the current teacher has admin status
-    # Returns true if the teacher is an admin
-    # def is_admin?
-    #   current_teacher && current_teacher.powers == "Admin"
-    # end
-    
-    # Author: Steven Royster
-    # If the teacher is not a super user then they 
-    #  will be flashed an unauthorized prompt and redirected to home
-    # def is_super
-    #   if !is_super?
-    #     flash[:danger] = "Unauthorized"
-    #     redirect_to home1_path
-    #   end
-    # end
-
-     # Author: Steven Royster
-    # Checks to see if the current teacher has super user status
-    # Returns true if the teacher is a super user
-    # def is_super?
-    #   current_teacher && current_teacher.id == 1
-    # end
-    
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
@@ -197,7 +162,14 @@ class TeachersController < ApplicationController
       :school_id, :password, :password_confirmation)
     end
     
-        # Switching the focus school 
+    #Can only access teachers and info from the same school
+    def same_school
+      if current_teacher.school_id != Teacher.find(params[:id]).school_id
+        redirect_to home_path, notice: "You can't access other schools."
+      end
+    end
+    
+    # Switching the focus school 
     def focus_school_params 
       params.require(:full_name).permit(:school_id)
     end 
