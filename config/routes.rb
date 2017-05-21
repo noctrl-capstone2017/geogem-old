@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
-  
   get "sessions/end",to:'sessions#end_session'
   
+  #to disguise teachers/id/edit_password as just /password (I know, I know-- but it works!)
+  get "/password", to: 'teachers#edit_password'
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   resources :teachers do
   member do

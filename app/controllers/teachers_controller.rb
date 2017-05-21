@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
   
   include TeachersHelper
 
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :edit_password, :update_password]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
 
@@ -41,18 +41,18 @@ class TeachersController < ApplicationController
   def edit
   end
   
-  # GET /teachers/1/password
-  #author: Tommy B
+  # GET /teachers/password
+  #author: Tommy B, Kevin M
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
-    @teacher = Teacher.find(params[:id])
+    @teacher = current_teacher
   end
   
-  #author: Tommy B
+  #author: Tommy B, Kevin M
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   # Note from Tommy B: the redirects need to be changed
   def update_password
-    teacher = Teacher.find(params[:id])
+    teacher = current_teacher
     # also in here i'm calling the authenticate method that usually is present in bcrypt.
     if teacher and teacher.authenticate(params[:old_password])
       if params[:password] == params[:password_confirmation]
