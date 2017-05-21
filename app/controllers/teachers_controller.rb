@@ -6,8 +6,8 @@ class TeachersController < ApplicationController
 
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   before_action :same_school, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
+  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
+  before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
 
   # GET /teachers
   # GET /teachers.json
