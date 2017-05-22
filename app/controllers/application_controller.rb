@@ -9,21 +9,21 @@ class ApplicationController < ActionController::Base
 
   private
     # Confirms a logged-in user.
-    def logged_in_teacher
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
+    def logged_in_teacher  #commented out of ease of developing. Should not be merged.
+      # unless logged_in?
+      #   store_location
+      #   flash[:danger] = "Please log in."
+      #   redirect_to login_url
+      # end
     end
     
   private
     # Guard each page, checks for logged in
-    def require_login
-      unless current_teacher
-      flash[:danger] = "Log in is not current"
-        redirect_to login_url
-      end
+    def require_login  #commented out of ease of developing. Should not be merged.
+      # unless current_teacher
+      # flash[:danger] = "Log in is not current"
+      #   redirect_to login_url
+      # end
     end
     
 end

@@ -21,6 +21,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'prawn'
 gem 'prawn-table'
 gem 'time_difference'
+gem 'chartkick'
 
 group :development, :test do
   gem 'rails-controller-testing'
