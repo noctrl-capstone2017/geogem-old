@@ -17,7 +17,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get new_session_url
     assert_response :success
   end
-
+  
+  #Authors: Alex P Debra J Matthew O
+  #makes sure session can be created after logging in
   test "should create session" do
     log_in_as(@user)
     assert_difference('Session.count') do
@@ -27,14 +29,21 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to session_url(Session.last)
   end
   
+  #Authors: Alex P Debra J Matthew O
+  #ensure that a session has a teacher assigned to it
   test "session must have a teacher" do
     assert_not_nil( @session.session_teacher, "session doesn't have teacher")	
   end
   
+  #Authors: Alex P Debra J Matthew O
+  #ensure that a session has a student assigned to it
   test "session must have a student" do
     assert_not_nil( @session.session_student, "session doesn't have student")	
   end
   
+  #Authors: Alex P Debra J Matthew O
+  #ensure that a session's start time is less than the end time, 
+  #valid sessions should last at least a few seconds
   test "start time is less than end time" do
     assert(@session.start_time < @session.end_time, "start time is greater than end time")
   end
@@ -51,7 +60,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   #get the end screen 
   test "should show end" do
     log_in_as(@user)
-    get '/end'
+    post end_session_url(@session)
     assert_response :success
   end
 
@@ -60,7 +69,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get edit_session_url(@session)
     assert_response :success
   end
-
+  
+  #Authors: Alex P Debra J Matthew O
+  #makes sure session can be updated after logging in
   test "should update session" do
     log_in_as(@user)
     patch session_url(@session), params: { session: { end_time: @session.end_time, session_student: @session.session_student, session_teacher: @session.session_teacher, start_time: @session.start_time } }

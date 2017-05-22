@@ -108,7 +108,7 @@ end
   name  = Faker::Hipster.word + " " + Faker::Hipster.word
   Square.create!(full_name: name,
                  screen_name: "S#{n+1}",
-                 tracking_type: (n%3)+1,      #1, 2, or 3
+                 tracking_type: (n%3)+1,    #1, 2, or 3 NEED TO CHANGE THIS FOR ENUM CLASS
                  description: name,
                  color: "red",
                  school_id: 1)
@@ -130,14 +130,25 @@ end
                         student_id: 1)
 end
 
+# Seed the databace with another session between the first teacher and third student
+Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
+                end_time: DateTime.new(2017,3,22,8,05, 0),
+                session_teacher: 1,
+                session_student: 1)
+
 # Seed the database with a session between the first teacher and first student 
 Session.create!(start_time: DateTime.new(2017,5,15,8,30, 0),
                 end_time: DateTime.new(2017,5,15,11,30, 0),
                 session_teacher: 1,
                 session_student: 1)
 
-#Seed the database with ten session events for the first session
+# Seed the databace with another session between the first teacher and third student
+Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
+                end_time: DateTime.new(2017,3,22,8,05, 0),
+                session_teacher: 1,
+                session_student: 3)
 
+#Seed the database with ten session events for the first session
 x = DateTime.new(2017,5,15,8, 30, 0)           #Start the session at 8:30 am
 roster_IDS = RosterSquare.where(student_id: 1) #roster square ids for student1
 
