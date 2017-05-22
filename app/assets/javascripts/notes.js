@@ -19,15 +19,13 @@ $( document ).ready(function() {
 							$.alert('provide a valid note');
 							return false;
 						}
-						/*
 						$.ajax({
-						    //TO BE IMPLEMENTED
-                //url:'/session_events',
+                url:'/session_notes',
                 type:'POST',
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 dataType:'json',
                 data:{
-                     note_content: note,
+                     note: note,
                      session_id: getSessionId()
                 },
                 success:function(data){
@@ -36,7 +34,7 @@ $( document ).ready(function() {
                 error:function(data){
                     alert("fail");
                 }
-            });*/
+            });
 					}
 				},
 				cancel: function () {
