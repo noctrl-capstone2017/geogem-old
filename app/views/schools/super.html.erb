@@ -1,4 +1,4 @@
-<!-- Robert Herrera -->
+<!-- UX team. Edited byRobert Herrera -->
 <div class="container">
 	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
 		<!-- page header -->
@@ -12,32 +12,9 @@
 				</div>
 			</div>
 		</div><!--End page header-->
-		<!-- school focus spinner -->
-		<div class="row first-content-row">
-			<form class="form-horizontal">
-				<div class="row vertical-align">
-					<div class="form-group">
-						<label class="control-label col-xs-5" for="selectSch">Super focus school:</label>
-						<div class="col-xs-7">
-							<!-- LIST OF SCHOOLS -->
-							<!-- submits HTTP Post request to the super_controller. The super_controller determines which action to use. -->
-							 <form action="/super" method="post">
-									<select required>
-										<% @schools.each do |school| %>
-											<option name ="<%= school.full_name %>" value="<%= school.full_name %>"><%= school.full_name %></option>
-								   		<% end %>
-									</select> 
-							</form>
-						</div>   <!-- col-->
-						<div class="col-xs-4 text-center">
-							<button type="submit" class="btn btn-md btn-success">Change focus school</button>
-						</div>   <!-- col -->
-	  			</div>   <!-- form group-->
-				</div>   <!-- row -->
-				<div class="row">
-				</div>   <!-- row -->
-			</form>
-		</div>
+<div class="row first-content-row">
+		<!-- Render the school focus spinner using form partial-->
+		 <%= render 'schoolSelect', school: @school %>
 		<!-- action icons -->
 		<div class="row action-icon-row" style="margin-top: 40px;">
 			<%= link_to schools_path(@schools) do %>
@@ -58,7 +35,7 @@
 			</div><!-- col -->
 			<% end %>
 		</div><!-- row -->
-
+		</div>
 		<!-- action icons, row 2 -->
 		<div class="row action-icon-row" style="margin-top: 40px;">
 			<%= link_to backup_path(@schools) do %>
