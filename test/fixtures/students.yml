@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   full_name: MyString
   screen_name: MyString
   icon: MyString
@@ -9,6 +10,7 @@ one:
   description: MyText
   session_interval: 1
   school_id: 1
+  id: 1 #DJ added, is necessary to include id fields to fix tests
 
 two:
   full_name: MyString
@@ -19,3 +21,4 @@ two:
   description: MyText
   session_interval: 1
   school_id: 1
+  id: 2 #DJ added, is necessary to include id fields to fix tests

@@ -15,6 +15,8 @@ class SessionEventsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  #Authors: Alex P Debra J Matthew O
+  #makes sure session event is created
   test "should create session_event" do
     assert_difference('SessionEvent.count') do
       post session_events_url, params: { session_event: { behavior_square_id: @session_event.behavior_square_id, duration_end_time: @session_event.duration_end_time, session_id: @session_event.session_id, square_press_time: @session_event.square_press_time } }

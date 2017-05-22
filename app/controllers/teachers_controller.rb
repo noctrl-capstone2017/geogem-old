@@ -17,9 +17,10 @@ class TeachersController < ApplicationController
   end
   
   def admin_report
-    @students = Student.all
-    @teachers = Teacher.all
-    @squares = Square.all
+    @current_teacher = current_teacher
+    @students = Student.where(school_id: current_teacher.school_id)
+    @teachers = Teacher.where(school_id: current_teacher.school_id)
+    @squares = Square.where(school_id: current_teacher.school_id)
   end
   
   # GET /teachers/1
@@ -28,9 +29,14 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
     @all_students_at_school = Student.where(school_id: @teacher.school_id)
-    #Note from Tommy B: Needs to be implemented still. I'm working on it!
-    #@students_not_in_roster_but_at_school = 
-
+    @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
+    
+    if params[:add_student]
+      @teacher.students.add(Student.find(@student_id))
+    elsif params[:remove_student]
+      @teacher.students.remove(Student.find(@student_id))
+    end
+      
   end
 
   # GET /teachers/new
@@ -41,6 +47,9 @@ class TeachersController < ApplicationController
   # GET /teachers/1/edit
   def edit
   end
+  
+  def admin
+  end 
   
   # GET /teachers/password
   #author: Tommy B, Kevin M
@@ -147,7 +156,7 @@ class TeachersController < ApplicationController
     teacher.full_name = schoolName
 
   end
- 
+
   private
   
     # Use callbacks to share common setup or constraints between actions.
