@@ -20,7 +20,8 @@ class StudentsController < ApplicationController
       @students = Student.where(school_id: current_teacher.school_id)
     end
     
-    # Paginate those students
+    # Paginate those students and order by screen_name
+    @students = @students.order('screen_name ASC')
     @students = @students.paginate(page: params[:page], :per_page => 10)
     
     # Make a second @sessions list for each student in the @studens list

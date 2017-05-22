@@ -18,7 +18,8 @@ class SquaresController < ApplicationController
       @squares = Square.where(school_id: current_teacher.school_id)
     end
     
-    # Paginate those squares
+    # Paginate those squares and order by screen_name
+    @squares = @squares.order('screen_name ASC')
     @squares = @squares.paginate(page: params[:page], :per_page => 10)
   end
 
