@@ -13,54 +13,52 @@
 <!--End page header-->
 <!-- action icons, first row -->		
 <div class="row">
-
-<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit school attributes">
+	<%= link_to edit_school_path(@current_teacher) do %>
+	<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit school attributes">
 	<div class ="action-sq i-navy center-block" >
-			<span class="fa fa-home fa-4x action-icon" ></span>
+		<span class="fa fa-home fa-4x action-icon" ></span>
 	</div>
-	<p><span class="student-icon-text">
-		<%= link_to 'School Profile', edit_school_path(@current_teacher) %>
-	</span></p>
-</div> <!-- col -->
-
-<div class="col-xs-2 text-center" title="School stats and more">
+		<p><span class="student-icon-text">School Profile</span></p>
+	</div> <!-- col -->
+	<% end %>
+	
+	<%= link_to super_report_path(@current_teacher) do %>
+	<div class="col-xs-2 text-center" title="School stats and more">
 	<div class ="action-sq i-pink center-block" >
-	<span class="fa fa-file-text-o fa-4x action-icon" ></span>
+		<span class="fa fa-file-text-o fa-4x action-icon" ></span>
 	</div>
-	<p><form action='students/show'><span class="student-icon-text">
-		<%= link_to 'Super Report', super_report_path(@current_teacher) %>
-	</span></form></p>
-</div> <!-- col -->
+		<p><span class="student-icon-text">Super Report</span></p>
+	</div> <!-- col -->
+	<% end %>
 </div>   <!-- row -->
 
 <!-- action icons, second row -->
 <div class="row action-icon-row">
-<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit all students">
+	<%= link_to students_path(@current_teacher) do %>
+	<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit all students">
 	<div class ="action-sq i-red center-block" >
 		<span class="fa fa-child fa-4x action-icon" ></span>
 	</div>
-	<p><span class="student-icon-text">
-		<%= link_to 'All Students', students_path(@current_teacher) %>
-	</span></p>
-</div> <!-- col -->
-
-<div class="col-xs-2 text-center" title="View/edit all teachers">
+		<p><span class="student-icon-text">All Students</span></p>
+	</div> <!-- col -->
+	<% end %>
+	
+	<%= link_to teachers_path(@current_teacher) do %>
+	<div class="col-xs-2 text-center" title="View/edit all teachers">
 	<div class ="action-sq i-yellow center-block" >
 		<span class="fa fa-apple fa-4x action-icon" ></span>
 	</div>
-	<p><span class="student-icon-text">
-		<%= link_to 'All Teachers', teachers_path(@current_teacher) %>
-	</span></p>
-</div> <!-- col -->
-
-<div class="col-xs-2 text-center" title="View/edit all behavior squares">
+	<p><span class="student-icon-text">All Teachers	</span></p>
+	</div> <!-- col -->
+	<% end %>
+	
+	<%= link_to squares_path(@current_teacher) do %>
+	<div class="col-xs-2 text-center" title="View/edit all behavior squares">
 	<div class ="action-sq i-ltblue center-block" >
 		<span class="fa fa-square-o fa-4x action-icon" ></span>
 	</div>
-	<p><span class="student-icon-text">
-		<%= link_to 'All Squares', roster_squares_path(@current_teacher) %>
-	</span></p>
-</div> <!-- col -->
-
+	<p><span class="student-icon-text">All Squares</span></p>
+	</div> <!-- col -->
+    <% end %>
 
 
