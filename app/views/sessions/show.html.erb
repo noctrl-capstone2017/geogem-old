@@ -1,7 +1,12 @@
 <!-- @author: Matthew O & Alex P -->
 <%= javascript_include_tag "sidebar.js" %>
 <%= javascript_include_tag "timer.js" %>
+<%= javascript_include_tag "notes.js" %>
 <%= csrf_meta_tag %>
+
+<!-- Note Functionality -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
 
 <!--Side bar -->
 <div id="mySidenav" class="sidenav">
@@ -74,7 +79,7 @@
                                 <div class="square i-<%= square.color %> text-center">
                                     <div class="col-xs-12">
                                             <h4><%= square.screen_name %> </h4>
-                                            <p id = "timer"><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
+                                            <p id = "timer"><span id="minutes">00</span>:<span id="seconds">00</span></p>
                                     </div>
                                     <div class="col-xs-1 col-xs-offset-7">
                                         <span> <i class="fa fa-clock-o icon-white"></i></span>
