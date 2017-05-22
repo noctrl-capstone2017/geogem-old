@@ -49,6 +49,7 @@ class TeachersController < ApplicationController
   end
   
   def admin
+    @teacher = current_teacher
   end 
   
   # GET /teachers/password
