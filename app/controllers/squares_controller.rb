@@ -1,5 +1,7 @@
 class SquaresController < ApplicationController
   
+  # By Ricky Perez & Michael Loptien  
+  
   include TeachersHelper
   
   before_action :set_square, only: [:show, :edit, :update, :destroy]
@@ -89,7 +91,7 @@ class SquaresController < ApplicationController
       else                                    #Admin for school
         @school = School.find(current_teacher.school_id)
         @color  = @school.color
-        @full_name = @school.full_name
+        @screen_name = @school.screen_name
         @icon = @school.icon
       end
     end
