@@ -64,8 +64,8 @@ class RosterSquaresController < ApplicationController
     
     respond_to do |format|
       if @roster_square.save
-        format.html { redirect_to @roster_square, notice: 'Roster square was successfully created.' }
-        format.json { render :show, status: :created, location: @roster_square }
+        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully created.' }
+        format.json { render :edit, status: :created, location: @roster_square }
       else
         format.html { render :new }
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
@@ -78,7 +78,7 @@ class RosterSquaresController < ApplicationController
   def update
     respond_to do |format|
       if @roster_square.update(roster_square_params)
-        format.html { redirect_to @roster_square, notice: 'Roster square was successfully updated.' }
+        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully updated.' }
         format.json { render :show, status: :ok, location: @roster_square }
       else
         format.html { render :edit }
@@ -100,7 +100,7 @@ class RosterSquaresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_roster_square
-      @roster_square = RosterSquare.find(params[:id])
+      @students = Student.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
