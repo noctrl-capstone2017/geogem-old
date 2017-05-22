@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'graph/main'
+
+  get 'graph/example'
+
+  get 'graph/random'
+
+  get 'graph/todo'
+
+  get 'graph/other'
+
   root 'login_session#new'
 
   #get 'teachers/:id/password' => 'teachers#password'
