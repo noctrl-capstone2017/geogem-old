@@ -56,7 +56,12 @@
         </td>
         <td><%= student.screen_name %></td>
         <td><%= student.full_name %></td>
-        <td>**Last Session***</td>                      <!-- Need to link to last Student Session -->
+        <% this_session =  @sessions.where(session_student: student.id).last %>
+        <% if this_session != nil %>
+          <td><%= this_session.end_time %></td>                      <!-- Need to link to last Student Session -->
+        <% else %>
+          <td>no previous sessions</td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -8,7 +8,7 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div class="col-md-12 text-center">
         <div class ="sq-studSesh i-<%= @student.color %> center-block">
-             <span class="fa fa-<%= @student.icon %> fa-5x student-icon" style="padding-top:20%;"></span>
+             <span class="fa fa-<%= @student.icon %> fa-5x student-icon center-block" style="padding-top:20%;"></span>
         </div>
         <h3><%= @student.full_name %></h3>
         <p id="start_time"></p>
@@ -30,7 +30,7 @@
     </div>
 </div>
 <!-- Main Content -->
-<div id="main">
+<div id="session-main">
     <div class="container-fluid">
         <!-- Behavior Square Area -->
         <% @student.squares.each_with_index do |square, index| %>
