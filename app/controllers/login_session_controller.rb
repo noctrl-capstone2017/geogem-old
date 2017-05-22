@@ -6,6 +6,7 @@ class LoginSessionController < ApplicationController
 
   # The teacher can only log out if they are actually logged in
   before_action :logged_in, only: [:destroy]
+  # Skips guard check because these are login/logout pages
   skip_before_action :require_login
   
   # login page
