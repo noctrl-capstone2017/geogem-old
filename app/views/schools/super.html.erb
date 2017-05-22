@@ -21,13 +21,8 @@
 						<div class="col-xs-7">
 							<!-- LIST OF SCHOOLS -->
 							<!-- submits HTTP Post request to the super_controller. The super_controller determines which action to use. -->
-							 <form action="/super" method="post">
-									<select required>
-										<% @schools.each do |school| %>
-											<option name ="<%= school.full_name %>" value="<%= school.full_name %>"><%= school.full_name %></option>
-								   		<% end %>
-									</select> 
-							</form>
+			 				<%= render 'schoolSelect', student: @teacher %>
+
 						</div>   <!-- col-->
 						<div class="col-xs-4 text-center">
 							<button type="submit" class="btn btn-md btn-success">Change focus school</button>
