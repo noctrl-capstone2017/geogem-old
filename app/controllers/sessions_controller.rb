@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
-    
+    @squares = @student.squares
   end
 
   # GET /sessions/1
