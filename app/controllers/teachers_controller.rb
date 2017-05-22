@@ -1,21 +1,41 @@
 # author: Kevin M, Tommy B
 # Teacher methods.
 class TeachersController < ApplicationController
+  
+  include TeachersHelper
 
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy, :edit_password, :update_password]
-  before_action :is_admin, except: [:update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:update, :edit, :edit_password, :update_password]
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :same_school, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
+  before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
 
   # GET /teachers
   # GET /teachers.json
   def index
     @current_teacher = current_teacher
-    @teachers = Teacher.paginate(page: params[:page], :per_page => 10)
+    @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
+  end
+  
+  def admin_report
+    @current_teacher = current_teacher
+    @students = Student.where(school_id: current_teacher.school_id)
+    @teachers = Teacher.where(school_id: current_teacher.school_id)
+    @squares = Square.where(school_id: current_teacher.school_id)
   end
   
   # GET /teachers/1
   # GET /teachers/1.json
   def show
+    @teacher = Teacher.find(params[:id])
+    @students = @teacher.students
+    @all_students_at_school = Student.where(school_id: @teacher.school_id)
+    @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
+    
+    if params[:add_student]
+      @teacher.students << Student.find(params[:add_student_id])
+    elsif params[:remove_student]
+      @teacher.students.delete(Student.find(params[:remove_student_id]))
+    end
   end
 
   # GET /teachers/new
@@ -27,31 +47,33 @@ class TeachersController < ApplicationController
   def edit
   end
   
-  # GET /teachers/1/password
-  #author: Tommy B
+  def admin
+  end 
+  
+  # GET /teachers/password
+  #author: Tommy B, Kevin M
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
-    @teacher = Teacher.find(params[:id])
+    @teacher = current_teacher
   end
   
-  #author: Tommy B
+  #author: Tommy B, Kevin M
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  
   # Note from Tommy B: the redirects need to be changed
   def update_password
-    teacher = Teacher.find(params[:id])
+    teacher = current_teacher
     # also in here i'm calling the authenticate method that usually is present in bcrypt.
     if teacher and teacher.authenticate(params[:old_password])
       if params[:password] == params[:password_confirmation]
         teacher.password = BCrypt::Password.create(params[:password])
         if teacher.save!
-          redirect_to @teacher, notice: "Password changed."
+          redirect_to @teacher, :flash => { :notice => "Password changed." }
         end
       else
-        redirect_to @teacher, notice: "Incorrect Password."
+        redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
       end
     else
-      redirect_to @teacher, notice: "Incorrect Password."
+      redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
     end
   end
 
@@ -62,7 +84,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
+        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new }
@@ -121,56 +143,21 @@ class TeachersController < ApplicationController
     end
   end
    
+   # make list of all schools available here so I can query them and set the super users schools attr 
+   def super
+    @schools = School.all
+   end
    #Robert Herrera
    # POST /super
   def updateFocus
     teacher = Teacher.find(1)
-    
-    if teacher.update(focus_school_params)
-      format.html { redirect_to teachers_url, notice: 'Super School was successfully switched.' }
-      teacher.full_name = params[full_name]
-    else
-      flash[:danger] = "Unauthorized"
-        redirect_to home1_path
-    end
+    schoolName = params[full_name]
+    teacher.full_name = schoolName
+
   end
- 
+
   private
   
-    # Author: Steven Royster
-    # If the teacher is not an admin then they 
-    #  will be flashed an unauthorized prompt and redirected to home
-    def is_admin
-      if !is_admin?
-        flash[:danger] = "Unauthorized"
-        redirect_to login_path
-      end
-    end
-    
-    # Author: Steven Royster
-    # Checks to see if the current teacher has admin status
-    # Returns true if the teacher is an admin
-    def is_admin?
-      current_teacher && current_teacher.powers == "Admin"
-    end
-    
-    # Author: Steven Royster
-    # If the teacher is not a super user then they 
-    #  will be flashed an unauthorized prompt and redirected to home
-    def is_super
-      if !is_super?
-        flash[:danger] = "Unauthorized"
-        redirect_to home1_path
-      end
-    end
-
-     # Author: Steven Royster
-    # Checks to see if the current teacher has super user status
-    # Returns true if the teacher is a super user
-    def is_super?
-      current_teacher && current_teacher.id == 1
-    end
-    
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
@@ -178,12 +165,19 @@ class TeachersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teacher_params
-      params.require(:teacher).permit(:user_name, :password_digest, :last_login,
+      params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_digest)
+      :school_id, :password, :password_confirmation)
     end
     
-        # Switching the focus school 
+    #Can only access teachers and info from the same school
+    def same_school
+      if current_teacher.school_id != Teacher.find(params[:id]).school_id
+        redirect_to home_path, notice: "You can't access other schools."
+      end
+    end
+    
+    # Switching the focus school 
     def focus_school_params 
       params.require(:full_name).permit(:school_id)
     end 

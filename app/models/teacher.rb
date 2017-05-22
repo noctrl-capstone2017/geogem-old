@@ -3,7 +3,7 @@
 
 class Teacher < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email
+  before_save   :downcase_email, :colorcheck
   ###REGEX###
   #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -40,7 +40,8 @@ class Teacher < ApplicationRecord
                                   dependent:   :destroy
 
   has_many :students, through: :active_relationships, source: :student
-  
+
+
   ### METHODS ###
   # Returns a random token.
   def Teacher.new_token
@@ -55,6 +56,7 @@ class Teacher < ApplicationRecord
   
   # Returns true if the given token matches the digest.
   def authenticated?(attribute, token)
+    return false if attribute.nil?
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
@@ -72,5 +74,12 @@ class Teacher < ApplicationRecord
     # Converts email to all lower-case.
     def downcase_email
       self.email = email.downcase
+    end
+    
+    # Converts light blue to ltblue.
+    def colorcheck
+      if self.color == 'light blue'
+        self.color = 'ltblue'
+      end
     end
 end

@@ -2,12 +2,16 @@
 # Author: Meagan Moore & Steven Royster
   
   class StaticPagesController < ApplicationController
-    def home1
-    end
-    
+    # Skips guard check because these pages don't require login
+    skip_before_action :require_login
+        
     def about1
     end
     
     def about2
     end
+    
+    def help
+    end
+    
   end

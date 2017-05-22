@@ -1,12 +1,31 @@
 Rails.application.routes.draw do
+  get 'graph/main'
+
+  get 'graph/example'
+
+  get 'graph/random'
+
+  get 'graph/todo'
+
+  get 'graph/other'
+
   root 'login_session#new'
 
-  #get 'teachers/:id/password' => 'teachers#password'
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
-  get "/end",to:'sessions#end'
+  #Might still be used 
+  #get "sessions/end",to:'sessions#end_session'
+  #get "sessions/:id/end",to:'sessions#end_session'
+  
+  #route to end session page
+  post 'sessions/:id/end_session' => 'sessions#end_session', as: :end_session
+  get "sessions/end",to:'sessions#end_session'
+  
+
+  #to disguise teachers/id/edit_password as just /password (I know, I know-- but it works!)
+  get "/password", to: 'teachers#edit_password'
   
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   resources :teachers do
@@ -16,11 +35,17 @@ Rails.application.routes.draw do
     end
   end
   
+  #allow for custom controller function
+  resources :sessions do
+    member do
+      get :end_session
+    end
+  end
+  
   resources :roster_students
   resources :roster_squares
-  resources :session_notes
+  resources :session_notes 
   resources :session_events
-  resources :sessions
   resources :squares
   resources :students
   
@@ -43,22 +68,20 @@ Rails.application.routes.draw do
   get    'home1'   => 'static_pages#home1'
   post   'home1'   => 'static_pages#home1'
   
-
   # Robert Herrera
-  get    'admin1'   => 'admin#home'
-  get    'admin2'   => 'admin#show'
-
-  get    '/super_report',    to: 'teachers#super_report'
-  get    '/admin',    to: 'teachers#admin'
+  # Proper routes for super, admin, and schools
   get    '/admin_report',    to: 'teachers#admin_report' 
-  get    '/super',    to: 'schools#super'
-
-  get    '/allSchools', to: 'schools#index'
-  get    '/schools/new', to: 'schools#new'
-  get    '/schools/new', to: 'schools#create'
-
-  post   '/super',    to: 'teachers#updateFocus'
-  #get    '/schools', to: 'schools#index'
+  get    '/super_report',    to: 'teachers#super_report'
+  get    '/admin',           to: 'teachers#admin'
+  get    '/super',           to: 'schools#super'
+  post   '/super',           to: 'teachers#updateFocus'
+  get    '/backup',          to: 'schools#backup'
+  get    '/suspend',         to: 'schools#suspend'  
+  get    '/restore',        to: 'schools#restore'   
+   
+  get    'help'   => 'static_pages#help'
+  
+  get    'notes' => 'session_notes#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

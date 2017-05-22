@@ -149,7 +149,7 @@ class TeacherTest < ActiveSupport::TestCase
   
   # Steven Royster
   test "authenticated? should return false for a teacher with nil digest" do
-    assert_not @teacher.authenticated?('')
+    assert_not @teacher.authenticated?(nil, nil)
   end
   
 end

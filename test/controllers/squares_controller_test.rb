@@ -37,13 +37,6 @@ class SquaresControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "should not create square wtih same id" do
-    assert_no_difference('Square.count') do
-      duplicate_item = @square.dup
-      assert_not duplicate_item.valid?
-    end
-  end
-
   test "should show square" do
     get square_url(@square)
     assert_response :success
