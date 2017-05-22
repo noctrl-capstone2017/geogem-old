@@ -11,32 +11,32 @@
 </div>
 
 <!-- Roster Form -->
-<h1>Note from Tommy B: if you try to add or remove a student, the teacher's description will be edited - not the roster. I am working on it.</h1>
-<%= form_for(@teacher) do |f| %>
+<h3> Note: Roster editing still doesn't work! </h3>
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
+		<form>
 		<!--Add/Remove Ctrls -->
 		<div class="row form-row vertical-align">
 			<div class="form-group col-sm-7">
 				<label for="addStud">Add Student to Roster</label>
-				<%= f.select :description, options_from_collection_for_select(@all_students_at_school, "id", "full_name"), class: 'form-control', id:"addStud" %>
+				<%= select_tag 'student_id', options_from_collection_for_select(@students_not_in_roster_but_at_school, "id", "full_name"), class: 'form-control', id:"addStud" %>
 			</div>
 			<div class="col-sm-1">
-				<%= f.submit "+", class: "btn btn-success", id: "addStudBtn" %>
+				<%= button_tag(type: 'submit', class: "btn btn-success", id: "addStudBtn", name: "add_student") do %> <i class="fa fa-plus icon-white"></i> <% end %>
 			</div>
 		</div><!-- End Row -->
-		<div class="row form-row">
+		<div class="row form-row vertical-align">
 			<div class="form-group col-sm-7">
 				<label for="removeStud">Remove Student from Roster</label>
-				<%= f.select :description, options_from_collection_for_select(@students, "id", "full_name"), class: 'form-control', id:"removeStud" %>
+				<%= select_tag 'student_id', options_from_collection_for_select(@students, "id", "full_name"), class: 'form-control', id:"removeStud" %>
 			</div>
 			<div class="col-sm-1">
-				<%= f.submit "-", class: "btn btn-danger", id: "removeStudBtn" %><i class="fa fa-minus icon-white"></i>
+				<%= button_tag(type: 'submit', class: "btn btn-danger", id: "addStudBtn", name: "remove_student") do %> <i class="fa fa-minus icon-white"></i> <% end %>
 			</div>
 		</div> <!--End row-->
+		</form>
 	</div>
 </div><!--End row-->
-<% end %> <!-- end of form submission -->
 
 <div class="row">
 	<div class="col-sm-10">
@@ -47,9 +47,8 @@
 <div id="student-roster" class="pre-scrollable container-fluid"> <!--Student display area -->
 	<% @students.each_with_index do |student, index| %>
 	<% if index % 6 == 0 %>
-	<div class="row students-row">
+		<div class="row students-row">
 	<% end %>
-	
 		<div class="col-xs-2 text-center">
 			<div class ="profile-sq i-<%= student.color %> center-block">
 				<span class="fa fa-<%= student.icon %> fa-3x student-icon "></span>
