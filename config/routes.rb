@@ -4,7 +4,13 @@ Rails.application.routes.draw do
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
-  get "sessions/end",to:'sessions#end_session'
+  
+  #Might still be used 
+  #get "sessions/end",to:'sessions#end_session'
+  #get "sessions/:id/end",to:'sessions#end_session'
+  
+  #route to end session page
+  post 'sessions/:id/end_session' => 'sessions#end_session', as: :end_session
   
   #to disguise teachers/id/edit_password as just /password (I know, I know-- but it works!)
   get "/password", to: 'teachers#edit_password'
