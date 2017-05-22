@@ -25,6 +25,7 @@ class SchoolsController < ApplicationController
   # make the list of schools available at /super
   def super
     @schools = School.all
+    @teacher = Teacher.first
   end
   
   def super_report
@@ -53,15 +54,11 @@ class SchoolsController < ApplicationController
   # PATCH/PUT /schools/1
   # PATCH/PUT /schools/1.json
   def update
-    respond_to do |format|
       if @school.update(school_params)
-        format.html { redirect_to @school, notice: 'School was successfully updated.' }
-        format.json { render :show, status: :ok, location: @school }
+        redirect_to schools_path, :notice => "School updated"
       else
-        format.html { render :edit }
-        format.json { render json: @school.errors, status: :unprocessable_entity }
+        redirect_to schools_path, :notice => "School updated"
       end
-    end
   end
 
 
