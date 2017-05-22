@@ -2,7 +2,7 @@
 <html>
 <%= render 'layouts/header' %>
 <body>
-	<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js" %>
+	<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js", "chartkick" %>
 <!--Note from Carolyn C - logged in pages all have this container col structure-->
 <% if logged_in? %>
 	<%= render 'layouts/navbar1' %>
