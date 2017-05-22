@@ -40,7 +40,6 @@
 		  <th>ID</th>
 			<th>Type</th>
 			<th>Description</th>
-			<th>Added by</th>
 		</tr>
 	</thead>
 
@@ -48,7 +47,7 @@
   <tbody>
     <% @squares.each do |square| %>
     <!--SOURCE for data-link: http://stackoverflow.com/questions/9945620/making-a-table-row-into-a-link-in-rails-->
-      <tr data-link = "<%= edit_square_path(square) %>">
+      <tr data-link="<%= edit_square_path(square) %>">
         
         <!-- Square Color -->
         <td>
@@ -70,9 +69,6 @@
         
         <!-- Square Description -->
         <td><%= square.description %></td>
-        
-        <!-- Square Created By -->
-        <td>***User Name***</td>                  <!-- Not yet supported -->
       </tr>
     <% end %>
   </tbody>

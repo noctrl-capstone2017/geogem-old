@@ -37,6 +37,10 @@
 	<%= link_to students_path(@current_teacher) do %>
 	<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit all students">
 	<div class ="action-sq i-red center-block" >
+
+		<span class="fa fa-child fa-4x action-icon" ></span>
+	</div>
+
 		<span class="fa fa-child fa-4x action-icon" ></span>
 	</div>
 		<p><span class="student-icon-text">All Students</span></p>
@@ -45,6 +49,56 @@
 	
 	<%= link_to teachers_path(@current_teacher) do %>
 	<div class="col-xs-2 text-center" title="View/edit all teachers">
+<!-- Andy A and UX team  Edited by Robert Herrera -->
+<!-- page header -->
+	<div class="page-header vertical-align">
+			<div class="col-xs-11">
+				<h2>Admin Dashboard<small> -  manage school teachers, students, squares, etc</small></h2><!-- Dynamically fills in with school id -->
+			</div>
+			<div class="col-xs-1 center-block">
+				<div class="header-sq i-plum" title="Admin Bianca17">
+					<span class="fa fa-apple fa-3x teacher-icon"></span>
+				</div>
+			</div>
+		</div>
+<!--End page header-->
+<!-- action icons, first row -->		
+<div class="row">
+	<%= link_to edit_school_path(@current_teacher) do %>
+	<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit school attributes">
+	<div class ="action-sq i-navy center-block" >
+		<span class="fa fa-home fa-4x action-icon" ></span>
+	</div>
+		<p><span class="student-icon-text">School Profile</span></p>
+	</div> <!-- col -->
+	<% end %>
+	
+	<%= link_to super_report_path(@current_teacher) do %>
+	<div class="col-xs-2 text-center" title="School stats and more">
+	<div class ="action-sq i-pink center-block" >
+		<span class="fa fa-file-text-o fa-4x action-icon" ></span>
+	</div>
+		<p><span class="student-icon-text">Super Report</span></p>
+	</div> <!-- col -->
+	<% end %>
+</div>   <!-- row -->
+
+<!-- action icons, second row -->
+<div class="row action-icon-row">
+	<%= link_to students_path(@current_teacher) do %>
+	<div class="col-xs-2 col-xs-offset-1 text-center" title="View/edit all students">
+	<div class ="action-sq i-red center-block" >
+		<span class="fa fa-child fa-4x action-icon" ></span>
+	</div>
+		<span class="fa fa-child fa-4x action-icon" ></span>
+	</div>
+		<p><span class="student-icon-text">All Students</span></p>
+	</div> <!-- col -->
+	<% end %>
+	
+	<%= link_to teachers_path(@current_teacher) do %>
+	<div class="col-xs-2 text-center" title="View/edit all teachers">
+		
 	<div class ="action-sq i-yellow center-block" >
 		<span class="fa fa-apple fa-4x action-icon" ></span>
 	</div>
