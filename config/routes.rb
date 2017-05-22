@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   
   #route to end session page
   post 'sessions/:id/end_session' => 'sessions#end_session', as: :end_session
+  get "sessions/end",to:'sessions#end_session'
   
 
   #to disguise teachers/id/edit_password as just /password (I know, I know-- but it works!)
