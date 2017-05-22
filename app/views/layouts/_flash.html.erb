@@ -1,9 +1,5 @@
-<!--                Login Area                  -->
-<!--   Author: Meagan Moore & Steven Royster    -->
-<!--         With help from Chase Smith         -->
-
 <div id='flash'>
-<% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
 </div>
