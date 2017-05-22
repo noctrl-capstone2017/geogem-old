@@ -25,12 +25,12 @@ class SessionNotesController < ApplicationController
   # POST /session_notes
   # POST /session_notes.json
   def create
-    @session_note = SessionNote.new(session_note_params)
-
+    @session_note = SessionNote.new
+    @session_note.note = params[:note]
+    @session_note.session_id = params[:session_id]
     respond_to do |format|
       if @session_note.save
-        format.html { redirect_to session_notes_url, notice: 'Session note was successfully created.' }
-        format.json { render :index, status: :created, location: @session_note }
+        format.any { render :json => {:response => 'Success' },:status => 200  }
       else
         format.html { render :new }
         format.json { render json: @session_note.errors, status: :unprocessable_entity }
