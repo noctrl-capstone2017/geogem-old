@@ -45,6 +45,7 @@
 
 <!-- Squares Table Body -->
   <tbody>
+  	<%= will_paginate %>
     <% @squares.each do |square| %>
     <!--SOURCE for data-link: http://stackoverflow.com/questions/9945620/making-a-table-row-into-a-link-in-rails-->
       <tr data-link="<%= edit_square_path(square) %>">
@@ -73,5 +74,5 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate %>
 <br>

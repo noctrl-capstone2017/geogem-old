@@ -5,11 +5,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   include LoginSessionHelper
+  # Checks to make sure user is logged in before 
+  # accessing most of the web application's pages
   before_action :require_login
 
   private
     # Confirms a logged-in user.
-    def logged_in_teacher
+    def logged_in_teacher  
       unless logged_in?
         store_location
         flash[:danger] = "Please log in."
@@ -19,7 +21,7 @@ class ApplicationController < ActionController::Base
     
   private
     # Guard each page, checks for logged in
-    def require_login
+    def require_login  
       unless current_teacher
       flash[:danger] = "Log in is not current"
         redirect_to login_url

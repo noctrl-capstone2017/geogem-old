@@ -1,0 +1,11 @@
+<!--<%= javascript_include_tag "https://www.gstatic.com/charts/loader.js", "chartkick"%> put in /app/views/layouts/application.html.erb to avoid including manually on each page-->
+<h1>Graph#main</h1>
+<p>Find me in app/views/graph/main.html.erb</p>
+
+<%= timeline [
+  ["Sprint 1", "2017-04-24", "2017-05-08"],
+  ["Sprint 2", "2017-05-08", "2017-05-22"],
+] %>
+
+<p><a href="graph/example">Chart Examples</a></p>
+<p><a href="graph/todo">todo list</a></p>

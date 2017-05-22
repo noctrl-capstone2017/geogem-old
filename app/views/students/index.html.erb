@@ -48,6 +48,7 @@
   
   <!-- Table Body -->
   <tbody>
+    <%= will_paginate %>
     <% @students.each do |student| %>
       <!--Make the entire link link--> 
       <tr data-link = "<%= edit_student_path(student) %>">
@@ -75,3 +76,4 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate %>
