@@ -30,7 +30,9 @@ class SchoolsController < ApplicationController
   def super_report
   end
   
-
+  def backup
+    @schools = School.all
+  end
 
   # POST /schools
   # POST /schools.json

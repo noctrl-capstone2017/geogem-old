@@ -4,8 +4,8 @@
 		<h2>Student Roster<small> - students accessible to teacher <%= @teacher.full_name %></small></h2>
 	</div>
 	<div class="col-xs-1">
-		<div class="header-sq i-plum" title=<%= @teacher.screen_name %>>
-			<span class="fa fa-apple fa-3x teacher-icon "></span>
+		<div class="table-sq i-<%= @teacher.color%>" title=<%= @teacher.screen_name %>>
+			<span class="fa fa-<%= @teacher.icon%> fa-2x teacher-icon"></span>
 		</div>
 	</div>
 </div>
