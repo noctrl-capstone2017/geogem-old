@@ -31,9 +31,11 @@
 		</form>
   </div>   <!-- col -->
 </div>    <!-- row -->
-<!--Table Header -->
+
 <br>
+
 <table class="table table-striped table-hover table-responsive schools-table">
+  
   <!-- Table Header -->
   <thead>
     <tr>
@@ -47,16 +49,28 @@
   <!-- Table Body -->
   <tbody>
     <% @students.each do |student| %>
-      <!--SOURCE for data-link: http://stackoverflow.com/questions/9945620/making-a-table-row-into-a-link-in-rails-->
+      <!--Make the entire link link--> 
       <tr data-link = "<%= edit_student_path(student) %>">
+        
+        <!-- Display the students symbol + color comdo --> 
         <td>
           <div class="table-sq i-<%= student.color %>">                 <!--Generate Student Color-->
 					  <i class="fa fa-<%= student.icon %> fa-2x table-icon"></i>  <!--Generate Student Icon-->
 				  </div>
         </td>
+        
+        <!-- Displays the students screen name -->
         <td><%= student.screen_name %></td>
+        
+        <!-- Displays the students last ran session -->
         <td><%= student.full_name %></td>
-        <td>**Last Session***</td>                      <!-- Need to link to last Student Session -->
+        <% this_session =  @sessions.where(session_student: student.id).last %>
+        <% if this_session != nil %>
+          <td><%= this_session.end_time %></td>
+        <% else %>
+          <td>no previous sessions</td>
+        <% end %>
+        
       </tr>
     <% end %>
   </tbody>
