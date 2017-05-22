@@ -35,7 +35,6 @@ class TeachersController < ApplicationController
     elsif params[:remove_student]
       @teacher.students.remove(Student.find(@student_id))
     end
-      
   end
 
   # GET /teachers/new
