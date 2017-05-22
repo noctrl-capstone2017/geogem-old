@@ -1,13 +1,13 @@
-
+<!-- @author: Matthew O & Alex P -->
 	<div class="container-fluid"> 
 		<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
 			<div class="page-header vertical-align">
 				<div class="col-xs-11">
-					<h2>End of Behavior Session with Jimmy</h2><!-- Dynamically fills in with user's name -->
+					<h2>End of Behavior Session with <%= @student.full_name %> </h2><!-- Dynamically fills in with user's name -->
 				</div>
 				<div class="col-xs-1">
-					<div class="header-sq i-red" >
-						<span class="fa fa-bicycle fa-3x student-icon "></span>
+					  <div class ="square i-<%= @student.color %>">
+						<span class="fa fa-<%= @student.icon %>  fa-3x student-icon "></span>
 					</div>
 				</div>
 			</div><!--End page header-->
@@ -26,8 +26,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><p class="listText">AG</p></td>
-							<td><p class="listText">2</p></td>
+							<td><p class="listText">test</p></td>
+							<td><p class="listText"></p></td>
 						</tr>
 						<tr>
 							<td><p class="listText">CRY</p></td>
