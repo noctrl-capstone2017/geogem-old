@@ -11,6 +11,7 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   # This section tests for the correct links to other pages
 
   test "should get index" do
+    log_in_as(@teacher)
     get teachers_url
     assert_response :success
   end
@@ -18,35 +19,30 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   #Authors: Alex P Debra J Matthew O
   # test the home screen
   test "should get home" do
+    log_in_as(@teacher)
     get "/home"
     assert_response :success
  end
 
   test "should get new" do
+    log_in_as(@teacher)
     get new_teacher_url
     assert_response :success
   end
 
   test "should show teacher" do
+    log_in_as(@teacher)
     get teacher_url(@teacher)
     assert_response :success
   end
 
   test "should get edit" do
+    log_in_as(@teacher)
     get edit_teacher_url(@teacher)
     assert_response :success
   end
 
   # End of testing links
-
-  # Tests deleting a teacher
-  test "should destroy teacher" do
-    assert_difference('Teacher.count', -1) do
-      delete teacher_url(@teacher)
-    end
-
-    assert_redirected_to teachers_url
-  end
   
   # Tests loading of the teacher's data when editing a teacher
   test "should properly load existing info when loading a profile" do
@@ -60,7 +56,7 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   # Inspired by previous capstone class
   test "should show superadmin" do
     log_in_as(teachers(:one))
-    get :show, id: @teacher
+    get :show, params: { id: @teacher }
     assert_response :success
   end
 end

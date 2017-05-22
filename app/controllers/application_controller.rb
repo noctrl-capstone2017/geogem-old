@@ -5,7 +5,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   include LoginSessionHelper
-  before_filter :require_login
+  # Checks to make sure user is logged in before 
+  # accessing most of the web application's pages
+  before_action :require_login
 
   private
     # Confirms a logged-in user.

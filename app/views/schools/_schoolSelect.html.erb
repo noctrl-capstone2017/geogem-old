@@ -1,0 +1,19 @@
+<!-- UX Team. Edited by Robert Herrera -->
+<%= form_for(Teacher.first) do |f| %>
+		<div class="row vertical-align">
+			<div class="form-group">
+				<label class="control-label col-xs-5" for="selectSch">Super focus school:</label>
+					<div class="col-xs-7">
+						<select class="form-control" id="selectSch">
+                           	<% @schools.each do |school| %>
+                           	<option value="<%= school.full_name %>"><%= school.full_name %></option>
+                           	 <% end %>
+                        </select> 
+					</div>   <!-- col-->
+	  		</div>   <!-- form group-->
+		</div>   <!-- row -->
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

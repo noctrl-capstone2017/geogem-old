@@ -1,16 +1,29 @@
 class StudentsController < ApplicationController
+  
+  include TeachersHelper
+  
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-  before_action :set_school         #set up the school info for the logged in teacher
+  before_action :set_school   #set up the school info for the logged in teacher
+  before_action :is_admin
+
   
   # GET /students
   # GET /students.json
   def index
-    # Check for Super User, shool_id == 0, list ALL students
-    if current_teacher.school_id == 0
+    
+    # Check for Super User, shool_id == 0, list ALL students in @students
+    if current_teacher.id == 1
       @students = Student.all
     else                      #school admin. Only list that schools students
       @students = Student.where(school_id: current_teacher.school_id)
     end
+    
+    # Paginate those students
+    @students = @students.paginate(page: params[:page], :per_page => 10)
+    
+    # Make a second @sessions list for each student in the @studens list
+    @sessions = Session.where(session_student: @students.ids)
+
   end
 
   # GET /students/1
@@ -77,18 +90,18 @@ class StudentsController < ApplicationController
     
     # Used for getting the school values for the logged in teacher 
     def set_school
-      if current_teacher.school_id == 0       #Super User
+      if current_teacher.school_id == 0           #Super User
         @color  = current_teacher.color
         @full_name = current_teacher.full_name
         @icon = current_teacher.icon
-      else                                    #Admin for school
+      else                                        #Admin for school
         @school = School.find(current_teacher.school_id)
         @color  = @school.color
         @full_name = @school.full_name
         @icon = @school.icon
       end
     end
-
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:full_name, :screen_name, :icon, :color, :contact_info, :description, :session_interval, :school_id)

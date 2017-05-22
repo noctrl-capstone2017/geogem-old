@@ -1,6 +1,10 @@
 class RosterSquaresController < ApplicationController
   before_action :set_roster_square, only: [:show, :edit, :update, :destroy]
-
+  helper_method :set_square_name
+  helper_method :set_square_color
+  helper_method :set_square_id
+  helper_method :set_square_desc
+  helper_method :set_roster_id
   # GET /roster_squares
   # GET /roster_squares.json
   def index
@@ -10,6 +14,7 @@ class RosterSquaresController < ApplicationController
   # GET /roster_squares/1
   # GET /roster_squares/1.json
   def show
+    
   end
 
   # GET /roster_squares/new
@@ -19,13 +24,44 @@ class RosterSquaresController < ApplicationController
 
   # GET /roster_squares/1/edit
   def edit
+    #Get set of squares and students to be used in roster squares.
+    @roster_square = RosterSquare.new
+    @roster_squares = RosterSquare.all
+    @students = Student.find_by_id(params[:id]) 
+    @square = Square.find_by_id(params[:id])
+    @squares = Square.all
   end
-
+  
+  #Below are helpers methos that when called allow you to check certain fields
+  #that would otherwise be unavailable
+  def set_roster_id (roster_square)
+    @roster_id = RosterSquare.find(roster_square.square_id).screen_name
+  end
+  
+  def set_square_id (roster_square)
+    @square_id = Square.find(roster_square.square_id).id
+  end
+  
+  def set_square_desc (roster_square)
+    @square_desc = Square.find(roster_square.square_id).full_name
+  end
+  
+  def set_square_name (roster_square)
+    @square_name = Square.find(roster_square.square_id).screen_name
+  end
+  
+  def set_square_color (roster_square)
+    @square_color = Square.find(roster_square.square_id).color
+  end
+  
   # POST /roster_squares
   # POST /roster_squares.json
   def create
     @roster_square = RosterSquare.new(roster_square_params)
-
+    @students = Student.find_by_id(params[:id])
+    @squares = Square.all
+    @square = Square.find_by_id(params[:id])
+    
     respond_to do |format|
       if @roster_square.save
         format.html { redirect_to @roster_square, notice: 'Roster square was successfully created.' }
@@ -71,4 +107,5 @@ class RosterSquaresController < ApplicationController
     def roster_square_params
       params.require(:roster_square).permit(:square_id, :student_id)
     end
+  
 end

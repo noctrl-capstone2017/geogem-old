@@ -37,13 +37,6 @@ class StudentsControllerTest < ActionDispatch::IntegrationTest
     end
   end
   
-  test "should not create student" do
-    assert_no_difference('Student.count') do
-      duplicate_item = @student.dup
-      assert_not duplicate_item.valid?
-    end
-  end
-  
   test "should show student" do
     get student_url(@student)
     assert_response :success

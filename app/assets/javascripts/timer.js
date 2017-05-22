@@ -14,10 +14,8 @@ window.onload = function () {
 	  timerSquare.behaviorId = $(durationDivs[i]).attr('name');
 	  timerSquare.durationLog =  document.getElementById("eventLog");
 	  timerSquare.buttonStart =  durationDivs[i].querySelector((".button-start"));
-	  timerSquare.tensTxt = durationDivs[i].querySelector("#tens");
 	  timerSquare.secondsTxt = durationDivs[i].querySelector("#seconds");
 	  timerSquare.minutesTxt = durationDivs[i].querySelector("#minutes");
-	  timerSquare.tens = 00;
 	  timerSquare.seconds = 00;
 	  timerSquare.minutes = 00;
 	  timerSquares.push(timerSquare);
@@ -48,6 +46,26 @@ window.onload = function () {
 	  cs = counterSquares[i];
 	  counterSquares[i].countButton.onclick = count.bind(this, cs);
   }
+  
+  var intervalDivs = document.getElementsByClassName("interval");
+  var intervalSquares = [];
+  for (var i = 0; i < intervalDivs.length; i++)
+  {
+	  var intervalSquare = new Object();
+	  intervalSquare.startEventTime;
+	  intervalSquare.endEventTime;
+	  intervalSquare.behaviorId = $(intervalDivs[i]).attr('name');
+	  intervalSquare.countLabel =  intervalDivs[i].querySelector(".count");
+	  intervalSquare.countLog = document.getElementById("eventLog");
+	  intervalSquare.countButton =  intervalDivs[i].querySelector((".counter"));	  
+	  intervalSquares.push(intervalSquare);
+  }
+  
+  for(var i = 0; i < intervalSquares.length; i++)
+  {
+	  interval = intervalSquares[i];
+	  intervalSquares[i].countButton.onclick = count.bind(this, interval);
+  }
  
 
   function count(cs)
@@ -61,7 +79,7 @@ window.onload = function () {
   function beginTimer(timerSq) 
   {
      clearInterval(timerSq.Interval);
-	 timerSq.Interval = setInterval(function(){startTimer(timerSq)}, 10);
+	 timerSq.Interval = setInterval(function(){startTimer(timerSq)}, 1000);
 	 timerSq.buttonStart.onclick = function(){stopTimer(timerSq)};
 	 timerSq.startEventTime = timeStamp();
 	 
@@ -70,7 +88,7 @@ window.onload = function () {
   function stopTimer(timerSq)
   {
     clearInterval(timerSq.Interval);
-	  timerSq.durationLog.innerHTML += timerSq.minutesTxt.innerHTML + ":" + timerSq.secondsTxt.innerHTML + ":" + timerSq.tensTxt.innerHTML + "," + timeStamp() + "\n" ;
+	  timerSq.durationLog.innerHTML += timerSq.minutesTxt.innerHTML + ":" + timerSq.secondsTxt.innerHTML +  "," + timeStamp() + "\n" ;
 	  timerSq.endEventTime = timeStamp();
 	  createSessionEvent(timerSq);
 	  resetTimer(timerSq);
@@ -81,56 +99,36 @@ window.onload = function () {
   function resetTimer(timerSq)
   {
      clearInterval(timerSq.Interval);
-     timerSq.tens = "00";
   	 timerSq.seconds = "00";
-	 timerSq.minutes = "00";
-     timerSq.tensTxt.innerHTML = timerSq.tens;
+	   timerSq.minutes = "00";
   	 timerSq.secondsTxt.innerHTML = timerSq.seconds;
-	 timerSq.minutesTxt.innerHTML = timerSq.minutes;
+	   timerSq.minutesTxt.innerHTML = timerSq.minutes;
   }
   
    
   
   function startTimer (timerSq)
   {
-	var tens = timerSq.tens;
-	var seconds = timerSq.seconds;
-	var minutes = timerSq.minutes;
-    tens++; 
-    
-    if(tens < 9)
-	{
-      timerSq.tensTxt.innerHTML = "0" + tens;
-    }
-    
-    if (tens > 9)
-	{
-      timerSq.tensTxt.innerHTML = tens;
-      
-    } 
-    
-    if (tens > 99)
-	{
-      seconds++;
+	  var seconds = timerSq.seconds;
+	  var minutes = timerSq.minutes;
+    seconds++;
+    if(seconds <  9)
+    {
       timerSq.secondsTxt.innerHTML = "0" + seconds;
-      tens = 0;
-      timerSq.tensTxt.innerHTML = "0" + 0;
     }
-    
     if (seconds > 9)
-	{
+	  {
       timerSq.secondsTxt.innerHTML = seconds;
     }
-	if(seconds > 59)
-	{
-		minutes++;
-		timerSq.minutesTxt.innerHTML = minutes;
-		seconds = 0;
-		timerSq.secondsTxt.innerHTML = "0" + 0;
-	}
-	timerSq.tens = tens;
-	timerSq.seconds = seconds;
-	timerSq.minutes = minutes;
+	  if(seconds > 59)
+	  {
+		  minutes++;
+		  timerSq.minutesTxt.innerHTML = minutes;
+		  seconds = 0;
+		  timerSq.secondsTxt.innerHTML = "0" + 0;
+	  }
+	  timerSq.seconds = seconds;
+	  timerSq.minutes = minutes;
   }
 
 }

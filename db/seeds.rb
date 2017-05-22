@@ -74,9 +74,9 @@ Teacher.create!(user_name: "admin",
                 powers: "Admin",
                 school_id: 1)
 
-# Seed the database with 10 faked Students
+# Seed the database with 30 faked Students
 # They go to North Central College
-10.times do |n|
+30.times do |n|
   name  = Faker::Name.first_name + " " + Faker::Name.last_name
   Student.create!(  screen_name: "temp",
                     contact_info: "student contact info",
@@ -105,20 +105,20 @@ end
 # They are North Central College's squares
 # tracking_type: 1 is duration, 2 is frequency, 3 is interval
 10.times do |n|
-  name  = Faker::Hipster.word + " " + Faker::Hipster.word
+  name  = Faker::Lorem.word + " " + Faker::Lorem.word
   Square.create!(full_name: name,
                  screen_name: "S#{n+1}",
-                 tracking_type: (n%3)+1,      #1, 2, or 3
+                 tracking_type: (n%3)+1,    #1, 2, or 3 NEED TO CHANGE THIS FOR ENUM CLASS
                  description: name,
                  color: "red",
                  school_id: 1)
 end
 
 
-#So far, there are 10 students created for North Central College.
-#Put 5 of them on profbill's roster.
-5.times do |n|
-  RosterStudent.create!(teacher_id: 1,  #1st teach is super prof bill,
+#So far, there are 30 students created for North Central College.
+#Put 23 of them on profbill's roster.
+23.times do |n|
+  RosterStudent.create!(teacher_id: 1,  #1st teacher is super prof bill,
                                         #2nd is general teacher
                         student_id: n+1)
 end
@@ -130,14 +130,33 @@ end
                         student_id: 1)
 end
 
-# Seed the database with a session between the first teacher and first student 
+# Seed the database with a session between the first teacher and first student
+# Session.find(1)
 Session.create!(start_time: DateTime.new(2017,5,15,8,30, 0),
                 end_time: DateTime.new(2017,5,15,11,30, 0),
                 session_teacher: 1,
                 session_student: 1)
 
-#Seed the database with ten session events for the first session
+# Seed the database with another session between the first teacher and first student
+Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
+                end_time: DateTime.new(2017,3,22,8,05, 0),
+                session_teacher: 1,
+                session_student: 1)
+                
+# Seed the database with a session between the first teacher and first student
+Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
+                end_time: DateTime.new(2017,3,22,8,05, 0),
+                session_teacher: 1,
+                session_student: 3)
 
+
+# Seed database with another session between the first teacher and third student
+Session.create!(start_time: DateTime.new(2017,3,22,9,30, 0),
+                end_time: DateTime.new(2017,3,22,10,05, 0),
+                session_teacher: 1,
+                session_student: 3)
+
+#Seed the database with ten session events for the first session
 x = DateTime.new(2017,5,15,8, 30, 0)           #Start the session at 8:30 am
 roster_IDS = RosterSquare.where(student_id: 1) #roster square ids for student1
 
@@ -158,7 +177,7 @@ end
 # Seed the database with 5 notes for the seeded Session
 y = DateTime.new(2017,5,15,8, 37, 0)
 5.times do |n|
-SessionNote.create!(note: Faker::Hipster.sentence,
+SessionNote.create!(note: Faker::Lorem.sentence,
                 session_id: 1, created_at: y)
 y = y + 11.0/1440
 end
