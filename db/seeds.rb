@@ -108,7 +108,7 @@ end
   name  = Faker::Hipster.word + " " + Faker::Hipster.word
   Square.create!(full_name: name,
                  screen_name: "S#{n+1}",
-                 tracking_type: (n%3)+1,      #1, 2, or 3
+                 tracking_type: (n%3)+1,    #1, 2, or 3 NEED TO CHANGE THIS FOR ENUM CLASS
                  description: name,
                  color: "red",
                  school_id: 1)

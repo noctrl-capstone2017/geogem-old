@@ -9,20 +9,46 @@ require 'login_session_helper'
 
 class ReportsControllerTest < ActionDispatch::IntegrationTest
   
-  #TS
+  #Taylor S
+  #Setup the teacher, student, and session for the report
   def setup
     @teacher = teachers(:one)
+    @student = students(:one)
     @session = sessions(:one)
-  end
-  
-  #TS, should work after fixture problem is resolved
-  test "should_get_report" do
-    log_in_as(@teacher)
-    #get  report1_url
-    #assert_response :success
+    @session_event = session_events(:one)
   end
   
   #TS
+  #I couldn't think of many test ideas, so I tested the fixutres to
+  #make sure they were working properly
+  
+  test "teacher1_should_not_be_nil" do
+  assert_not_nil(@teacher.full_name, "Teacher1 fixture is nil")
+  end
+  
+  #TS
+  test "student1_should_not_be_nil" do
+  assert_not_nil(@student.full_name, "Student1 fixture is nil") 
+  end
+  
+  #TS
+  test "session1_should_not_be_nil" do
+  assert_not_nil(@session.start_time, "Session1 fixture is nil") 
+  end
+  
+  #TS
+  #Checks to see if a logged in teacher can get the report
+  test "should_get_report" do
+    @session_event = session_events(:one)
+    log_in_as(@teacher)
+    get  report1_url
+    assert_response :success
+  end
+  
+  
+  #TS
+  #Checks to see if a logged out user gets redirected when
+  #trying to access /report1
   test "must be logged in" do
     get report1_url
     assert_response :redirect #should get redirected because not logged in
@@ -30,6 +56,7 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
   
   
   #Commented out only because they are failing for right now
+  #NV
   
   #test "should get data from session" do
     #get assigns(session)
