@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'graph/other'
 
-  root 'graph#main'
+  root 'login_session#new'
 
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
