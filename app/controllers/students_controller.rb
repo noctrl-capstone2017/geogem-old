@@ -8,9 +8,12 @@ class StudentsController < ApplicationController
     # Check for Super User, shool_id == 0, list ALL students
     if current_teacher.school_id == 0
       @students = Student.all
+      @sessions = Session.where(session_student: @students.ids).last
     else                      #school admin. Only list that schools students
       @students = Student.where(school_id: current_teacher.school_id)
+      @sessions = Session.where(session_student: @students.ids, session_teacher: current_teacher.id)
     end
+    # get_sessions
   end
 
   # GET /students/1
@@ -88,7 +91,14 @@ class StudentsController < ApplicationController
         @icon = @school.icon
       end
     end
-
+    
+    def get_sessions
+      # @students.each do |s|
+      #   @last_session = Sessions.where(session_student: s.id).last
+      # end
+    end
+      
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:full_name, :screen_name, :icon, :color, :contact_info, :description, :session_interval, :school_id)
