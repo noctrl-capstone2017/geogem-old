@@ -130,14 +130,25 @@ end
                         student_id: 1)
 end
 
+# Seed the databace with another session between the first teacher and third student
+Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
+                end_time: DateTime.new(2017,3,22,8,05, 0),
+                session_teacher: 1,
+                session_student: 1)
+
 # Seed the database with a session between the first teacher and first student 
 Session.create!(start_time: DateTime.new(2017,5,15,8,30, 0),
                 end_time: DateTime.new(2017,5,15,11,30, 0),
                 session_teacher: 1,
                 session_student: 1)
 
-#Seed the database with ten session events for the first session
+# Seed the databace with another session between the first teacher and third student
+Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
+                end_time: DateTime.new(2017,3,22,8,05, 0),
+                session_teacher: 1,
+                session_student: 3)
 
+#Seed the database with ten session events for the first session
 x = DateTime.new(2017,5,15,8, 30, 0)           #Start the session at 8:30 am
 roster_IDS = RosterSquare.where(student_id: 1) #roster square ids for student1
 
