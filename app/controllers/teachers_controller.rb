@@ -28,9 +28,14 @@ class TeachersController < ApplicationController
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
     @all_students_at_school = Student.where(school_id: @teacher.school_id)
-    #Note from Tommy B: Needs to be implemented still. I'm working on it!
-    #@students_not_in_roster_but_at_school = 
-
+    @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
+    
+    if params[:add_student]
+      @teacher.students.add(Student.find(@student_id))
+    elsif params[:remove_student]
+      @teacher.students.remove(Student.find(@student_id))
+    end
+      
   end
 
   # GET /teachers/new
