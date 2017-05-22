@@ -11,6 +11,9 @@ class SquaresController < ApplicationController
     else                      #school admin. Only list that schools students
       @squares = Square.where(school_id: current_teacher.school_id)
     end
+    
+    # Paginate those squares
+    @squares = @squares.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /squares/1
