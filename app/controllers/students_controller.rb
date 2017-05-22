@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
     # Check for Super User, shool_id == 0, list ALL students
     if current_teacher.school_id == 0
       @students = Student.all
-      @sessions = Session.where(session_student: @students.ids).last
+      @sessions = Session.where(session_student: @students.ids)
     else                      #school admin. Only list that schools students
       @students = Student.where(school_id: current_teacher.school_id)
       @sessions = Session.where(session_student: @students.ids, session_teacher: current_teacher.id)
