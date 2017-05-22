@@ -1,5 +1,6 @@
 <!--Ricky Perez & Michael Loptien-->
 
+<!-- Error Catching -->
 <%= form_for(student) do |f| %>
   <% if student.errors.any? %>
     <div id="error_explanation">
@@ -29,16 +30,23 @@
     </div>
   </div>
 
-  <div class="" form-spacer="">	&nbsp;</div>
+<!-- Show Student Interval field -->
+  <div class="row form-row">
+    <div class="col-xs-1 col-xs-offset-1"><h4>Session Interval (min): </h4></div>
+    <div class="col-xs-4 col-xs-offset-1">
+      <%= f.select :session_interval, [5,15,30,60], class: "form-control"  %>    				
+    </div>
+  </div
+
+  <div>	&nbsp;</div>
 
 <!-- Show Student Color Field -->
   <div class="row form-row">
 		<div class="col-xs-1 col-xs-offset-1">
 		  <h4>Color: </h4></div>
 		<div class="col-xs-4 col-xs-offset-1">
-      <%= f.select :color, ['gray', 'navy','red','yellow',
-      ['light blue', 'ltblue'],'orange','green','lavendar','plum','mint','pink',
-      ['dark orange','dkorange'],'aqua']%>
+      <%= f.select :color, ['navy','red','yellow',
+      ['light blue', 'ltblue'],'orange','green','lavendar','plum','mint','pink']%>
 		</div>
 	</div>
 
@@ -47,7 +55,7 @@
     <div class="col-xs-1 col-xs-offset-1"><h4>Icon: </h4></div>
     <div class="col-xs-4 col-xs-offset-1">
       <%= f.select :icon, ['bug', 'car','puzzle-piece','flash',
-      'flask',['soccer ball','futbol-o'],'gamepad','heart','leaf','paper-plane','paw','star',
+     ['soccer ball','futbol-o'],'gamepad','heart','leaf','paper-plane','paw','star',
       'graduation-cap'] %>
   	</div>
   </div>
@@ -80,14 +88,11 @@
 	  <div class="col-xs-6 col-xs-offset-1 text-center"> 
       <% if local_assigns[:isNew] %>
         <%= f.submit "Add New Student", class: "btn btn-success"%>
-						&nbsp; &nbsp; &nbsp;
-	      <%= link_to 'Cancel', students_path, class: "btn btn-danger" %>
       <% else %>
         <%= f.submit "Save Changes", class: "btn btn-success"%>
-						&nbsp; &nbsp; &nbsp;
-	      <%= link_to 'Cancel', students_path, class: "btn btn-danger" %>        
       <% end %>
-	    
+	      		&nbsp; &nbsp; &nbsp;
+	      <%= link_to 'Cancel', students_path, class: "btn btn-danger" %> 
     </div>
   </div>
 <% end %>

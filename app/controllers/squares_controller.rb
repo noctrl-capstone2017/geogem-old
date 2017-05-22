@@ -1,7 +1,11 @@
 class SquaresController < ApplicationController
+  
+  include TeachersHelper
+  
   before_action :set_square, only: [:show, :edit, :update, :destroy]
   before_action :set_school         #set up the school info for the logged in teacher
-  
+  before_action :is_admin
+    
   # GET /squares
   # GET /squares.json
   def index
@@ -11,6 +15,9 @@ class SquaresController < ApplicationController
     else                      #school admin. Only list that schools students
       @squares = Square.where(school_id: current_teacher.school_id)
     end
+    
+    # Paginate those squares
+    @squares = @squares.paginate(page: params[:page], :per_page => 10)
   end
 
   # GET /squares/1

@@ -1,5 +1,6 @@
 class SessionEventsController < ApplicationController
   before_action :set_session_event, only: [:show, :edit, :update, :destroy]
+  
 
   # GET /session_events
   # GET /session_events.json
@@ -24,12 +25,15 @@ class SessionEventsController < ApplicationController
   # POST /session_events
   # POST /session_events.json
   def create
-    @session_event = SessionEvent.new(session_event_params)
+    @session_event = SessionEvent.new
+    @session_event.behavior_square_id = params[:behavior_id]
+    @session_event.square_press_time = params[:start_time].to_s
+    @session_event.duration_end_time = params[:end_time].to_s
+    @session_event.session_id = params[:session_id]
 
     respond_to do |format|
       if @session_event.save
-        format.html { redirect_to @session_event, notice: 'Session event was successfully created.' }
-        format.json { render :show, status: :created, location: @session_event }
+        format.any { render :json => {:response => 'Success' },:status => 200  }
       else
         format.html { render :new }
         format.json { render json: @session_event.errors, status: :unprocessable_entity }

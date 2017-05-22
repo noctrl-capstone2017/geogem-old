@@ -1,59 +1,62 @@
 <!--(will be) Adapted for use by Kevin M. -->
 <div class="page-header cap17-header vertical-align">
 	<div class="col-xs-11">
-		<h2>Student Roster<small> - students accessible to teacher <%= @teacher.full_name%></small></h2>
+		<h2>Student Roster<small> - students accessible to teacher <%= @teacher.full_name %></small></h2>
 	</div>
 	<div class="col-xs-1">
-		<div class="header-sq i-plum" title=<%= @teacher.screen_name%>>
-			<span class="fa fa-apple fa-3x teacher-icon "></span>
+		<div class="table-sq i-<%= @teacher.color%>" title=<%= @teacher.screen_name %>>
+			<span class="fa fa-<%= @teacher.icon%> fa-2x teacher-icon"></span>
 		</div>
 	</div>
 </div>
 
 <!-- Roster Form -->
+<h3> Note: Roster editing still doesn't work! </h3>
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
 		<form>
-			<!-- Student Access -->
-			<div class="radio">
-				<label><input type="radio" name="studAccess">Access all students at Turning Pointe</label>
+		<!--Add/Remove Ctrls -->
+		<div class="row form-row vertical-align">
+			<div class="form-group col-sm-7">
+				<label for="addStud">Add Student to Roster</label>
+				<%= select_tag 'student_id', options_from_collection_for_select(@students_not_in_roster_but_at_school, "id", "full_name"), class: 'form-control', id:"addStud" %>
 			</div>
-			<div class="radio">
-				<label><input type="radio" name="studAccess">Some students</label>
+			<div class="col-sm-1">
+				<%= button_tag(type: 'submit', class: "btn btn-success", id: "addStudBtn", name: "add_student") do %> <i class="fa fa-plus icon-white"></i> <% end %>
 			</div>
-			<!--Add/Remove Ctrls -->
-			<div class="row form-row vertical-align">
-				<div class="form-group col-sm-7">
-					<label for="addStud">Add student to roster</label>
-					<select class="form-control" id="addStud">
-						<option>Not Implemented</option>
-					</select>
-				</div>
-				<div class="col-sm-1">
-					<button id="addStudBtn" class="btn btn-success"><i class="fa fa-plus icon-white"></i></button>
-				</div>
-			</div><!-- End Row -->
-			<div class="row form-row">
-				<div class="form-group col-sm-7">
-					<label for="removeStud">Remove student from roster</label>
-					<select class="form-control" id="removeStud">
-						<option>Not Implemented</option>
-					</select>
-				</div>
-				<div class="col-sm-1">
-					<button id="removeStudBtn" class="btn btn-danger"><i class="fa fa-minus icon-white"></i></button>
-				</div>
-			</div> <!--End row-->
-			<button type="submit" class="btn btn-lg btn-primary">Change Roster</button>
+		</div><!-- End Row -->
+		<div class="row form-row vertical-align">
+			<div class="form-group col-sm-7">
+				<label for="removeStud">Remove Student from Roster</label>
+				<%= select_tag 'student_id', options_from_collection_for_select(@students, "id", "full_name"), class: 'form-control', id:"removeStud" %>
+			</div>
+			<div class="col-sm-1">
+				<%= button_tag(type: 'submit', class: "btn btn-danger", id: "addStudBtn", name: "remove_student") do %> <i class="fa fa-minus icon-white"></i> <% end %>
+			</div>
+		</div> <!--End row-->
 		</form>
 	</div>
 </div><!--End row-->
+
 <div class="row">
 	<div class="col-sm-10">
 		<h3>Current Roster:</h3>
 	</div>
 </div>
+
 <div id="student-roster" class="pre-scrollable container-fluid"> <!--Student display area -->
-	<div class="row students-row">
-	</div>   <!-- row -->
+	<% @students.each_with_index do |student, index| %>
+	<% if index % 6 == 0 %>
+		<div class="row students-row">
+	<% end %>
+		<div class="col-xs-2 text-center">
+			<div class ="profile-sq i-<%= student.color %> center-block">
+				<span class="fa fa-<%= student.icon %> fa-3x student-icon "></span>
+			</div>
+				<p><span class="student-icon-text"> <%= student.full_name %> </span></p>
+		</div> <!-- col -->
+	<% if index % 6 == 5 %>
+		</div>   <!-- row -->
+	<% end %> <!-- end of if index -->
+  	<% end %> <!-- end of @students.each_with_index -->
 </div> <!--End Student Roster -->

@@ -1,3 +1,4 @@
+<%= render 'layouts/navbar3' %>
 <!-- Another note from Carolyn C: again, if you are working on a page that you see while NOT logged in, you need to manually add the container and the div associated.-->
 <div class="container">
 <!--- Note from Carolyn C: all pages that are not logged (excluding the login screen) need this content col!-->
@@ -5,9 +6,6 @@
 		<div class="page-header vertical-align">
 			<div class="col-xs-11">
 				<h2>About student art<small> - artwork contributed to Dinner Out</small></h2><!-- Dynamically fills in with school id -->
-				<% if logged_out? %>
-					<%= link_to "Back to login", login_path%>
-				<% end %>
 			</div>
 			<div class="col-xs-1 center-block">
 				<div class="header-sq i-lavendar" title="About out student art">
