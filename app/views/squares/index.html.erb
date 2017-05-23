@@ -3,6 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <!-- page header -->
+<%= render 'layouts/flash' %>
 <div class="page-header vertical-align">
 
   <!-- Dynamically fills in with school full name -->
@@ -12,7 +13,7 @@
 	
 	<!-- Dynamically fills in with school color, icon, and title of school -->
 	<div class="col-xs-1 center-block">
-		<div class="header-sq i-<%= @color %>" title="<%= @screen_name%>">
+		<div class="header-sq i-<%= @color %>" title="<%= @full_name%>">
 					<span class="fa fa-<%= @icon %> fa-3x teacher-icon"></span>
 		</div>
 	</div>
