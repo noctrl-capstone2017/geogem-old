@@ -9,13 +9,6 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   end
 
   # This section tests for the correct links to other pages
-
-  test "should get index" do
-    log_in_as(@teacher)
-    get teachers_url
-    assert_response :success
-  end
-  
   #Authors: Alex P Debra J Matthew O
   # test the home screen
   test "should get home" do
@@ -46,17 +39,18 @@ class TeachersControllerTest < ActionDispatch::IntegrationTest
   
   # Tests loading of the teacher's data when editing a teacher
   test "should properly load existing info when loading a profile" do
+    log_in_as(@teacher)
     get edit_teacher_url(@teacher)
     assert_template "teachers/edit"
     #This is all that's necessary, since if one part of it fails, all of it does.
-    assert_select 'h2', text: 'Teacher profile for ' + @teacher.full_name
+    assert_select 'h2', text: 'Teacher profile for ' + @teacher.screen_name
   end
   
   # Steven Royster
   # Inspired by previous capstone class
   test "should show superadmin" do
     log_in_as(teachers(:one))
-    get :show, params: { id: @teacher }
+    get teacher_url(@teacher)
     assert_response :success
   end
 end

@@ -1,12 +1,13 @@
 class StudentsController < ApplicationController
   
-  # By Ricky Perez & Michael Loptien
+  # authors: Ricky Perez & Michael Loptien
+  # Controller for Students
   
   include TeachersHelper
   
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :set_school   #set up the school info for the logged in teacher
-  before_action :is_admin
+  before_action :is_admin     #make sure only admins can reach any of this
 
   
   # GET /students
@@ -16,7 +17,7 @@ class StudentsController < ApplicationController
     # Check for Super User, shool_id == 0, list ALL students in @students
     if current_teacher.id == 1
       @students = Student.all
-    else                      #school admin. Only list that schools students
+    else                      # Admin only, list just that schools students
       @students = Student.where(school_id: current_teacher.school_id)
     end
     
@@ -24,7 +25,7 @@ class StudentsController < ApplicationController
     @students = @students.order('screen_name ASC')
     @students = @students.paginate(page: params[:page], :per_page => 10)
     
-    # Make a second @sessions list for each student in the @studens list
+    # Make a @sessions list for each student in the @studens list
     @sessions = Session.where(session_student: @students.ids)
 
   end
@@ -48,29 +49,23 @@ class StudentsController < ApplicationController
   # POST /students.json
   def create
     @student = Student.new(student_params)
-
-    respond_to do |format|
-      if @student.save
-        format.html { redirect_to students_url, notice: 'Student was successfully created.' }
-        format.json { render :index, status: :created, location: @student }
-      else
-        format.html { render :new }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
+    if @student.save
+      flash[:success] = "Student was successfully created."
+      redirect_to students_url
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /students/1
   # PATCH/PUT /students/1.json
   def update
-    respond_to do |format|
-      if @student.update(student_params)
-        format.html { redirect_to students_url, notice: 'Student was successfully updated.' }
-        format.json { render :index, status: :ok, location: @student }
-      else
-        format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
-      end
+    @student = Student.find(params[:id])
+    if @student.update(student_params)
+        flash[:success] = "Student was successfully updated."
+        redirect_to students_url
+    else
+      render 'edit'
     end
   end
 
@@ -93,20 +88,15 @@ class StudentsController < ApplicationController
     
     # Used for getting the school values for the logged in teacher 
     def set_school
-      if current_teacher.school_id == 0           #Super User
-        @color  = current_teacher.color
-        @full_name = current_teacher.full_name
-        @icon = current_teacher.icon
-      else                                        #Admin for school
-        @school = School.find(current_teacher.school_id)
-        @color  = @school.color
-        @screen_name = @school.screen_name
-        @icon = @school.icon
-      end
+      @school = School.find(current_teacher.school_id)
+      @color  = @school.color
+      @screen_name = @school.screen_name
+      @full_name = @school.full_name
+      @icon = @school.icon
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:full_name, :screen_name, :icon, :color, :contact_info, :description, :session_interval, :school_id)
+      params.require(:student).permit(:full_name, :screen_name, :icon, :color,:contact_info, :description, :session_interval, :school_id)
     end
 end
