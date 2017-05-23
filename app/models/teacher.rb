@@ -3,7 +3,7 @@
 
 class Teacher < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email, :colorcheck
+  before_save   :downcase_email, :color_check, :super_check
   ###REGEX###
   #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -77,9 +77,16 @@ class Teacher < ApplicationRecord
     end
     
     # Converts light blue to ltblue.
-    def colorcheck
+    def color_check
       if self.color == 'light blue'
         self.color = 'ltblue'
+      end
+    end
+    
+    # Makes sure Bill doesn't accidentally remove his admin powers.
+    def super_check
+      if self.id == '1'
+        self.powers = "Admin"
       end
     end
 end

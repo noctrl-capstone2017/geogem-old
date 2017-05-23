@@ -14,7 +14,7 @@
 
 <div class="row form-row">
 	<!-- Teacher ID -->
-	<div class="col-sm-2 col-sm-offset-1"><h4> Teacher ID: </h4></div>
+	<div class="col-sm-2 col-sm-offset-1"><h4>Username: </h4></div>
 	<div class="col-sm-2">
 		<%= f.text_field :user_name, class: 'form-control', id: 'teacherID', :readonly => true %>
 	</div>
@@ -30,7 +30,7 @@
 
 <!-- Teacher screen_name field -->
 <div class="row form-row">
-	<div class="col-xs-1 col-xs-offset-1"><h4>Short Name: </h4></div>
+	<div class="col-xs-1 col-xs-offset-1"><h4>Teacher ID: </h4></div>
 	<div class="col-xs-4 col-xs-offset-1">
 		<%= f.text_field :screen_name, class: 'form-control', :readonly => true %>
 	</div>
@@ -102,10 +102,8 @@
 	  	Save Changes 
 	  <% end %>
 	</div>
-<% end %>
-	<!--This needs to be outside of the form, otherwise its function is overridden
-	    and it becomes another submit button.-->
 	<div class="col-sm-1 col-sm-offset-1"> 
-		<%= button_to "Cancel", teachers_path, :class => "btn btn-danger", :method => :get %>
+		<%= link_to "Cancel", teachers_path, :class => "btn btn-danger" %>
 	</div>
 </div>
+<% end %>
