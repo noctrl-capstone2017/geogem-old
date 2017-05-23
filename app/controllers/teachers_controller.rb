@@ -14,6 +14,7 @@ class TeachersController < ApplicationController
   def index
     @current_teacher = current_teacher
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
+    @teachers = @teachers.order('screen_name ASC')
   end
   
   def admin_report
@@ -30,6 +31,7 @@ class TeachersController < ApplicationController
     @students = @teacher.students
     @all_students_at_school = Student.where(school_id: @teacher.school_id)
     @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
+    @students_not_in_roster_but_at_school = @students_not_in_roster_but_at_school.order('screen_name ASC')
     
     if params[:add_student]
       @teacher.students << Student.find(params[:add_student_id])
