@@ -1,5 +1,7 @@
 class SquaresController < ApplicationController
   
+  # By Ricky Perez & Michael Loptien  
+  
   include TeachersHelper
   
   before_action :set_square, only: [:show, :edit, :update, :destroy]
@@ -16,7 +18,8 @@ class SquaresController < ApplicationController
       @squares = Square.where(school_id: current_teacher.school_id)
     end
     
-    # Paginate those squares
+    # Paginate those squares and order by screen_name
+    @squares = @squares.order('screen_name ASC')
     @squares = @squares.paginate(page: params[:page], :per_page => 10)
   end
 
@@ -89,7 +92,7 @@ class SquaresController < ApplicationController
       else                                    #Admin for school
         @school = School.find(current_teacher.school_id)
         @color  = @school.color
-        @full_name = @school.full_name
+        @screen_name = @school.screen_name
         @icon = @school.icon
       end
     end

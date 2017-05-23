@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
   
+  # By Ricky Perez & Michael Loptien
+  
   include TeachersHelper
   
   before_action :set_student, only: [:show, :edit, :update, :destroy]
@@ -18,7 +20,8 @@ class StudentsController < ApplicationController
       @students = Student.where(school_id: current_teacher.school_id)
     end
     
-    # Paginate those students
+    # Paginate those students and order by screen_name
+    @students = @students.order('screen_name ASC')
     @students = @students.paginate(page: params[:page], :per_page => 10)
     
     # Make a second @sessions list for each student in the @studens list
@@ -97,7 +100,7 @@ class StudentsController < ApplicationController
       else                                        #Admin for school
         @school = School.find(current_teacher.school_id)
         @color  = @school.color
-        @full_name = @school.full_name
+        @screen_name = @school.screen_name
         @icon = @school.icon
       end
     end
