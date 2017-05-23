@@ -1,3 +1,4 @@
+#Authors Alex P, Matthew O, Debra J
 class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy]
 
