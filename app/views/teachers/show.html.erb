@@ -11,7 +11,6 @@
 </div>
 
 <!-- Roster Form -->
-<h3> Note: Roster editing still doesn't work! </h3>
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
 		<form>
@@ -19,7 +18,7 @@
 		<div class="row form-row vertical-align">
 			<div class="form-group col-sm-7">
 				<label for="addStud">Add Student to Roster</label>
-				<%= select_tag 'student_id', options_from_collection_for_select(@students_not_in_roster_but_at_school, "id", "full_name"), class: 'form-control', id:"addStud" %>
+				<%= select_tag 'add_student_id', options_from_collection_for_select(@students_not_in_roster_but_at_school, "id", "full_name"), class: 'form-control', id:"addStud" %>
 			</div>
 			<div class="col-sm-1">
 				<%= button_tag(type: 'submit', class: "btn btn-success", id: "addStudBtn", name: "add_student") do %> <i class="fa fa-plus icon-white"></i> <% end %>
@@ -28,7 +27,7 @@
 		<div class="row form-row vertical-align">
 			<div class="form-group col-sm-7">
 				<label for="removeStud">Remove Student from Roster</label>
-				<%= select_tag 'student_id', options_from_collection_for_select(@students, "id", "full_name"), class: 'form-control', id:"removeStud" %>
+				<%= select_tag 'remove_student_id', options_from_collection_for_select(@students, "id", "full_name"), class: 'form-control', id:"removeStud" %>
 			</div>
 			<div class="col-sm-1">
 				<%= button_tag(type: 'submit', class: "btn btn-danger", id: "addStudBtn", name: "remove_student") do %> <i class="fa fa-minus icon-white"></i> <% end %>
