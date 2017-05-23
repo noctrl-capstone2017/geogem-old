@@ -4,9 +4,9 @@
 			<div class="col-xs-11">
 				<h2>Admin Dashboard<small> -  manage school teachers, students, squares, etc</small></h2><!-- Dynamically fills in with school id -->
 			</div>
-			<div class="col-xs-1 center-block">
-				<div class="header-sq i-plum" title="Admin Bianca17">
-					<span class="fa fa-apple fa-3x teacher-icon"></span>
+			<div class="col-xs-1 pull-right">
+				<div class="header-sq i-<%= @teacher.color %>" title=<%= @teacher.screen_name %>>
+					<span class="fa fa-<%= @teacher.icon %> fa-3x teacher-icon"></span>
 				</div>
 			</div>
 		</div>
@@ -22,12 +22,12 @@
 	</div> <!-- col -->
 	<% end %>
 	
-	<%= link_to super_report_path(@current_teacher) do %>
+	<%= link_to admin_report_path(@current_teacher) do %>
 	<div class="col-xs-2 text-center" title="School stats and more">
 	<div class ="action-sq i-pink center-block" >
 		<span class="fa fa-file-text-o fa-4x action-icon" ></span>
 	</div>
-		<p><span class="student-icon-text">Super Report</span></p>
+		<p><span class="student-icon-text">Admin Report</span></p>
 	</div> <!-- col -->
 	<% end %>
 </div>   <!-- row -->
