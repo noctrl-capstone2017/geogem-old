@@ -52,6 +52,7 @@
 		    <table class="table table-striped table-hover table-responsive teachers-table">
 		   		<thead>
 		   			<tr>
+		   				<th>Teacher Icon</th>
 							<th>Teacher ID</th>
 							<th>Full Name</th>
 							<th>Contact Information</th>
@@ -62,8 +63,12 @@
 							<tbody>
 					            <% @teachers.each do |teacher| %>
 							  					<tr data-link="/students/<%= teacher.id %>">
-													<td><p class="listText">
-											    <p class="fa fa-user school-icon">&nbsp;&nbsp;&nbsp;<span> <%= teacher.screen_name %></span> </p></td>
+													<td>
+														<div class="table-sq i-<%= teacher.color %>">                 <!--Generate Teacher Color-->
+														  <i class="fa fa-<%= teacher.icon %> fa-2x table-icon"></i>  <!--Generate Teacher Icon-->
+													  </div>
+													</td>	
+													<td><p class="listText"></p><span> <%= teacher.screen_name %></span> </p></td>
 											    <td><p class="listText"><span> <%= teacher.full_name %></span> </p></td>
 											    <td><p class="listText"><span> <%= teacher.email %></span> </p></td>
 											    <td><p class="listText"><span> <%= teacher.last_login %></span> </p></td>
@@ -79,6 +84,7 @@
 		    <table class="table table-striped table-hover table-responsive teachers-table">
 		   		<thead>
 		   			<tr>
+		   				<th>Square Icon</th>
 							<th>Square ID</th>
 							<th>Square Name</th>
 							<th>Tracking Type</th>
@@ -89,8 +95,12 @@
 							<tbody>
 					            <% @squares.each do |square| %>
 							  					<tr data-link="/students/<%= square.id %>">
-													<td><p class="listText">
-											    <p class="fa fa-stop school-icon">&nbsp;&nbsp;&nbsp;<span> <%= square.screen_name %></span> </p></td>
+													<td>
+														<div class="table-sq i-<%= square.color %>">                 <!--Generate Square Color-->
+														  
+													  </div>
+													</td>	
+													<td><p class="listText"><span> <%= square.screen_name %></span> </p></td>
 											    <td><p class="listText"><span> <%= square.full_name %></span> </p></td>
 											    <td><p class="listText"><span> <%= square.tracking_type %></span> </p></td>
 											    <td><p class="listText"><span> <%= square.description %></span> </p></td>
