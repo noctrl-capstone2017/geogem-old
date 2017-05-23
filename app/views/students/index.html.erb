@@ -1,8 +1,10 @@
-<!--Ricky Perez & Michael Loptien-->
+<!-- authors: Ricky Perez & Michael Loptien -->
+<!-- Index view for students, list of all applicable students -->
 
 <p id="notice"><%= notice %></p>
 
 <!-- Page Header -->
+<%= render 'layouts/flash' %>
 <div class="page-header vertical-align">
   
   <!-- Dynamically fills in with school full name -->
@@ -12,7 +14,7 @@
 	
 	<!-- Dynamically fills in with school color, icon, and title of school -->
 	<div class="col-xs-1 center-block">
-		<div class="header-sq i-<%= @color %>" title="<%= @screen_name%>">
+		<div class="header-sq i-<%= @color %>" title="<%= @full_name%>">
 					<span class="fa fa-<%= @icon %> fa-3x teacher-icon"></span>
 		</div>
 	</div>
@@ -29,11 +31,12 @@
 			  <i class="fa fa-plus-square-o"></i> New Student
 			</button>
 		</form>
-  </div>   <!-- col -->
-</div>    <!-- row -->
+  </div>
+</div>
 
 <br>
 
+<!-- Start of Table -->
 <table class="table table-striped table-hover table-responsive schools-table">
   
   <!-- Table Header -->
@@ -50,22 +53,30 @@
   <tbody>
     <%= will_paginate %>
     <% @students.each do |student| %>
-      <!--Make the entire link link--> 
+    
+      <!--Make the entire line link--> 
       <tr data-link = "<%= edit_student_path(student) %>">
         
         <!-- Display the students symbol + color comdo --> 
         <td>
-          <div class="table-sq i-<%= student.color %>">                 <!--Generate Student Color-->
-					  <i class="fa fa-<%= student.icon %> fa-2x table-icon"></i>  <!--Generate Student Icon-->
+          <div class="table-sq i-<%= student.color %>">                 
+					  <i class="fa fa-<%= student.icon %> fa-2x table-icon"></i>
 				  </div>
         </td>
         
         <!-- Displays the students screen name -->
         <td><%= student.screen_name %></td>
         
-        <!-- Displays the students last ran session -->
+        <!-- Displays the student full name -->
         <td><%= student.full_name %></td>
-        <% this_session =  @sessions.where(session_student: student.id).last %>
+        
+        <!-- 
+        Displays the students last ran session
+        querys the last session from current student
+        if not nil display the end time
+        if it is nil then show default message
+        -->
+        <% this_session = @sessions.where(session_student: student.id).last %>
         <% if this_session != nil %>
           <td><%= this_session.end_time %></td>
         <% else %>
@@ -75,5 +86,7 @@
       </tr>
     <% end %>
   </tbody>
+  <!-- End Table Body -->
 </table>
+<!-- End Table -->
 <%= will_paginate %>

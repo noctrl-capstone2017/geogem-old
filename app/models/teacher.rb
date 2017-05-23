@@ -16,8 +16,9 @@ class Teacher < ApplicationRecord
   
   ###VALIDATIONS###
   validates :user_name,  presence: true, length: { maximum: 75 },
-                         uniqueness: { case_sensitive: false}  
-  
+                         uniqueness: { case_sensitive: false },  
+                         format: { with: VALID_USER_NAME_REGEX }
+                         
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },
                     format: { with: VALID_SCREEN_NAME_REGEX }
