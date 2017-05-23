@@ -14,13 +14,14 @@ class Teacher < ApplicationRecord
   #Alphanumerical stuff only.
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
   
-  ###VALIDAITONS###
+  ###VALIDATIONS###
   validates :user_name,  presence: true, length: { maximum: 75 },
                          uniqueness: { case_sensitive: false}  
   
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },
                     format: { with: VALID_SCREEN_NAME_REGEX }
+  
   validates :icon,  presence: true
   validates :color, presence: true
   
@@ -76,7 +77,8 @@ class Teacher < ApplicationRecord
       self.email = email.downcase
     end
     
-    # Converts light blue to ltblue.
+    # Converts light blue to ltblue, so it can easily be drawn on in views.
+    # 'light blue' isn't a color that's recognized by bootstrap, but 'ltblue' is!
     def color_check
       if self.color == 'light blue'
         self.color = 'ltblue'

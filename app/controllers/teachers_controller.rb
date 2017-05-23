@@ -1,22 +1,29 @@
 # author: Kevin M, Tommy B
-# Teacher methods.
+# Teacher methods, as well as admin, super, and home stuff.
 class TeachersController < ApplicationController
   
   include TeachersHelper
-
+  #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   before_action :same_school, only: [:show, :edit, :update, :destroy]
   before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
 
   # GET /teachers
-  # GET /teachers.json
+  # This method prepares the index view. It sets up pagination in an ascending
+  # order by their screen_name.
   def index
     @current_teacher = current_teacher
+    # For testing only
+    # @current_school = School.find(1)
+    @current_school = School.find(@current_teacher.school_id)
+    
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
     @teachers = @teachers.order('screen_name ASC')
   end
   
+  # GET /admin_report
+  #This method prepares the admin_report view.
   def admin_report
     @current_teacher = current_teacher
     @students = Student.where(school_id: current_teacher.school_id)
@@ -25,7 +32,8 @@ class TeachersController < ApplicationController
   end
   
   # GET /teachers/1
-  # GET /teachers/1.json
+  # This prepares the roster view for the teacher. It sets up pagination similarly
+  # to the teacher index.
   def show
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students
@@ -41,6 +49,7 @@ class TeachersController < ApplicationController
   end
 
   # GET /teachers/new
+  # This prepares the new teacher form.
   def new
     @teacher = Teacher.new
   end
@@ -54,20 +63,22 @@ class TeachersController < ApplicationController
     end
   end
   
+  # GET /admin
+  # This prepares the admin dashboard.
   def admin
     @teacher = current_teacher
   end 
   
   # GET /teachers/password
-  #author: Tommy B, Kevin M
+  # This prepares the password change page. It will always show the current user's,
+  # even if they try to access it with another ID via /teachers/id/edit_password.
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
     @teacher = current_teacher
   end
   
-  #author: Tommy B, Kevin M
   #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  # Note from Tommy B: the redirects need to be changed
+  # This updates the Teacher's password.
   def update_password
     teacher = current_teacher
     # also in here i'm calling the authenticate method that usually is present in bcrypt.
@@ -86,7 +97,8 @@ class TeachersController < ApplicationController
   end
 
   # POST /teachers
-  # POST /teachers.json
+  # This creates a new Teacher. It's basically just scaffolding, but the redirect
+  # has been changed.
   def create
     @teacher = Teacher.new(teacher_params)
 
@@ -128,7 +140,7 @@ class TeachersController < ApplicationController
   
   
   # PATCH/PUT /teachers/1
-  # PATCH/PUT /teachers/1.json
+  # This updates a teacher. It's essentially just scaffolding.
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
@@ -141,21 +153,21 @@ class TeachersController < ApplicationController
     end
   end
    
-   # make list of all schools available here so I can query them and set the super users schools attr 
-   def super
+  # This method prepares the super view.
+  def super
     @schools = School.all
-   end
+  end
+  
    #Robert Herrera
    # POST /super
+   # This changes the super school focus.
   def updateFocus
     teacher = Teacher.find(1)
     schoolName = params[full_name]
     teacher.full_name = schoolName
-
   end
 
   private
-  
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
