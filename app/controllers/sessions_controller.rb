@@ -8,8 +8,9 @@ class SessionsController < ApplicationController
   end
   
   def end_session
-    # @student = Student.find(@session.session_student)
     @session = Session.find(params[:id])
+    @session.end_time = Time.now
+    @session.save
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
     @squares = @student.squares
