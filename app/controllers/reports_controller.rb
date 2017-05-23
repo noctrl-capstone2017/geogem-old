@@ -17,7 +17,7 @@ pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
 
                       # -------Session Data---------#
 #for now, just grab the first seeded session
-session = Session.first
+session = Session.last
 student = Student.find(session.session_teacher)
 teacher = Teacher.find(session.session_student)
 
@@ -306,12 +306,12 @@ rows3.each do |r2|
 table3.push(r2)  
 end
 
-pdf.move_down 50
-pdf.text "Session Key", :style => :bold
-pdf.stroke_horizontal_rule
-pdf.move_down 10
-pdf.table table3, :header => true, :cell_style => { :border_color => "FFFFFF" },
-  :column_widths => { 0 => 40, 1 => 25, 2 => 200, 3 => 100},:position => :left
+#pdf.move_down 50
+#pdf.text "Session Key", :style => :bold
+#pdf.stroke_horizontal_rule
+#pdf.move_down 10
+#pdf.table table3, :header => true, :cell_style => { :border_color => "FFFFFF" },
+ #:column_widths => { 0 => 40, 1 => 25, 2 => 200, 3 => 100},:position => :left
 
 
 
