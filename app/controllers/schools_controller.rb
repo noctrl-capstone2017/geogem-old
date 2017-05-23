@@ -34,6 +34,24 @@ class SchoolsController < ApplicationController
   def backup
     @schools = School.all
   end
+  
+  def suspend
+    @current_teacher = current_teacher
+    #id = 1 written below refers to ProfBill, the SuperUser. He can't get deleted, and therefore will never be in the set of teachers elligible for deletion
+    @teachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1) 
+    @school = School.find(current_teacher.school_id)
+    @school_name = School.find(current_teacher.school_id).full_name
+    @teacher_count = @teachers.count
+  end 
+
+  def restore
+    @current_teacher = current_teacher
+    @teachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1) #id = 1 is ProfBill, the SuperUser. He can't get deleted.
+    @school = School.find(current_teacher.school_id)
+    @school_name = School.find(current_teacher.school_id).full_name
+    @teacher_count = @teachers.count
+  end 
+  
 
   # POST /schools
   # POST /schools.json
