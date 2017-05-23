@@ -32,11 +32,10 @@ class TeachersController < ApplicationController
     @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
     
     if params[:add_student]
-      @teacher.students.add(Student.find(@student_id))
+      @teacher.students << Student.find(params[:add_student_id])
     elsif params[:remove_student]
-      @teacher.students.remove(Student.find(@student_id))
+      @teacher.students.delete(Student.find(params[:remove_student_id]))
     end
-      
   end
 
   # GET /teachers/new
