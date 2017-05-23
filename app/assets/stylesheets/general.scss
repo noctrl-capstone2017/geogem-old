@@ -574,3 +574,11 @@ input[type="radio"]:checked + label {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+
+/* Custom styling for the submit button on the login page  */
+/* Author Steven Rosyter */
+.custom-submit-width {
+	height: 20%;
+	width: 70%;
+}

@@ -11,6 +11,7 @@
 			<!--   Author: Meagan Moore & Steven Royster    -->
 			<!--        This is the main login form         -->
 			<div class="form-group">
+				
 			<%= form_for(:login_session, url: login_path) do |f| %>
 				<%= render 'layouts/flash' %>
 				
@@ -25,7 +26,7 @@
 			
 			<br>
 			<div class="form-group">
-				<%= f.submit "Log in", class: "btn btn-primary btn-lg center-block" %>
+				<%= f.submit "Log in", class: "btn btn-primary btn-lg center-block form-control custom-submit-width" %>
 			</div>
 			<% end %>
 			<br>
