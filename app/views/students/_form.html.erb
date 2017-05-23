@@ -85,9 +85,9 @@
   <div class="row action-buttons-row">
 	  <div class="col-xs-6 col-xs-offset-1 text-center"> 
       <% if local_assigns[:isNew] %>
-        <%= f.submit "Add New Student", class: "btn btn-success"%>
+         <%= button_tag(type: 'submit', class: "btn btn-success") do %>Add New Student<%end%>
       <% else %>
-        <%= f.submit "Save Changes", class: "btn btn-success"%>
+        <%= button_tag(type: 'submit', class: "btn btn-success") do %>Save Changes<%end%>
       <% end %>
 	      		&nbsp; &nbsp; &nbsp;
 	      <%= link_to 'Cancel', students_path, class: "btn btn-danger" %> 
