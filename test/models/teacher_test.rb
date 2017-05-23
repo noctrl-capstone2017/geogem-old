@@ -17,7 +17,7 @@ class TeacherTest < ActiveSupport::TestCase
                 email: "wtktriger@noctrl.edu",
                 description: "Super user",
                 powers: "Admin",
-                school_id: 0)
+                school_id: 1)
   end
   
   # Tests the teacher against the validations from the model file
