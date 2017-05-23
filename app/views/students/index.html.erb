@@ -1,4 +1,5 @@
-<!--Ricky Perez & Michael Loptien-->
+<!-- authors: Ricky Perez & Michael Loptien -->
+<!-- Index view for students, list of all applicable students -->
 
 <p id="notice"><%= notice %></p>
 
@@ -52,7 +53,8 @@
   <tbody>
     <%= will_paginate %>
     <% @students.each do |student| %>
-      <!--Make the entire link link--> 
+    
+      <!--Make the entire line link--> 
       <tr data-link = "<%= edit_student_path(student) %>">
         
         <!-- Display the students symbol + color comdo --> 
@@ -84,5 +86,7 @@
       </tr>
     <% end %>
   </tbody>
+  <!-- End Table Body -->
 </table>
+<!-- End Table -->
 <%= will_paginate %>
