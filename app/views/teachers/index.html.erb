@@ -48,7 +48,7 @@
 						<% if teacher.last_login.nil? %>
 						Never
 						<% else %>
-						<%= teacher.last_login %>
+						<%= time_ago_in_words(teacher.last_login) %>
 						<% end %>
 					</span></p></td>
 					<td><p class="listText"><span></span></p>

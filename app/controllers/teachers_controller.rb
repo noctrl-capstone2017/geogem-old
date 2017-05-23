@@ -90,8 +90,8 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
-        format.json { render :show, status: :created, location: @teacher }
+        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
+        format.json { render :index, status: :created, location: teachers_path }
       else
         format.html { render :new }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
@@ -136,16 +136,6 @@ class TeachersController < ApplicationController
         format.html { render :edit }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /teachers/1
-  # DELETE /teachers/1.json
-  def destroy
-    @teacher.destroy
-    respond_to do |format|
-      format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
    
