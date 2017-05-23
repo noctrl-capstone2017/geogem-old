@@ -21,17 +21,8 @@
 
 <% if !is_admin? %>
 <!--If they aren't an admin, they have less access.-->
-
-	<% if current_teacher == @teacher %>
-	<!--They can still change stuff on their own page.-->
-		<%= render 'layouts/profile_teacher_version' %>
-	<% end %>
-	
-	<% if current_teacher != @teacher%>
-	<!--If they aren't an admin and are viewing someone else,, they have no access.-->
-		<%= render 'layouts/profile_other_version' %>
-	<% end %>
-	
+<!--They can still change stuff on their own page.-->
+	<%= render 'layouts/profile_teacher_version' %>
 <% end %>
 
 	<!--Action Icons -->

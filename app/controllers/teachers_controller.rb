@@ -44,7 +44,12 @@ class TeachersController < ApplicationController
   end
 
   # GET /teachers/1/edit
+  # If the user viewing a profile isn't an admin, then it shows them their own
+  # profile instead.
   def edit
+    if !is_admin?
+      @teacher = @current_teacher
+    end
   end
   
   def admin

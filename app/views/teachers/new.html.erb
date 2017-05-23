@@ -122,9 +122,13 @@
 	    just a link to return, while the add button is the submit.-->
 	<div class="row action-buttons-row">
 		<div class="col-sm-1 col-sm-offset-1"> 
-			<%= f.submit "Add New Teacher", class: "btn btn-success" %>
+			<%= button_tag(type: 'submit', class: "btn btn-success") do %>  
+	  		Add New Teacher
+	  	<% end %>
 		</div>
 <% end %>
+	<!--This needs to be outside of the form, otherwise its function is overridden
+	    and it becomes another submit button.-->
 	<div class="col-sm-1 col-sm-offset-1"> 
 		<%= button_to "Cancel", teachers_path, :class => "btn btn-danger", :method => :get %>
 	</div>
