@@ -37,7 +37,7 @@
             <div class="actions">
                 <%= hidden_field_tag :start %>
                 <%= hidden_field_tag :end %>
-                <%= submit_tag "End Session",:onclick => "return getEndTime", :class => "btn btn-lg btn-primary btnFix"%>
+                <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
             </div>
         <% end %>
     </div>
@@ -110,11 +110,5 @@
     </div>
 </div>
 
-
-<!-- This is a test button used to test the end page
-      This button can be taken out if needed -->
-<p>
-    <%= button_to "End Session", { :controller => "sessions", :action => "end_session"}, {class: "btn btn-lg btn-primary btnFix", name: 'end_session', type: 'submit'}%>
-</p>
 
 <textarea class="eventLog" id = "eventLog" style="display:none;" disabled></textarea>

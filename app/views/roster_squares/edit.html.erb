@@ -23,19 +23,20 @@
 				<!-- student behavior Squares -->
 				<div class="row squares-row first-content-row">
 					<!-- set the squares for the specific student-->
-			    <% @roster_squares.each do |roster_square| %>
-				    <% if roster_square.student_id == @students.id %>
-				      <% square_name = set_square_name(roster_square) %>
-				    	<% square_color = set_square_color(roster_square) %>
-					   	<div class="col-xs-2">
-							<div class="square i-<%= square_color %> text-center">
-								<div class="col-xs-12">
-									<h4><%=square_name%></h4>
-								</div>
-							</div><!--End Square-->
-						</div><!--End Col -->
+				    <%@roster_squares.each do |roster_square|%>
+					    <% if roster_square.student_id == @students.id %>
+					      <% square_name = set_square_name(roster_square) %>
+					    	<% square_color = set_square_color(roster_square) %>
+					    	<% square_id = set_square_id(roster_square) %>
+						   	<div class="col-xs-2">
+								<div class="square i-<%= square_color %> text-center">
+									<div class="col-xs-12">
+										<p><a href="/squares/<%=square_id%>/edit"><span><h4><%=square_name%></h4></span></a></p>		   		
+									</div>
+								</div><!--End Square-->
+							</div><!--End Col -->
+						<%end%>
 					<%end%>
-		    	<%end%>
 				</div><!--End Row -->
 	
 			<!-- Calls the edit from which is the add squares select and the submit button-->
@@ -52,13 +53,12 @@
 				<div class="form-group col-xs-2">
 					<select class="form-control" id="addStud">
 						<!-- Loops through checking which squares the student has in the roster of squares-->
-					 <% @roster_squares.each do |roster_square| %>
-						<% @squares.each do |square| %>
-						<!-- Make sure to only check this students squares-->
-								<% if roster_square.student_id == @students.id && roster_square.square_id == square.id %>
-									<option><%= square.screen_name %> - <%= square.full_name %></option>
-								<%end%>
-						<%end%>
+						<% @student_squares.each do |student_squares| %>
+						<!-- Called helper methods-->
+						<% current_square_screen_name = set_square_name(student_squares) %>
+						<% current_square_full_name = set_square_desc(student_squares) %>
+						<% current_square_id = set_square_id(student_squares) %>
+						<option><%= current_square_screen_name %> - <%= current_square_full_name %></option>
 					<%end%>
 					</select>
 				</div>
