@@ -5,10 +5,7 @@
 	<div class="col-xs-11">
 		<h2>Teacher profile for <%= @teacher.screen_name %></h2>
 	</div>
-	<div class="col-xs-1">
-	<div class="table-sq i-<%= @teacher.color%>" title=<%= @teacher.screen_name %>>
-		<span class="fa fa-<%= @teacher.icon%> fa-2x teacher-icon"></span>
-	</div>
+	<%= render 'layouts/current_teacher_icon' %>
 </div>
 </div>
 
