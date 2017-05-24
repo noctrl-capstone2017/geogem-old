@@ -1,3 +1,5 @@
+#Author: Ricky Perez
+#Description: This contains the methods and helpers used for the roster square page
 class RosterSquaresController < ApplicationController
   before_action :set_roster_square, only: [:show, :edit, :update, :destroy]
   helper_method :set_square_name
@@ -5,6 +7,7 @@ class RosterSquaresController < ApplicationController
   helper_method :set_square_id
   helper_method :set_square_desc
   helper_method :set_roster_id
+  helper_method :is_student_square
   # GET /roster_squares
   # GET /roster_squares.json
   def index
@@ -27,9 +30,15 @@ class RosterSquaresController < ApplicationController
     #Get set of squares and students to be used in roster squares.
     @roster_square = RosterSquare.new
     @roster_squares = RosterSquare.all
-    @students = Student.find_by_id(params[:id]) 
+    #Get the students information
+    @students = Student.find_by_id(params[:id])
+    #Set the students squares
+    @student_squares = RosterSquare.where(student_id: @students.id)
+    #Set the squares for the specific school
+    @school_squares = Square.where(school_id: @students.school_id)
     @square = Square.find_by_id(params[:id])
     @squares = Square.all
+    #@not_student_squares = Square.where.not(id: @student_squares.find(student_id).square_id)
   end
   
   #Below are helpers methos that when called allow you to check certain fields
@@ -54,6 +63,24 @@ class RosterSquaresController < ApplicationController
     @square_color = Square.find(roster_square.square_id).color
   end
   
+  #Checks if the square is used for the specific student. Unused at the moment
+  def is_student_square(square)
+    @is_square = false
+    @student_squares.each do |student_square|
+    @is_square = false
+      if square.id == student_square.square_id
+        @is_square = true
+        break
+      end
+      
+      if @is_square != true
+        @is_square = false
+      end 
+      
+    end
+    @is_square
+  end
+  
   # POST /roster_squares
   # POST /roster_squares.json
   def create
@@ -61,11 +88,11 @@ class RosterSquaresController < ApplicationController
     @students = Student.find_by_id(params[:id])
     @squares = Square.all
     @square = Square.find_by_id(params[:id])
-    
+    @student_squares = RosterSquare.where(student_id: @students)
     respond_to do |format|
       if @roster_square.save
-        format.html { redirect_to @roster_square, notice: 'Roster square was successfully created.' }
-        format.json { render :show, status: :created, location: @roster_square }
+        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully created.' }
+        format.json { render :edit, status: :created, location: @roster_square }
       else
         format.html { render :new }
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
@@ -78,7 +105,7 @@ class RosterSquaresController < ApplicationController
   def update
     respond_to do |format|
       if @roster_square.update(roster_square_params)
-        format.html { redirect_to @roster_square, notice: 'Roster square was successfully updated.' }
+        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully updated.' }
         format.json { render :show, status: :ok, location: @roster_square }
       else
         format.html { render :edit }
@@ -92,7 +119,7 @@ class RosterSquaresController < ApplicationController
   def destroy
     @roster_square.destroy
     respond_to do |format|
-      format.html { redirect_to roster_squares_url, notice: 'Roster square was successfully destroyed.' }
+      format.html { redirect_to  "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -100,7 +127,8 @@ class RosterSquaresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_roster_square
-      @roster_square = RosterSquare.find(params[:id])
+      #Sets the edit page to the specified student
+      @students = Student.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
