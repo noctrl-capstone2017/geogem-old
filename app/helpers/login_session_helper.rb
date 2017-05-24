@@ -35,7 +35,7 @@ module LoginSessionHelper
     !current_teacher.nil?
   end
   
-  # Returns true if the teacher is logged in, false otherwise.
+  # Returns true if the teacher is logged out, false otherwise.
   def logged_out?
     current_teacher.nil?
   end
@@ -54,5 +54,17 @@ module LoginSessionHelper
     session.delete(:teacher_id)
     @current_teacher = nil
   end
+<<<<<<< HEAD
+=======
+
+  # Redirects if user is not super & is trying to do
+  #     something they don't have permission to 
+  def super
+    if !is_super?
+      flash[:danger] = "Unauthorized. You are not a super user."
+      redirect_to home1_path
+    end
+  end
+>>>>>>> 2c03f0b1902eac636ae8258bc025b69b73f54816
   
 end
