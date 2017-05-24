@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
+  #route to pdf from session page
+  post    '/report1',  to: 'reports#report1'
+  
   #route to end session page
   post 'sessions/:id/end_session' => 'sessions#end_session', as: :end_session
 

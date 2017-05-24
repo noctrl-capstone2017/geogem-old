@@ -21,20 +21,12 @@ class TeachersController < ApplicationController
   before_action :is_super, only: [:admin, :update, :update_password]
 
   # GET /teachers
-  # This method prepares the index view. It sets up pagination in an ascending
-  # order by their screen_name.
+  # GET /teachers.json
   def index
     @current_teacher = current_teacher
-    # For testing only
-    # @current_school = School.find(1)
-    @current_school = School.find(@current_teacher.school_id)
-    
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
-    @teachers = @teachers.order('screen_name ASC')
   end
   
-  # GET /admin_report
-  #This method prepares the admin_report view.
   def admin_report
     @current_teacher = current_teacher
     @students = Student.where(school_id: current_teacher.school_id)
@@ -43,38 +35,53 @@ class TeachersController < ApplicationController
   end
   
   # GET /teachers/1
-  # This prepares the roster view for the teacher. It sets up pagination similarly
-  # to the teacher index.
+  # GET /teachers/1.json
   def show
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students.order('full_name ASC')
     @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
     @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
     
+    #Whenever this page is visited, it updates the roster for the admin.
+    if @teacher.powers == "Admin"
+      
+      #https://stackoverflow.com/questions/3343861/how-do-i-check-to-see-if-my-array-includes-an-object
+      @students_at_school.each do |student|
+        unless @students.include?(student)
+          @teacher.students << Student.find(student.id)
+        end
+      end
+    
+      @students = @students_at_school
+      @students_not_in_roster = []
+    end
+    
+    #Admins always have every student, so they can't add or remove from any admins.
     if params[:add_student]
-      @teacher.students << Student.find(params[:add_student_id])
+        if params[:add_student_id != nil]
+          if @teacher.powers != "Admin"
+            @teacher.students << Student.find(params[:add_student_id])
+          end
+        end
+        
     elsif params[:remove_student]
-      @teacher.students.delete(Student.find(params[:remove_student_id]))
+      if params[:remove_student_id != nil]
+        if @teacher.powers != "Admin"
+          @teacher.students.delete(Student.find(params[:remove_student_id]))
+        end
+      end
     end
   end
 
   # GET /teachers/new
-  # This prepares the new teacher form.
   def new
     @teacher = Teacher.new
   end
 
   # GET /teachers/1/edit
-  # If the user viewing a profile isn't an admin, then it shows them their own
-  # profile instead.
   def edit
-    if !is_admin?
-      @teacher = @current_teacher
-    end
   end
   
-  # GET /admin
-  # This prepares the admin dashboard.
   def admin
     @teacher = current_teacher
   end 
@@ -107,15 +114,14 @@ class TeachersController < ApplicationController
   end
 
   # POST /teachers
-  # This creates a new Teacher. It's basically just scaffolding, but the redirect
-  # has been changed.
+  # POST /teachers.json
   def create
     @teacher = Teacher.new(teacher_params)
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
-        format.json { render :index, status: :created, location: teachers_path }
+        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
+        format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
@@ -150,7 +156,7 @@ class TeachersController < ApplicationController
   
   
   # PATCH/PUT /teachers/1
-  # This updates a teacher. It's essentially just scaffolding.
+  # PATCH/PUT /teachers/1.json
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
@@ -162,22 +168,32 @@ class TeachersController < ApplicationController
       end
     end
   end
-   
-  # This method prepares the super view.
-  def super
-    @schools = School.all
+
+  # DELETE /teachers/1
+  # DELETE /teachers/1.json
+  def destroy
+    @teacher.destroy
+    respond_to do |format|
+      format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
-  
+   
+   # make list of all schools available here so I can query them and set the super users schools attr 
+   def super
+    @schools = School.all
+   end
    #Robert Herrera
    # POST /super
-   # This changes the super school focus.
   def updateFocus
     teacher = Teacher.find(1)
     schoolName = params[full_name]
     teacher.full_name = schoolName
+
   end
 
   private
+  
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])

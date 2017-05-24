@@ -19,3 +19,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+#ignore routes and login check
+#/config/routes.rb
+#/app/controllers/application_controller.rb
