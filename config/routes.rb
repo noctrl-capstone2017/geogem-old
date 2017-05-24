@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get     '/super_report',    to: 'teachers#super_report'
   get     '/admin',           to: 'teachers#admin'
   get     '/super',           to: 'schools#super'
-  post    '/super',           to: 'teachers#updateFocus'
+  post    '/super',           to: 'teachers#updateFocus'    as: :updateFocus
   get     '/backup',          to: 'schools#backup'
   get     '/suspend',         to: 'schools#suspend'  
   get     '/restore',         to: 'schools#restore'
@@ -30,14 +30,9 @@ Rails.application.routes.draw do
   get     'logout',           to: 'login_session#logout'
   get     'about1',           to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
-  
-  # Commented out by Meagan Moore
-  # No home1 page? just home
-  # get     'home1',            to: 'static_pages#home1'
-  # post    'home1',            to: 'static_pages#home1'
-  
-  get    'help',              to: 'static_pages#help'
-  get    'notes',             to: 'session_notes#index'
+
+  get     'help',             to: 'static_pages#help'
+  get     'notes',            to: 'session_notes#index'
 
   get     'graph/main'
   get     'graph/example'

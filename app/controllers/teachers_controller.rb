@@ -177,23 +177,22 @@ class TeachersController < ApplicationController
   end
    
   # This method prepares the super view.
-  def super
+  def super 
     @schools = School.all
+   # @school = School.first
+    @teacher = Teacher.find(params[:id])
   end
   
-   #Robert Herrera
-   # POST /super
-   # This changes the super school focus.
-  def updateFocus
-    teacher = Teacher.find(1)
-    schoolName = params[full_name]
-    teacher.full_name = schoolName
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
+    end
+    
+    def set_school
+      @school = School.find(current_teacher.school_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
