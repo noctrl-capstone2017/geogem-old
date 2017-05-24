@@ -1,3 +1,4 @@
+#Authors: Alex P Debra J Matthew O
 require 'test_helper'
 
 class SessionEventsControllerTest < ActionDispatch::IntegrationTest
