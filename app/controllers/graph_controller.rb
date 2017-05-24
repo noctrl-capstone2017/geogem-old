@@ -6,7 +6,7 @@ class GraphController < ApplicationController
   def example
     @allSessions = Session.all
     @studentSessions = Session.where(session_student:1)
-    @last3sessions = @sessionGroup.last(3)
+    @last3sessions = @studentSessions.last(3)
   end
 
   def random

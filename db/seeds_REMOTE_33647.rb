@@ -1,3 +1,14 @@
+#Author: Taylor Spino
+
+stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o", 
+            "gamepad","heart", "leaf","paper-plane","paw","star","graduation-cap"];
+        
+teach_icons = ["apple", "book", "pencil", "calculator"];
+
+
+#Took out light
+colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavendar", "plum", "pink"];
+
 # Seed the database with a School
 # School.find(1)
 School.create!(full_name: "North Central",
@@ -11,18 +22,13 @@ School.create!(full_name: "North Central",
 
 #School seeds added by - Dakota B
 30.times do |n|
-  color = Faker::Commerce.color
-  email = "example-#{n+1}@railstutorial.org"
-  desc = Faker::Lorem.sentence
-  pre = Faker::Address.city_suffix
-  pos = Faker::Address.city_prefix
-  School.create!(full_name: pre + pos + "University",
+  School.create!(full_name: Faker::University.name,
                  screen_name: "test",
-                 icon: pre,
-                 color: color,
-                 email: email,
+                 icon: "apple",
+                 color: colors.sample,
+                 email: "example-#{n+1}@railstutorial.org",
                  website: "www.example.edu",
-                 description: desc)
+                 description: Faker::Lorem.sentence)
     
 end
 
@@ -81,8 +87,8 @@ Teacher.create!(user_name: "admin",
   Student.create!(  screen_name: "temp",
                     contact_info: "student contact info",
                     description: "student description",
-                    icon: "bicycle",
-                    color: "green",
+                    icon: stud_icons.sample,
+                    color: colors.sample,
                     session_interval: 20,
                     school_id: 1,
                     full_name: name)
@@ -110,7 +116,7 @@ end
                  screen_name: "S#{n+1}",
                  tracking_type: (n%3)+1,    #1, 2, or 3 NEED TO CHANGE THIS FOR ENUM CLASS
                  description: name,
-                 color: "red",
+                 color: colors.sample,
                  school_id: 1)
 end
 
@@ -143,7 +149,7 @@ Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 session_teacher: 1,
                 session_student: 1)
                 
-# Seed the database with a session between the first teacher and third student
+# Seed the database with a session between the first teacher and first student
 Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 end_time: DateTime.new(2017,3,22,8,05, 0),
                 session_teacher: 1,
@@ -168,11 +174,11 @@ SessionEvent.create!(behavior_square_id: roster_IDS[n%5].square_id,
 x = x + 16.0/1440
 end
 
-#Made this seed to debug and check events that start/end at interval endpoint
+#Used to check events that start/end at interval endpoint
 SessionEvent.create!(behavior_square_id: roster_IDS[1].square_id,
-                     square_press_time: DateTime.new(2017,5,15,8,45, 0),
-                     duration_end_time: DateTime.new(2017,5,15,8,48, 0),
-                     session_id:1)
+                      square_press_time: DateTime.new(2017,5,15,8,45, 0),
+                      duration_end_time: DateTime.new(2017,5,15,8,48, 0),
+                      session_id:1)
 
 # Seed the database with 5 notes for the seeded Session
 y = DateTime.new(2017,5,15,8, 37, 0)

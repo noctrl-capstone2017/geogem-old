@@ -143,7 +143,7 @@ Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 session_teacher: 1,
                 session_student: 1)
                 
-# Seed the database with a session between the first teacher and third student
+# Seed the database with a session between the first teacher and first student
 Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 end_time: DateTime.new(2017,3,22,8,05, 0),
                 session_teacher: 1,
@@ -169,10 +169,10 @@ x = x + 16.0/1440
 end
 
 #Made this seed to debug and check events that start/end at interval endpoint
-SessionEvent.create!(behavior_square_id: roster_IDS[1].square_id,
-                     square_press_time: DateTime.new(2017,5,15,8,45, 0),
-                     duration_end_time: DateTime.new(2017,5,15,8,48, 0),
-                     session_id:1)
+# SessionEvent.create!(behavior_square_id: roster_IDS[1].square_id,
+#                      square_press_time: DateTime.new(2017,5,15,8,45, 0),
+#                      duration_end_time: DateTime.new(2017,5,15,8,48, 0),
+#                      session_id:1)
 
 # Seed the database with 5 notes for the seeded Session
 y = DateTime.new(2017,5,15,8, 37, 0)

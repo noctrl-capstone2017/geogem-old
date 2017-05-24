@@ -143,7 +143,7 @@ Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 session_teacher: 1,
                 session_student: 1)
                 
-# Seed the database with a session between the first teacher and third student
+# Seed the database with a session between the first teacher and first student
 Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 end_time: DateTime.new(2017,3,22,8,05, 0),
                 session_teacher: 1,

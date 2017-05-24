@@ -28,7 +28,8 @@ class GraphControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
   
-  test "google should respond" do #https://stackoverflow.com/questions/5908017/check-if-url-exists-in-ruby
+  #pings google's graph API and returns true if response is a success (2XX range)
+  test "google should respond" do # adapted from https://stackoverflow.com/questions/5908017/check-if-url-exists-in-ruby
     url = URI.parse("https://www.gstatic.com/charts/loader.js")
     req = Net::HTTP.new(url.host, url.port)
     req.use_ssl = (url.scheme == 'https')
