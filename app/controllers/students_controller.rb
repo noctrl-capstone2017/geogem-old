@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
   before_action :set_school   #set up the school info for the logged in teacher
   
   # commented out by Meagan Moore
-  # no bueno
+  # no bueno, anyone can access students
   #before_action :is_admin     #make sure only admins can reach any of this
 
   
