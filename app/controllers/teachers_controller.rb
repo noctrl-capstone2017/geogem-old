@@ -7,16 +7,15 @@ class TeachersController < ApplicationController
   #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
-  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
+  #Guards added by Meagan Moore
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create]
+  before_action :is_super, only: [:super, :updateFocus]
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
   # order by their screen_name.
   def index
     @current_teacher = current_teacher
-    # For testing only
-    # @current_school = School.find(1)
     @current_school = School.find(@current_teacher.school_id)
     
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
@@ -41,10 +40,34 @@ class TeachersController < ApplicationController
     @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
     @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
     
+    #Whenever this page is visited, it updates the roster for the admin.
+    if @teacher.powers == "Admin"
+      
+      #https://stackoverflow.com/questions/3343861/how-do-i-check-to-see-if-my-array-includes-an-object
+      @students_at_school.each do |student|
+        unless @students.include?(student)
+          @teacher.students << Student.find(student.id)
+        end
+      end
+    
+      @students = @students_at_school
+      @students_not_in_roster = []
+    end
+    
+    #Admins always have every student, so they can't add or remove from any admins.
     if params[:add_student]
-      @teacher.students << Student.find(params[:add_student_id])
+        if params[:add_student_id != nil]
+          if @teacher.powers != "Admin"
+            @teacher.students << Student.find(params[:add_student_id])
+          end
+        end
+        
     elsif params[:remove_student]
-      @teacher.students.delete(Student.find(params[:remove_student_id]))
+      if params[:remove_student_id != nil]
+        if @teacher.powers != "Admin"
+          @teacher.students.delete(Student.find(params[:remove_student_id]))
+        end
+      end
     end
   end
 

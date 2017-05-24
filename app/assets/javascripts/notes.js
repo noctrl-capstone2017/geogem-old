@@ -1,4 +1,6 @@
-$( document ).ready(function() {
+//@author Debra J & Matthew O 
+//Quick note during a session
+( document ).ready(function() {
 	$('.noteBtn').on('click', function () {
 		$.confirm({
 			title: 'Notes:',
@@ -19,22 +21,23 @@ $( document ).ready(function() {
 							$.alert('provide a valid note');
 							return false;
 						}
+						//send the note
 						$.ajax({
-                url:'/session_notes',
-                type:'POST',
-                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-                dataType:'json',
-                data:{
-                     note: note,
-                     session_id: getSessionId()
-                },
-                success:function(data){
-                    alert("success");
-                },
-                error:function(data){
-                    alert("fail");
-                }
-            });
+			                url:'/session_notes',
+			                type:'POST',
+			                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+			                dataType:'json',
+			                data:{
+			                     note: note,
+			                     session_id: getSessionId()
+			                },
+			                success:function(data){
+			                    
+			                },
+			                error:function(data){
+			                    
+			                }
+			            });
 					}
 				},
 				cancel: function () {
