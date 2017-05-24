@@ -6,7 +6,9 @@ class GraphController < ApplicationController
   def example
     @allSessions = Session.all
     @studentSessions = Session.where(session_student:1)
-    @last3sessions = @studentSessions.last(3)
+    @last2sessions = @studentSessions.last(2)
+    @sesh1Events = SessionEvent.where(@studentSessions.first(1))
+    @otherStudentSesh = Session.where(session_student:1).first(1)
   end
 
   def random
