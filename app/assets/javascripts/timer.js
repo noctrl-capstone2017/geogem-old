@@ -1,8 +1,12 @@
 //@author Matthew O
 window.onload = function () {
   //Add JAlert prompt http://labs.abeautifulsite.net/archived/jquery-alerts/demo/
+  
+  //Start time of the session
   var startTime = document.getElementById("start_time");
   startTime.innerHTML = timeOnlyStamp();
+  document.getElementById("start").value = timeStamp();
+  //Creates all the objects for duration behaviors
   var durationDivs = document.getElementsByClassName("duration");
   var timerSquares = [];
   for (var i = 0; i < durationDivs.length; i++)
@@ -10,7 +14,7 @@ window.onload = function () {
 	  var timerSquare = new Object();
 	  timerSquare.startEventTime;
 	  timerSquare.endEventTime;
-	  timerSquare.Interval;
+	  timerSquare.Interval; //Interval for the timer not to be confused with an interval behavior sq
 	  timerSquare.behaviorId = $(durationDivs[i]).attr('name');
 	  timerSquare.durationLog =  document.getElementById("eventLog");
 	  timerSquare.buttonStart =  durationDivs[i].querySelector((".button-start"));
@@ -21,12 +25,14 @@ window.onload = function () {
 	  timerSquares.push(timerSquare);
   }
   
+  //Attaches event handler for all the timer buttons
   for(var i = 0; i < timerSquares.length; i++)
   {
 	  ts = timerSquares[i];
 	  timerSquares[i].buttonStart.onclick = beginTimer.bind(this, ts);
   }  
 
+  //Creates all the objects for frequency behaviors
   var counterDivs = document.getElementsByClassName("frequency");
   var counterSquares = [];
   for (var i = 0; i < counterDivs.length; i++)
@@ -41,12 +47,14 @@ window.onload = function () {
 	  counterSquares.push(counterSquare);
   }
   
+  //Attaches event handler for all the frequency buttons
   for(var i = 0; i < counterSquares.length; i++)
   {
 	  cs = counterSquares[i];
 	  counterSquares[i].countButton.onclick = count.bind(this, cs);
   }
   
+  //Creates all the objects for interval behaviors
   var intervalDivs = document.getElementsByClassName("interval");
   var intervalSquares = [];
   for (var i = 0; i < intervalDivs.length; i++)
@@ -61,13 +69,15 @@ window.onload = function () {
 	  intervalSquares.push(intervalSquare);
   }
   
+  //Attaches event handler for all the interval buttons
+  //Uses same handler as frequency
   for(var i = 0; i < intervalSquares.length; i++)
   {
 	  interval = intervalSquares[i];
 	  intervalSquares[i].countButton.onclick = count.bind(this, interval);
   }
  
-
+  //Handler for frequency and interval behaviors
   function count(cs)
   {
 	  cs.countLabel.innerText = (parseInt(cs.countLabel.innerText) + 1);  
@@ -76,15 +86,18 @@ window.onload = function () {
 	  createSessionEvent(cs);
   }
 
+  //Starts the timer
   function beginTimer(timerSq) 
   {
-     clearInterval(timerSq.Interval);
-	 timerSq.Interval = setInterval(function(){startTimer(timerSq)}, 1000);
-	 timerSq.buttonStart.onclick = function(){stopTimer(timerSq)};
-	 timerSq.startEventTime = timeStamp();
+    clearInterval(timerSq.Interval);
+	  timerSq.Interval = setInterval(function(){startTimer(timerSq)}, 1000);
+	  //After timer starts next click will stop the timer
+	  timerSq.buttonStart.onclick = function(){stopTimer(timerSq)};
+	  timerSq.startEventTime = timeStamp();
 	 
   }
   
+  //End the timer and call method to send to the database
   function stopTimer(timerSq)
   {
     clearInterval(timerSq.Interval);
@@ -92,10 +105,11 @@ window.onload = function () {
 	  timerSq.endEventTime = timeStamp();
 	  createSessionEvent(timerSq);
 	  resetTimer(timerSq);
+	  //Reset the onclick to start the timer
 	  timerSq.buttonStart.onclick = function(){beginTimer(timerSq)};
   }
   
-
+  //Reset the timer fields
   function resetTimer(timerSq)
   {
      clearInterval(timerSq.Interval);
@@ -106,7 +120,7 @@ window.onload = function () {
   }
   
    
-  
+  //Actual timer method: called every second when a timer is running
   function startTimer (timerSq)
   {
 	  var seconds = timerSq.seconds;
@@ -132,7 +146,7 @@ window.onload = function () {
   }
 
 }
-
+//Time stamp with a date
 function timeStamp() {
 // Create a date object with the current time
   var now = new Date();
@@ -158,7 +172,7 @@ function timeStamp() {
   return date.join("/") + " " + time.join(":") + " " + suffix;
 
 }
-
+//Only includes the time in the time stamp
 function timeOnlyStamp() {
 // Create a date object with the current time
   var now = new Date();
@@ -179,7 +193,7 @@ function timeOnlyStamp() {
   return time.join(":") + " " +suffix;
 
 }
-
+//Posts the session event to the database
 function createSessionEvent(sessionEvent)
 {
     
@@ -195,17 +209,23 @@ function createSessionEvent(sessionEvent)
              session_id: getSessionId()
         },
         success:function(data){
-            alert("success");
         },
         error:function(data){
-            alert("fail");
         }
     });
 }
 
+//Gets the session id from the url
 function getSessionId(sessionEvent)
 {
   url = window.location.href;
   number = parseInt(url.match(/(\d+)$/g));
 	return number;
+}
+
+//Set the end session time
+function getEndTime()
+{
+  document.getElementById("end").value = timeStamp();
+  return true;
 }

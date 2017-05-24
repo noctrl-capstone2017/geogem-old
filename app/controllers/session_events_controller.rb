@@ -25,6 +25,7 @@ class SessionEventsController < ApplicationController
 
   # POST /session_events
   # POST /session_events.json
+  #author: Matthew O & Alex P
   def create
     @session_event = SessionEvent.new
     @session_event.behavior_square_id = params[:behavior_id]

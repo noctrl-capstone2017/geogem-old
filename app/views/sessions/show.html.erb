@@ -1,4 +1,4 @@
-<!-- @author: Matthew O & Alex P -->
+<!-- @author: Matthew O & Alex P & Debra J-->
 <%= javascript_include_tag "sidebar.js" %>
 <%= javascript_include_tag "timer.js" %>
 <%= javascript_include_tag "notes.js" %>
@@ -17,9 +17,13 @@
         </div>
         <h3><%= @student.full_name %></h3>
         <p id="start_time"></p>
-        <%= button_tag(type: 'submit', class: "btn btn-lg btn-primary", name: 'end_session') do %>
-           End Session
-       <% end %>
+        <%= form_tag end_session_path, :method => :POST do%>
+            <div class="actions">
+                <%= hidden_field_tag :start %>
+                <%= hidden_field_tag :end %>
+                <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
+            </div>
+        <% end %>
     </div>
 </div><!--End Sidebar -->
 <!--Top Buttons-->
@@ -29,9 +33,13 @@
     </div>
     <div class="col-xs-6  col-md-4 pull-right">
         <button class="btn btn-lg btn-secondary noteBtn"><i class="fa fa-pencil-square-o icon-white fa-lg"></i> Notes</button>
-        <%= button_tag(type: 'submit', class: "btn btn-lg btn-primary", name: 'end_session') do %>
-           End Session
-    <% end %>
+        <%= form_tag end_session_path, :method => :POST do%>
+            <div class="actions">
+                <%= hidden_field_tag :start %>
+                <%= hidden_field_tag :end %>
+                <%= submit_tag "End Session",:onclick => "return getEndTime", :class => "btn btn-lg btn-primary btnFix"%>
+            </div>
+        <% end %>
     </div>
 </div>
 <!-- Main Content -->
@@ -101,6 +109,7 @@
         <div class="btn btn-danger btn-lg">Undo</div>
     </div>
 </div>
+
 
 <!-- This is a test button used to test the end page
       This button can be taken out if needed -->
