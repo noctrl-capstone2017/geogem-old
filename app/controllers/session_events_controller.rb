@@ -1,3 +1,4 @@
+#Authors Alex P, Matthew O, Debra J
 class SessionEventsController < ApplicationController
   before_action :set_session_event, only: [:show, :edit, :update, :destroy]
   
@@ -30,6 +31,9 @@ class SessionEventsController < ApplicationController
     @session_event.behavior_square_id = params[:behavior_id]
     @session_event.square_press_time = params[:start_time].to_s
     @session_event.duration_end_time = params[:end_time].to_s
+    #Taylor S for debugging
+    #@session_event.square_press_time = Time.now
+    #@session_event.duration_end_time = Time.now + 5*60
     @session_event.session_id = params[:session_id]
 
     respond_to do |format|

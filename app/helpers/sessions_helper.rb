@@ -1,13 +1,13 @@
+#Authors Alex P, Matthew O, Debra J
 module SessionsHelper
+  #Calculates session duration from start and end times
   def calculateDuration
     @session = Session.find(params[:id])
     start = Time.at(@session.start_time)
     endt = Time.at(@session.end_time)
-
-    #endt= Endt.find(@session.end_time)
-    #duration = @session.end_time - @session.start_time
     duration = endt - start
-    duration = Time.at(duration).utc.strftime("%H:%M")
+    #show duration as minutes
+    duration = Time.at(duration).utc.strftime("%M")
     return duration
   end
 end
