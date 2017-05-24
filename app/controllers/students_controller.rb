@@ -7,6 +7,9 @@ class StudentsController < ApplicationController
   
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :set_school   #set up the school info for the logged in teacher
+  
+  # commented out by Meagan Moore
+  # no bueno
   #before_action :is_admin     #make sure only admins can reach any of this
 
   
