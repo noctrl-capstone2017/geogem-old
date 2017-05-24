@@ -2,9 +2,17 @@
 # Some school methods, as well as some super stuff.
 
 class SchoolsController < ApplicationController
-  before_action :set_school, only: [:show, :edit, :update, :destroy]
-  #before_action :set_school_name, only: [:show, :edit, :update, :destroy]
+  include TeachersHelper
+  include LoginSessionHelper
   
+  before_action :set_school, only: [:show, :edit, :update, :destroy]
+
+  # Guards to limit access from certain users
+  # Author: Meagan Moore
+  #before_action :is_admin, only: [:] does admin get any of this stuff?? No, right?
+  #before_action :is_super, only: [:super, :suspend, :backup, :restore]
+
+
   # Used in the /schools route to display all schools
   def index
     @schools = School.paginate(page: params[:page], :per_page => 10)

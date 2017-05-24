@@ -14,7 +14,7 @@ module TeachersHelper
     # Returns true if the teacher is an admin
     def is_admin
       if !is_admin?
-        flash[:danger] = "Unauthorized"
+        flash[:danger] = "Unauthorized. You are not an administrator"
         redirect_to login_path
       end
     end
@@ -26,13 +26,13 @@ module TeachersHelper
       current_teacher && current_teacher.id == 1
     end
     
-     # Author: Steven Royster
+    # Author: Steven Royster
     # Checks to see if the current teacher has super user status
     # Returns true if the teacher is a super user
     def is_super
       if !is_super?
-        flash[:danger] = "Unauthorized"
-        redirect_to home1_path
+        flash[:danger] = "Unauthorized. You are not a super user."
+        redirect_to home_path
       end
     end
 end

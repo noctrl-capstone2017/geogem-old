@@ -18,6 +18,25 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
     @session_event = session_events(:one)
   end
   
+  
+  #TS
+  #Checks to see if a logged out user gets redirected when
+  #trying to access /report1
+  test "must be logged in" do
+    post report1_url, params: {id: @session.id}
+    assert_response :redirect #should get redirected because not logged in
+  end
+  
+    #TS
+  #Checks to see if a logged in teacher can get the report
+  test "should_get_report" do
+    log_in_as(@teacher)
+    #send in the id for the session of interest
+    post report1_url, params: {id: @session.id}
+    assert_response :success
+  end
+  
+  
   #TS
   #I couldn't think of many test ideas, so I tested the fixutres to
   #make sure they were working properly
@@ -35,25 +54,6 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
   test "session1_should_not_be_nil" do
   assert_not_nil(@session.start_time, "Session1 fixture is nil") 
   end
-  
-  #TS
-  #Checks to see if a logged in teacher can get the report
-  test "should_get_report" do
-    @session_event = session_events(:one)
-    log_in_as(@teacher)
-    get  report1_url
-    assert_response :success
-  end
-  
-  
-  #TS
-  #Checks to see if a logged out user gets redirected when
-  #trying to access /report1
-  test "must be logged in" do
-    get report1_url
-    assert_response :redirect #should get redirected because not logged in
-  end
-  
   
   #Commented out only because they are failing for right now
   #NV
