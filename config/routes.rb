@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "/analysis", to: 'teachers#analysis'
   get 'static_pages/help'
   
+  #route to pdf from session page
+  post    '/report1',  to: 'reports#report1'
+  
   #route to end session page
   post 'sessions/:id/end_session' => 'sessions#end_session', as: :end_session
 
@@ -59,8 +62,10 @@ Rails.application.routes.draw do
   get    'about1'  => 'static_pages#about1'
   get    'about2'  => 'static_pages#about2'
   
-  get    'home1'   => 'static_pages#home1'
-  post   'home1'   => 'static_pages#home1'
+  # Commented out by Meagan Moore
+  # No home1 page? just home
+  #get    'home1'   => 'static_pages#home1'
+  #post   'home1'   => 'static_pages#home1'
   
   # Robert Herrera
   # Proper routes for super, admin, and schools

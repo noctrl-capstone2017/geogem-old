@@ -6,7 +6,7 @@ module SessionsHelper
     start = Time.at(@session.start_time)
     endt = Time.at(@session.end_time)
     duration = endt - start
-    #Format duration as the number of minutes
+    #show duration as minutes
     duration = Time.at(duration).utc.strftime("%M")
     return duration
   end

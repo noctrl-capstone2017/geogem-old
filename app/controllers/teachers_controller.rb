@@ -16,8 +16,6 @@ class TeachersController < ApplicationController
   # order by their screen_name.
   def index
     @current_teacher = current_teacher
-    # For testing only
-    # @current_school = School.find(1)
     @current_school = School.find(@current_teacher.school_id)
     
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
