@@ -22,6 +22,7 @@
 			<label for="addSquare"><h4>Add Square: </h4></label>
 		</div>
   	<div class="form-group col-xs-2">
+  	    <!-- Populates drop down for add box-->
         <%= f.select :square_id, options_for_select(@squares.map {|squares| ["#{squares.screen_name } - #{squares.full_name }", squares.id, {'data-id'=>squares.id}] }), class: "form-control", id: "addStud"%>
         <!-- This the id for the student it's just hidden-->
         <%= f.hidden_field :student_id, :value => @students.id%>
