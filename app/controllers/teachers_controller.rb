@@ -1,32 +1,29 @@
 # author: Kevin M, Tommy B
 # admin methods by Dakota B.
-# guards by Meagan Moore
 # Teacher methods, as well as admin, super, and home stuff.
 class TeachersController < ApplicationController
   
   include TeachersHelper
-  include LoginSessionHelper
-    
   #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
-  
-  # commented out by Meagan Moore
-  # no bueno
-  #before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
-  #before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
-  
-  # Good guards by Meagan Moore
-  before_action :is_admin, only: [:admin, :update, :update_password]
-  before_action :is_super, only: [:admin, :update, :update_password]
+  #Guards added by Meagan Moore
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create]
+  before_action :is_super, only: [:super, :updateFocus]
 
   # GET /teachers
-  # GET /teachers.json
+  # This method prepares the index view. It sets up pagination in an ascending
+  # order by their screen_name.
   def index
     @current_teacher = current_teacher
+    @current_school = School.find(@current_teacher.school_id)
+    
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
+    @teachers = @teachers.order('screen_name ASC')
   end
   
+  # GET /admin_report
+  #This method prepares the admin_report view.
   def admin_report
     @current_teacher = current_teacher
     @students = Student.where(school_id: current_teacher.school_id)
@@ -35,7 +32,8 @@ class TeachersController < ApplicationController
   end
   
   # GET /teachers/1
-  # GET /teachers/1.json
+  # This prepares the roster view for the teacher. It sets up pagination similarly
+  # to the teacher index.
   def show
     @teacher = Teacher.find(params[:id])
     @students = @teacher.students.order('full_name ASC')
@@ -74,14 +72,22 @@ class TeachersController < ApplicationController
   end
 
   # GET /teachers/new
+  # This prepares the new teacher form.
   def new
     @teacher = Teacher.new
   end
 
   # GET /teachers/1/edit
+  # If the user viewing a profile isn't an admin, then it shows them their own
+  # profile instead.
   def edit
+    if !is_admin?
+      @teacher = @current_teacher
+    end
   end
   
+  # GET /admin
+  # This prepares the admin dashboard.
   def admin
     @teacher = current_teacher
   end 
@@ -114,14 +120,15 @@ class TeachersController < ApplicationController
   end
 
   # POST /teachers
-  # POST /teachers.json
+  # This creates a new Teacher. It's basically just scaffolding, but the redirect
+  # has been changed.
   def create
     @teacher = Teacher.new(teacher_params)
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
-        format.json { render :show, status: :created, location: @teacher }
+        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
+        format.json { render :index, status: :created, location: teachers_path }
       else
         format.html { render :new }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
@@ -156,7 +163,7 @@ class TeachersController < ApplicationController
   
   
   # PATCH/PUT /teachers/1
-  # PATCH/PUT /teachers/1.json
+  # This updates a teacher. It's essentially just scaffolding.
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
@@ -168,32 +175,22 @@ class TeachersController < ApplicationController
       end
     end
   end
-
-  # DELETE /teachers/1
-  # DELETE /teachers/1.json
-  def destroy
-    @teacher.destroy
-    respond_to do |format|
-      format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
    
-   # make list of all schools available here so I can query them and set the super users schools attr 
-   def super
+  # This method prepares the super view.
+  def super
     @schools = School.all
-   end
+  end
+  
    #Robert Herrera
    # POST /super
+   # This changes the super school focus.
   def updateFocus
     teacher = Teacher.find(1)
     schoolName = params[full_name]
     teacher.full_name = schoolName
-
   end
 
   private
-  
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
