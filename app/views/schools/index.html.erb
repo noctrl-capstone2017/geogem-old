@@ -1,14 +1,16 @@
 <!-- Edited by Dakota B and Robert H-->
-<!-- 5.18.17 -->
+
 			<!-- page header -->
-			<div class="page-header cap17-header">
-				<h2>All Schools <small> - view/edit all schools
-					<div class ="header-sq i-navy pull-right" title="All schools">
-						<span class="fa fa-home fa-2x header-icon"></span>
-					</div>
-				</small>
-				</h2>
-			</div>   <!--page header-->
+		<div class="page-header vertical-align">
+			<div class="col-xs-11">
+				<h2>All Schools<small> - View or Edit all schools</small></h2><!-- Dynamically fills in with school id -->
+			</div>
+			<div class="col-xs-1 pull-right">
+				<div class="header-sq i-<%= @current_teacher.color %>" title=<%= @current_teacher.screen_name %>>
+					<span class="fa fa-<%= @current_teacher.icon %> fa-3x teacher-icon"></span>
+				</div>
+			</div>
+		</div><!--End page header-->
 
 			<!-- new school button -->
 			<div class="row">

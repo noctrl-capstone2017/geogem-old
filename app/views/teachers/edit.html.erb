@@ -3,41 +3,30 @@
 
 <div class="page-header cap17-header vertical-align">
 	<div class="col-xs-11">
-		<h2>Teacher profile for <%= @teacher.full_name %></h2>
+		<h2>Teacher profile for <%= @teacher.screen_name %></h2>
 	</div>
-	<div class="col-xs-1">
-	<div class="table-sq i-<%= @teacher.color%>" title=<%= @teacher.screen_name %>>
-		<span class="fa fa-<%= @teacher.icon%> fa-2x teacher-icon"></span>
-	</div>
-</div>
+	<%= render 'layouts/current_teacher_icon' %>
 </div>
 
 <!-- Teacher profile area -->
 
 <% if is_admin? %>
+
 <!--If they are an admin, they have more access.-->
 	<%= render 'layouts/profile_admin_version' %>
+	
 <% end %>
 
 <% if !is_admin? %>
-<!--If they aren't an admin, they have less access.-->
 
-	<% if current_teacher == @teacher %>
-	<!--They can still change stuff on their own page.-->
-		<%= render 'layouts/profile_teacher_version' %>
-	<% end %>
-	
-	<% if current_teacher != @teacher%>
-	<!--If they aren't an admin and are viewing someone else,, they have no access.-->
-		<%= render 'layouts/profile_other_version' %>
-	<% end %>
+<!--If they aren't an admin, they have less access.-->
+<!--They can still change stuff on their own page.-->
+	<%= render 'layouts/profile_teacher_version' %>
 	
 <% end %>
 
-	<!--Action Icons -->
-	<!--Figured out span link_to from http://stackoverflow.com/questions/7563911/adding-span-tag-in-rails-link-to -->
-
-
+<!--Action Icons -->
+<!--Figured out span link_to from http://stackoverflow.com/questions/7563911/adding-span-tag-in-rails-link-to -->
 <div class="row action-icon-row" style="margin-top: 40px;">
 	
 	<!--If the teacher viewing the page is an admin, show them this option.-->

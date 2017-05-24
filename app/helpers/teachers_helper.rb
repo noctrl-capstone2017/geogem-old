@@ -1,5 +1,7 @@
+# Kevin M:
+# Contains methods for checking permissions.
+# This is basically all just Steven Royster's work. Beautiful! 
 module TeachersHelper
-    
     # Author: Steven Royster
     # If the teacher is not an admin then they 
     #  will be flashed an unauthorized prompt and redirected to home

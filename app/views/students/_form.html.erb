@@ -1,4 +1,5 @@
-<!--Ricky Perez & Michael Loptien-->
+<!-- authors: Ricky Perez & Michael Loptien -->
+<!-- renders the forms for edit and new students -->
 
 <!-- Error Catching -->
 <%= form_for(student) do |f| %>
@@ -75,11 +76,11 @@
 	</div>
 
 <!-- Hidden field for school id, set via logged in teachers school id -->
-<% if local_assigns[:isNew] %>
-  <%= f.hidden_field :school_id, :value => current_teacher.school_id%>
-<% end %>
+  <% if local_assigns[:isNew] %>
+    <%= f.hidden_field :school_id, :value => current_teacher.school_id%>
+  <% end %>
 
-<!-- This area displays the save or cancel buttons
+<!-- This area displays the save and cancel buttons
  It uses an If statment to test a passed in value "isNew"
  to determine which button text will show -->
   <div class="row action-buttons-row">
