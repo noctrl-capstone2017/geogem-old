@@ -1,3 +1,5 @@
+#Author: Ricky Perez
+#Description: This contains the methods and helpers used for the roster square page
 class RosterSquaresController < ApplicationController
   before_action :set_roster_square, only: [:show, :edit, :update, :destroy]
   helper_method :set_square_name
@@ -28,8 +30,11 @@ class RosterSquaresController < ApplicationController
     #Get set of squares and students to be used in roster squares.
     @roster_square = RosterSquare.new
     @roster_squares = RosterSquare.all
+    #Get the students information
     @students = Student.find_by_id(params[:id])
+    #Set the students squares
     @student_squares = RosterSquare.where(student_id: @students.id)
+    #Set the squares for the specific school
     @school_squares = Square.where(school_id: @students.school_id)
     @square = Square.find_by_id(params[:id])
     @squares = Square.all
@@ -58,6 +63,7 @@ class RosterSquaresController < ApplicationController
     @square_color = Square.find(roster_square.square_id).color
   end
   
+  #Checks if the square is used for the specific student. Unused at the moment
   def is_student_square(square)
     @is_square = false
     @student_squares.each do |student_square|
@@ -121,6 +127,7 @@ class RosterSquaresController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_roster_square
+      #Sets the edit page to the specified student
       @students = Student.find(params[:id])
     end
 
