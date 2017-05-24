@@ -2,13 +2,13 @@
 require 'test_helper'
 
 class SchoolsControllerTest < ActionDispatch::IntegrationTest
-   # Use the fixtures to set the testing env's school. Teacher is set to super user.
+  # Use the fixtures to set the testing env's school. Teacher is set to super user.
   setup do
     @school = schools(:one)
     log_in_as(teachers(:one))
   end
   
-  #This test makes sure super_url gets the super dashboard page
+  # This test makes sure super_url gets the super dashboard page
   test "should get super dashboard" do
     get super_url
     assert_response :success
@@ -18,4 +18,5 @@ class SchoolsControllerTest < ActionDispatch::IntegrationTest
     get schools_url
     assert_response :success
   end
-end
+  
+end #end of super_test.rb file
