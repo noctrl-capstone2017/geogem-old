@@ -3,15 +3,9 @@
 class TeachersController < ApplicationController
   
   include TeachersHelper
-<<<<<<< HEAD
-
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-  before_action :same_school, only: [:show, :edit, :update, :destroy]
-=======
   #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
->>>>>>> 4e52757848dce166321964dcce989b22ee7ab99a
   before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
 
@@ -33,15 +27,9 @@ class TeachersController < ApplicationController
   # GET /teachers/1.json
   def show
     @teacher = Teacher.find(params[:id])
-<<<<<<< HEAD
-    @students = @teacher.students
-    @all_students_at_school = Student.where(school_id: @teacher.school_id)
-    @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
-=======
     @students = @teacher.students.order('full_name ASC')
     @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
     @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
->>>>>>> 4e52757848dce166321964dcce989b22ee7ab99a
     
     if params[:add_student]
       @teacher.students << Student.find(params[:add_student_id])
@@ -64,26 +52,15 @@ class TeachersController < ApplicationController
   end 
   
   # GET /teachers/password
-<<<<<<< HEAD
-  #author: Tommy B, Kevin M
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-=======
   # This prepares the password change page. It will always show the current user's,
   # even if they try to access it with another ID via /teachers/id/edit_password.
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
->>>>>>> 4e52757848dce166321964dcce989b22ee7ab99a
   def edit_password
     @teacher = current_teacher
   end
   
-<<<<<<< HEAD
-  #author: Tommy B, Kevin M
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  # Note from Tommy B: the redirects need to be changed
-=======
   # This updates the Teacher's password.
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
->>>>>>> 4e52757848dce166321964dcce989b22ee7ab99a
   def update_password
     teacher = current_teacher
     # also in here i'm calling the authenticate method that usually is present in bcrypt.
