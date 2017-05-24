@@ -1,8 +1,3 @@
-
-#THIS MESSAGE SHOULD NOT APPEAR ON MASTER BRANCH
-#if it does, I forgot to change this back. to fix it, uncomment the methods below, change root to:
-#root 'login_session#new'
-#uncomment the methods in /app/controllers/application_controller.rb, and remove this comment.
 Rails.application.routes.draw do
   get 'graph/main'
 
@@ -14,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'graph/other'
 
-  root 'graph#main'
+  root 'login_session#new'
 
   get "/home" , to: 'teachers#home'
   get "/analysis", to: 'teachers#analysis'
