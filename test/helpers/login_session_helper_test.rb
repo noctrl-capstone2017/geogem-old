@@ -4,20 +4,17 @@
 
 require 'test_helper'
 
+# THIS IS ALL COMMENTED OUT BECAUSE IT SHOULD BE USED FOR
+#   THE 'REMEMBER ME' FEATURE WHICH WE ARE NOT IMPLEMENTING
 class LoginSessionHelperTest < ActionView::TestCase
 
-  #def setup
-  #  @teacher = teachers(:one)
-  #  remember(@teacher)
-  #end
+  def setup
+    @teacher = teachers(:one)
+  end
 
-  #test "current_teacher returns right teacher when session is nil" do
-  #  assert_equal @teacher, current_teacher
-  #  assert is_logged_in?
-  #end
+  test "current_teacher returns right teacher when session is nil" do
+    assert_equal @teacher, current_teacher
+    assert is_logged_in?
+  end
 
-  #test "current_teacher returns nil when remember digest is wrong" do
-  #  @user.update_attribute(:remember_digest, Teacher.digest(Teacher.new_token))
-  #  assert_nil current_teacher
-  #end
 end

@@ -24,7 +24,7 @@ module TeachersHelper
       current_teacher && current_teacher.id == 1
     end
     
-     # Author: Steven Royster
+    # Author: Steven Royster
     # Checks to see if the current teacher has super user status
     # Returns true if the teacher is a super user
     def is_super
