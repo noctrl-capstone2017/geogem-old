@@ -41,7 +41,16 @@ class TeachersController < ApplicationController
     @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
     @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
     
+    #Whenever this page is visited, it updates the roster for the admin.
     if @teacher.powers == "Admin"
+      
+      #https://stackoverflow.com/questions/3343861/how-do-i-check-to-see-if-my-array-includes-an-object
+      @students_at_school.each do |student|
+        unless @students.include?(student)
+          @teacher.students << Student.find(student.id)
+        end
+      end
+    
       @students = @students_at_school
       @students_not_in_roster = []
     end
