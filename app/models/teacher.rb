@@ -3,7 +3,7 @@
 
 class Teacher < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email, :colorcheck
+  before_save   :downcase_email, :color_check, :super_check
   ###REGEX###
   #Only allows legit email formatting
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -14,13 +14,15 @@ class Teacher < ApplicationRecord
   #Alphanumerical stuff only.
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
   
-  ###VALIDAITONS###
+  ###VALIDATIONS###
   validates :user_name,  presence: true, length: { maximum: 75 },
-                         uniqueness: { case_sensitive: false}  
-  
+                         uniqueness: { case_sensitive: false },  
+                         format: { with: VALID_USER_NAME_REGEX }
+                         
   validates :full_name, presence: true, length: { maximum: 75 }
   validates :screen_name, presence: true, length: { maximum: 8 },
                     format: { with: VALID_SCREEN_NAME_REGEX }
+  
   validates :icon,  presence: true
   validates :color, presence: true
   
@@ -76,10 +78,18 @@ class Teacher < ApplicationRecord
       self.email = email.downcase
     end
     
-    # Converts light blue to ltblue.
-    def colorcheck
+    # Converts light blue to ltblue, so it can easily be drawn on in views.
+    # 'light blue' isn't a color that's recognized by bootstrap, but 'ltblue' is!
+    def color_check
       if self.color == 'light blue'
         self.color = 'ltblue'
+      end
+    end
+    
+    # Makes sure Bill doesn't accidentally remove his admin powers.
+    def super_check
+      if self.id == '1'
+        self.powers = "Admin"
       end
     end
 end

@@ -9,26 +9,25 @@
 			
 			<!--                Login Area                  -->
 			<!--   Author: Meagan Moore & Steven Royster    -->
-			
+			<!--        This is the main login form         -->
 			<div class="form-group">
+				
 			<%= form_for(:login_session, url: login_path) do |f| %>
 				<%= render 'layouts/flash' %>
 				
 				<%= f.label :user_name %>
 				<%= f.text_field :user_name, class: 'form-control'%>
-
-				<!--<%= f.label :username %>-->
-				<!--<%= f.text_field :username, class: 'form-control'%>-->
 			</div>
 			
 			<div class="form-group">
-			    <%= f.label :password %>
-			    <%= f.password_field :password, class: 'form-control' %>
+			  <%= f.label :password %>
+			  <%= f.password_field :password, class: 'form-control' %>
 			</div>
 			
 			<br>
-			
-			<%= f.submit "Log in", class: "btn btn-primary btn-lg center-block" %>
+			<div class="form-group">
+				<%= f.submit "Log in", class: "btn btn-primary btn-lg center-block form-control custom-submit-width" %>
+			</div>
 			<% end %>
 			<br>
 			
