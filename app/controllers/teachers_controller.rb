@@ -5,10 +5,10 @@ class TeachersController < ApplicationController
   
   include TeachersHelper
   #Before actions to reduce access and prime pages to show teacher info.
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-  before_action :same_school, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher, only: [:show, :edit, :update]
+  before_action :same_school, only: [:show, :edit, :update]
   before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
+  before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
@@ -37,10 +37,9 @@ class TeachersController < ApplicationController
   # to the teacher index.
   def show
     @teacher = Teacher.find(params[:id])
-    @students = @teacher.students
-    @all_students_at_school = Student.where(school_id: @teacher.school_id)
-    @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
-    @students_not_in_roster_but_at_school = @students_not_in_roster_but_at_school.order('screen_name ASC')
+    @students = @teacher.students.order('full_name ASC')
+    @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
+    @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
     
     if params[:add_student]
       @teacher.students << Student.find(params[:add_student_id])
@@ -73,13 +72,13 @@ class TeachersController < ApplicationController
   # GET /teachers/password
   # This prepares the password change page. It will always show the current user's,
   # even if they try to access it with another ID via /teachers/id/edit_password.
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
     @teacher = current_teacher
   end
   
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   # This updates the Teacher's password.
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def update_password
     teacher = current_teacher
     # also in here i'm calling the authenticate method that usually is present in bcrypt.
@@ -87,13 +86,13 @@ class TeachersController < ApplicationController
       if params[:password] == params[:password_confirmation]
         teacher.password = BCrypt::Password.create(params[:password])
         if teacher.save!
-          redirect_to @teacher, :flash => { :notice => "Password changed." }
+          redirect_to teacher_edit_path, :flash => { :notice => "Password changed." }
         end
       else
-        redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
+        redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
       end
     else
-      redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
+      redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
     end
   end
 
@@ -145,7 +144,7 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
+        format.html { redirect_to teachers_path, notice: 'Teacher was successfully updated.' }
         format.json { render :show, status: :ok, location: @teacher }
       else
         format.html { render :edit }
