@@ -1,9 +1,10 @@
 class GraphController < ApplicationController
   def main
-    @sessionGroup = Student.find_by(id:1).sessions
+    
   end
 
   def example
+    @sessionGroup = Student.find_by(id:1).sessions
   end
 
   def random
