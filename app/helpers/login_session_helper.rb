@@ -54,14 +54,5 @@ module LoginSessionHelper
     session.delete(:teacher_id)
     @current_teacher = nil
   end
-
-  # Redirects if user is not super & is trying to do
-  #     something they don't have permission to 
-  def super
-    if !is_super?
-      flash[:danger] = "Unauthorized. You are not a super user."
-      redirect_to home1_path
-    end
-  end
   
 end

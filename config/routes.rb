@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  # Cleaned up by: Michael Loptien
+
   root    'login_session#new'
   get     '/home' ,           to: 'teachers#home'
   get     '/analysis',        to: 'teachers#analysis'
@@ -28,11 +30,14 @@ Rails.application.routes.draw do
   get     'logout',           to: 'login_session#logout'
   get     'about1',           to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
-  get     'home1',            to: 'static_pages#home1'
-  post    'home1',            to: 'static_pages#home1'
   
-  get    'help',  to: 'static_pages#help'
-  get    'notes', to: 'session_notes#index'
+  # Commented out by Meagan Moore
+  # No home1 page? just home
+  # get     'home1',            to: 'static_pages#home1'
+  # post    'home1',            to: 'static_pages#home1'
+  
+  get    'help',              to: 'static_pages#help'
+  get    'notes',             to: 'session_notes#index'
 
   get     'graph/main'
   get     'graph/example'
@@ -42,6 +47,9 @@ Rails.application.routes.draw do
   
   # mloptien: waiting for confirmation on this route from mObzera
   # post    '/session_events',  to: 'session_events#create'
+  
+  #route to pdf from session page
+  post    '/report1',  to: 'reports#report1'
   
   #route to end session page
   post    'sessions/:id/end_session', to: 'sessions#end_session', as: :end_session
