@@ -7,9 +7,11 @@ class SessionsController < ApplicationController
     @sessions = Session.all
   end
   
+  #Alex P + Matthew O
   def end_session
     @session = Session.find(params[:id])
-    @session.end_time = Time.now
+    @session.start_time = params[:start].to_s
+    @session.end_time = params[:end].to_s
     @session.save
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
@@ -20,7 +22,7 @@ class SessionsController < ApplicationController
 
   # GET /sessions/1
   # GET /sessions/1.json
-  # Alex P + Matthew OS
+  # Alex P + Matthew O
   def show
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
