@@ -9,6 +9,7 @@ class TeachersController < ApplicationController
   before_action :same_school, only: [:show, :edit, :update, :destroy]
   before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
+  before_action :set_school, only: [:show, :edit, :update, :destroy]
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
@@ -155,23 +156,22 @@ class TeachersController < ApplicationController
   end
    
   # This method prepares the super view.
-  def super
+  def super 
     @schools = School.all
+   # @school = School.first
+    @teacher = Teacher.find(params[:id])
   end
   
-   #Robert Herrera
-   # POST /super
-   # This changes the super school focus.
-  def updateFocus
-    teacher = Teacher.find(1)
-    schoolName = params[full_name]
-    teacher.full_name = schoolName
-  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
+    end
+    
+    def set_school
+      @school = School.find(current_teacher.school_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -187,9 +187,4 @@ class TeachersController < ApplicationController
         redirect_to home_path, notice: "You can't access other schools."
       end
     end
-    
-    # Switching the focus school 
-    def focus_school_params 
-      params.require(:full_name).permit(:school_id)
-    end 
 end

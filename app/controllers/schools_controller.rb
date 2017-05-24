@@ -3,10 +3,13 @@
 
 class SchoolsController < ApplicationController
   before_action :set_school, only: [:show, :edit, :update, :destroy]
-
+  #before_action :set_school_name, only: [:show, :edit, :update, :destroy]
+  
   # Used in the /schools route to display all schools
   def index
     @schools = School.paginate(page: params[:page], :per_page => 10)
+    @school = set_school
+    set_school.full_name = params[:full_name]
   end
 
   # Used in the creation of new schools
@@ -16,8 +19,12 @@ class SchoolsController < ApplicationController
 
   # Used in the Super Dashboard to allow teacher 1 (profbill) to switch focus to any school
   def super
-    @schools = School.all
-    @teacher = Teacher.first
+    @schools = School.all #makes all school names available for select dropdown 
+    @teacher = Teacher.first #
+    @school = set_school
+    @current_teacher = current_teacher
+   # set_school.full_name = params[:full_name]
+    #@teacher.school_id = params[:selectSch]
   end
   
   # Used to pass information about which school will be backed up to the /backup page
@@ -66,21 +73,38 @@ class SchoolsController < ApplicationController
   # Used to update a School profile
   def update
       if @school.update(school_params)
-        redirect_to schools_path, :notice => "School updated"
+        redirect_to schools_path, :notice => "School updated "
       else
         redirect_to schools_path, :notice => "School updated"
       end
   end
 
+  # Used to update a School profile
+  def updateFocus
+    @current_school =  School.find(Teacher.first.school_id)
+      if @current_teacher.update(focus_school_params)
+        @current_teacher.school_id =  params[:full_name]
+        flash[:success] = current_teacher.school_id =  params[:full_name]
+        #current_teacher.school_id = params[:selectSch]
+        redirect_to super_path, :notice => "Focus school switched " 
+      else
+        redirect_to home_path, :notice => "Focus school not switched"
+      end
+  end
+
+
   private
 
     def set_school
-      @school = School.find(params[:id])
+      @school =  School.find(Teacher.first.school_id)
     end
    
-    # Never trust parameters from the scary internet, only allow the white list through.
+ # Never trust parameters from the scary internet, only allow the white list through.
     def school_params
       params.require(:school).permit(:full_name, :screen_name, :icon, :color, :email, :website, :description)
     end
-    
+    # Require a school and a full name
+    def focus_school_params
+      params.permit(:full_name)
+    end
 end # end of controller
