@@ -12,9 +12,9 @@ module UxHelper
     return icons;
   end
   
-  #Returns array of color string names for selections
+  #Returns array of color string names for  selections
   def colorNames
-    colors = ["red", "orange", "yellow", "green", "mint", "navy", "light blue", "lavender", "plum", "pink"];
+    colors = ["red", "orange", "yellow", "green", "mint", "navy", "light blue", "lavender", "plum", "pink"]; 
     return colors;
   end
   

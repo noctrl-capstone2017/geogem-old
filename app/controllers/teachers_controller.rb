@@ -7,8 +7,9 @@ class TeachersController < ApplicationController
   #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
-  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
+  #Guards added by Meagan Moore
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create]
+  before_action :is_super, only: [:super, :updateFocus]
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
