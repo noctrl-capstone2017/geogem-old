@@ -8,13 +8,14 @@ class SessionsController < ApplicationController
   end
   
   def end_session
-    # @student = Student.find(@session.session_student)
     @session = Session.find(params[:id])
     @session.end_time = Time.now
     @session.save
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
     @squares = @student.squares
+    @square_type = @squares
+    
   end
 
   # GET /sessions/1
@@ -23,6 +24,7 @@ class SessionsController < ApplicationController
   def show
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
+  
     
    if params[:end_session]
     respond_to do |format|
