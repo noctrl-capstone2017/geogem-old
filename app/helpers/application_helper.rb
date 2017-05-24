@@ -11,6 +11,5 @@ module ApplicationHelper
           "student_art/art3_Steven.jpg", "student_art/art4_Trudy.jpg" ]
     images[rand(images.size)]
   end
-  
 
 end

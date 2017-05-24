@@ -71,7 +71,7 @@ module LoginSessionHelper
   # def admin
   #   if !is_admin?
   #     flash[:danger] = "Unauthorized. You are not an administrator."
-  #     redirect_to home1_path
+  #     redirect_to home_path
   #   end
   # end
   
@@ -80,7 +80,7 @@ module LoginSessionHelper
   def super
     if !is_super?
       flash[:danger] = "Unauthorized. You are not a super user."
-      redirect_to home1_path
+      redirect_to home_path
     end
   end
   

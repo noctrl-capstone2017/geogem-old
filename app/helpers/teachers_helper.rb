@@ -32,7 +32,7 @@ module TeachersHelper
     def is_super
       if !is_super?
         flash[:danger] = "Unauthorized"
-        redirect_to home1_path
+        redirect_to home_path
       end
     end
 end
