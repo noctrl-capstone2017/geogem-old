@@ -43,10 +43,25 @@ class TeachersController < ApplicationController
     @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
     @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
     
+    if @teacher.powers == "Admin"
+      @students = @students_at_school
+      @students_not_in_roster = []
+    end
+    
+    #Admins always have every student, so they can't add or remove from any admins.
     if params[:add_student]
-      @teacher.students << Student.find(params[:add_student_id])
+        if params[:add_student_id != nil]
+          if @teacher.powers != "Admin"
+            @teacher.students << Student.find(params[:add_student_id])
+          end
+        end
+        
     elsif params[:remove_student]
-      @teacher.students.delete(Student.find(params[:remove_student_id]))
+      if params[:remove_student_id != nil]
+        if @teacher.powers != "Admin"
+          @teacher.students.delete(Student.find(params[:remove_student_id]))
+        end
+      end
     end
   end
 
