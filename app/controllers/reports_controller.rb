@@ -1,11 +1,18 @@
 #Author: Taylor Spino
 class ReportsController < ApplicationController
-#This code is complex & maybe ugly, but I am 99.9% sure everything works. 
-#I fixed anything that I knew was buggy/broken.
 
 def report1
 #Eventually going to refactor this so this type of report is in its own class
 #Right? That way we can have methods for each table like last years's class
+
+#Right now, the FIRST table only shows events that occured in between the
+#session START and END time.
+
+#The SECOND and THIRD tables show ANY duration events and notes, respectively,
+#that happened during the session.
+
+#It's moderately useful for debugging, but I can easily change this if we 
+#want to.
 
 pdf = Prawn::Document.new
 pdf.font "Helvetica"
@@ -16,8 +23,8 @@ pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
 
 
                       # -------Session Data---------#
-#for now, just grab the first seeded session
-session = Session.first
+#for now, just grab the last seeded session
+session = Session.find(params[:id])
 student = Student.find(session.session_teacher)
 teacher = Teacher.find(session.session_student)
 
@@ -43,26 +50,6 @@ pdf.grid([0,0], [0,4]).bounding_box do
                       session.end_time.strftime("%I:%M%p"), :align => :right
 end
 
-
-                      # -------Unused Stuff right here---------#
-          # ----Use this if you want to make header info a table instead----#
-#row1 = Array.new
-#row1.push "Student Name:" + student.full_name
-#row1.push "Date: #{session.start_time.to_date}"
-
-#row2 = Array.new
-#row2.push "Teacher Name: " + teacher.full_name
-#row2.push "Time: " + session.start_time.strftime("%I:%M%p") + " - " +
-                      #session.end_time.strftime("%I:%M%p")
-                      
-                      
-#name_and_date = Array.new {Array.new}
-#name_and_date.push row1
-#name_and_date.push row2
-
-#pdf.table name_and_date, :header => true, :cell_style => { :border_color => "FFFFFF" },
-  #:column_widths => { 0 => 350, 1 => 190}, :position => :left
-
                       # -------ENTIRE SUMMARY TABLE---------#
 
 #header is the first row for our table, will have this format:
@@ -83,7 +70,7 @@ eventsOccurred.each do |event|
 end
 
 #SORT the header array by square TYPE
-#Will sort by duration, then frequency, then interval...Can we change this?
+#Will sort by duration, then frequency, then interval
 header.sort! { |a,b| a.tracking_type  <=> b.tracking_type}
 
 #Let's start doing some actual data rows for our table
@@ -91,7 +78,11 @@ header.sort! { |a,b| a.tracking_type  <=> b.tracking_type}
 startI = session.start_time
 
 #Grab student interval time
+
 stud_interval = student.session_interval 
+
+#MAKE SUPER SHORT INTERVALS FOR DEBUGGING
+#stud_interval = 0.5
 
 #adds stud_interval minutes to the start time
 endI = session.start_time + stud_interval*60
@@ -106,7 +97,10 @@ eventsOccurred.each do |event|
 
 
 #THE MONEY $$$
-while endI <= session.end_time
+#while endI <= session.end_time
+
+#DEBUGGING
+while endI <= session.end_time + 60*60
 
 row = Array.new
 row.push(startI.strftime("%I:%M%p") + " - " + endI.strftime("%I:%M%p"))
@@ -255,7 +249,15 @@ pdf.table table2, :header => true,
   
                        # -------Notes Table---------#                      
 
-notesTaken = SessionNote.where(session_id: session.id)
+notesTakenMap = SessionNote.where(session_id: session.id)
+notesTaken = Array.new
+
+notesTakenMap.each do |m|
+notesTaken.push(m)
+end
+
+notesTaken.sort!{ |a,b| a.created_at   <=> b.created_at}
+
 notesTable = Array.new {Array.new}
 notesTable.push(["Time", "Note"])
 
@@ -306,12 +308,16 @@ rows3.each do |r2|
 table3.push(r2)  
 end
 
+#will get error if there the rows3 array is empty because that means
+#our array of arrays is empty and we have nothing to display
+if(rows3.count > 0)
 pdf.move_down 50
 pdf.text "Session Key", :style => :bold
 pdf.stroke_horizontal_rule
 pdf.move_down 10
 pdf.table table3, :header => true, :cell_style => { :border_color => "FFFFFF" },
-  :column_widths => { 0 => 40, 1 => 25, 2 => 200, 3 => 100},:position => :left
+ :column_widths => { 0 => 40, 1 => 25, 2 => 200, 3 => 100},:position => :left
+end
 
 
 

@@ -1,5 +1,8 @@
 class Square < ApplicationRecord
         
+    # authors: Ricky Perez & Michael Loptien
+    # Model for Students
+    
     # Ensures that none of the fields are empty
     validates :screen_name, presence: true
     validates :tracking_type, presence: true

@@ -1,54 +1,75 @@
 <!--Author: Carolyn C--->
-<!--Right now there is a lack of erb choices. should this belong to student, teacher, or sesh?-->
-<!--currently under teachers (since clicked on from home) in the views, but owned by sesh.-->
+<!--Spacing fixed up by Kevin M for Sprint 3.-->
+<!--I still need some help getting the name to dynamically appear. I tried doing <*%=student.full_name%> (minus the star) w/ my controller and it didn't work.-->
+<!--Also the /report1 still isn't working? Maybe?-->
 <body>
-<div class="container">
-    <div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
-        <!--page header -->
-        <div class="page-header vertical-align">
-            <div class="col-xs-11">
-                <h2>Analysis <small> -Reports for StudentName.</small></h2><!--Dynamically fills in with school id -->
+    <div class="container">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0">
+            <!--page header -->
+            <div class="page-header vertical-align">
+                <div class="col-xs-11">
+                    <h2>Analysis <small> -Reports for Student1.</small></h2><!--Dynamically fills in with school id -->
                 </div>
-                
                 <div class="col-xs-1 center-block">
                     <div class="header-sq i-gray" title="Analysis">
                         <span class="fa fa-line-chart fa-3x teacher-icon"></span>
-                        </div>
                     </div>
-                </div><!--End page header-->
-                <!--content, buttons and text -->
-                <div class="content-text">
-                <br>
-                <div class="row">
-                     <!--add button & description row -->
-                     <div class="form-group">
-                         <p><input type="submit" href="#TaylorSAnalysisPage" name="commit" value="Analyze Session" class="btn btn-primary  btn-lg" /> Select a Behavior Session and view analysis.<br><br/></p>
-                    </div>
-                    </div>
-                    <div class="row">
-                        <!--add button & description row -->
-                        <div class="form-group">
-                            <p>
-                                <input type="submit" href="#ExportToCSV" name="commit" value="Export to CSV" class="btn btn-primary  btn-lg" /> Export behavior session data in CSV format.<br><br>
-                                </p>
-                                </div>
-                                </div>
-                                <div class="row"> <!--add button & description row -->
-                                <div class="form-group">
-                                    <p>
-                                        <input type="submit" href="#ComingSoon" name="commit" value="Coming Soon!" class="btn btn-primary  btn-lg" /> Place holder for now, will update soon!<br><br>
-                                        </p>
-                                        </div>
-                                        </div> 
-                                        <div class="row">
-                                            <!--add button & description row -->
-                                            <div class="form-group"><p><input type="submit" href="#ComingSoon" name="commit" value="Coming Soon!" class="btn btn-primary  btn-lg" /> Place holder for now, will update soon!<br><br>
-                                            </p></div>
-                                            </div>
-                                            </div>   
-                                            <!--content-text -->
-                                            </div>   <!--col -->
-                                            </div>   <!--row -->
-                                            </div>   <!--container -->
-                                            </body>
-                
+                </div>
+            </div><!--End page header-->
+            <!--content, buttons and text -->
+            <div class="content-text">
+                <div class="form-group"> 
+                        <div class="row">
+                            <div class = "col-xs-2">
+                				<a href="report1">
+        	                        <div class="col-xs-2 col-xs-offset-1 text-center" title="Analysis">
+        	                            <div class ="action-sq i-navy center-block" >
+        		                            <span class="fa fa-file-text-o fa-4x action-icon" ></span>
+        	                            </div>
+        	                        </div> <!-- end col -->
+                                </a>
+            			    </div><!--end col-->
+            			    <div class = "col-xs-8">
+    	                       <h3>Reports</h3>
+			                   <p>Reports will include Behavior Session Summary, Weekly Report, and more.<br><br></p>
+            			    </div><!--end col-->
+            			</div><!--end row-->
+            			<br>
+                        <br>
+                        <div class="row">
+                            <div class = "col-xs-2">
+                				<a href="/report1">
+        	                        <div class="col-xs-2 col-xs-offset-1 text-center" title="Analysis">
+        	                            <div class ="action-sq i-red center-block" >
+        		                            <span class="fa fa-bar-chart fa-4x action-icon" ></span>
+        	                            </div>
+        	                        </div> <!-- col -->
+                                </a>
+            			    </div><!--end col-->
+            			    <div class = "col-xs-8">
+    	                       <h3>Charts</h3>
+			                    <p>The monthly line chart for behavior squares, and more.<br><br></p>
+            			    </div><!--end col-->
+            			</div><!--end row-->
+            			<br>
+            			<br>
+            			<div class="row">
+                            <div class = "col-xs-2">
+                				<a href="/report1">
+        	                        <div class="col-xs-2 col-xs-offset-1 text-center" title="Analysis">
+        	                            <div class ="action-sq i-yellow center-block" >
+        		                            <span class="fa fa-file-excel-o fa-4x action-icon" ></span>
+        	                            </div>
+        	                        </div> <!-- col -->
+                                </a>
+            			    </div><!--end col-->
+            			    <div class = "col-xs-8">
+    	                       <h3>Export</h3>
+			                    <p>Export behavior session data in CSV format.</p>
+            			    </div><!--end col-->
+            			</div><!--end row-->
+        	        </form>
+        <!--content-text -->
+        </div>
+    </div>  
+</body>

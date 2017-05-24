@@ -1,6 +1,6 @@
 <%= render 'layouts/navbar2' %>
 <!--Login Area -->
-<div class="container-fluid">
+<div class="container-fluid" data-no-turbolink="true">
 	<div class="row login-row">
 		<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 well login-col">
 
@@ -9,27 +9,28 @@
 			
 			<!--                Login Area                  -->
 			<!--   Author: Meagan Moore & Steven Royster    -->
-			
-			<div class="form-group">
+			<!--        This is the main login form         -->
 			<%= form_for(:login_session, url: login_path) do |f| %>
+			
+			<div class="form-group">		
 				<%= render 'layouts/flash' %>
-				
 				<%= f.label :user_name %>
 				<%= f.text_field :user_name, class: 'form-control'%>
-
-				<!--<%= f.label :username %>-->
-				<!--<%= f.text_field :username, class: 'form-control'%>-->
 			</div>
 			
 			<div class="form-group">
-			    <%= f.label :password %>
-			    <%= f.password_field :password, class: 'form-control' %>
+			  <%= f.label :password %>
+			  <%= f.password_field :password, class: 'form-control' %>
 			</div>
 			
 			<br>
 			
-			<%= f.submit "Log in", class: "btn btn-primary btn-lg center-block" %>
+			<div class="form-group">
+				<%= f.submit "Log in", class: "btn btn-primary btn-lg center-block form-control custom-submit-width" %>
+			</div>
+			
 			<% end %>
+			
 			<br>
 			
 		</div>   <!-- end col --> 

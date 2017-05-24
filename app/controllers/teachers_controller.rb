@@ -3,11 +3,13 @@
 class TeachersController < ApplicationController
   
   include TeachersHelper
-
-  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
-  before_action :same_school, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
-  before_action :is_super, except: [:home, :update, :edit, :edit_password, :update_password]
+  include LoginSessionHelper
+    
+  #Before actions to reduce access and prime pages to show teacher info.
+  before_action :set_teacher, only: [:show, :edit, :update]
+  before_action :same_school, only: [:show, :edit, :update]
+  #before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
+  #before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
 
   # GET /teachers
   # GET /teachers.json
@@ -27,16 +29,39 @@ class TeachersController < ApplicationController
   # GET /teachers/1.json
   def show
     @teacher = Teacher.find(params[:id])
-    @students = @teacher.students
-    @all_students_at_school = Student.where(school_id: @teacher.school_id)
-    @students_not_in_roster_but_at_school = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students)
+    @students = @teacher.students.order('full_name ASC')
+    @students_at_school = Student.where(school_id: @teacher.school_id).order('full_name ASC')
+    @students_not_in_roster = Student.where(school_id: @teacher.school_id).where.not(id: @teacher.students).order('full_name ASC')
     
-    if params[:add_student]
-      @teacher.students.add(Student.find(@student_id))
-    elsif params[:remove_student]
-      @teacher.students.remove(Student.find(@student_id))
-    end
+    #Whenever this page is visited, it updates the roster for the admin.
+    if @teacher.powers == "Admin"
       
+      #https://stackoverflow.com/questions/3343861/how-do-i-check-to-see-if-my-array-includes-an-object
+      @students_at_school.each do |student|
+        unless @students.include?(student)
+          @teacher.students << Student.find(student.id)
+        end
+      end
+    
+      @students = @students_at_school
+      @students_not_in_roster = []
+    end
+    
+    #Admins always have every student, so they can't add or remove from any admins.
+    if params[:add_student]
+        if params[:add_student_id != nil]
+          if @teacher.powers != "Admin"
+            @teacher.students << Student.find(params[:add_student_id])
+          end
+        end
+        
+    elsif params[:remove_student]
+      if params[:remove_student_id != nil]
+        if @teacher.powers != "Admin"
+          @teacher.students.delete(Student.find(params[:remove_student_id]))
+        end
+      end
+    end
   end
 
   # GET /teachers/new
@@ -49,18 +74,19 @@ class TeachersController < ApplicationController
   end
   
   def admin
+    @teacher = current_teacher
   end 
   
   # GET /teachers/password
-  #author: Tommy B, Kevin M
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  # This prepares the password change page. It will always show the current user's,
+  # even if they try to access it with another ID via /teachers/id/edit_password.
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
     @teacher = current_teacher
   end
   
-  #author: Tommy B, Kevin M
-  #utilized http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  # Note from Tommy B: the redirects need to be changed
+  # This updates the Teacher's password.
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def update_password
     teacher = current_teacher
     # also in here i'm calling the authenticate method that usually is present in bcrypt.
@@ -68,13 +94,13 @@ class TeachersController < ApplicationController
       if params[:password] == params[:password_confirmation]
         teacher.password = BCrypt::Password.create(params[:password])
         if teacher.save!
-          redirect_to @teacher, :flash => { :notice => "Password changed." }
+          redirect_to teacher_edit_path, :flash => { :notice => "Password changed." }
         end
       else
-        redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
+        redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
       end
     else
-      redirect_to @teacher, :flash => { :danger => "Incorrect Password." }
+      redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
     end
   end
 
@@ -125,7 +151,7 @@ class TeachersController < ApplicationController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
+        format.html { redirect_to teachers_path, notice: 'Teacher was successfully updated.' }
         format.json { render :show, status: :ok, location: @teacher }
       else
         format.html { render :edit }

@@ -17,7 +17,7 @@ class TeacherTest < ActiveSupport::TestCase
                 email: "wtktriger@noctrl.edu",
                 description: "Super user",
                 powers: "Admin",
-                school_id: 0)
+                school_id: 1)
   end
   
   # Tests the teacher against the validations from the model file
@@ -147,7 +147,8 @@ class TeacherTest < ActiveSupport::TestCase
     assert_equal mixed_case_email.downcase, @teacher.reload.email
   end
   
-  # Steven Royster
+  # Tests if authenticated 
+  # Author: Steven Royster & Meagan Moore
   test "authenticated? should return false for a teacher with nil digest" do
     assert_not @teacher.authenticated?(nil, nil)
   end

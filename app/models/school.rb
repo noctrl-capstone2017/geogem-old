@@ -14,30 +14,23 @@ class School < ApplicationRecord
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
 
   validates :screen_name,  presence: true, length: { maximum: 8 }
-                    #format: { with: VALID_SCREEN_NAME_REGEX },
-                   # uniqueness: { case_sensitive: false}
+             # format: { with: VALID_SCREEN_NAME_REGEX },
+             # uniqueness: { case_sensitive: false}
                     
   validates :full_name,  presence: true, length: { maximum: 75 }
   validates :website, presence: true, length: { maximum: 75 }
   validates :email, presence: true, length: { maximum: 255 }
-                  #  format: { with: VALID_EMAIL_REGEX },
-                  #  uniqueness: { case_sensitive: false }
+             # format: { with: VALID_EMAIL_REGEX },
+             # uniqueness: { case_sensitive: false }
                     
   validates :description, presence: true, length: { maximum: 255 }
   validates :color, presence: true
-  
-    
-  #has_many :active_relationships, class_name:  "Teacher",
-   #                                foreign_key: "student_id",
-   #                                dependent:   :destroy
- # has_many :teachers, through: :active_relationships, source: :teachers
     
   private
-
     # Converts email to all lower-case.
     def downcase_email
       self.email = email.downcase
     end
     
-end
+end # end School.rb
 
