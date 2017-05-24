@@ -73,7 +73,7 @@ Rails.application.routes.draw do
   get    '/super_report',    to: 'teachers#super_report'
   get    '/admin',           to: 'teachers#admin'
   get    '/super',           to: 'schools#super'
-  post   '/super',           to: 'teachers#updateFocus'
+  patch   '/super',           to: 'schools#updateFocus' , as: :updateFocus
   get    '/backup',          to: 'schools#backup'
   get    '/suspend',         to: 'schools#suspend'  
   get    '/restore',        to: 'schools#restore'   
