@@ -5,8 +5,13 @@ class TeachersController < ApplicationController
   
   include TeachersHelper
   #Before actions to reduce access and prime pages to show teacher info.
+<<<<<<< HEAD
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
+=======
+  before_action :set_teacher, only: [:show, :edit, :update, :destroy]
+  before_action :same_school, only: [:show, :edit, :update, :destroy]
+>>>>>>> 1d8895f3f22d91b8c1395612c8a1225b32ddf1dc
   before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
   before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
 
