@@ -8,13 +8,4 @@ require 'test_helper'
 #   THE 'REMEMBER ME' FEATURE WHICH WE ARE NOT IMPLEMENTING
 class LoginSessionHelperTest < ActionView::TestCase
 
-  def setup
-    @teacher = teachers(:one)
-  end
-
-  test "current_teacher returns right teacher when session is nil" do
-    assert_equal @teacher, current_teacher
-    assert is_logged_in?
-  end
-
 end

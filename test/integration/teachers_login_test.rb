@@ -21,11 +21,20 @@ class TeachersLoginTest < ActionDispatch::IntegrationTest
     get root_path
     assert flash.empty?
   end
-
-  # test for user logout
+  
+  # Test the admin page guard
+  test "login as non-admin with valid information and test the admin guard" do
+    get login_path
+    assert_template 'login_session/new'
+    post login_path, params: { login_session: { user_name: @teacher.user_name, password: "password", id: 4 } }
+    get admin_path
+    assert flash.empty?
+  end
+  
+  # Test logging in and then make sure teacher/user can logout successfully
   test "login with valid information followed by logout" do
     get login_path
-    post login_path, params: { login_session: { user_name: @teacher.user_name, password: 'password' } }
+    post login_path, params: { login_session: { user_name: @teacher.user_name, password: "password" } }
     assert is_logged_in?
     assert_redirected_to @teacher
     follow_redirect!
@@ -43,21 +52,8 @@ class TeachersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", logout_path,      count: 0
     assert_select "a[href=?]", teacher_path(@teacher), count: 0
   end
-
-  # test "login with remembering" do
-  #   log_in_as(@teacher, remember_me: '1')
-  #   assert_not_nil cookies['remember_token']
-  # end
-
-  # test "login without remembering" do
-  #   # Log in to set the cookie.
-  #   log_in_as(@teacher, remember_me: '1')
-  #   # Log in again and verify that the cookie is deleted.
-  #   log_in_as(@teacher, remember_me: '0')
-  #   assert_empty cookies['remember_token']
-  # end
   
-  # Steven Royster
+  # Author: Meagan Moore & Steven Royster
   test "should flash incorrect username/password combination" do
     get login_path
     assert_template 'login_session/new'
