@@ -59,8 +59,10 @@ Rails.application.routes.draw do
   get    'about1'  => 'static_pages#about1'
   get    'about2'  => 'static_pages#about2'
   
-  get    'home1'   => 'static_pages#home1'
-  post   'home1'   => 'static_pages#home1'
+  # Commented out by Meagan Moore
+  # No home1 page? just home
+  #get    'home1'   => 'static_pages#home1'
+  #post   'home1'   => 'static_pages#home1'
   
   # Robert Herrera
   # Proper routes for super, admin, and schools
