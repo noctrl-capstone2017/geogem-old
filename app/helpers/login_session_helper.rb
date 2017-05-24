@@ -48,40 +48,11 @@ module LoginSessionHelper
     end
   end
   
-  # Commented out by Steven Royster
-  #    We are not implementing a remember me feature
-  # Forgets a persistent session.
-
-  # def forget(teacher)
-  #   #teacher.forget
-  #   cookies.delete(:teacher_id)
-  #   cookies.delete(:remember_token)
-  # end
-
-  
   # Logs out the current teacher.
   def log_out
     #forget(current_teacher)
     session.delete(:teacher_id)
     @current_teacher = nil
-  end
-  
-  # Redirects if user is not admin & is trying to do
-  # something they don't have permission to 
-  # def admin
-  #   if !is_admin?
-  #     flash[:danger] = "Unauthorized. You are not an administrator."
-  #     redirect_to home_path
-  #   end
-  # end
-  
-    # Redirects if user is not admin & is trying to do
-  # something they don't have permission to 
-  def super
-    if !is_super?
-      flash[:danger] = "Unauthorized. You are not a super user."
-      redirect_to home_path
-    end
   end
   
 end

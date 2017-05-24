@@ -43,6 +43,7 @@ class TeachersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", teacher_path(@teacher), count: 0
   end
   
+  # test for flash
   # Steven Royster
   test "should flash incorrect username/password combination" do
     get login_path
