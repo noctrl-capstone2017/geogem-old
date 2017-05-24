@@ -114,14 +114,36 @@ class TeachersController < ApplicationController
   end
 
   # POST /teachers
-  # POST /teachers.json
+  
+  # This updates the Teacher's password.
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  def update_password
+    teacher = current_teacher
+    # also in here i'm calling the authenticate method that usually is present in bcrypt.
+    if teacher and teacher.authenticate(params[:old_password])
+      if params[:password] == params[:password_confirmation]
+        teacher.password = BCrypt::Password.create(params[:password])
+        if teacher.save!
+          redirect_to teacher_edit_path, :flash => { :notice => "Password changed." }
+        end
+      else
+        redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
+      end
+    else
+      redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
+    end
+  end
+
+  # POST /teachers
+  # This creates a new Teacher. It's basically just scaffolding, but the redirect
+  # has been changed.
   def create
     @teacher = Teacher.new(teacher_params)
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to @teacher, :flash => { :notice => "Teacher was successfully created." } }
-        format.json { render :show, status: :created, location: @teacher }
+        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
+        format.json { render :index, status: :created, location: teachers_path }
       else
         format.html { render :new }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
@@ -156,7 +178,7 @@ class TeachersController < ApplicationController
   
   
   # PATCH/PUT /teachers/1
-  # PATCH/PUT /teachers/1.json
+  # This updates a teacher. It's essentially just scaffolding.
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
@@ -168,53 +190,47 @@ class TeachersController < ApplicationController
       end
     end
   end
-
-  # DELETE /teachers/1
-  # DELETE /teachers/1.json
-  def destroy
-    @teacher.destroy
-    respond_to do |format|
-      format.html { redirect_to teachers_url, notice: 'Teacher was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
    
-   # make list of all schools available here so I can query them and set the super users schools attr 
-   def super
+  # This method prepares the super view.
+  def super 
     @schools = School.all
-   end
-   #Robert Herrera
-   # POST /super
-  def updateFocus
-    teacher = Teacher.find(1)
-    schoolName = params[full_name]
-    teacher.full_name = schoolName
-
+   # @school = School.first
+    @teacher = Teacher.find(params[:id])
   end
+  
+
 
   private
-  
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def teacher_params
-      params.require(:teacher).permit(:user_name, :last_login,
-      :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation)
-    end
-    
-    #Can only access teachers and info from the same school
-    def same_school
-      if current_teacher.school_id != Teacher.find(params[:id]).school_id
-        redirect_to home_path, notice: "You can't access other schools."
+    private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_teacher
+        @teacher = Teacher.find(params[:id])
       end
+      
+      def set_school
+        @school = School.find(current_teacher.school_id)
+      end
+  
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def teacher_params
+        params.require(:teacher).permit(:user_name, :last_login,
+        :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
+        :school_id, :password, :password_confirmation)
+      end
+      
+      #Can only access teachers and info from the same school
+      def same_school
+        if current_teacher.school_id != Teacher.find(params[:id]).school_id
+          redirect_to home_path, notice: "You can't access other schools."
+        end
+      end
+      
+      # Switching the focus school 
+      def focus_school_params 
+        params.require(:full_name).permit(:school_id)
+      end 
     end
-    
-    # Switching the focus school 
-    def focus_school_params 
-      params.require(:full_name).permit(:school_id)
-    end 
 end

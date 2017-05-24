@@ -26,14 +26,6 @@ class SessionsController < ApplicationController
   def show
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
-  
-    
-   if params[:end_session]
-    respond_to do |format|
-            format.html { redirect_to @session, notice: 'Session was successfully created.' }
-            format.json { render :end_session, status: :created, location: @session }
-    end
-   end
   end
 
   # GET /sessions/new
