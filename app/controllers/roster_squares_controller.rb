@@ -58,15 +58,23 @@ class RosterSquaresController < ApplicationController
     @square_color = Square.find(roster_square.square_id).color
   end
   
-  def is_student_square (square, roster_square)
-    if RosterSquare.exists?(:square_id => square.id)
-      @is_square = true
+  def is_student_square(square)
+    @is_square = false
+    @student_squares.each do |student_square|
+    @is_square = false
+      if square.id == student_square.square_id
+        @is_square = true
+        break
+      end
+      
+      if @is_square != true
+        @is_square = false
+      end 
+      
     end
+    @is_square
   end
   
-  def set_not_student_squares
-    
-  end
   # POST /roster_squares
   # POST /roster_squares.json
   def create
@@ -74,7 +82,7 @@ class RosterSquaresController < ApplicationController
     @students = Student.find_by_id(params[:id])
     @squares = Square.all
     @square = Square.find_by_id(params[:id])
-    
+    @student_squares = RosterSquare.where(student_id: @students)
     respond_to do |format|
       if @roster_square.save
         format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully created.' }
