@@ -45,13 +45,11 @@
 				<div class="form-group col-xs-2">
 					<select class="form-control" id="addStud">
 						<!-- Loops through checking which squares the student has in the roster of squares-->
-					 <% @roster_squares.each do |roster_square| %>
-						<% @squares.each do |square| %>
-						<!-- Make sure to only check this students squares-->
-								<% if roster_square.student_id == @students.id && roster_square.square_id == square.id %>
-									<option><%= square.screen_name %> - <%= square.full_name %></option>
-								<%end%>
-						<%end%>
+					<% @student_squares.each do |student_squares| %>
+						<% current_square_screen_name = set_square_name(student_squares) %>
+						<% current_square_full_name = set_square_desc(student_squares) %>
+						<% current_square_id = set_square_id(student_squares) %>
+						<option><%= current_square_screen_name %> - <%= current_square_full_name %></option>
 					<%end%>
 					</select>
 				</div>

@@ -5,6 +5,7 @@ class RosterSquaresController < ApplicationController
   helper_method :set_square_id
   helper_method :set_square_desc
   helper_method :set_roster_id
+  helper_method :is_student_square
   # GET /roster_squares
   # GET /roster_squares.json
   def index
@@ -27,9 +28,12 @@ class RosterSquaresController < ApplicationController
     #Get set of squares and students to be used in roster squares.
     @roster_square = RosterSquare.new
     @roster_squares = RosterSquare.all
-    @students = Student.find_by_id(params[:id]) 
+    @students = Student.find_by_id(params[:id])
+    @student_squares = RosterSquare.where(student_id: @students.id)
+    @school_squares = Square.where(school_id: @students.school_id)
     @square = Square.find_by_id(params[:id])
     @squares = Square.all
+    #@not_student_squares = Square.where.not(id: @student_squares.find(student_id).square_id)
   end
   
   #Below are helpers methos that when called allow you to check certain fields
@@ -54,6 +58,15 @@ class RosterSquaresController < ApplicationController
     @square_color = Square.find(roster_square.square_id).color
   end
   
+  def is_student_square (square, roster_square)
+    if RosterSquare.exists?(:square_id => square.id)
+      @is_square = true
+    end
+  end
+  
+  def set_not_student_squares
+    
+  end
   # POST /roster_squares
   # POST /roster_squares.json
   def create
@@ -92,7 +105,7 @@ class RosterSquaresController < ApplicationController
   def destroy
     @roster_square.destroy
     respond_to do |format|
-      format.html { redirect_to roster_squares_url, notice: 'Roster square was successfully destroyed.' }
+      format.html { redirect_to  "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -22,9 +22,19 @@
 			<label for="addSquare"><h4>Add Square: </h4></label>
 		</div>
   	<div class="form-group col-xs-2">
-        <%= f.select :square_id, options_for_select(@squares.map {|squares| ["#{squares.screen_name } - #{squares.full_name }", squares.id, {'data-id'=>squares.id}] }), class: "form-control", id: "addStud"%>
-        <!-- This the id for the student it's just hidden-->
-        <%= f.hidden_field :student_id, :value => @students.id%>
+  	 
+  	 	<select class="form-control" id="addStud">
+						<!-- Loops through checking which squares the student has in the roster of squares-->
+    			 <% @school_squares.each do |square| %>
+    			   <% @student_squares.each do |roster_square| %>
+    			     <% is_student_square(square, roster_square) %>
+    			   <%end%>
+
+      				<option><%= square.screen_name %> - <%= square.full_name %></option>
+    			<%end%>
+    	</select>
+  	 
+
   	</div>
 		<%= f.submit "Add Square", class:"btn btn-success"%>
 	</div>
