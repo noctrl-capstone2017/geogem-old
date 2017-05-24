@@ -1,4 +1,5 @@
 # author: Kevin M, Tommy B
+# admin methods by Dakota B.
 # Teacher methods, as well as admin, super, and home stuff.
 class TeachersController < ApplicationController
   
