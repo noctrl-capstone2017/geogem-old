@@ -13,12 +13,12 @@ class TeachersController < ApplicationController
   
   # commented out by Meagan Moore
   # no bueno
-  #before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
-  #before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
+  before_action :is_admin, except: [:home, :update, :edit, :edit_password, :update_password]
+  before_action :is_super, except: [:index, :home, :update, :edit, :edit_password, :update_password]
   
   # Good guards by Meagan Moore
-  before_action :is_admin, only: [:admin, :update, :update_password]
-  before_action :is_super, only: [:admin, :update, :update_password]
+  #before_action :is_admin, only: [:admin, :update_password]
+  #before_action :is_super, only: [:admin, :update_password]
 
   # GET /teachers
   # GET /teachers.json
