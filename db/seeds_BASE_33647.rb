@@ -1,14 +1,3 @@
-#Author: Taylor Spino
-
-stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o", 
-            "gamepad","heart", "leaf","paper-plane","paw","star","graduation-cap"];
-        
-teach_icons = ["apple", "book", "pencil", "calculator"];
-
-
-#Took out light
-colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavendar", "plum", "pink"];
-
 # Seed the database with a School
 # School.find(1)
 School.create!(full_name: "North Central",
@@ -22,16 +11,20 @@ School.create!(full_name: "North Central",
 
 #School seeds added by - Dakota B
 30.times do |n|
-  School.create!(full_name: Faker::University.name,
+  color = Faker::Commerce.color
+  email = "example-#{n+1}@railstutorial.org"
+  desc = Faker::Lorem.sentence
+  pre = Faker::Address.city_suffix
+  pos = Faker::Address.city_prefix
+  School.create!(full_name: pre + pos + "University",
                  screen_name: "test",
-                 icon: "apple",
-                 color: colors.sample,
-                 email: "example-#{n+1}@railstutorial.org",
+                 icon: pre,
+                 color: color,
+                 email: email,
                  website: "www.example.edu",
-                 description: Faker::Lorem.sentence)
+                 description: desc)
     
 end
-
 
 # Seed the database with an initial Super user profbill
 # Associate him with North Central College (school_id: 1)
@@ -88,8 +81,8 @@ Teacher.create!(user_name: "admin",
   Student.create!(  screen_name: "temp",
                     contact_info: "student contact info",
                     description: "student description",
-                    icon: stud_icons.sample,
-                    color: colors.sample,
+                    icon: "bicycle",
+                    color: "green",
                     session_interval: 20,
                     school_id: 1,
                     full_name: name)
@@ -117,7 +110,7 @@ end
                  screen_name: "S#{n+1}",
                  tracking_type: (n%3)+1,    #1, 2, or 3 NEED TO CHANGE THIS FOR ENUM CLASS
                  description: name,
-                 color: colors.sample,
+                 color: "red",
                  school_id: 1)
 end
 
@@ -150,7 +143,7 @@ Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 session_teacher: 1,
                 session_student: 1)
                 
-# Seed the database with a session between the first teacher and third student
+# Seed the database with a session between the first teacher and first student
 Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
                 end_time: DateTime.new(2017,3,22,8,05, 0),
                 session_teacher: 1,
@@ -175,11 +168,11 @@ SessionEvent.create!(behavior_square_id: roster_IDS[n%5].square_id,
 x = x + 16.0/1440
 end
 
-#Used to check events that start/end at interval endpoint
-SessionEvent.create!(behavior_square_id: roster_IDS[1].square_id,
-                      square_press_time: DateTime.new(2017,5,15,8,45, 0),
-                      duration_end_time: DateTime.new(2017,5,15,8,48, 0),
-                      session_id:1)
+#Made this seed to debug and check events that start/end at interval endpoint
+# SessionEvent.create!(behavior_square_id: roster_IDS[1].square_id,
+#                      square_press_time: DateTime.new(2017,5,15,8,45, 0),
+#                      duration_end_time: DateTime.new(2017,5,15,8,48, 0),
+#                      session_id:1)
 
 # Seed the database with 5 notes for the seeded Session
 y = DateTime.new(2017,5,15,8, 37, 0)
@@ -188,39 +181,3 @@ SessionNote.create!(note: Faker::Lorem.sentence,
                 session_id: 1, created_at: y)
 y = y + 11.0/1440
 end
-
-# |---------------------SEEDS FOR TEST USE-------------------------------|
-# Seed the database with a disposable test school and two teachers
-School.create!(full_name: "South Central",
-               screen_name: "soctrl",
-               icon: "apple",
-               color: "red",
-               email: "soctrl@noctrl.edu",
-               website: "soctrl.edu",
-               description: "It's South Central!")
-               
-Teacher.create!(user_name: "TEST_teacher1",
-                password: "password",
-                password_confirmation: "password",
-                last_login: Time.now,
-                full_name: "TEST1",
-                screen_name: "TEST1",
-                icon: "apple",
-                color: "green",
-                email: "teacher@soctrl.edu",
-                description: "General teacher login",
-                powers: "Teacher",
-                school_id: 32)
-                
-Teacher.create!(user_name: "TEST_teacher2",
-                password: "password",
-                password_confirmation: "password",
-                last_login: Time.now,
-                full_name: "TEST2",
-                screen_name: "TEST2",
-                icon: "apple",
-                color: "green",
-                email: "teacher@soctrl.edu",
-                description: "General teacher login",
-                powers: "Teacher",
-                school_id: 32)
