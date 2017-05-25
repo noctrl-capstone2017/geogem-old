@@ -54,7 +54,7 @@
          <div class="col-xs-2">
             <a href="/home" class="btn btn-lg btn-primary">Home</a>
             </div>
-            <div style="float:left; width:auto; margin-top:-14px">
+            <div style="float:left; width:auto;">
             <%= button_to 'Print Report', {:controller => "reports", :action => "report1", 
              :id=> @session.id} , {:method=>:post, class: "btn btn-lg btn-success btnFix"}  %>
              </div>
