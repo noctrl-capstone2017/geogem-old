@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy]
+  helper :Sessions
 
   # GET /sessions
   # GET /sessions.json
@@ -10,9 +11,17 @@ class SessionsController < ApplicationController
   #Alex P + Matthew O
   def end_session
     @session = Session.find(params[:id])
-    @session.start_time = params[:start].to_s
-    @session.end_time = params[:end].to_s
-    @session.save
+    if(@session.start_time.nil?)
+      if params[:end_sess1]
+        @session.start_time = params[:start].to_s
+        @session.end_time = params[:end].to_s
+        @session.save
+      elsif params[:end_sess2] 
+        @session.start_time = params[:start2].to_s
+        @session.end_time = params[:end2].to_s
+        @session.save
+      end
+    end
     @student = Student.find(@session.session_student)
     @teacher = Teacher.find(@session.session_teacher)
     @squares = @student.squares

@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   get     'graph/other'
   
   # mloptien: waiting for confirmation on this route from mObzera
-  # post    '/session_events',  to: 'session_events#create'
+  post    '/session_events',  to: 'session_events#create'
   
   #route to pdf from session page
   post    '/report1',  to: 'reports#report1'
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
   resources :roster_students
   resources :roster_squares
   resources :session_notes 
-  resources :session_events
+  #resources :session_events
   resources :squares
   resources :students
   resources :schools
