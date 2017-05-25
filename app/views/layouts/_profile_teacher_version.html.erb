@@ -1,6 +1,7 @@
 <!--This is the teacher version of the profile view. They can't change too much,
   but just enough.-->
 <%= form_for(@teacher) do |f| %>
+<div class="col-xs-11"><h4><%= notice %></h4></div>
 <% if @teacher.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
