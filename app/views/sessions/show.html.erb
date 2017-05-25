@@ -32,9 +32,11 @@
         <span onclick="openNav()"><i class="fa fa-chevron-circle-left fa-2x"></i></span>
     </div>
     <div class="col-xs-6  col-md-4 pull-right">
-        <button class="btn btn-lg btn-secondary noteBtn"><i class="fa fa-pencil-square-o icon-white fa-lg"></i> Notes</button>
+        <div style="display:inline">
+            <button class="btn btn-lg btn-secondary noteBtn"><i class="fa fa-pencil-square-o icon-white fa-lg"></i> Notes</button>
+        </div>
         <%= form_tag end_session_path, :method => :POST do%>
-            <div class="actions">
+            <div class="actions btnFix" style="float:left; display:inline">
                 <%= hidden_field_tag :start %>
                 <%= hidden_field_tag :end %>
                 <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
