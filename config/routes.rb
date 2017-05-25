@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get     'graph/todo'
   get     'graph/other'
   
-  # mloptien: waiting for confirmation on this route from mObzera
+  #route to create session events during the session
   post    '/session_events',  to: 'session_events#create'
   
   #route to pdf from session page
@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   resources :roster_students
   resources :roster_squares
   resources :session_notes 
-  #resources :session_events
   resources :squares
   resources :students
   resources :schools
