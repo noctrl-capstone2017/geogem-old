@@ -13,8 +13,9 @@
 <div class="row first-content-row">
 	<div class="col-xs-3">
 		<p><%= notice %></p>
-		<%= button_to "New Teacher", new_teacher_path,
-    :class => "col-sm-offset-1 btn btn-lg btn-success", :method => :get %>
+		<%= button_to new_teacher_path, method: :get, class: 'col-sm-offset-1 btn btn-lg btn-success' do %>
+  		<i class="fa fa-plus-square-o"></i> New Teacher
+		<% end %>
 	</div><!-- End col-->
 </div><!-- End row -->
 
@@ -25,7 +26,7 @@
 			<th class="col-xs-1">Icon</th>
 			<th>ID</th>
 			<th>Name</th>
-			<th>Admin</th>
+			<th>Powers</th>
 			<th>Last Login</th>
 		</tr>
 	</thead>
