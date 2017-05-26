@@ -15,7 +15,7 @@
       <!--End page header-->
       <div class="row">
          <div class="col-xs-10 col-xs-offset-1">
-           <h4>Session Duration: <%= calculateDuration =%> min</h4>
+           <h4>Session Duration: <%= calculateDuration =%></h4>
             <br>
             <h4>Quick Summary:</h4>
             <table class="table table-striped table-hover table-responsive">
@@ -54,7 +54,7 @@
          <div class="col-xs-2">
             <a href="/home" class="btn btn-lg btn-primary">Home</a>
             </div>
-            <div style="float:left; width:auto; margin-top:-14px">
+            <div style="float:left; width:auto;">
             <%= button_to 'Print Report', {:controller => "reports", :action => "report1", 
              :id=> @session.id} , {:method=>:post, class: "btn btn-lg btn-success btnFix"}  %>
              </div>
