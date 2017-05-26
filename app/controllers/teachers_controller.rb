@@ -156,7 +156,7 @@ class TeachersController < ApplicationController
           end
         end
     elsif params[:analyze]
-        redirect_to analysis_path
+        redirect_to analysis_student_path(params[:student_id])
     end
   end
   
