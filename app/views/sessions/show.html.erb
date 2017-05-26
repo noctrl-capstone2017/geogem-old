@@ -21,7 +21,7 @@
             <div class="actions">
                 <%= hidden_field_tag :start %>
                 <%= hidden_field_tag :end %>
-                <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
+                <%= submit_tag "End Session", :name => 'end_sess1',  :onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
             </div>
         <% end %>
     </div>
@@ -37,8 +37,8 @@
         </div>
         <%= form_tag end_session_path, :method => :POST do%>
             <div class="actions btnFix vertical-align" style="float:left; width:auto; display:block">
-                <%= hidden_field_tag :start %>
-                <%= hidden_field_tag :end %>
+                <%= hidden_field_tag :start2 %>
+                <%= hidden_field_tag :end2 %>
                 <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
             </div>
         <% end %>
