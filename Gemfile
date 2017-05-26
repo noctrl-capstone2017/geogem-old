@@ -22,6 +22,7 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'time_difference'
 gem 'chartkick'
+gem 'groupdate'
 
 group :development, :test do
   gem 'rails-controller-testing'
