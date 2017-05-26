@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   def end_session
     @session = Session.find(params[:id])
     #if time is already set for the sessions do not reset it
-    if(@session.start_time.nil?)
+    if(@session.start_time.nil? and @session.end_time.nil?)
       #allows for 2 end session buttons
       if params[:end_sess1]
         @session.start_time = params[:start].to_s
