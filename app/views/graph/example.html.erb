@@ -2,7 +2,7 @@
 <p>Find me in app/views/graph/example.html.erb</p>
 <%= @sesh1Events = SessionEvent.where(session_id:1) %>
 
-<%= line_chart @allSessions.group_by_minute(:square_press_time).count %>
+<%= line_chart @allSessions.group_by_minute(:start_time).count %>
 <%= bar_chart @sesh1Events.group(:behavior_square_id).count %>
 
 <p>timeline of session events</p>
