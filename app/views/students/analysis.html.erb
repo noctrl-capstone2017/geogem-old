@@ -1,14 +1,10 @@
-<!--Author: Carolyn C--->
-<!--Spacing fixed up by Kevin M for Sprint 3.-->
-<!--I still need some help getting the name to dynamically appear. I tried doing <*%=student.full_name%> (minus the star) w/ my controller and it didn't work.-->
-<!--Also the /report1 still isn't working? Maybe?-->
 <body>
     <div class="container">
         <div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0">
             <!--page header -->
             <div class="page-header vertical-align">
                 <div class="col-xs-11">
-                    <h2>Analysis <small> -Reports for Student1.</small></h2><!--Dynamically fills in with school id -->
+                    <h2>Analysis <small> Reports for <%= @student.full_name %> </small></h2><!--Dynamically fills in with school id -->
                 </div>
                 <div class="col-xs-1 center-block">
                     <div class="header-sq i-gray" title="Analysis">
@@ -21,7 +17,7 @@
                 <div class="form-group"> 
                         <div class="row">
                             <div class = "col-xs-2">
-                				<a href="report1">
+                				<a href="teachers/analysis2">
         	                        <div class="col-xs-2 col-xs-offset-1 text-center" title="Analysis">
         	                            <div class ="action-sq i-navy center-block" >
         		                            <span class="fa fa-file-text-o fa-4x action-icon" ></span>
@@ -38,7 +34,7 @@
                         <br>
                         <div class="row">
                             <div class = "col-xs-2">
-                				<a href="/report1">
+                				<a href="teachers/analysis3">
         	                        <div class="col-xs-2 col-xs-offset-1 text-center" title="Analysis">
         	                            <div class ="action-sq i-red center-block" >
         		                            <span class="fa fa-bar-chart fa-4x action-icon" ></span>
@@ -55,7 +51,7 @@
             			<br>
             			<div class="row">
                             <div class = "col-xs-2">
-                				<a href="/report1">
+                				<a href="teachers/analysis2">
         	                        <div class="col-xs-2 col-xs-offset-1 text-center" title="Analysis">
         	                            <div class ="action-sq i-yellow center-block" >
         		                            <span class="fa fa-file-excel-o fa-4x action-icon" ></span>

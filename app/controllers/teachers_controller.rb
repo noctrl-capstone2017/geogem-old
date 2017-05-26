@@ -146,7 +146,6 @@ class TeachersController < ApplicationController
         @session = Session.new
         @session.session_teacher = @teacher.id
         @session.session_student = params[:student_id]
-        @session.start_time = Time.now
         respond_to do |format|
           if @session.save
             format.html { redirect_to @session, notice: 'Session was successfully created.' }
@@ -157,7 +156,7 @@ class TeachersController < ApplicationController
           end
         end
     elsif params[:analyze]
-        redirect_to analysis_path
+        redirect_to analysis_student_path(params[:student_id])
     end
   end
   
