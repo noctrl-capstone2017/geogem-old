@@ -1,0 +1,102 @@
+<div class="page-header cap17-header vertical-align">
+	<div class="col-xs-11">
+		<h2>Login Settings<small> - edit login settings for Teacher EddieZ</small></h2>
+	</div>
+	<div class="col-xs-1">
+		<div class="header-sq i-plum" title="Bianca17">
+			<span class="fa fa-apple fa-3x teacher-icon "></span>
+		</div>
+	</div>
+</div>
+
+	<!--Edit Login Settings form -->
+	<form class="form-horizontal" action="teacher2.html">
+
+	 	<!-- Teacher ID -->
+	 	<div class="row form-row">
+			<div class="col-xs-2 col-xs-offset-1"><h4> Teacher ID: </h4></div>
+			<div class="col-xs-2">
+				<input type="id" class="form-control" id="teacherID" placeholder="EddieZ">
+			</div>
+		</div>
+	
+		<!-- Teacher name -->
+		<div class="row form-row">
+   		<div class="col-xs-1 col-xs-offset-1"><h4>Name: </h4></div>
+   			<div class="col-xs-4 col-xs-offset-1">
+				<input type="name" class="form-control" id="teacherName" placeholder="Edward Z. Jones">
+			</div>
+		</div>   <!-- row -->
+
+		<!-- a little extra space after name/email -->
+		<div class="form-spacer">	&nbsp;</div>
+		<hr width="80%">
+		<div class="form-spacer">	&nbsp;</div>
+
+		<!-- Teacher powers -->
+		<div class="row form-row">
+			<div class="col-xs-2 col-xs-offset-1"><h4>Teacher powers: </h4></div>
+			<div class="col-xs-4">
+				<select name="colors">
+					<option value="Cyan">Admin</option>
+					<option value="Blue">Teacher</option>
+					<option value="Red">SessionOnly</option>
+				</select>
+			</div>
+ 		</div>
+
+		<!-- Teacher login suspended? -->
+		<div class="row form-row">
+			<div class="col-xs-2 col-xs-offset-1"><h4>Login status: </h4></div>
+			<div class="col-xs-4 checkbox">
+				<label><input type="checkbox" checked="checked">Suspended</label>
+			</div>
+		</div>
+
+		<!-- OK, Cancel buttons -->
+		<div class="row "> 
+			<div class="col-xs-4 col-xs-offset-2 text-center">
+				<button type="submit" class="btn btn-success">Change Settings</button>
+				&nbsp; &nbsp; &nbsp;
+				<button type="submit" class="btn btn-danger">Cancel</button>
+			</div>
+		</div>
+	</form>   <!-- settings form -->
+
+
+	<!-- a little extra space after name/email -->
+	<div class="form-spacer">	&nbsp;</div>
+	<hr width="80%">
+	<div class="form-spacer">	&nbsp;</div>
+
+	<!-- Change Password form -->
+	<form class="form-horizontal" action="teacher2.html">
+		
+		<!-- new password -->
+	  <div class="row form-row">
+		  <label class="control-label col-sm-3" for="newPass"><h4>New Password:</h4></label>
+			<div class="col-sm-4"> 
+			  <input type="password" class="form-control" id="newPass">
+			</div>
+	  </div>
+		
+		<!-- confirm new password -->
+	  <div class="row form-row">
+		  <label class="control-label col-sm-3" for="confPass"><h4>Confirm New Password:</h4></label>
+			<div class="col-sm-4"> 
+			  <input type="password" class="form-control" id="confPass">
+			</div>
+	  </div>
+		
+		<!-- OK, Cancel buttons -->
+		<div class="row "> 
+			<div class="col-xs-4 col-xs-offset-2 text-center">
+				<button type="submit" class="btn btn-success">Change Password</button>
+				&nbsp; &nbsp; &nbsp;
+				<button type="submit" class="btn btn-danger">Cancel</button>
+			</div>
+		</div>
+	</form>   <!-- change password form-->
+
+	</div>   <!-- col -->
+</div><!--End row-->
