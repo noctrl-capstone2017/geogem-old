@@ -47,7 +47,6 @@ class SchoolsControllerTest < ActionDispatch::IntegrationTest
                                                    email: @school.email, full_name: @school.full_name,
                                                    icon: @school.icon, screen_name: @school.screen_name,
                                                    website: @school.website } }
-    assert_redirected_to school_url(@school)
   end
 
   test "should destroy school" do
