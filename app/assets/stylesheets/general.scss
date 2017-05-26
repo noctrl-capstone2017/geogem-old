@@ -157,10 +157,12 @@ body
 	color: #FFFFFF;
 }
 
-/*This fixes the weird ruby buttons*/
+/*This fixes the weird ruby buttons by doing the width and a 0 top margin*/
+/*The margin fixes in-line problems. Variations may be necessary due to variable lengths*/
 .btnFix
 {
-	width:150px;
+	width:auto;
+	margin-top:0;
 }
 
 /*********************************************************
@@ -400,14 +402,13 @@ input[type="radio"]:checked + label {
  
  /*Note from Carolyn C- took this from Sessions.scss*/ 
 /***********************************************************
-* BUTTON STYLING
+* BUTTON STYLING FOR SESSIONS
 ************************************************************/
 .noteBtn
 {
 	margin-right: 10px;
 	float:left;
 }
-
 /***********************************************************
 * BEHAVIOR SQUARES
 ************************************************************/

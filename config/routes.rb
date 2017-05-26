@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   get     '/admin_report',    to: 'teachers#admin_report' 
   get     '/super_report',    to: 'teachers#super_report'
   get     '/admin',           to: 'teachers#admin'
-  get     '/super',           to: 'schools#super'
-  post    '/super',           to: 'teachers#updateFocus'
+  get     '/super',           to: 'schools#super' 
+  patch    '/super',           to: 'schools#updateFocus'
   get     '/backup',          to: 'schools#backup'
   get     '/suspend',         to: 'schools#suspend'  
   get     '/restore',         to: 'schools#restore'
@@ -40,8 +40,8 @@ Rails.application.routes.draw do
   get     'graph/todo'
   get     'graph/other'
   
-  # mloptien: waiting for confirmation on this route from mObzera
-  # post    '/session_events',  to: 'session_events#create'
+  #route to create session events during the session
+  post    '/session_events',  to: 'session_events#create'
   
   #route to pdf from session page
   post    '/report1',  to: 'reports#report1'
@@ -68,7 +68,6 @@ Rails.application.routes.draw do
   resources :roster_students
   resources :roster_squares
   resources :session_notes 
-  resources :session_events
   resources :squares
   resources :students
   resources :schools

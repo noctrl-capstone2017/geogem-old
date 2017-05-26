@@ -6,6 +6,7 @@ window.onload = function () {
   var startTime = document.getElementById("start_time");
   startTime.innerHTML = timeOnlyStamp();
   document.getElementById("start").value = timeStamp();
+  document.getElementById("start2").value = timeStamp();
   //Creates all the objects for duration behaviors
   var durationDivs = document.getElementsByClassName("duration");
   var timerSquares = [];
@@ -227,5 +228,6 @@ function getSessionId(sessionEvent)
 function getEndTime()
 {
   document.getElementById("end").value = timeStamp();
+  document.getElementById("end2").value = timeStamp();
   return true;
 }

@@ -1,6 +1,6 @@
 //@author Debra J & Matthew O 
 //Quick note during a session
-( document ).ready(function() {
+$( document ).ready(function() {
 	$('.noteBtn').on('click', function () {
 		$.confirm({
 			title: 'Notes:',
