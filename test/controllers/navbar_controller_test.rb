@@ -28,11 +28,5 @@ class NavbarControllerTest < ActionDispatch::IntegrationTest
         get about2_path
         assert_response:success
     end
-    
-    #If on logout, it should be navbar3
-    test "should get navbar3 for logout" do
-        get logout_path
-        assert_response:success
-    end
 
 end

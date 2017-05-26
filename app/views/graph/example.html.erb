@@ -1,5 +1,5 @@
 <h1>Graph#example</h1>
 <p>Find me in app/views/graph/example.html.erb</p>
-<%= bar_chart @sessionGroup.group(:id).sum(:tally) %>
-<%= line_chart @sessionGroup.group(:id).sum(:tally) %>
+<%= bar_chart @studentSessions.group(:id).sum(:tally) %>
+<%= line_chart @studentSessions.group(:id).sum(:tally) %>
 <p>timeline of session events</p>
