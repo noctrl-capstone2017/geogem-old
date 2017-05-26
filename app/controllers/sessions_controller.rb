@@ -17,12 +17,10 @@ class SessionsController < ApplicationController
         @session.start_time = params[:start].to_s
         @session.end_time = params[:end].to_s
         @session.save
-        redirect_to end_session_path
       elsif params[:end_sess2] 
         @session.start_time = params[:start2].to_s
         @session.end_time = params[:end2].to_s
         @session.save
-        redirect_to end_session_path
       end
     end
     @student = Student.find(@session.session_student)
