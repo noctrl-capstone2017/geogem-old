@@ -1,4 +1,9 @@
+<!-- note from Carolyn C: This should make it nav3 if not logged in, nav1 if you are. Should solve double screen issue.-->
+<% if logged_in? %>
+
+<% else %>
 <%= render 'layouts/navbar3' %>
+<% end %>
 	<!-- page header -->
 	<!-- Another note from Carolyn C: again, if you are working on a page that you see while NOT logged in, you need to manually add the container and the div associated.-->
 	<div class="container">

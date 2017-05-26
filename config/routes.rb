@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root    'login_session#new'
   get     '/home' ,           to: 'teachers#home'
   get     '/analysis',        to: 'teachers#analysis'
+  get     '/analysis2',        to: 'teacher#analysis2'
   get     'static_pages/help'
   
   get     '/report1',         to: 'reports#report1'
