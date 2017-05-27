@@ -61,7 +61,7 @@
 		
 		<!--A roundabout way of making ltblue display as light blue.-->
 		<% if @teacher.color == 'ltblue' %>
-			<%= f.select :color, options_for_select(colorNames, :selected => 'light blue'), 
+			<%= f.select :color, options_for_select(colorNames, :selected => 'red'), 
 			class: 'form-control' %>
 		<% end %>
 		
@@ -69,6 +69,7 @@
 		<% if @teacher.color != 'ltblue' %>
 			<%= f.select :color, colorNames, class: 'form-control' %>
 		<% end %>
+		
 	</div>
 </div>
 
