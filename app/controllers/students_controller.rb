@@ -47,6 +47,12 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
   end
+  
+  #Author: Carolyn C
+  #For analysis purposes
+  def analysis
+   @student = Student.find(params[:id])
+  end
 
   # POST /students
   # POST /students.json

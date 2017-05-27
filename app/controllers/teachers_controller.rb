@@ -56,14 +56,14 @@ class TeachersController < ApplicationController
     
     #Admins always have every student, so they can't add or remove from any admins.
     if params[:add_student]
-        if params[:add_student_id != nil]
+        if params[:add_student_id] != nil
           if @teacher.powers != "Admin"
             @teacher.students << Student.find(params[:add_student_id])
           end
         end
         
     elsif params[:remove_student]
-      if params[:remove_student_id != nil]
+      if params[:remove_student_id] != nil
         if @teacher.powers != "Admin"
           @teacher.students.delete(Student.find(params[:remove_student_id]))
         end
@@ -156,7 +156,7 @@ class TeachersController < ApplicationController
           end
         end
     elsif params[:analyze]
-        redirect_to analysis_path
+        redirect_to analysis_student_path(params[:student_id])
     end
   end
   
@@ -197,7 +197,7 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation)
+      :school_id, :password, :password_confirmation, :suspended)
     end
     
     #Can only access teachers and info from the same school

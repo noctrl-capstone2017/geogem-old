@@ -4,8 +4,6 @@ Rails.application.routes.draw do
 
   root    'login_session#new'
   get     '/home' ,           to: 'teachers#home'
-  get     '/analysis',        to: 'teachers#analysis'
-  get     '/analysis2',        to: 'teacher#analysis2'
   get     'static_pages/help'
   
   get     '/report1',         to: 'reports#report1'
@@ -15,8 +13,8 @@ Rails.application.routes.draw do
   get     '/admin_report',    to: 'teachers#admin_report' 
   get     '/super_report',    to: 'teachers#super_report'
   get     '/admin',           to: 'teachers#admin'
-  get     '/super',           to: 'schools#super' 
-  patch    '/super',           to: 'schools#updateFocus'
+  get     '/super',           to: 'schools#super'
+  post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
   get     '/backup',          to: 'schools#backup'
   get     '/suspend',         to: 'schools#suspend'  
   get     '/restore',         to: 'schools#restore'
@@ -66,10 +64,17 @@ Rails.application.routes.draw do
     end
   end
   
+  #Carolyn C - send student to analysis page
+  resources :students do
+    member do
+      get :analysis
+    end
+  end
+  
+  
   resources :roster_students
   resources :roster_squares
   resources :session_notes 
   resources :squares
-  resources :students
   resources :schools
 end
