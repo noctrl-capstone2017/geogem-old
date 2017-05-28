@@ -4,7 +4,7 @@ window.onload = function () {
   
   //Start time of the session
   var startTime = document.getElementById("start_time");
-  startTime.innerHTML = timeOnlyStamp();
+  startTime.innerHTML = "Start Time: " + timeOnlyStamp();
   document.getElementById("start").value = timeStamp();
   document.getElementById("start2").value = timeStamp();
   //Creates all the objects for duration behaviors
