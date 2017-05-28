@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   get     '/backup',          to: 'schools#backup'
   get     '/suspend',         to: 'schools#suspend'  
   get     '/restore',         to: 'schools#restore'
-
-  #to disguise teachers/id/edit_password as just /password
+  
+  # Teacher routes
+  # Author: Kevin M and Tommy B
+  # to disguise teachers/id/edit_password as just /password
   get     '/password',        to: 'teachers#edit_password'
   get     'teachers/:id/login_settings',
                               to: 'teachers#login_settings'
