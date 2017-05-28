@@ -18,9 +18,16 @@ Rails.application.routes.draw do
   get     '/backup',          to: 'schools#backup'
   get     '/suspend',         to: 'schools#suspend'  
   get     '/restore',         to: 'schools#restore'
+<<<<<<< HEAD
 
   #Teacher controller routing
   #to disguise teachers/id/edit_password as just /password
+=======
+  
+  # Teacher routes
+  # Author: Kevin M and Tommy B
+  # to disguise teachers/id/edit_password as just /password
+>>>>>>> d6d18e42a8f9646a2dda529a39d349a003986df7
   get     '/password',        to: 'teachers#edit_password'
   patch 'teachers/:id/change_password', to: 'teachers#change_password'
   get     'teachers/:id/login_settings',
