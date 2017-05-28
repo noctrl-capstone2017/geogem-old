@@ -87,6 +87,7 @@ class TeachersController < ApplicationController
   def edit
     if !is_admin?
       @teacher = @current_teacher
+      params[:id] = @teacher.id
     end
   end
   
@@ -102,24 +103,7 @@ class TeachersController < ApplicationController
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
     @teacher = current_teacher
-  end
-  
-  # This changes the Teacher's password.
-  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  def change_password
-    teacher = current_teacher
-    if teacher and teacher.authenticate(params[:old_password])
-      if params[:password] == params[:password_confirmation]
-        teacher.password = BCrypt::Password.create(params[:password])
-        if teacher.save!
-          redirect_to teacher_edit_path, :flash => { :notice => "Password changed." }
-        end
-      else
-        redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
-      end
-    else
-      redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
-    end
+    params[:id] = @teacher.id
   end
 
   # POST /teachers
@@ -130,7 +114,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
+        foat.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
         format.json { render :index, status: :created, location: teachers_path }
       else
         format.html { render :new }
@@ -138,7 +122,6 @@ class TeachersController < ApplicationController
       end
     end
   end
-
 
   #author: Matthew O & Alex P
   #home page for teachers, display top 8 most used students, route to anaylze or new session
@@ -167,13 +150,36 @@ class TeachersController < ApplicationController
   # PATCH/PUT /teachers/1
   # This updates a teacher. It's essentially just scaffolding.
   def update
-    respond_to do |format|
-      if @teacher.update(teacher_params)
-        format.html { redirect_to edit_teacher_path(@teacher.id), notice: 'Teacher was successfully updated.' }  
-      else
-        format.html { render :edit }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+    if params[:teacher][:current_password]
+      change_password
+    else
+      respond_to do |format|
+        if @teacher.update(teacher_params)
+          format.html { redirect_to edit_teacher_path(@teacher.id), notice: 'Teacher was successfully updated.' }  
+        else
+          format.html { render :edit }
+          format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        end
       end
+    end
+  end
+  
+  # This changes the Teacher's password.
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  # for method layout.
+  def change_password
+    teacher = current_teacher
+    if teacher.authenticate(params[:teacher][:current_password])
+      if params[:teacher][:password] == params[:teacher][:password_confirmation]
+        teacher.password = params[:teacher][:password]
+        if teacher.save!
+          redirect_to edit_teacher_path(teacher), :flash => { :notice => "Password changed." }
+        end
+      else
+        redirect_to edit_password_teacher_path, :flash => { :error => "New password and confirmation didn't match." }
+      end
+    else
+      redirect_to edit_password_teacher_path, :flash => { :error => "Incorrect password." }
     end
   end
    
@@ -200,7 +206,7 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation, :suspended)
+      :school_id, :password, :password_confirmation, :suspended, :current_password)
     end
     
     #Can only access teachers and info from the same school

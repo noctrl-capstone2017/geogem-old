@@ -2,7 +2,7 @@
 # Teacher model validation, methods, and more!
 
 class Teacher < ApplicationRecord
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :current_password
   before_save   :downcase_email, :color_check, :super_check
   ###REGEX###
   #Only allows legit email formatting
@@ -32,7 +32,7 @@ class Teacher < ApplicationRecord
   validates :powers, presence: true
   validates :school_id, presence: true
 
-  validates :password, presence: true, length: { minimum: 6 }, on: :update, allow_blank: true;
+  validates :password, presence: true, length: { minimum: 6 }, allow_blank: true
   has_secure_password
   
   #Creates the relationship of what students belong to the teacher
