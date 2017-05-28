@@ -115,7 +115,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        foat.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
+        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
       else
         format.html { render :new }
       end
@@ -133,7 +133,7 @@ class TeachersController < ApplicationController
         @session.session_student = params[:student_id]
         respond_to do |format|
           if @session.save
-            format.html { redirect_to @session, notice: 'Session was successfully created.' }
+            format.html { redirect_to @session, :flash => { :notice => 'Session was successfully created.' } }
           else
             format.html { render :new }
           end
@@ -158,7 +158,7 @@ class TeachersController < ApplicationController
     else
       respond_to do |format|
         if @teacher.update(teacher_params)
-          format.html { redirect_to edit_teacher_path(@teacher.id), notice: 'Teacher was successfully updated.' }  
+          format.html { redirect_to edit_teacher_path(@teacher.id), :flash => { :notice => 'Teacher was successfully updated.' } }
         else
           format.html { render :edit }
         end
@@ -172,8 +172,7 @@ class TeachersController < ApplicationController
   def change_login_settings
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to edit_teacher_path(@teacher.id), 
-                notice: 'Login settings for this teacher were successully updated.' }  
+        format.html { redirect_to edit_teacher_path(@teacher.id), :flash => { :notice => 'Login settings for this teacher were successully updated.' } }
       else
         format.html { render :login_settings }
       end
@@ -228,7 +227,7 @@ class TeachersController < ApplicationController
     #Can only access teachers and info from the same school
     def same_school
       if current_teacher.school_id != Teacher.find(params[:id]).school_id
-        redirect_to home_path, notice: "You can't access other schools."
+        redirect_to home_path, :flash => { :notice => "You can't access other schools." }
       end
     end
     
