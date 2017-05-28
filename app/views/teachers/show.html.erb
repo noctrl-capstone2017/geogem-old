@@ -29,6 +29,11 @@
 				<%= button_tag(type: 'submit', class: "btn btn-danger", id: "addStudBtn", name: "remove_student") do %> <i class="fa fa-minus icon-white"></i> <% end %>
 			</div>
 		</div> <!--End row-->
+		<div class="row form-row vertical-align">
+			<div class="form-group col-sm-7">
+				<%= link_to "Cancel", edit_teacher_path, :class => "btn btn-danger" %>
+			</div>
+		</div>
 		</form>
 	</div>
 </div><!--End row-->
