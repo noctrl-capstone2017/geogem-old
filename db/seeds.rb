@@ -1,12 +1,11 @@
 #Author: Taylor Spino
+#If you want to add extra seeds for your own use, add them at the bottom (:
 
 stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o", 
             "gamepad","heart", "leaf","paper-plane","paw","star","graduation-cap"];
-        
-teach_icons = ["apple", "book", "pencil", "calculator"];
 
-
-#Took out light
+#Took out light blue for now because controller changes it 
+#to lt blue which is not linked here
 colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavendar", "plum", "pink"];
 
 # Seed the database with a School
@@ -31,7 +30,6 @@ School.create!(full_name: "North Central",
                  description: Faker::Lorem.sentence)
     
 end
-
 
 # Seed the database with an initial Super user profbill
 # Associate him with North Central College (school_id: 1)
@@ -133,9 +131,17 @@ end
 
 #Give the first student 5 squares
 5.times do |n|
-  RosterSquare.create!(square_id: n+1,
+  RosterSquare.create!(square_id: n+1, #squares 1-5
                         student_id: 1)
 end
+
+#Give the third student 5 squares
+5.times do |n|
+  RosterSquare.create!(square_id: n+3, #squares 3-8
+                        student_id: 3)
+end
+
+#------------------TWO SESSIONS WITH STUDENT 1----------------------#
 
 # Seed the database with a session between the first teacher and first student
 # Session.find(1)
@@ -145,25 +151,41 @@ Session.create!(start_time: DateTime.new(2017,5,15,8,30, 0),
                 session_student: 1)
 
 # Seed the database with another session between the first teacher and first student
-Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
-                end_time: DateTime.new(2017,3,22,8,05, 0),
+Session.create!(start_time: DateTime.new(2017,5,22,7,50, 0),
+                end_time: DateTime.new(2017,5,22,9,05, 0),
                 session_teacher: 1,
                 session_student: 1)
+
+#------------------FOUR SESSIONS WITH STUDENT 3----------------------#
                 
-# Seed the database with a session between the first teacher and third student
-Session.create!(start_time: DateTime.new(2017,3,22,7,50, 0),
-                end_time: DateTime.new(2017,3,22,8,05, 0),
+#STUDENT 3 SESSION 1
+Session.create!(start_time: DateTime.new(2017,5,12,9,00, 0),
+                end_time: DateTime.new(2017,5,12,12,00, 0),
                 session_teacher: 1,
                 session_student: 3)
 
 
-# Seed database with another session between the first teacher and third student
-Session.create!(start_time: DateTime.new(2017,3,22,9,30, 0),
-                end_time: DateTime.new(2017,3,22,10,05, 0),
+#STUDENT 3 SESSION 2
+Session.create!(start_time: DateTime.new(2017,5,15,9,00, 0),
+                end_time: DateTime.new(2017,5,15,12,00, 0),
                 session_teacher: 1,
                 session_student: 3)
 
-#Seed the database with ten session events for the first session
+#STUDENT 3 SESSION 3
+Session.create!(start_time: DateTime.new(2017,5,23,9,00, 0),
+                end_time: DateTime.new(2017,5,23,12,00, 0),
+                session_teacher: 1,
+                session_student: 3)
+
+#STUDENT 3 SESSION 4
+Session.create!(start_time: DateTime.new(2017,5,27,9,00, 0),
+                end_time: DateTime.new(2017,5,27,12,00, 0),
+                session_teacher: 1,
+                session_student: 3)
+
+#----------------------STUDENT 1 SESSIONS--------------------------#
+
+#Seed the database with ten session events for STUDENT 1 SESSION 1
 x = DateTime.new(2017,5,15,8, 30, 0)           #Start the session at 8:30 am
 roster_IDS = RosterSquare.where(student_id: 1) #roster square ids for student1
 
@@ -189,6 +211,31 @@ SessionNote.create!(note: Faker::Lorem.sentence,
 y = y + 11.0/1440
 end
 
+#--------------------STUDENT 3 SESSIONS--------------------------#
+#5/12, 5/15, 5/23, 5/27
+
+#Seed the database with ten session events for STUDENT 1 SESSION 2
+a = [ DateTime.new(2017,5,12,9,00, 0),
+      DateTime.new(2017,5,15,9,00, 0),
+      DateTime.new(2017,5,23,9,00, 0),
+      DateTime.new(2017,5,27,9,00, 0) ]        #Start the session at 9:00 am
+roster_IDS2 = RosterSquare.where(student_id: 3) #roster square ids for student1
+4.times do |k|
+b = a[k]
+  5.times do |l|
+  #for now only have events of with id = roster_IDS2[2].square_id (square 5)
+  #this is for Kevin P, so your graph for SQUARE 5 should show FOUR DAYS
+  #where this square occurred FIVE times
+  SessionEvent.create!(behavior_square_id: roster_IDS2[2].square_id,
+                      square_press_time: b,
+                      duration_end_time: b + 5.0/1440,
+                      session_id: (k+3) ) #session 1-2 is STUDENT 1, sessions 3-6 is STUDENT 3
+  b = b + 30.0/1440
+  end
+
+end
+
+#-----NON-TAYLOR S SEEDS. FEEL FREE TO PLANT WHATEVER YOU WANT HERE------#
 # |---------------------SEEDS FOR TEST USE-------------------------------|
 # Seed the database with a disposable test school and two teachers
 School.create!(full_name: "South Central",
