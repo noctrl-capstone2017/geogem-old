@@ -90,7 +90,7 @@
 	<div class="row form-row vertical-align">
 		<div class="col-sm-offset-1 col-sm-2"><h4>Color: </h4></div>
 		<div class="col-sm-4 col-sm-offset-0">
-			<%= f.select :color, options_for_select(colorNames), 
+			<%= f.select :color, options_for_select(colorNames.map {|color| [color.titleize, color]}), 
 			class: 'form-control' %>
 		</div>
 	</div>
@@ -99,7 +99,7 @@
 	<div class="row form-row">
 		<div class="col-xs-1 col-xs-offset-1"><h4>Icon: </h4></div>
 		<div class="col-xs-4 col-xs-offset-1">
-			<%= f.select :icon, options_for_select(teacherIcons), 
+			<%= f.select :icon, options_for_select(teacherIcons.map {|icon| [icon.titleize, icon]}), 
 			class: 'form-control' %>
 		</div>
 	</div>
