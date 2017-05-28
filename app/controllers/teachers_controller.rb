@@ -104,7 +104,7 @@ class TeachersController < ApplicationController
     @teacher = current_teacher
   end
   
-  # This updates the Teacher's password.
+  # This changes the Teacher's password.
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def change_password
     teacher = current_teacher

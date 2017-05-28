@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   resources :teachers do
     member do
       get :edit_password
-      put :update_password
+      put :change_password
     end
   end
   
