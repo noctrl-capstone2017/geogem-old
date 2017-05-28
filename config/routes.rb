@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   #to disguise teachers/id/edit_password as just /password
   get     '/password',        to: 'teachers#edit_password'
+  get     'teachers/:id/login_settings',
+                              to: 'teachers#login_settings'
+  get     'teachers/:id/edit',to: 'teachers#edit'
 
   # Login Session Controller Routing 
   # Author: Meagan Moore & Steven Royster
@@ -53,7 +56,7 @@ Rails.application.routes.draw do
   resources :teachers do
     member do
       get :edit_password
-      put :update_password
+      put :change_password
     end
   end
   
