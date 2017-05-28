@@ -8,7 +8,19 @@
 	<!--Edit Login Settings form -->
 <%= form_for(@teacher) do |f| %>
 	<form class="form-horizontal">
-
+		<%= render 'layouts/flash' %>
+		<% if @teacher.errors.any? %>
+		  <div class="col-xs-11">
+		    <h4><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h4>
+		    <br>
+		    <ul>
+		      <% @teacher.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		    </ul>
+		  </div>
+		<% end %>
+		
 	 	<!-- Teacher ID -->
 	 	<div class="row form-row">
 			<div class="col-xs-2 col-xs-offset-1"><h4> Teacher ID: </h4></div>

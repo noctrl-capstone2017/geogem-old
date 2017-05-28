@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
-  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create]
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings]
   before_action :is_super, only: [:super, :updateFocus]
 
   # GET /teachers
@@ -71,6 +71,7 @@ class TeachersController < ApplicationController
     end
   end
   
+  # GET /teachers/id/login_settings
   def login_settings
     @teacher = Teacher.find(params[:id])
   end
@@ -115,10 +116,8 @@ class TeachersController < ApplicationController
     respond_to do |format|
       if @teacher.save
         foat.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
-        format.json { render :index, status: :created, location: teachers_path }
       else
         format.html { render :new }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -135,10 +134,8 @@ class TeachersController < ApplicationController
         respond_to do |format|
           if @session.save
             format.html { redirect_to @session, notice: 'Session was successfully created.' }
-            format.json { render :show, status: :created, location: @session }
           else
             format.html { render :new }
-            format.json { render json: @session.errors, status: :unprocessable_entity }
           end
         end
     elsif params[:analyze]
@@ -148,23 +145,42 @@ class TeachersController < ApplicationController
   
   
   # PATCH/PUT /teachers/1
-  # This updates a teacher. It's essentially just scaffolding.
+  # This updates a teacher. If current_password is in the params, then they're
+  # trying to change their password, so it redirects the put to change_password.
+  #
+  # Similarly, if suspended is in the params, then it changes their success or
+  # error redirection.
   def update
     if params[:teacher][:current_password]
       change_password
+    elsif params[:teacher][:suspended]
+      change_login_settings
     else
       respond_to do |format|
         if @teacher.update(teacher_params)
           format.html { redirect_to edit_teacher_path(@teacher.id), notice: 'Teacher was successfully updated.' }  
         else
           format.html { render :edit }
-          format.json { render json: @teacher.errors, status: :unprocessable_entity }
         end
       end
     end
   end
   
-  # This changes the Teacher's password.
+  # This method displays flashes for updates to login settings. It's virtually
+  # identical to update, but it redirects to a different location with a different
+  # flash.
+  def change_login_settings
+    respond_to do |format|
+      if @teacher.update(teacher_params)
+        format.html { redirect_to edit_teacher_path(@teacher.id), 
+                notice: 'Login settings for this teacher were successully updated.' }  
+      else
+        format.html { render :login_settings }
+      end
+    end
+  end
+  
+  # This method changes the Teacher's password and displays appropriate flashes.
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   # for method layout.
   def change_password

@@ -86,10 +86,11 @@ class Teacher < ApplicationRecord
       end
     end
     
-    # Makes sure Bill doesn't accidentally remove his admin powers.
+    # Makes sure Bill doesn't accidentally remove his admin powers or suspend himself
     def super_check
-      if self.id == '1'
+      if self.user_name == 'profbill'
         self.powers = "Admin"
+        self.suspended = "false"
       end
     end
 end
