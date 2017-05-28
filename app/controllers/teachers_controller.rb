@@ -70,6 +70,10 @@ class TeachersController < ApplicationController
       end
     end
   end
+  
+  def login_settings
+    @teacher = Teacher.find(params[:id])
+  end
 
   # GET /teachers/new
   # This prepares the new teacher form.
@@ -102,9 +106,8 @@ class TeachersController < ApplicationController
   
   # This updates the Teacher's password.
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  def update_password
+  def change_password
     teacher = current_teacher
-    # also in here i'm calling the authenticate method that usually is present in bcrypt.
     if teacher and teacher.authenticate(params[:old_password])
       if params[:password] == params[:password_confirmation]
         teacher.password = BCrypt::Password.create(params[:password])

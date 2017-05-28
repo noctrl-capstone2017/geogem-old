@@ -54,9 +54,13 @@
 		
 		<div class="col-xs-2 col-xs-offset-1 text-center" title="Edit teacher login settings">
 			<div class ="action-sq i-gray center-block">
-				<!--<a href="teacher6.html">--><span class="fa fa-gear fa-4x student-icon"></span><!--</a>-->
+				<%= link_to 'login_settings' do %>
+					<span class="fa fa-gear fa-4x student-icon"></span><!--</a>-->
+				<% end %>
 			</div>
-			<p><!--<a href="teacher6.html">--><span class="student-icon-text">Login Settings</span><!--</a>--></p>
+			<p><%= link_to 'login_settings' do %>
+				<span class="student-icon-text">Login Settings</span><!--</a>--></p>
+			<% end %>
 		</div>
 	<% end %>
 	
