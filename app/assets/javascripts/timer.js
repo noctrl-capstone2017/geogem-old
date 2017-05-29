@@ -15,6 +15,7 @@ window.onload = function () {
   for (var i = 0; i < durationDivs.length; i++)
   {
 	  var timerSquare = new Object();
+	  timerSquare.type = "duration";
 	  timerSquare.startEventTime;
 	  timerSquare.endEventTime;
 	  timerSquare.Interval; //Interval for the timer not to be confused with an interval behavior sq
@@ -42,6 +43,7 @@ window.onload = function () {
   for (var i = 0; i < counterDivs.length; i++)
   {
 	  var counterSquare = new Object();
+	  counterSquare.type = "frequency";
 	  counterSquare.startEventTime;
 	  counterSquare.endEventTime;
 	  counterSquare.behaviorId = $(counterDivs[i]).attr('name');
@@ -65,6 +67,7 @@ window.onload = function () {
   for (var i = 0; i < intervalDivs.length; i++)
   {
 	  var intervalSquare = new Object();
+	  intervalSquare.type = "interval";
 	  intervalSquare.startEventTime;
 	  intervalSquare.endEventTime;
 	  intervalSquare.behaviorId = $(intervalDivs[i]).attr('name');
@@ -285,6 +288,13 @@ function undo()
                 },
                 success:function(data){
                   sessionEvents[sessionEventUndo.index].undone = true;
+                  if(sessionEvents[sessionEventUndo.index].sessionEvent.type == "interval" || sessionEvents[sessionEventUndo.index].sessionEvent.type == "frequency")
+                  {
+                     if(parseInt(sessionEvents[sessionEventUndo.index].sessionEvent.countLabel.innerText) != 0)
+                     {
+                        sessionEvents[sessionEventUndo.index].sessionEvent.countLabel.innerText = (parseInt(sessionEvents[sessionEventUndo.index].sessionEvent.countLabel.innerText) - 1);  
+                     }
+                  }
                   for(var i = sessionEvents.length-1; i >= 0; --i)
                   {
                       if(!sessionEvents[i].undone)
