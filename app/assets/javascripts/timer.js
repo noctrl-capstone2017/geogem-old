@@ -242,6 +242,7 @@ function getEndTime()
   return true;
 }
 
+//Keep track of all the events that happened and update the last event
 function logEvent(sessionEvent)
 {
  
@@ -260,9 +261,13 @@ function logEvent(sessionEvent)
   $('#eventLog').append(JSON.stringify(lastSessionEvent));
 }
 
+//Allows for undoing the last session event
 function undo()
 {
-  sessionEventUndo = lastSessionEvent;
+    //Handles async issues, last session event could change while undoing this event
+    sessionEventUndo = lastSessionEvent;
+  
+    //Make them confirm they want to undo
     $.confirm({
 			title: 'Undo:',
 			content: '' +
@@ -287,7 +292,8 @@ function undo()
                      session_id: lastSessionEvent.session_id
                 },
                 success:function(data){
-                  sessionEvents[sessionEventUndo.index].undone = true;
+                  sessionEvents[sessionEventUndo.index].undone = true; //mark it's been undone
+                  //decrement the count on the front end if a count is connected
                   if(sessionEvents[sessionEventUndo.index].sessionEvent.type == "interval" || sessionEvents[sessionEventUndo.index].sessionEvent.type == "frequency")
                   {
                      if(parseInt(sessionEvents[sessionEventUndo.index].sessionEvent.countLabel.innerText) != 0)
@@ -295,6 +301,7 @@ function undo()
                         sessionEvents[sessionEventUndo.index].sessionEvent.countLabel.innerText = (parseInt(sessionEvents[sessionEventUndo.index].sessionEvent.countLabel.innerText) - 1);  
                      }
                   }
+                  //go to the next session event that hasn't been undone
                   for(var i = sessionEvents.length-1; i >= 0; --i)
                   {
                       if(!sessionEvents[i].undone)
