@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
-  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings]
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show]
   before_action :is_super, only: [:super, :updateFocus]
 
   # GET /teachers
