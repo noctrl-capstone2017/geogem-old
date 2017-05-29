@@ -6,7 +6,7 @@ stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o",
 
 #Took out light blue for now because controller changes it 
 #to lt blue which is not linked here
-colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavendar", "plum", "pink"];
+colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavender", "plum", "pink"];
 
 # Seed the database with a School
 # School.find(1)
