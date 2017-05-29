@@ -9,7 +9,7 @@ class TeachersController < ApplicationController
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
   before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create]
-  before_action :is_super, only: [:super, :updateFocus]
+  before_action :is_super, only: [:super, :updateFocus, :super_report]
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
