@@ -254,37 +254,64 @@ function logEvent(sessionEvent)
   evt.index = sessionEvents.length;
   
   sessionEvents.push(evt);
-  alert(lastSessionEvent.index);
   $('#eventLog').append(JSON.stringify(lastSessionEvent));
 }
 
 function undo()
 {
-    sessionEventUndo = lastSessionEvent;
-  	$.ajax({
-        url:'/session_events/undo',
-        type:'POST',
-        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-        dataType:'json',
-        data:{
-             behavior_square_id: lastSessionEvent.behavior_square_id,
-             session_id: lastSessionEvent.session_id
-        },
-        success:function(data){
-          sessionEvents[sessionEventUndo.index].undone = true;
-          for(var i = sessionEvents.length-1; i >= 0; --i)
-          {
-              alert(sessionEvents[i]);
-              if(!sessionEvents[i].undone)
-              {
-                alert(sessionEvents[i].behavior_square_id)
-                lastSessionEvent = sessionEvents[i];
-                break;
-              }
-          }
-          alert(lastSessionEvent.behavior_square_id);
-        },
-        error:function(data){
-        }
-    });
+  sessionEventUndo = lastSessionEvent;
+    $.confirm({
+			title: 'Undo:',
+			content: '' +
+			'<form action="" class="formName">' +
+			'<div class="form-group">' +
+			'<label>This will undo the last session event and cannot be undone</label>' +
+			'</div>' +
+			'</form>',
+			buttons: {
+				formSubmit: {
+					text: 'Submit',
+					btnClass: 'btn-blue',
+					action: function () {
+						//send the note
+						$.ajax({
+                url:'/session_events/undo',
+                type:'POST',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                dataType:'json',
+                data:{
+                     behavior_square_id: lastSessionEvent.behavior_square_id,
+                     session_id: lastSessionEvent.session_id
+                },
+                success:function(data){
+                  sessionEvents[sessionEventUndo.index].undone = true;
+                  for(var i = sessionEvents.length-1; i >= 0; --i)
+                  {
+                      if(!sessionEvents[i].undone)
+                      {
+                        lastSessionEvent.behavior_square_id =  sessionEvents[i].behavior_square_id;
+                        lastSessionEvent.index = sessionEvents[i].index;
+                        lastSessionEvent.sessionEvent = sessionEvents[i].sessionEvent;
+                        break;
+                      }
+                  }
+                },
+                error:function(data){
+                }
+            });
+					}
+				},
+				cancel: function () {
+					//close
+				},
+			},
+			onContentReady: function () {
+				// you can bind to the form
+				var jc = this;
+				this.$content.find('form').on('submit', function (e) { // if the user submits the form by pressing enter in the field.
+					e.preventDefault();
+					jc.$$formSubmit.trigger('click'); // reference the button and click it
+				});
+			}
+		});
 }
