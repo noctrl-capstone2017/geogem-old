@@ -19,18 +19,19 @@ Rails.application.routes.draw do
   get     '/school_suspend',  to: 'schools#suspend'  
   get     '/school_restore',  to: 'schools#restore'
 
-  #to disguise teachers/id/edit_password as just /password
-  get     '/password',        to: 'teachers#edit_password'
-  get     'teachers/:id/login_settings',
-                              to: 'teachers#login_settings'
-  get     'teachers/:id/edit',to: 'teachers#edit'
+  # Teacher routes
+  # Author: Kevin M and Tommy B
+  # to disguise teachers/id/edit_password as just /password
+  get     '/password',                    to: 'teachers#edit_password'
+  patch 'teachers/:id/change_password',   to: 'teachers#change_password'
+  get     'teachers/:id/login_settings',  to: 'teachers#login_settings'
 
   # Login Session Controller Routing 
   # Author: Meagan Moore & Steven Royster
   get     'login',            to: 'login_session#new'
   post    'login',            to: 'login_session#create'
   get     'logout',           to: 'login_session#logout'
-  get     'about1',           to: 'static_pages#about1'
+  get     'about',           to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
 
   get     'help',             to: 'static_pages#help'
@@ -56,7 +57,6 @@ Rails.application.routes.draw do
   resources :teachers do
     member do
       get :edit_password
-      put :change_password
     end
   end
   
