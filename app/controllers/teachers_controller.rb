@@ -115,7 +115,7 @@ class TeachersController < ApplicationController
 
     respond_to do |format|
       if @teacher.save
-        foat.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
+        format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
       else
         format.html { render :new }
       end
