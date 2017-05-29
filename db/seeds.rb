@@ -22,7 +22,7 @@ School.create!(full_name: "North Central",
 #School seeds added by - Dakota B
 30.times do |n|
   School.create!(full_name: Faker::University.name,
-                 screen_name: "test",
+                 screen_name: "test-{#n+1}",
                  icon: "apple",
                  color: colors.sample,
                  email: "example-#{n+1}@railstutorial.org",
