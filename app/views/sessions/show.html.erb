@@ -1,8 +1,18 @@
 <!-- @author: Matthew O & Alex P & Debra J-->
-<%= javascript_include_tag "sidebar.js" %>
-<%= javascript_include_tag "timer.js" %>
-<%= javascript_include_tag "notes.js" %>
 <%= csrf_meta_tag %>
+<!-- Control the selection and unselection of the student roster -->
+<script>
+	$(document).ready(function() {
+        $(".d-sq").click(function(){
+        
+            if(!$(this).hasClass("sq-active")) {
+                $(this).addClass("sq-active");
+            } else {
+                $(this).removeClass("sq-active");
+            }
+        });
+	});
+</script>
 
 <!-- Note Functionality -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
@@ -86,7 +96,7 @@
                         <% if square.tracking_type == 1 %>
                         <div class="wrapper duration" name="<%= square.id %>">
                             <button class="button-start square i-<%= square.color %>" id="button-start1">
-                                <div class="square i-<%= square.color %> text-center">
+                                <div class="d-sq square i-<%= square.color %> text-center">
                                     <div class="col-xs-12">
                                             <h4><%= square.screen_name %> </h4>
                                             <p id = "timer"><span id="minutes">00</span>:<span id="seconds">00</span></p>
