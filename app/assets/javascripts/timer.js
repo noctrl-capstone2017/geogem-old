@@ -1,4 +1,6 @@
 //@author Matthew O
+var lastSessionEvent = { "session_id":null, "behavior_square_id":null, "index": -1};
+var sessionEvents = [];
 window.onload = function () {
   //Add JAlert prompt http://labs.abeautifulsite.net/archived/jquery-alerts/demo/
   
@@ -85,6 +87,7 @@ window.onload = function () {
 	  cs.startEventTime = timeStamp();
 	  cs.endEventTime = timeStamp();
 	  createSessionEvent(cs);
+	  logEvent(cs);
   }
 
   //Starts the timer
@@ -105,6 +108,7 @@ window.onload = function () {
 	  timerSq.durationLog.innerHTML += timerSq.minutesTxt.innerHTML + ":" + timerSq.secondsTxt.innerHTML +  "," + timeStamp() + "\n" ;
 	  timerSq.endEventTime = timeStamp();
 	  createSessionEvent(timerSq);
+	  logEvent(timerSq);
 	  resetTimer(timerSq);
 	  //Reset the onclick to start the timer
 	  timerSq.buttonStart.onclick = function(){beginTimer(timerSq)};
@@ -230,4 +234,44 @@ function getEndTime()
   document.getElementById("end").value = timeStamp();
   document.getElementById("end2").value = timeStamp();
   return true;
+}
+
+function logEvent(sessionEvent)
+{
+  lastSessionEvent.session_id = getSessionId(sessionEvent);
+  lastSessionEvent.behavior_square_id =  sessionEvent.behaviorId;
+  lastSessionEvent.index = lastSessionEvent.index + 1;
+  lastSessionEvent.sessionEvent = sessionEvent;
+  sessionEvents.push(lastSessionEvent);
+  alert(lastSessionEvent.index);
+  $('#eventLog').append(JSON.stringify(lastSessionEvent));
+}
+
+function undo()
+{
+    sessionEventUndo = lastSessionEvent;
+  	$.ajax({
+        url:'/session_events/undo',
+        type:'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        dataType:'json',
+        data:{
+             behavior_square_id: lastSessionEvent.behavior_square_id,
+             session_id: lastSessionEvent.session_id
+        },
+        success:function(data){
+          sessionEvents.splice[sessionEventUndo.index, 1, "removed"];
+          for(var i = sessionEvents.length-1; i >= 0; i--)
+          {
+              if(sessionEvents[i] != "removed")
+              {
+                lastSessionEvent = sessionEvents[i];
+                break;
+              }
+          }
+          alert(lastSessionEvent.behavior_square_id);
+        },
+        error:function(data){
+        }
+    });
 }

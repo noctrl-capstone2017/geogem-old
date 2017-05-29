@@ -1,12 +1,11 @@
+# authors: Ricky Perez & Michael Loptien
+# Model for Students
+
 class Student < ApplicationRecord
-    
-    # authors: Ricky Perez & Michael Loptien
-    # Model for Students
     
     # Ensures that none of the fields are empty
     validates :full_name, presence: true
     validates :screen_name, presence: true
-    validates :description, presence: true
     validates :color, presence: true
     validates :icon, presence: true
     validates :session_interval, presence: true

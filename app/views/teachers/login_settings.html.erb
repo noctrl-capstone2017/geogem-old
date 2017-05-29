@@ -8,7 +8,19 @@
 	<!--Edit Login Settings form -->
 <%= form_for(@teacher) do |f| %>
 	<form class="form-horizontal">
-
+		<%= render 'layouts/flash' %>
+		<% if @teacher.errors.any? %>
+		  <div class="col-xs-11">
+		    <h4><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h4>
+		    <br>
+		    <ul>
+		      <% @teacher.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		    </ul>
+		  </div>
+		<% end %>
+		
 	 	<!-- Teacher ID -->
 	 	<div class="row form-row">
 			<div class="col-xs-2 col-xs-offset-1"><h4> Teacher ID: </h4></div>
@@ -39,15 +51,16 @@
 			</div>
  		</div>
 
-<!-- IS NOT IMPLEMENTED -->
 		<!-- Teacher login suspended? -->
 		<div class="row form-row">
 			<div class="col-xs-2 col-xs-offset-1"><h4>Login status: </h4></div>
 			<div class="col-xs-4 checkbox">
-				<label><input type="checkbox" checked="checked">Suspended</label>
+				<%= f.label :suspended do %>
+  					<%= f.check_box :suspended, {:class => "col-xs-4 checkbox"}, "true", "false" %>
+  					Suspended
+				<% end %>
 			</div>
 		</div>
-<!-- ------------------ -->
 
 		<!-- OK, Cancel buttons -->
 		<div class="row "> 
@@ -68,13 +81,16 @@
 <hr width="80%">
 <div class="form-spacer">	&nbsp;</div>
 
+
+		
+		
 <!-- Change Password form -->
 <%= form_for(@teacher) do |f| %>
 	<form class="form-horizontal">
 		
 		<!-- new password -->
 	  <div class="row form-row">
-		  <label class="control-label col-sm-3" for="newPass"><h4>New Password:</h4></label>
+		  <label class="col-xs-2 col-xs-offset-1" for="newPass"><h4>New Password:</h4></label>
 			<div class="col-sm-4"> 
 			  <%= f.password_field :password, class: 'form-control', id: 'newPass' %>
 			</div>
@@ -82,7 +98,7 @@
 		
 		<!-- confirm new password -->
 	  <div class="row form-row">
-		  <label class="control-label col-sm-3" for="confPass"><h4>Confirm New Password:</h4></label>
+		  <label class="col-xs-2 col-xs-offset-1" for="confPass"><h4>Confirm New Password:</h4></label>
 			<div class="col-sm-4"> 
 			  <%= f.password_field :password_confirmation, class: 'form-control', id: 'confPass' %>
 			</div>
