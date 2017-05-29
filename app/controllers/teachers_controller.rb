@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
-  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create]
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show]
   before_action :is_super, only: [:super, :updateFocus]
 
   # GET /teachers
@@ -71,6 +71,7 @@ class TeachersController < ApplicationController
     end
   end
   
+  # GET /teachers/id/login_settings
   def login_settings
     @teacher = Teacher.find(params[:id])
   end
@@ -87,6 +88,7 @@ class TeachersController < ApplicationController
   def edit
     if !is_admin?
       @teacher = @current_teacher
+      params[:id] = @teacher.id
     end
   end
   
@@ -102,24 +104,7 @@ class TeachersController < ApplicationController
   # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
   def edit_password
     @teacher = current_teacher
-  end
-  
-  # This changes the Teacher's password.
-  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
-  def change_password
-    teacher = current_teacher
-    if teacher and teacher.authenticate(params[:old_password])
-      if params[:password] == params[:password_confirmation]
-        teacher.password = BCrypt::Password.create(params[:password])
-        if teacher.save!
-          redirect_to teacher_edit_path, :flash => { :notice => "Password changed." }
-        end
-      else
-        redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
-      end
-    else
-      redirect_to teacher_edit_password_path, :flash => { :danger => "Incorrect Password." }
-    end
+    params[:id] = @teacher.id
   end
 
   # POST /teachers
@@ -131,14 +116,11 @@ class TeachersController < ApplicationController
     respond_to do |format|
       if @teacher.save
         format.html { redirect_to teachers_path, :flash => { :notice => "Teacher was successfully created." } }
-        format.json { render :index, status: :created, location: teachers_path }
       else
         format.html { render :new }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
     end
   end
-
 
   #author: Matthew O & Alex P
   #home page for teachers, display top 8 most used students, route to anaylze or new session
@@ -151,11 +133,9 @@ class TeachersController < ApplicationController
         @session.session_student = params[:student_id]
         respond_to do |format|
           if @session.save
-            format.html { redirect_to @session, notice: 'Session was successfully created.' }
-            format.json { render :show, status: :created, location: @session }
+            format.html { redirect_to @session, :flash => { :notice => 'Session was successfully created.' } }
           else
             format.html { render :new }
-            format.json { render json: @session.errors, status: :unprocessable_entity }
           end
         end
     elsif params[:analyze]
@@ -165,15 +145,56 @@ class TeachersController < ApplicationController
   
   
   # PATCH/PUT /teachers/1
-  # This updates a teacher. It's essentially just scaffolding.
+  # This updates a teacher. If current_password is in the params, then they're
+  # trying to change their password, so it redirects the put to change_password.
+  #
+  # Similarly, if suspended is in the params, then it changes their success or
+  # error redirection.
   def update
+    if params[:teacher][:current_password]
+      change_password
+    elsif params[:teacher][:suspended]
+      change_login_settings
+    else
+      respond_to do |format|
+        if @teacher.update(teacher_params)
+          format.html { redirect_to edit_teacher_path(@teacher.id), :flash => { :notice => 'Teacher was successfully updated.' } }
+        else
+          format.html { render :edit }
+        end
+      end
+    end
+  end
+  
+  # This method displays flashes for updates to login settings. It's virtually
+  # identical to update, but it redirects to a different location with a different
+  # flash.
+  def change_login_settings
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to edit_teacher_path(@teacher.id), notice: 'Teacher was successfully updated.' }  
+        format.html { redirect_to edit_teacher_path(@teacher.id), :flash => { :notice => 'Login settings for this teacher were successully updated.' } }
       else
-        format.html { render :edit }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.html { render :login_settings }
       end
+    end
+  end
+  
+  # This method changes the Teacher's password and displays appropriate flashes.
+  # Used http://stackoverflow.com/questions/25490308/ruby-on-rails-two-different-edit-pages-and-forms-how-to for help
+  # for method layout.
+  def change_password
+    teacher = current_teacher
+    if teacher.authenticate(params[:teacher][:current_password])
+      if params[:teacher][:password] == params[:teacher][:password_confirmation]
+        teacher.password = params[:teacher][:password]
+        if teacher.save!
+          redirect_to edit_teacher_path(teacher), :flash => { :notice => "Password changed." }
+        end
+      else
+        redirect_to edit_password_teacher_path, :flash => { :error => "New password and confirmation didn't match." }
+      end
+    else
+      redirect_to edit_password_teacher_path, :flash => { :error => "Incorrect password." }
     end
   end
    
@@ -200,13 +221,13 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation, :suspended)
+      :school_id, :password, :password_confirmation, :suspended, :current_password)
     end
     
     #Can only access teachers and info from the same school
     def same_school
       if current_teacher.school_id != Teacher.find(params[:id]).school_id
-        redirect_to home_path, notice: "You can't access other schools."
+        redirect_to home_path, :flash => { :notice => "You can't access other schools." }
       end
     end
     
