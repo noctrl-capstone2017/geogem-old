@@ -1,12 +1,12 @@
 //@author Matthew O
-var lastSessionEvent = { "session_id":null, "behavior_square_id":null, "index": -1};
+var lastSessionEvent = { "session_id":null, "behavior_square_id":null, "index": 0};
 var sessionEvents = [];
 window.onload = function () {
   //Add JAlert prompt http://labs.abeautifulsite.net/archived/jquery-alerts/demo/
   
   //Start time of the session
   var startTime = document.getElementById("start_time");
-  startTime.innerHTML = timeOnlyStamp();
+  startTime.innerHTML = "Start Time: " + timeOnlyStamp();
   document.getElementById("start").value = timeStamp();
   document.getElementById("start2").value = timeStamp();
   //Creates all the objects for duration behaviors
@@ -19,6 +19,7 @@ window.onload = function () {
 	  timerSquare.endEventTime;
 	  timerSquare.Interval; //Interval for the timer not to be confused with an interval behavior sq
 	  timerSquare.behaviorId = $(durationDivs[i]).attr('name');
+	  timerSquare.undone = false;
 	  timerSquare.durationLog =  document.getElementById("eventLog");
 	  timerSquare.buttonStart =  durationDivs[i].querySelector((".button-start"));
 	  timerSquare.secondsTxt = durationDivs[i].querySelector("#seconds");
@@ -44,6 +45,7 @@ window.onload = function () {
 	  counterSquare.startEventTime;
 	  counterSquare.endEventTime;
 	  counterSquare.behaviorId = $(counterDivs[i]).attr('name');
+	  counterSquare.undone = false;
 	  counterSquare.countLabel =  counterDivs[i].querySelector(".count");
 	  counterSquare.countLog = document.getElementById("eventLog");
 	  counterSquare.countButton =  counterDivs[i].querySelector((".counter"));	  
@@ -66,6 +68,7 @@ window.onload = function () {
 	  intervalSquare.startEventTime;
 	  intervalSquare.endEventTime;
 	  intervalSquare.behaviorId = $(intervalDivs[i]).attr('name');
+	  intervalSquare.undone = false;
 	  intervalSquare.countLabel =  intervalDivs[i].querySelector(".count");
 	  intervalSquare.countLog = document.getElementById("eventLog");
 	  intervalSquare.countButton =  intervalDivs[i].querySelector((".counter"));	  
@@ -238,11 +241,19 @@ function getEndTime()
 
 function logEvent(sessionEvent)
 {
+ 
   lastSessionEvent.session_id = getSessionId(sessionEvent);
   lastSessionEvent.behavior_square_id =  sessionEvent.behaviorId;
-  lastSessionEvent.index = lastSessionEvent.index + 1;
+  lastSessionEvent.index = sessionEvents.length;
   lastSessionEvent.sessionEvent = sessionEvent;
-  sessionEvents.push(lastSessionEvent);
+  
+  var evt = { "session_id":null, "behavior_square_id":null, "index": -1};
+  evt.session_id = getSessionId(sessionEvent);
+  evt.behavior_square_id =  sessionEvent.behaviorId;
+  evt.sessionEvent = sessionEvent;
+  evt.index = sessionEvents.length;
+  
+  sessionEvents.push(evt);
   alert(lastSessionEvent.index);
   $('#eventLog').append(JSON.stringify(lastSessionEvent));
 }
@@ -260,11 +271,13 @@ function undo()
              session_id: lastSessionEvent.session_id
         },
         success:function(data){
-          sessionEvents.splice[sessionEventUndo.index, 1, "removed"];
-          for(var i = sessionEvents.length-1; i >= 0; i--)
+          sessionEvents[sessionEventUndo.index].undone = true;
+          for(var i = sessionEvents.length-1; i >= 0; --i)
           {
-              if(sessionEvents[i] != "removed")
+              alert(sessionEvents[i]);
+              if(!sessionEvents[i].undone)
               {
+                alert(sessionEvents[i].behavior_square_id)
                 lastSessionEvent = sessionEvents[i];
                 break;
               }
