@@ -9,6 +9,13 @@ class ApplicationController < ActionController::Base
   # accessing most of the web application's pages
   before_action :require_login
 
+  #Author: Matthew O & Alex P
+  #allow disabling of showing the navbar on certain screens
+  #https://stackoverflow.com/questions/13395153/how-to-render-partial-on-everything-except-a-certain-action
+  def disable_nav
+    @disable_nav = true
+  end
+
   private
     # Confirms a logged-in user.
     def logged_in_teacher  
