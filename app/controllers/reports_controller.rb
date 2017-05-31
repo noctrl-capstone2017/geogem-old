@@ -57,6 +57,16 @@ end
 header = Array.new
 rows = Array.new{Array.new}
 
+
+#we should be able to use this instead of header
+stud_squares = Array.new
+roster_squaresMap = RosterSquare.where(student_id: student.id)
+
+roster_squaresMap.each do |map_square|
+  stud_squares.push(Square.find(map_square.square_id))
+end
+
+
 #for each square pressed in the session
 eventsOccurred.each do |event|
  
@@ -72,6 +82,8 @@ end
 #SORT the header array by square TYPE
 #Will sort by duration, then frequency, then interval
 header.sort! { |a,b| a.tracking_type  <=> b.tracking_type}
+
+stud_squares.sort! { |a,b| a.tracking_type  <=> b.tracking_type}
 
 #Let's start doing some actual data rows for our table
 
@@ -96,19 +108,20 @@ eventsOccurred.each do |event|
       end
 
 
-#THE MONEY $$$
 #while endI <= session.end_time
-
-#DEBUGGING
+#DEBUGGING, adding an hour just so we can have a couple of rows
 while endI <= session.end_time + 60*60
 
 row = Array.new
 row.push(startI.strftime("%I:%M%p") + " - " + endI.strftime("%I:%M%p"))
 
 
+#WE CAN CHOOSE HEADER FOR ONLY THE SQUARE OF THE EVENTS THAT OCCURRED
+#OR HEADER FOR ALL ROSTER SQUARES OF STUDENT
+
 #in each loop, we need to make a row of data for the specific
 #interval we are dealing with (startI, endI)
-  header.each do |pressed|
+  stud_squares.each do |pressed|
     
     
     #FREQUENCY CODE
@@ -170,7 +183,7 @@ end
 #new header is array of screen names for each type of square pressed in sesh
 newHeader = Array.new
 
-header.each do |v|
+stud_squares.each do |v|
 newHeader.push(v.screen_name)
 end
 
@@ -185,7 +198,7 @@ table.push(r)
 end
 
 pdf.move_up 20
-pdf.text "All Behaviors Exhibeted during Session", :style => :bold
+pdf.text "All Behaviors Exhibited during Session", :style => :bold
 pdf.stroke_horizontal_rule
 pdf.move_down 10
 
@@ -233,14 +246,14 @@ table2.push([Square.find(dEvent.behavior_square_id ).screen_name.to_s,
               dEvent.square_press_time.strftime("%I:%M%p"),
               dEvent.duration_end_time.strftime("%I:%M%p"),
               TimeDifference.between(dEvent.square_press_time, 
-                            dEvent.duration_end_time).in_minutes.to_s])  
+                            dEvent.duration_end_time).in_minutes.to_s + " min"])  
   
 end
 end
 
 
 pdf.move_down 50
-pdf.text "Duration Behaviors Exhibeted during Session", :style => :bold
+pdf.text "Duration Behaviors Exhibited during Session", :style => :bold
 pdf.stroke_horizontal_rule
 pdf.move_down 10
 pdf.table table2, :header => true, 
@@ -283,7 +296,8 @@ pdf.table notesTable, :header => true,
 table3 = Array.new {Array.new}
 rows3 = Array.new{Array.new}
 
-header.each do |s|
+#CAN PUT HEADER OR STUD_SQUARES
+stud_squares.each do |s|
 keyRow = Array.new
 keyRow.push(s.screen_name.to_s)
 keyRow.push(" = ")
