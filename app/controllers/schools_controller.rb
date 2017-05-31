@@ -66,10 +66,9 @@ class SchoolsController < ApplicationController
   # Used in addition the the new method in the creation of schools.
   def create
     @school = School.new(school_params)
-    
     respond_to do |format|
       if @school.save
-        format.html { redirect_to @school, notice: 'School was successfully created.' }
+        format.html { redirect_to schools_path }
         format.json { render :show, status: :created, location: @school }
       else
         format.html { render :new }
@@ -81,13 +80,13 @@ class SchoolsController < ApplicationController
   # Used to update a School profile
   def update
       if @school.update(school_params)
-        redirect_to schools_path, :notice => "School updated "
+        redirect_to super_path
       else
-        redirect_to schools_path, :notice => "School updated"
+        redirect_to schools_path
       end
   end
 
-  # Used to update a School profile
+  # Used by Super user to switch Focus School
   def updateFocus
     @current_school =  School.find(Teacher.first.school_id)
       if @current_teacher.update(focus_school_params)

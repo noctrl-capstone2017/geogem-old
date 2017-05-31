@@ -65,23 +65,22 @@
 		</div>
 	</div>
 
-
   <!-- This area displays the save or cancel buttons
  It uses an If statment to test a passed in value "isNew"
  to determine which button text will show 
  Matt O -->
-  <div class="row action-buttons-row">
-	  <div class="col-xs-6 col-xs-offset-1 text-center"> 
-      <% if local_assigns[:isNew] %>
-        <%= f.submit "Add New School", class: "btn btn-success"%>
-						&nbsp; &nbsp; &nbsp;
-	      <%= link_to 'Cancel', schools_path, class: "btn btn-danger" %>
-      <% else %>
-        <%= f.submit "Save Changes", class: "btn btn-success"%>
-						&nbsp; &nbsp; &nbsp;
-	      <%= link_to 'Cancel', schools_path, class: "btn btn-danger" %>        
-      <% end %>
-	    
-    </div>
-  </div>
+
+
+<div class="row action-buttons-row">
+	<div class="col-sm-1 col-sm-offset-1"> 
+	  <%= button_tag(type: 'submit', class: "btn btn-success") do %>  
+	  	Save Change
+	  <% end %>
+	</div>
+	<div class="col-sm-1 col-sm-offset-1"> 
+		<%= link_to "Cancel", super_path, :class => "btn btn-danger" %>
+	</div>
+</div>
+
+<!-- END OF FORM -->
 <% end %>

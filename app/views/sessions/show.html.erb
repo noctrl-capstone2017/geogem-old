@@ -1,8 +1,18 @@
 <!-- @author: Matthew O & Alex P & Debra J-->
-<%= javascript_include_tag "sidebar.js" %>
-<%= javascript_include_tag "timer.js" %>
-<%= javascript_include_tag "notes.js" %>
 <%= csrf_meta_tag %>
+<!-- Control the selection and unselection of the student roster -->
+<script>
+	$(document).ready(function() {
+        $(".d-sq").click(function(){
+        
+            if(!$(this).hasClass("sq-active")) {
+                $(this).addClass("sq-active");
+            } else {
+                $(this).removeClass("sq-active");
+            }
+        });
+	});
+</script>
 
 <!-- Note Functionality -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css">
@@ -21,7 +31,7 @@
             <div class="actions">
                 <%= hidden_field_tag :start %>
                 <%= hidden_field_tag :end %>
-                <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
+                <%= submit_tag "End Session", :name => 'end_sess1',  :onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
             </div>
         <% end %>
     </div>
@@ -32,12 +42,14 @@
         <span onclick="openNav()"><i class="fa fa-chevron-circle-left fa-2x"></i></span>
     </div>
     <div class="col-xs-6  col-md-4 pull-right">
-        <button class="btn btn-lg btn-secondary noteBtn"><i class="fa fa-pencil-square-o icon-white fa-lg"></i> Notes</button>
+        <div class="vertical-align" style="display:block">
+            <button class="btn btn-lg btn-secondary noteBtn"><i class="fa fa-pencil-square-o icon-white fa-lg"></i> Notes</button>
+        </div>
         <%= form_tag end_session_path, :method => :POST do%>
-            <div class="actions">
-                <%= hidden_field_tag :start %>
-                <%= hidden_field_tag :end %>
-                <%= submit_tag "End Session",:onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
+            <div class="actions btnFix vertical-align" style="float:left; width:auto; display:block">
+                <%= hidden_field_tag :start2 %>
+                <%= hidden_field_tag :end2 %>
+                <%= submit_tag "End Session", :name => 'end_sess2', :onclick => "return getEndTime()", :class => "btn btn-lg btn-primary btnFix"%>
             </div>
         <% end %>
     </div>
@@ -84,7 +96,7 @@
                         <% if square.tracking_type == 1 %>
                         <div class="wrapper duration" name="<%= square.id %>">
                             <button class="button-start square i-<%= square.color %>" id="button-start1">
-                                <div class="square i-<%= square.color %> text-center">
+                                <div class="d-sq square i-<%= square.color %> text-center">
                                     <div class="col-xs-12">
                                             <h4><%= square.screen_name %> </h4>
                                             <p id = "timer"><span id="minutes">00</span>:<span id="seconds">00</span></p>
@@ -106,7 +118,7 @@
 <!-- Additional Button Area -->
 <div class="row">
     <div class="col-sm-2 pull-right">
-        <div class="btn btn-danger btn-lg">Undo</div>
+        <div class="btn btn-danger btn-lg", onclick="undo();">Undo</div>
     </div>
 </div>
 

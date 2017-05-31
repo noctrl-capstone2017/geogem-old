@@ -1,28 +1,19 @@
-class StudentsController < ApplicationController
+# authors: Ricky Perez & Michael Loptien
+# Controller for Students
   
-  # authors: Ricky Perez & Michael Loptien
-  # Controller for Students
+class StudentsController < ApplicationController
   
   include TeachersHelper
   
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :set_school   #set up the school info for the logged in teacher
-  
-  # commented out by Meagan Moore
-  # no bueno, anyone can access students
-  #before_action :is_admin     #make sure only admins can reach any of this
+  before_action :is_admin     #make sure only admins can reach any of this
 
-  
   # GET /students
   # GET /students.json
   def index
-    
-    # Check for Super User, shool_id == 0, list ALL students in @students
-    if current_teacher.id == 1
-      @students = Student.all
-    else                      # Admin only, list just that schools students
-      @students = Student.where(school_id: current_teacher.school_id)
-    end
+    # Admin only, list just that schools students
+    @students = Student.where(school_id: current_teacher.school_id)
     
     # Paginate those students and order by screen_name
     @students = @students.order('screen_name ASC')
@@ -46,6 +37,12 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+  end
+  
+  #Author: Carolyn C
+  #For analysis purposes
+  def analysis
+   @student = Student.find(params[:id])
   end
 
   # POST /students
