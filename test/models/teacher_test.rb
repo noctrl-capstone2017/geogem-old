@@ -62,9 +62,9 @@ class TeacherTest < ActiveSupport::TestCase
   end
   
   # Remove description and test
-  test "description should be present" do
+  test "description shouldn't be required" do
     @teacher.description = ""
-    assert_not @teacher.valid?
+    assert @teacher.valid?
   end
   
   # Remove powers and test
