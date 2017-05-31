@@ -21,7 +21,6 @@ class StudentsController < ApplicationController
     
     # Make a @sessions list for each student in the @studens list
     @sessions = Session.where(session_student: @students.ids)
-
   end
 
   # GET /students/1

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
   get     '/school_backup',   to: 'schools#backup'
   get     '/school_suspend',  to: 'schools#suspend'  
+  post    '/school_suspend',  to: 'schools#suspend',         as: :suspend
   get     '/school_restore',  to: 'schools#restore'
 
   # Teacher routes
