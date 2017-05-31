@@ -271,3 +271,17 @@ Teacher.create!(user_name: "TEST_teacher2",
                 description: "General teacher login",
                 powers: "Teacher",
                 school_id: 32)
+
+Teacher.create!(user_name: "TEST_teacherSus",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "TEST2",
+                screen_name: "TEST2",
+                icon: "apple",
+                color: "green",
+                email: "teacherz@soctrl.edu",
+                description: "General teacher login",
+                powers: "Teacher",
+                school_id: 32,
+                suspended: true)
