@@ -133,7 +133,7 @@ class TeachersController < ApplicationController
         @session.session_student = params[:student_id]
         respond_to do |format|
           if @session.save
-            format.html { redirect_to @session, :flash => { :notice => 'Session was successfully created.' } }
+            format.any { redirect_to @session }
           else
             format.html { render :new }
           end
