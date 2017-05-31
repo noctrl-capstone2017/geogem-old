@@ -1,7 +1,7 @@
 #Author: Ricky Perez
 #Description: This contains the methods and helpers used for the roster square page
 class RosterSquaresController < ApplicationController
-  before_action :set_roster_square, only: [:show, :edit, :update, :destroy]
+  before_action :set_roster_square, only: [:show, :edit, :update]
   helper_method :set_square_name
   helper_method :set_square_color
   helper_method :set_square_id
@@ -39,6 +39,13 @@ class RosterSquaresController < ApplicationController
     @school_squares = Square.where(school_id: @students.school_id)
     @square = Square.find_by_id(params[:id])
     @squares = Square.all
+    
+    if params[:remove_square]
+      if params[:remove_square_id] != nil
+        @roster_squares.delete(RosterSquare.find(params[:remove_square_id]))
+        redirect_to  "/roster_squares/#{@roster_square.student_id}/edit"
+      end
+    end
   end
   
   #Below are helpers methos that when called allow you to check certain fields
@@ -91,15 +98,13 @@ class RosterSquaresController < ApplicationController
     @squares = Square.all
     @square = Square.find_by_id(params[:id])
     @student_squares = RosterSquare.where(student_id: @students)
-    respond_to do |format|
       if @roster_square.save
-        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully created.' }
-        format.json { render :edit, status: :created, location: @roster_square }
+        flash[:success] = 'Roster square was successfully created.'
+        redirect_to "/roster_squares/#{@roster_square.student_id}/edit"
       else
         format.html { render :new }
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /roster_squares/1
@@ -114,14 +119,6 @@ class RosterSquaresController < ApplicationController
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  # DELETE /roster_squares/1
-  # DELETE /roster_squares/1.json
-  def destroy
-    @roster_squares.find(params[:id]).destroy
-    flash[:success] = 'Roster square was successfully destroyed.' 
-    redirect_to  "/roster_squares/#{@roster_square.student_id}/edit"
   end
 
   private

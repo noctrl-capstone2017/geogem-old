@@ -8,10 +8,10 @@
 					<label for="removeSquare"><h4>Remove Square: </h4></label>
 				</div>
 				<div class="form-group col-xs-2">
-        	 <%= form.select :id, options_for_select(@student_squares.map {|student_square| ["#{set_square_name(student_square)} - #{set_square_desc(student_square) }", student_square.id, {'data-id'=>student_square.id}] }), class: "form-control", id: "addStud"%>
+        	 <%= select_tag 'remove_square_id' :id, options_for_select(@student_squares.map {|student_square| ["#{set_square_name(student_square)} - #{set_square_desc(student_square) }", student_square.id, {'data-id'=>student_square.id}] }), class: "form-control", id: "removeSquare"%>
 				</div>
 				<div class="col-xs-2 text-center">
-				  <%= form.submit "Remove Square", class:"btn btn-danger"%>
+					<%= button_tag(type: 'submit', class: "btn btn-danger", id: "addStudBtn", name: "remove_square") do %> <i class="fa fa-minus icon-white"></i> <% end %>
 				</div>
 			</div><!--End row -->
 <%end%>

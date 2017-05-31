@@ -32,6 +32,6 @@
         <!-- This the id for the student it's just hidden-->
         <%= f.hidden_field :student_id, :value => @students.id%>
   	</div>
-		<%= f.submit "Add Square", class:"btn btn-success"%>
+		<%= f.submit "Add Square", class:"btn btn-success",  id: "addStudBtn" %>
 	</div>
 <%end%>
