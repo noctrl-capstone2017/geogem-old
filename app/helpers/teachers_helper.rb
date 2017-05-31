@@ -15,7 +15,7 @@ module TeachersHelper
     def is_admin
       if !is_admin?
         flash[:danger] = "Unauthorized. You are not an administrator"
-        redirect_to login_path
+        redirect_to home_path
       end
     end
     

@@ -28,6 +28,7 @@ $( document ).ready(function() {
 			                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
 			                dataType:'json',
 			                data:{
+			                		 time: timeStamp(),
 			                     note: note,
 			                     session_id: getSessionId()
 			                },
