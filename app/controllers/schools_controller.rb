@@ -19,6 +19,10 @@ class SchoolsController < ApplicationController
     @school = set_school
     set_school.full_name = params[:full_name]
   end
+  
+  def edit
+    @school = School.find(params[:id])
+  end
 
   # Used in the creation of new schools
   def new
@@ -47,20 +51,21 @@ class SchoolsController < ApplicationController
     @current_teacher = current_teacher
     # id = 1 written below refers to ProfBill, the SuperUser. He can't get deleted,
     # and therefore will never be in the set of teachers elligible for deletion
-    @teachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1) 
+    @activeTeachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1, suspended: true)
     @school = School.find(current_teacher.school_id)
     @school_name = School.find(current_teacher.school_id).full_name
-    @teacher_count = @teachers.count
+    @teacher_count = @activeTeachers.count
+    
   end 
 
   # Used to pass information to the /restore page about which teachers at what school will be restored.
   def restore
     @current_teacher = current_teacher
     #id = 1 is ProfBill, the SuperUser. He can't get deleted in the first place. No point in restoring.
-    @teachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1) 
+    @activeTeachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1)
     @school = School.find(current_teacher.school_id)
     @school_name = School.find(current_teacher.school_id).full_name
-    @teacher_count = @teachers.count
+    @teacher_count = @activeTeachers.count
   end 
   
   # Used in addition the the new method in the creation of schools.
@@ -113,5 +118,9 @@ class SchoolsController < ApplicationController
     # Require a school and a full name
     def focus_school_params
       params.permit(:full_name)
+    end
+    #Require a teacher to be suspended
+    def suspended_teacher_params
+      params.permit(:suspended)
     end
 end # end of controller

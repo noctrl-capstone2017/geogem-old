@@ -30,6 +30,8 @@ class SessionNotesController < ApplicationController
     @session_note.session_id = params[:session_id]
     respond_to do |format|
       if @session_note.save
+         @session_note.created_at = params[:time].to_s
+         @session_note.save
         format.any { render :json => {:response => 'Success' },:status => 200  }
       else
         format.html { render :new }
