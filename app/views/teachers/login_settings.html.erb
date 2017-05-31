@@ -10,15 +10,16 @@
 	<form class="form-horizontal">
 		<%= render 'layouts/flash' %>
 		<% if @teacher.errors.any? %>
-		  <div class="col-xs-11">
-		    <h4><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h4>
-		    <br>
-		    <ul>
-		      <% @teacher.errors.full_messages.each do |message| %>
-		        <li><%= message %></li>
-		      <% end %>
-		    </ul>
-		  </div>
+    	  <div id="error_explanation">
+          <div class="alert alert-danger">
+      		<%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:
+      	  </div>
+          <ul>
+          <% @teacher.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+          </ul>
+          </div>
 		<% end %>
 		
 	 	<!-- Teacher ID -->

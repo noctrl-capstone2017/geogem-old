@@ -2,17 +2,18 @@
   but just enough.-->
 <%= form_for(@teacher) do |f| %>
 <div class="col-xs-11"><h4><%= notice %></h4></div>
-<% if @teacher.errors.any? %>
-  <div id="error_explanation">
-    <h4 class="col-xs-12"><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h4>
-    <br>
-    <ul class="col-xs-12">
+  <% if @teacher.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+      <%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:
+      </div>
+      <ul>
       <% @teacher.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
-    </ul>
-  </div>
-<% end %>
+      </ul>
+    </div>
+  <% end %>
 
 <!-- Teacher ID -->
 <div class="row form-row">
