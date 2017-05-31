@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   get     '/admin',           to: 'teachers#admin'
   get     '/super',           to: 'schools#super'
   post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
-  get     '/backup',          to: 'schools#backup'
-  get     '/suspend',         to: 'schools#suspend'  
-  get     '/restore',         to: 'schools#restore'
+  get     '/school_backup',   to: 'schools#backup'
+  get     '/school_suspend',  to: 'schools#suspend'  
+  get     '/school_restore',  to: 'schools#restore'
 
   # Teacher routes
   # Author: Kevin M and Tommy B
@@ -43,8 +43,9 @@ Rails.application.routes.draw do
   get     'graph/todo'
   get     'graph/other'
   
-  #route to create session events during the session
+  #route to create and delete session events during the session
   post    '/session_events',  to: 'session_events#create'
+  post    '/session_events/undo',  to: 'session_events#undo'
   
   #route to pdf from session page
   post    '/report1',  to: 'reports#report1'

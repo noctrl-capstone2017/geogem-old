@@ -12,13 +12,8 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    
-    # Check for Super User, shool_id == 0, list ALL students in @students
-    if current_teacher.description == "Super user"
-      @students = Student.all
-    else                      # Admin only, list just that schools students
-      @students = Student.where(school_id: current_teacher.school_id)
-    end
+    # Admin only, list just that schools students
+    @students = Student.where(school_id: current_teacher.school_id)
     
     # Paginate those students and order by screen_name
     @students = @students.order('screen_name ASC')
