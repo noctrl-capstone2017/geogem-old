@@ -19,7 +19,7 @@ class NavbarControllerTest < ActionDispatch::IntegrationTest
     
     #If on about1, it should be navbar3  
     test "should get navbar3 for about1" do
-        get about1_path
+        get about_path
         assert_response :success
     end
     

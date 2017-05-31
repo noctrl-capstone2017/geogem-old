@@ -26,9 +26,9 @@ class TeachersController < ApplicationController
   #This method prepares the admin_report view.
   def admin_report
     @current_teacher = current_teacher
-    @students = Student.where(school_id: current_teacher.school_id)
-    @teachers = Teacher.where(school_id: current_teacher.school_id)
-    @squares = Square.where(school_id: current_teacher.school_id)
+    @students = Student.where(school_id: current_teacher.school_id).order('full_name ASC')
+    @teachers = Teacher.where(school_id: current_teacher.school_id).order('full_name ASC')
+    @squares = Square.where(school_id: current_teacher.school_id).order('full_name ASC')
   end
   
   # GET /teachers/1
@@ -137,7 +137,7 @@ class TeachersController < ApplicationController
         @session.session_student = params[:student_id]
         respond_to do |format|
           if @session.save
-            format.html { redirect_to @session, :flash => { :notice => 'Session was successfully created.' } }
+            format.any { redirect_to @session }
           else
             format.html { render :new }
           end
