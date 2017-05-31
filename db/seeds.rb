@@ -90,7 +90,7 @@ Teacher.create!(user_name: "admin",
                     description: "student description",
                     icon: stud_icons.sample,
                     color: colors.sample,
-                    session_interval: 20,
+                    session_interval: 15,
                     school_id: 1,
                     full_name: first_name + " " + last_name)
 end
@@ -104,7 +104,7 @@ end
                     description: "student description",
                     icon: "bicycle",
                     color: "green",
-                    session_interval: 20,
+                    session_interval: 15,
                     school_id: 2,
                     full_name: first_name + " " + last_name)
 end
