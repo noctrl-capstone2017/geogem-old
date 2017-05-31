@@ -13,14 +13,14 @@ class School < ApplicationRecord
   #Alphanumerical stuff only.
   VALID_SCREEN_NAME_REGEX = /\A[A-Za-z\d]+\z/
 
-  validates :screen_name,  presence: true, length: { maximum: 8 }
+  validates :screen_name,  presence: true, length: { maximum: 8 },
              # format: { with: VALID_SCREEN_NAME_REGEX },
-             # uniqueness: { case_sensitive: false}
-                    
+              uniqueness: { case_sensitive: false}
+              #produces 'screen name already taken' error if school id is taken      
   validates :full_name,  presence: true, length: { maximum: 75 }
   validates :website, presence: true, length: { maximum: 75 }
-  validates :email, presence: true, length: { maximum: 255 }
-             # format: { with: VALID_EMAIL_REGEX },
+  validates :email, presence: true, length: { maximum: 255 },
+              format: { with: VALID_EMAIL_REGEX }
              # uniqueness: { case_sensitive: false }
                     
   validates :description, presence: true, length: { maximum: 255 }

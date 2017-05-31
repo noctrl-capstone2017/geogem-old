@@ -1,4 +1,4 @@
-<!-- Edited for use by Dakota B -->
+<!-- Edited for use by Dakota B and Robert H-->
 		<!-- page header -->
 		<div class="page-header vertical-align">
 			<div class="col-xs-11">
@@ -23,20 +23,19 @@
    					<th>Student Icon</th>
 					<th>Student ID</th>
 					<th>Full Name</th>
-					<th>Contact Information</th>
 				</tr>
 			</thead>
 			<tbody>
 	            <% @students.each do |students| %>
-  					<tr data-link="/students/<%= students.id %>">
-							<td>
-								<div class="table-sq i-<%= students.color %>">                 <!--Generate Student Color-->
-								  <i class="fa fa-<%= students.icon %> fa-2x table-icon"></i>  <!--Generate Student Icon-->
-							  	</div>
-							</td>	
-							<td><p class="listText"><span> <%= students.screen_name %></span> </p></td>
+	            
+  					<tr data-link="<%= edit_student_path(students.id) %>">
+						<td>
+							<div class="table-sq i-<%= students.color %>">                 <!--Generate Student Color-->
+							 	<i class="fa fa-<%= students.icon %> fa-2x table-icon"></i>  <!--Generate Student Icon-->
+							</div>
+						</td>	
+						<td><p class="listText"><span> <%= students.screen_name %></span> </p></td>
 					    <td><p class="listText"><span> <%= students.full_name %></span> </p></td>
-					    <td><p class="listText"><span> <%= students.contact_info %></span> </p></td>
   		      		</tr>
   		        <% end %>
 			</tbody>
@@ -59,9 +58,9 @@
 			</thead>
 				<tbody>
 		            <% @teachers.each do |teacher| %>
-	  					<tr data-link="/students/<%= teacher.id %>">
+	  					<tr data-link="<%= edit_teacher_path(teacher.id) %>">
 							<td>
-								<div class="table-sq i-<%= teacher.color %>">                 <!--Generate Teacher Color-->
+							  <div class="table-sq i-<%= teacher.color %>">                 <!--Generate Teacher Color-->
 								  <i class="fa fa-<%= teacher.icon %> fa-2x table-icon"></i>  <!--Generate Teacher Icon-->
 							  </div>
 							</td>	
@@ -84,20 +83,29 @@
 		   				<th>Square Icon</th>
 						<th>Square ID</th>
 						<th>Square Name</th>
-						<th>Tracking Type</th>
+						<th>Type</th>
 						<th>Description</th>
 					</tr>
 				</thead>
 					<tbody>
 			            <% @squares.each do |square| %>
-		  					<tr data-link="/students/<%= square.id %>">
+		  					<tr data-link="<%= edit_square_path(square.id) %>">
 								<td>
-									<div class="table-sq i-<%= square.color %>">                 <!--Generate Square Color-->
-								  </div>
+									<div class="table-sq i-<%= square.color %>">              <!--Generate Square Color-->
+									 <span class="fa fa-square-o fa-3x teacher-icon"></span>  <!--Generate square Icon-->
+								    </div>
 								</td>	
 								<td><p class="listText"><span> <%= square.screen_name %></span> </p></td>
 							    <td><p class="listText"><span> <%= square.full_name %></span> </p></td>
-							    <td><p class="listText"><span> <%= square.tracking_type %></span> </p></td>
+							    <!-- If statement for translating  square type int into string KM-->
+							    <td><% if square.tracking_type == 1 %>
+							        <p class="listText">Duration</p>
+							        <% elsif square.tracking_type == 2 %>
+							        <p class="listText">Frequency</p>
+							        <% else %>
+							        <p class="listText">Interval</p>
+							        <% end %>
+							    </td>
 							    <td><p class="listText"><span> <%= square.description %></span> </p></td>
 		  		      		</tr>
 			  		    <% end %>
@@ -107,4 +115,3 @@
 			<br><br>
 		</div>   <!-- content-text -->
 		
-<%= link_to 'Return to Admin Dashboard', admin_path %>

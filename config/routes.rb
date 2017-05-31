@@ -15,19 +15,23 @@ Rails.application.routes.draw do
   get     '/admin',           to: 'teachers#admin'
   get     '/super',           to: 'schools#super'
   post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
-  get     '/backup',          to: 'schools#backup'
-  get     '/suspend',         to: 'schools#suspend'  
-  get     '/restore',         to: 'schools#restore'
+  get     '/school_backup',   to: 'schools#backup'
+  get     '/school_suspend',  to: 'schools#suspend'  
+  get     '/school_restore',  to: 'schools#restore'
 
-  #to disguise teachers/id/edit_password as just /password
-  get     '/password',        to: 'teachers#edit_password'
+  # Teacher routes
+  # Author: Kevin M and Tommy B
+  # to disguise teachers/id/edit_password as just /password
+  get     '/password',                    to: 'teachers#edit_password'
+  patch 'teachers/:id/change_password',   to: 'teachers#change_password'
+  get     'teachers/:id/login_settings',  to: 'teachers#login_settings'
 
   # Login Session Controller Routing 
   # Author: Meagan Moore & Steven Royster
   get     'login',            to: 'login_session#new'
   post    'login',            to: 'login_session#create'
   get     'logout',           to: 'login_session#logout'
-  get     'about1',           to: 'static_pages#about1'
+  get     'about',           to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
 
   get     'help',             to: 'static_pages#help'
@@ -39,8 +43,9 @@ Rails.application.routes.draw do
   get     'graph/todo'
   get     'graph/other'
   
-  #route to create session events during the session
+  #route to create and delete session events during the session
   post    '/session_events',  to: 'session_events#create'
+  post    '/session_events/undo',  to: 'session_events#undo'
   
   #route to pdf from session page
   post    '/report1',  to: 'reports#report1'
@@ -53,7 +58,6 @@ Rails.application.routes.draw do
   resources :teachers do
     member do
       get :edit_password
-      put :update_password
     end
   end
   
