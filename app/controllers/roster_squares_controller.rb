@@ -34,11 +34,11 @@ class RosterSquaresController < ApplicationController
     @students = Student.find_by_id(params[:id])
     #Set the students squares
     @student_squares = RosterSquare.where(student_id: @students.id)
+    @not_student_squares = []
     #Set the squares for the specific school
     @school_squares = Square.where(school_id: @students.school_id)
     @square = Square.find_by_id(params[:id])
     @squares = Square.all
-    #@not_student_squares = Square.where.not(id: @student_squares.find(student_id).square_id)
   end
   
   #Below are helpers methos that when called allow you to check certain fields
@@ -67,7 +67,6 @@ class RosterSquaresController < ApplicationController
   def is_student_square(square)
     @is_square = false
     @student_squares.each do |student_square|
-    @is_square = false
       if square.id == student_square.square_id
         @is_square = true
         break
@@ -77,6 +76,9 @@ class RosterSquaresController < ApplicationController
         @is_square = false
       end 
       
+    end
+    if @is_square == false
+      @not_student_squares.push(square)
     end
     @is_square
   end
@@ -117,11 +119,9 @@ class RosterSquaresController < ApplicationController
   # DELETE /roster_squares/1
   # DELETE /roster_squares/1.json
   def destroy
-    @roster_square.destroy
-    respond_to do |format|
-      format.html { redirect_to  "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @roster_squares.find(params[:id]).destroy
+    flash[:success] = 'Roster square was successfully destroyed.' 
+    redirect_to  "/roster_squares/#{@roster_square.student_id}/edit"
   end
 
   private
