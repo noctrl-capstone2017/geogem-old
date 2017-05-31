@@ -42,8 +42,35 @@ class StudentsController < ApplicationController
   #Author: Carolyn C
   #For analysis purposes
   def analysis
-   @student = Student.find(params[:id])
+    @student = Student.find(params[:id])
+    if params[:analysis_report]
+          redirect_to analysis2_student_path( @student)
+    elsif params[:analyze_csv]
+          redirect_to analysis3_student_path( @student)
+    elsif params[:analyze_charts]
+          redirect_to analysis4_student_path( @student)
+    end
   end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis2
+    @student = Student.find(params[:id])
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis3
+    @student = Student.find(params[:id])
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis4
+    @student = Student.find(params[:id])
+  end
+  
+  
 
   # POST /students
   # POST /students.json
