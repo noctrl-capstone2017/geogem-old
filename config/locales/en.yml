@@ -19,5 +19,11 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+# Changed by Kevin Morgan to accomodate for screen_name to display as Teacher ID
+# See models/teacher.rb for more details.
+# https://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
+en:  
+  activerecord:
+    attributes:
+      teacher:
+        screen_name: "Teacher ID"

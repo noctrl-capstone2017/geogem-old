@@ -20,8 +20,13 @@ class Teacher < ApplicationRecord
                          format: { with: VALID_USER_NAME_REGEX }
                          
   validates :full_name, presence: true, length: { maximum: 75 }
+  
+  #https://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
+  #Screen_name is seen as "Teacher ID" by the user. We change how its errors are displayed in
+  # config/locales/en.yml, check it out!
   validates :screen_name, presence: true, length: { maximum: 8 },
-                    format: { with: VALID_SCREEN_NAME_REGEX }
+                    format: { with: VALID_SCREEN_NAME_REGEX } 
+                    
   
   validates :icon,  presence: true
   validates :color, presence: true
