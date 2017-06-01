@@ -73,9 +73,16 @@ Rails.application.routes.draw do
   resources :students do
     member do
       get :analysis
+      get :analysis2
+      get :analysis3
+      get :analysis4
     end
   end
   
+  #Carolyn C routes for analysis
+  get 'student/:id/analysis2', to: 'students#analysis', as: :analysis2
+  get 'student/:id/analysis3', to: 'students#analysis', as: :analysis3
+  get 'student/:id/analysis4', to: 'students#analysis', as: :analysis4
   
   resources :roster_students
   resources :roster_squares
