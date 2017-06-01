@@ -28,7 +28,6 @@ class Teacher < ApplicationRecord
   
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }
-  validates :description, presence: true
   validates :powers, presence: true
   validates :school_id, presence: true
 
