@@ -24,7 +24,7 @@ pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
 
                       # -------Session Data---------#
 #for now, just grab the last seeded session
-session = Session.find(params[:id])
+session = Session.last
 student = Student.find(session.session_teacher)
 teacher = Teacher.find(session.session_student)
 
