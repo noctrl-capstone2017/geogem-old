@@ -33,3 +33,5 @@ en:
           attributes:
             user_name:
               invalid: "can't have any spaces"
+            screen_name:
+              invalid: "must be alphanumeric"

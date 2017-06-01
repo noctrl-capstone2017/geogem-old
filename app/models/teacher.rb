@@ -26,7 +26,6 @@ class Teacher < ApplicationRecord
   # config/locales/en.yml, check it out!
   validates :screen_name, presence: true, length: { maximum: 8 },
                     format: { with: VALID_SCREEN_NAME_REGEX } 
-                    
   
   validates :icon,  presence: true
   validates :color, presence: true
