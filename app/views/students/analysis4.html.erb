@@ -4,15 +4,24 @@
             <!--page header -->
             <div class="page-header vertical-align">
                 <div class="col-xs-11">
-                    <h2>Analysis <small> CHARTS for <%= @student.full_name %> </small></h2><!--Dynamically fills in with school id -->
+                    <h2>Analysis <small> Export to CSV for <%= @student.full_name %> </small></h2><!--Dynamically fills in with school id -->
                 </div>
                 <div class="col-xs-1 center-block">
-                    <div class="header-sq i-gray" title="Analysis">
-                        <span class="fa fa-line-chart fa-3x teacher-icon"></span>
+                    <div class="header-sq i-<%= @student.color %>" title="Analysis">
+                        <span class="fa fa-file-excel-o fa-3x teacher-icon"></span>
                     </div>
                 </div>
             </div><!--End page header-->
-            Coming Soon! Charts for the Student!
+            <div class="row-xs-2 text-center">
+			    <div class="form-group">
+				    <h4>Session:</h4>Coming soon: A spinner to select a specific session.
+				    <br>
+				    <br>
+    				<%= button_tag(type: 'submit', class: "btn btn-lg btn-success", name: 'Export') do %>
+    				    Export to CSV
+    				<% end %>
+                </div>
+			</div><!--end form-->
         </div>
     </div>  
 </body>
