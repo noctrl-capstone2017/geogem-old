@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170602140334) do
     t.string   "color"
     t.string   "contact_info"
     t.text     "description"
-    t.integer  "session_interval"
+    t.integer  "session_interval", default: 15
     t.integer  "school_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
