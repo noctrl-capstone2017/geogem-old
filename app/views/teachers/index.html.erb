@@ -49,12 +49,24 @@
 					<td><p class="listText"><span><%= teacher.screen_name %></span></p></td>
 					<td><p class="listText"><span><%= teacher.powers %></span></p></td>
 					
-					<!--Last Login. If the user has never logged in, list Never.-->
+					<!-- Teacher last-login area -->
+					<!-- The reason (suspended) isn't just added afterwards is so that it
+					     stays in the same line. -->
 					<td><p class="listText"><span> 
+					<!--Last Login. If the user has never logged in, list Never.-->
 						<% if teacher.last_login.nil? %>
 							Never
+							<% if teacher.suspended? %>
+								<small>(Suspended)</small>
+							<% end %>
+						<!--If the teacher has logged in but is suspended, indicate that.-->
 						<% else %>
-							<%= time_ago_in_words(teacher.last_login) %>
+							<% if teacher.suspended? %>
+								<%= time_ago_in_words(teacher.last_login) %> 
+								<small>(Suspended)</small>
+							<% else %>
+								<%= time_ago_in_words(teacher.last_login) %>
+							<% end %>
 						<% end %>
 					</span></p></td>
 					<td><p class="listText"><span></span></p>
