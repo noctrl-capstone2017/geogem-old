@@ -129,14 +129,21 @@ class TeachersController < ApplicationController
     @teacher = current_teacher
     @top_students = Student.where(id: Session.where(session_teacher: @teacher.id).group('session_student').order('count(*)').select('session_student').limit(8))
     if params[:start_session]
-        @session = Session.new
-        @session.session_teacher = @teacher.id
-        @session.session_student = params[:student_id]
-        respond_to do |format|
-          if @session.save
-            format.html { redirect_to @session, :flash => { :notice => 'Session was successfully created.' } }
-          else
-            format.html { render :new }
+        @student = Student.find(params[:student_id])
+        if(@student.squares.size == 0)
+          respond_to do |format|
+            format.html { redirect_to home_path, :flash => { :notice => 'Cannot start session with student who has no behaviors to track' } }
+          end
+        else
+          @session = Session.new
+          @session.session_teacher = @teacher.id
+          @session.session_student = params[:student_id]
+          respond_to do |format|
+            if @session.save
+              format.html { redirect_to @session, :flash => { :notice => 'Session was successfully created.' } }
+            else
+              format.html { render :new }
+            end
           end
         end
     elsif params[:analyze]

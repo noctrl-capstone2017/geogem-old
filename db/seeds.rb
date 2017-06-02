@@ -78,7 +78,8 @@ Teacher.create!(user_name: "admin",
                 email: "admin@noctrl.edu",
                 description: "General admin login",
                 powers: "Admin",
-                school_id: 1)
+                school_id: 1,
+                suspended: true)
 
 # Seed the database with 30 faked Students
 # They go to North Central College
