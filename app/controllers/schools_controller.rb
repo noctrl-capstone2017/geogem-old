@@ -56,16 +56,22 @@ class SchoolsController < ApplicationController
     @school_name = School.find(current_teacher.school_id).full_name
     @teacher_count = @activeTeachers.count
     
+    # Should update all the appropriate teachers to be suspended
+    @activeTeachers.update_all(suspended: true)
+    
   end 
 
   # Used to pass information to the /restore page about which teachers at what school will be restored.
   def restore
     @current_teacher = current_teacher
     #id = 1 is ProfBill, the SuperUser. He can't get deleted in the first place. No point in restoring.
-    @activeTeachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1)
+    @activeTeachers = Teacher.where(school_id: current_teacher.school_id).where.not(id: 1, suspended: false)
     @school = School.find(current_teacher.school_id)
     @school_name = School.find(current_teacher.school_id).full_name
     @teacher_count = @activeTeachers.count
+    
+    # Should update all the appropriate teachers to be suspended
+    @activeTeachers.update_all(suspended: false)
   end 
   
   # Used in addition the the new method in the creation of schools.
