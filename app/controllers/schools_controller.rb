@@ -9,9 +9,8 @@ class SchoolsController < ApplicationController
 
   # Guards to limit access from certain users
   # Author: Meagan Moore
-  #before_action :is_admin, only: [:] does admin get any of this stuff?? No, right?
-  #before_action :is_super, only: [:super, :suspend, :backup, :restore]
-
+  before_action :is_super, only: [:super, :suspend, :backup, :restore, :index, :super_report]
+  before_action :is_admin, only: [:edit]
 
   # Used in the /schools route to display all schools
   def index
@@ -35,6 +34,7 @@ class SchoolsController < ApplicationController
     @teacher = Teacher.first #
     @school = set_school
     @current_teacher = current_teacher
+    @current_school = School.find(current_teacher.school_id)
    # set_school.full_name = params[:full_name]
     #@teacher.school_id = params[:selectSch]
   end
@@ -100,7 +100,7 @@ class SchoolsController < ApplicationController
   # Used by Super user to switch Focus School
   def updateFocus
     @current_school =  School.find(Teacher.first.school_id)
-      if @current_teacher.update(focus_school_params)
+      if @current_teacher.update(focus_school_params) 
         @current_teacher.school_id =  params[:full_name]
         flash[:success] = current_teacher.school_id =  params[:full_name]
         #current_teacher.school_id = params[:selectSch]

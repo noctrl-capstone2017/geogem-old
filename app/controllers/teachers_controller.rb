@@ -8,8 +8,8 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
-  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show]
-  before_action :is_super, only: [:super, :updateFocus]
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show, :edit]
+  before_action :is_super, only: [:super, :updateFocus, :super_report]
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
@@ -96,6 +96,7 @@ class TeachersController < ApplicationController
   # This prepares the admin dashboard.
   def admin
     @teacher = current_teacher
+    @current_school = School.find(current_teacher.school_id)
   end 
   
   # GET /teachers/password
