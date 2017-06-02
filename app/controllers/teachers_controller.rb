@@ -1,5 +1,6 @@
 # author: Kevin M, Tommy B
 # admin methods by Dakota B.
+# guards by Meagan Moore
 # Teacher methods, as well as admin, super, and home stuff.
 class TeachersController < ApplicationController
   
@@ -242,7 +243,14 @@ f params[:teacher][:current_password]
     end
     
     # Switching the focus school 
+<<<<<<< HEAD
   # def focus_school_params 
   #  params.permit(:full_name)
   # end 
 end
+=======
+    def focus_school_params 
+      params.require(:full_name).permit(:school_id)
+    end 
+end
+>>>>>>> bd8af27fdb05d3ad2aea7bdb987d48142ae7b1ba

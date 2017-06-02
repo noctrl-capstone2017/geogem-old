@@ -12,6 +12,7 @@ class SchoolsController < ApplicationController
   before_action :is_super, only: [:super, :suspend, :backup, :restore, :index, :super_report]
   before_action :is_admin, only: [:edit]
 
+
   # Used in the /schools route to display all schools
   def index
     @schools = School.paginate(page: params[:page], :per_page => 10).order('full_name ASC')
