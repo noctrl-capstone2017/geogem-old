@@ -8,7 +8,7 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
-  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show, :edit]
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings]
   before_action :is_super, only: [:super, :updateFocus, :super_report]
 
   # GET /teachers
@@ -158,8 +158,10 @@ class TeachersController < ApplicationController
   #
   # Similarly, if suspended is in the params, then it changes their success or
   # error redirection.
-  def update
-    if params[:teacher][:current_password]
+  def update      
+    if params[:teacher][:hiddenVal]
+       redirect_to super_path    iels
+f params[:teacher][:current_password]
       change_password
     elsif params[:teacher][:suspended]
       change_login_settings
@@ -229,7 +231,7 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation, :suspended, :current_password)
+      :school_id, :password, :password_confirmation, :suspended, :current_password, :hiddenVal) #add hidden field to permited
     end
     
     #Can only access teachers and info from the same school
@@ -240,7 +242,7 @@ class TeachersController < ApplicationController
     end
     
     # Switching the focus school 
-    def focus_school_params 
-      params.require(:full_name).permit(:school_id)
-    end 
+  # def focus_school_params 
+  #  params.permit(:full_name)
+  # end 
 end

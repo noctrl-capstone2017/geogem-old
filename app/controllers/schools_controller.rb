@@ -14,7 +14,7 @@ class SchoolsController < ApplicationController
 
   # Used in the /schools route to display all schools
   def index
-    @schools = School.paginate(page: params[:page], :per_page => 10)
+    @schools = School.paginate(page: params[:page], :per_page => 10).order('full_name ASC')
     @school = set_school
     set_school.full_name = params[:full_name]
   end
