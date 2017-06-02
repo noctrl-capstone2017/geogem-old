@@ -42,7 +42,7 @@
 	
 			<!-- Calls the edit from which is the add squares select and the submit button-->
 			<%= render 'form', roster_square: @roster_square %>
-			
+			<!--Form for delete roster square-->
 			<form>			<!-- remove square row-->
 				<div class="row vertical-align add-rm-squares-row">
 					<div class="col-xs-1 col-xs-offset-1 text-right">
@@ -52,9 +52,11 @@
 						<label for="removeSquare"><h4>Remove Square: </h4></label>
 					</div>
 					<div class="form-group col-xs-2">
+						<!--Populates the drop down box-->
 						<%= select_tag 'remove_square_id', options_for_select(@student_squares.map {|student_square| ["#{set_square_name(student_square)} - #{set_square_desc(student_square) }", student_square.id] }), class: "form-control", id: "removeSquare"%>
 					</div>
 					<div class="col-xs-2 text-center">
+						<!--Creates the button for the delete drop down box-->
 						<%= button_tag(type: 'submit', class: "btn btn-danger", id: "addStudBtn", name: "remove_square") do %> <i class="fa fa-minus icon-white"></i> <% end %>
 					</div>
 				</div><!--End row -->
