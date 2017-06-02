@@ -9,8 +9,7 @@ class SchoolsController < ApplicationController
 
   # Guards to limit access from certain users
   # Author: Meagan Moore
-  #before_action :is_admin, only: [:] does admin get any of this stuff?? No, right?
-  #before_action :is_super, only: [:super, :suspend, :backup, :restore]
+  before_action :is_super, only: [:super, :suspend, :backup, :restore]
 
 
   # Used in the /schools route to display all schools

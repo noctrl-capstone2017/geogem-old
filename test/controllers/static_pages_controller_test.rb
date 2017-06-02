@@ -36,8 +36,8 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   
   # Tests the about1 page 
   # Author: Meagan Moore & Steven Royster 
-  test "should get about1" do
-    get about1_url
+  test "should get about" do
+    get about_url
     assert_response :success
     assert_select "title", "Operation Dinner Out"
   end
