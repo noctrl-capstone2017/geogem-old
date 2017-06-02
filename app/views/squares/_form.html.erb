@@ -5,8 +5,9 @@
 <%= form_for(square) do |f| %>
   <% if square.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(square.errors.count, "error") %> prohibited this square from being saved:</h2>
-
+      <div class="alert alert-danger">
+        The Form Contains <%= pluralize(square.errors.count, "error") %>
+      </div>
       <ul>
       <% square.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -44,7 +45,7 @@
 		</div>
 		<div class="col-sm-4 col-md-offset-0 col-sm-offset-0">
       <%= f.select :color,  ['navy','red','yellow',
-      ['light blue', 'ltblue'],'orange','green','lavendar','plum','mint','pink']%>
+      ['light blue', 'ltblue'],'orange','green','lavender','plum','mint','pink']%>
 		</div>
 	</div>
 
