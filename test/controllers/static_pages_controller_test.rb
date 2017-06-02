@@ -12,7 +12,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get about student art" do
     get about2_url
     assert_response :success
-    assert_select "h2", "About student art - artwork contributed to Dinner Out"
+    assert_select "h2", "About student art - artwork contributed to GeoGem"
     #uncomment when pushed
     #assert_select "a[href=mailto:?]",'wtkrieger@noctrl.edu', count: 1
   end
@@ -36,7 +36,11 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   
   # Tests the about1 page 
   # Author: Meagan Moore & Steven Royster 
+<<<<<<< HEAD
+  test "should get about" do
+=======
   test "should get about1" do
+>>>>>>> 138749f354054bfe9e03eff801542cffe53a495e
     get about_url
     assert_response :success
     assert_select "title", "GeoGem"

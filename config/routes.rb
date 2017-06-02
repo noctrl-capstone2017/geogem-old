@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get     'login',            to: 'login_session#new'
   post    'login',            to: 'login_session#create'
   get     'logout',           to: 'login_session#logout'
-  get     'about',           to: 'static_pages#about1'
+  get     'about',            to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
 
   get     'help',             to: 'static_pages#help'
