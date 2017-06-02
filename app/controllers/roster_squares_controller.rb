@@ -1,7 +1,7 @@
 #Author: Ricky Perez
 #Description: This contains the methods and helpers used for the roster square page
 class RosterSquaresController < ApplicationController
-  before_action :set_roster_square, only: [:show, :edit, :update, :destroy]
+  before_action :set_roster_square, only: [:show, :edit, :update]
   helper_method :set_square_name
   helper_method :set_square_color
   helper_method :set_square_id
@@ -34,11 +34,18 @@ class RosterSquaresController < ApplicationController
     @students = Student.find_by_id(params[:id])
     #Set the students squares
     @student_squares = RosterSquare.where(student_id: @students.id)
+    @not_student_squares = []
     #Set the squares for the specific school
     @school_squares = Square.where(school_id: @students.school_id)
     @square = Square.find_by_id(params[:id])
     @squares = Square.all
-    #@not_student_squares = Square.where.not(id: @student_squares.find(student_id).square_id)
+    
+    if params[:remove_square]
+      if params[:remove_square_id] != nil
+        @roster_squares.delete(RosterSquare.find(params[:remove_square_id]))
+        redirect_to  "/roster_squares/#{params[:id]}/edit"
+      end
+    end
   end
   
   #Below are helpers methos that when called allow you to check certain fields
@@ -67,7 +74,6 @@ class RosterSquaresController < ApplicationController
   def is_student_square(square)
     @is_square = false
     @student_squares.each do |student_square|
-    @is_square = false
       if square.id == student_square.square_id
         @is_square = true
         break
@@ -77,6 +83,9 @@ class RosterSquaresController < ApplicationController
         @is_square = false
       end 
       
+    end
+    if @is_square == false
+      @not_student_squares.push(square)
     end
     @is_square
   end
@@ -89,15 +98,13 @@ class RosterSquaresController < ApplicationController
     @squares = Square.all
     @square = Square.find_by_id(params[:id])
     @student_squares = RosterSquare.where(student_id: @students)
-    respond_to do |format|
       if @roster_square.save
-        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully created.' }
-        format.json { render :edit, status: :created, location: @roster_square }
+        flash[:success] = 'Roster square was successfully created.'
+        redirect_to "/roster_squares/#{@roster_square.student_id}/edit"
       else
         format.html { render :new }
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /roster_squares/1
@@ -108,19 +115,9 @@ class RosterSquaresController < ApplicationController
         format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully updated.' }
         format.json { render :show, status: :ok, location: @roster_square }
       else
-        format.html { render :edit }
+        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully updated.' }
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /roster_squares/1
-  # DELETE /roster_squares/1.json
-  def destroy
-    @roster_square.destroy
-    respond_to do |format|
-      format.html { redirect_to  "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

@@ -23,7 +23,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test "should get help" do
     get static_pages_help_url
     assert_response :success
-    assert_select "h2", "Help - frequently asked questions about Dinner Out"
+    assert_select "h2", "Help - frequently asked questions about GeoGem"
   end
 
   # Tests root path, should be login
@@ -31,15 +31,19 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   test 'should get root path' do
     get root_path
     assert_response :success
-    assert_select "title", "Operation Dinner Out"
+    assert_select "title", "GeoGem"
   end
   
   # Tests the about1 page 
   # Author: Meagan Moore & Steven Royster 
+<<<<<<< HEAD
   test "should get about" do
+=======
+  test "should get about1" do
+>>>>>>> 138749f354054bfe9e03eff801542cffe53a495e
     get about_url
     assert_response :success
-    assert_select "title", "Operation Dinner Out"
+    assert_select "title", "GeoGem"
   end
   
 end

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
   get     '/school_backup',   to: 'schools#backup'
   get     '/school_suspend',  to: 'schools#suspend'  
+  post    '/school_suspend',  to: 'schools#suspend',         as: :suspend
   get     '/school_restore',  to: 'schools#restore'
 
   # Teacher routes
@@ -72,9 +73,16 @@ Rails.application.routes.draw do
   resources :students do
     member do
       get :analysis
+      get :analysis2
+      get :analysis3
+      get :analysis4
     end
   end
   
+  #Carolyn C routes for analysis
+  get 'student/:id/analysis2', to: 'students#analysis', as: :analysis2
+  get 'student/:id/analysis3', to: 'students#analysis', as: :analysis3
+  get 'student/:id/analysis4', to: 'students#analysis', as: :analysis4
   
   resources :roster_students
   resources :roster_squares

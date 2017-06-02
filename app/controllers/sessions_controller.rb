@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   before_action :set_session, only: [:show, :edit, :update, :destroy]
-  before_filter :disable_nav, only: [:show]
+  before_action :disable_nav, only: [:show]
   
   # GET /sessions
   # GET /sessions.json

@@ -137,7 +137,7 @@ window.onload = function () {
 	  var seconds = timerSq.seconds;
 	  var minutes = timerSq.minutes;
     seconds++;
-    if(seconds <  9)
+    if(seconds <  10)
     {
       timerSq.secondsTxt.innerHTML = "0" + seconds;
     }

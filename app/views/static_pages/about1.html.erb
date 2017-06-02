@@ -15,11 +15,11 @@
 	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
 		<div class="page-header vertical-align">
 			<div class="col-xs-11">
-				<h2>About<small> - meet the GeoGem team</small></h2>
+				<h2>About<small> - GeoGem <%= DeployHelper.geogem_version_detailed =%>, deployed <%= DeployHelper.geogem_deploy_date =%></small></h2>
 			</div>
 			<div class="col-xs-1 center-block">
-				<div class="header-sq i-gray" title="All about GeoGem">
-					<span class="fa fa-info fa-3x teacher-icon"></span>
+				<div class="header-sq i-ltblue" title="All about GeoGem">
+					<span class="fa fa-info-circle fa-3x teacher-icon"></span>
 				</div>
 			</div>
 		</div><!--End page header-->
@@ -38,7 +38,7 @@
 		</div>
 		<div class="row content-text">
 			<div class="col-xs-12">
-				<h3>Contributions</h3>
+				<h3>Acknowledgements</h3>
 				<p>
 					<!--Part 2: Thank you Turning Pointe and others. -->
 					We would like to extend our thanks to <a href="http://www.turningpointeautismfoundation.org/" target="_blank">Turning Pointe Autism Foundation</a> for providing their expertise and willingness to help
@@ -58,6 +58,15 @@
 		</div>
 		<!------------------------------------ Team Images ------------------------------------>
 		<div class="row">
+			<!---- Alex P. ---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
+						data-name="Alex P." data-text="..." 
+						data-img="<%=asset_path("alexp.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("alexp.jpg") %>);"></div>
+					<h5>Alex P.</h5>
+				</div>
+			</div><!-- End Col-->
 			<!---- Prof Bill ---->
 			<div class="col-xs-4 col-sm-3">
 				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Prof Bill" 
@@ -77,45 +86,15 @@
 					<h5>Carolyn C.</h5>
 				</div>
 			</div><!-- End Col-->
-			<!---- Steven R ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Steven R" 
-						data-text="It was quite an exciting adventure creating GeoGem! I had a good time 
-						working with some awesome people. Don't let the suit fool you...I'm not that important." 
-						data-img="<%=asset_path("stevenr.jpg") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("stevenr.jpg") %>);"></div>
-					<h5>Steven R.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Robert H ---->
+			<!---- Dakota B. ---->
 			<div class="col-xs-4 col-sm-3">
 				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Robert H" data-text="I worked on the administrator and super-user portions of GeoGem. 
-						The process of creating a usable app as part of a large group proved challenging, but very rewarding. 
-						I hope GeoGem allows people to be more productive while helping others!" 
-						data-img="<%=asset_path("roberth.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("roberth.png") %>);"></div>
-					<h5>Robert H.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Kevin M ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Kevin M." 
-						data-text=" I worked on teacher-focused pages with Tommy B! This was the first major thing I've worked on, and it was pretty fun. 
-						I'm a vampire, so I don't have a real picture." 
-						data-img="<%=asset_path("kevinm.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("kevinm.png") %>);"></div>
-					<h5>Kevin M.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Michael L---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Michael L." 
-						data-text="I survived capstone and had a great time learning all the tools necessary to complete this project. 
-						It was a great opportunity to create something those in education can use to make their lives just a bit easier." 
-						data-img="<%=asset_path("michaell.jpg") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("michaell.jpg") %>);"></div>
-					<h5>Michael L.</h5>
+						data-name="Dakota B." data-text="My role in capstone was spent developing the administrator pages. 
+						I had fun working with old friends and new, and developing from the shadows to 
+						make the secret pages which many users will never see. Perhaps in exchange for snacks, I could share these secrets..." 
+						data-img="<%=asset_path("dakotab.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("dakotab.jpg") %>);"></div>
+					<h5>Dakota B.</h5>
 				</div>
 			</div><!-- End Col-->
 			<!---- Debra J ---->
@@ -129,13 +108,34 @@
 					<h5>Debra J.</h5>
 				</div>
 			</div><!-- End Col-->
-			<!---- Steven Y---->
+			<!---- Kevin M ---->
 			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Steven Y." 
-						data-text="I had a great time in capstone. I look forward to putting my capstone experience towards a career." 
-						data-img="<%=asset_path("steveny.JPG") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("steveny.JPG") %>);"></div>
-					<h5>Steven Y.</h5>
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Kevin M." 
+						data-text=" I worked on teacher-focused pages with Tommy B! This was the first major thing I've worked on, and it was pretty fun. 
+						I'm a vampire, so I don't have a real picture." 
+						data-img="<%=asset_path("kevinm.png") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("kevinm.png") %>);"></div>
+					<h5>Kevin M.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Kevin P. ---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
+						data-name="Kevin P." data-text="Writer of code and eater of baked goods. Now knows far too much about charting libraries." 
+						data-img="<%=asset_path("kevinp.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("kevinp.jpg") %>);"></div>
+					<h5>Kevin P.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Matthew O. ---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
+						data-name="Matthew O." data-text="I had a great experience in capstone. 
+						Working on the sessions gave me a unique opportunity to further strengthen 
+						both my front-end and back-end development skills. I'm excited to see the potential impact GeoGem will have." 
+						data-img="<%=asset_path("matthewo.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("matthewo.jpg") %>);"></div>
+					<h5>Matthew O.</h5>
 				</div>
 			</div><!-- End Col-->
 			<!---- Megan M ---->
@@ -146,6 +146,28 @@
 						data-img="<%=asset_path("meaganm.jpg") %>">		
 					<div class="sq-about center-block" style="background-image: url(<%=asset_path("meaganm.jpg") %>);"></div>
 					<h5>Megan M.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Michael L---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Michael L." 
+						data-text="I survived capstone and had a great time learning all the tools necessary to complete this project. 
+						It was a great opportunity to create something those in education can use to make their lives just a bit easier." 
+						data-img="<%=asset_path("michaell.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("michaell.jpg") %>);"></div>
+					<h5>Michael L.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Nate V. ---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
+						data-name="Nate V." data-text="I am a 4th year student who enjoys 
+						spending my time with computers, music, and traveling, and possesses a borderline 
+						unhealthy obsession with sneaker collecting. I worked on the report capability for the project, 
+						where Taylor S. and I provided the pdf and csv output functionality." 
+						data-img="<%=asset_path("natev.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("natev.jpg") %>);"></div>
+					<h5>Nate V.</h5>
 				</div>
 			</div><!-- End Col-->
 			<!---- Ricky P ---->
@@ -159,14 +181,45 @@
 					<h5>Ricky P.</h5>
 				</div>
 			</div><!-- End Col-->
-			<!---- Tommy B ---->
+			<!---- Robert H ---->
 			<div class="col-xs-4 col-sm-3">
 				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Tommy B." data-text="I had a great time working with Kevin M. on the teacher-focused pages and trying to keep up with him! 
-						It was a great experience working with everyone from 0 to a full, deployed application in only a few weeks!" 
-						data-img="<%=asset_path("tommyb.jpg") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("tommyb.jpg") %>);"></div>
-					<h5>Tommy B.</h5>
+						data-name="Robert H" data-text="I worked on the administrator and super-user portions of GeoGem. 
+						The process of creating a usable app as part of a large group proved challenging, but very rewarding. 
+						I hope GeoGem allows people to be more productive while helping others!" 
+						data-img="<%=asset_path("roberth.png") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("roberth.png") %>);"></div>
+					<h5>Robert H.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Rolando M. ---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
+						data-name="Rolando M." data-text="I'm extremely grateful that I had the opportunity to 
+						work with an amazing team. The team worked extremely hard over the last few weeks to build 
+						something we hope you guys love." 
+						data-img="<%=asset_path("rolandom.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("rolandom.jpg") %>);"></div>
+					<h5>Rolando M.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Steven R ---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Steven R" 
+						data-text="It was quite an exciting adventure creating GeoGem! I had a good time 
+						working with some awesome people. Don't let the suit fool you...I'm not that important." 
+						data-img="<%=asset_path("stevenr.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("stevenr.jpg") %>);"></div>
+					<h5>Steven R.</h5>
+				</div>
+			</div><!-- End Col-->
+			<!---- Steven Y---->
+			<div class="col-xs-4 col-sm-3">
+				<div class="group_item text-center" data-toggle="modal" data-target="#bio" data-name="Steven Y." 
+						data-text="I had a great time in capstone. I look forward to putting my capstone experience towards a career." 
+						data-img="<%=asset_path("steveny.JPG") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("steveny.JPG") %>);"></div>
+					<h5>Steven Y.</h5>
 				</div>
 			</div><!-- End Col-->
 			<!---- Taylor S ---->
@@ -179,58 +232,14 @@
 					<h5>Taylor S.</h5>
 				</div>
 			</div><!-- End Col-->
-			<!---- Alex P. ---->
+			<!---- Tommy B ---->
 			<div class="col-xs-4 col-sm-3">
 				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Alex P." data-text="..." 
-						data-img="<%=asset_path("avatar.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("avatar.png") %>);"></div>
-					<h5>Alex P.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Matthew O. ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Matthew O." data-text="..." 
-						data-img="<%=asset_path("avatar.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("avatar.png") %>);"></div>
-					<h5>Matthew O.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Dakota B. ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Dakota B." data-text="..." 
-						data-img="<%=asset_path("avatar.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("avatar.png") %>);"></div>
-					<h5>Dakota B.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Rolando M. ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Rolando M." data-text="..." 
-						data-img="<%=asset_path("avatar.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("avatar.png") %>);"></div>
-					<h5>Rolando M.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Kevin P. ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Kevin P." data-text="..." 
-						data-img="<%=asset_path("avatar.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("avatar.png") %>);"></div>
-					<h5>Kevin P.</h5>
-				</div>
-			</div><!-- End Col-->
-			<!---- Nate V. ---->
-			<div class="col-xs-4 col-sm-3">
-				<div class="group_item text-center" data-toggle="modal" data-target="#bio" 
-						data-name="Nate V." data-text="..." 
-						data-img="<%=asset_path("avatar.png") %>">		
-					<div class="sq-about center-block" style="background-image: url(<%=asset_path("avatar.png") %>);"></div>
-					<h5>Nate V.</h5>
+						data-name="Tommy B." data-text="I had a great time working with Kevin M. on the teacher-focused pages and trying to keep up with him! 
+						It was a great experience working with everyone from 0 to a full, deployed application in only a few weeks!" 
+						data-img="<%=asset_path("tommyb.jpg") %>">		
+					<div class="sq-about center-block" style="background-image: url(<%=asset_path("tommyb.jpg") %>);"></div>
+					<h5>Tommy B.</h5>
 				</div>
 			</div><!-- End Col-->
 		</div><!--End Row-->
