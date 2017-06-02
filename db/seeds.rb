@@ -1,5 +1,6 @@
 #Author: Taylor Spino
 #If you want to add extra seeds for your own use, add them at the bottom (:
+#include ux_helper.rb
 
 stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o", 
             "gamepad","heart", "leaf","paper-plane","paw","star","graduation-cap"];
@@ -22,7 +23,7 @@ School.create!(full_name: "North Central",
 #School seeds added by - Dakota B
 30.times do |n|
   School.create!(full_name: Faker::University.name,
-                 screen_name: "test-#{n+1}",
+                 screen_name: "schl-#{n+2}",
                  icon: "apple",
                  color: colors.sample,
                  email: "example-#{n+1}@railstutorial.org",
@@ -82,28 +83,30 @@ Teacher.create!(user_name: "admin",
 # Seed the database with 30 faked Students
 # They go to North Central College
 30.times do |n|
-  name  = Faker::Name.first_name + " " + Faker::Name.last_name
-  Student.create!(  screen_name: "temp",
+  first_name  = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  Student.create!(  screen_name: first_name.downcase[0] + last_name.downcase,
                     contact_info: "student contact info",
                     description: "student description",
                     icon: stud_icons.sample,
                     color: colors.sample,
-                    session_interval: 20,
+                    session_interval: 15,
                     school_id: 1,
-                    full_name: name)
+                    full_name: first_name + " " + last_name)
 end
 
 # Two students with different school id's than the rest
 2.times do |n|
-  name  = Faker::Name.name
-  Student.create!(  screen_name: "temp",
+  first_name  = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  Student.create!(  screen_name: first_name.downcase[0] + last_name.downcase,
                     contact_info: "student contact info",
                     description: "student description",
                     icon: "bicycle",
                     color: "green",
-                    session_interval: 20,
+                    session_interval: 15,
                     school_id: 2,
-                    full_name: name)
+                    full_name: first_name + " " + last_name)
 end
 
 # Seed the database with 10 faked Squares

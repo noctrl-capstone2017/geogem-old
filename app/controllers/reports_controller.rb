@@ -24,7 +24,7 @@ pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
 
                       # -------Session Data---------#
 #for now, just grab the last seeded session
-session = Session.find(params[:id])
+session = Session.last
 student = Student.find(session.session_teacher)
 teacher = Teacher.find(session.session_student)
 
@@ -107,10 +107,15 @@ eventsOccurred.each do |event|
         eventsArray.push(event)
       end
 
+one_time_loop = false
+if(TimeDifference.between(session.start_time, 
+                            session.end_time).in_minutes < stud_interval)
+one_time_loop = true
+end
 
 #while endI <= session.end_time
 #DEBUGGING, adding an hour just so we can have a couple of rows
-while endI <= session.end_time + 60*60
+while (endI <= session.end_time || one_time_loop)
 
 row = Array.new
 row.push(startI.strftime("%I:%M%p") + " - " + endI.strftime("%I:%M%p"))
@@ -175,6 +180,7 @@ row.push(startI.strftime("%I:%M%p") + " - " + endI.strftime("%I:%M%p"))
   end
 
   rows.push(row)
+  one_time_loop = false
   startI = startI + stud_interval*60
   endI = endI + stud_interval*60
   
