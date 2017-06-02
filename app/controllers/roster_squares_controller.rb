@@ -43,7 +43,7 @@ class RosterSquaresController < ApplicationController
     if params[:remove_square]
       if params[:remove_square_id] != nil
         @roster_squares.delete(RosterSquare.find(params[:remove_square_id]))
-        redirect_to  "/roster_squares/#{@roster_square.student_id}/edit"
+        redirect_to  "/roster_squares/#{params[:id]}/edit"
       end
     end
   end
@@ -115,7 +115,7 @@ class RosterSquaresController < ApplicationController
         format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully updated.' }
         format.json { render :show, status: :ok, location: @roster_square }
       else
-        format.html { render :edit }
+        format.html { redirect_to "/roster_squares/#{@roster_square.student_id}/edit", notice: 'Roster square was successfully updated.' }
         format.json { render json: @roster_square.errors, status: :unprocessable_entity }
       end
     end
