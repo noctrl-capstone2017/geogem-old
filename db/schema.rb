@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526222359) do
+ActiveRecord::Schema.define(version: 20170602221016) do
 
   create_table "roster_squares", force: :cascade do |t|
     t.integer  "square_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170526222359) do
     t.integer  "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["student_id", "teacher_id"], name: "index_roster_students_on_student_id_and_teacher_id", unique: true
   end
 
   create_table "schools", force: :cascade do |t|
@@ -81,10 +82,10 @@ ActiveRecord::Schema.define(version: 20170526222359) do
     t.string   "color"
     t.string   "contact_info"
     t.text     "description"
-    t.integer  "session_interval"
+    t.integer  "session_interval", default: 15
     t.integer  "school_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "teachers", force: :cascade do |t|

@@ -16,7 +16,7 @@
 				<!-- Print out the Student Art -->
 				<!--    By: Meagan Moore     -->
 				<% image = random_student_art%>
-        <%= image_tag(image, height: "400", alt: "Student Art") %>
+				<%= image_tag(image.gsub("app/assets/images/", ""), height: "400", alt: "Student Art") %>
 				
 				<br>
 				<div class="logout-art-text">
@@ -34,4 +34,4 @@
 		</div>   <!-- row -->
 	</div> <!-- end content-col -->
 	
-</div><!--End container -->	
+</div><!--End container -->

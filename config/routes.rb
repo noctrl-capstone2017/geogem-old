@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   root    'login_session#new'
   get     '/home' ,           to: 'teachers#home'
   get     'static_pages/help'
-  
-  get     '/report1',         to: 'reports#report1'
 
   # Super, admin, and schools routes
   # Author: Robert Herrera
@@ -32,7 +30,7 @@ Rails.application.routes.draw do
   get     'login',            to: 'login_session#new'
   post    'login',            to: 'login_session#create'
   get     'logout',           to: 'login_session#logout'
-  get     'about',           to: 'static_pages#about1'
+  get     'about',            to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
 
   get     'help',             to: 'static_pages#help'
