@@ -9,9 +9,9 @@ stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o",
 #to lt blue which is not linked here
 colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavender", "plum", "pink"];
 
-case Rails.env
+#case Rails.env
 
-when "development"
+#when "development"
 # Seed the database with a School
 # School.find(1)
 School.create!(full_name: "North Central",
@@ -46,7 +46,7 @@ Teacher.create!(user_name: "profbill",
                 screen_name: "profbill",
                 icon: "apple",
                 color: "red",
-                email: "wtktriger@noctrl.edu",
+                email: "wtktrieger@noctrl.edu",
                 description: "Super user",
                 powers: "Admin",
                 school_id: 1)
@@ -241,6 +241,230 @@ b = a[k]
 
 end
 
+#-------------------- Prof Bill - seed with all Cap17 students ------------#
+#
+Teacher.create!(user_name: "tgbanas",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Tommy B",
+                screen_name: "TommyB",
+                icon: "apple",
+                color: "red",
+                email: "tgbanas@noctrl.edu",
+                description: "Tommy B",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "debrand",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Dakota B",
+                screen_name: "DakotaB",
+                icon: "apple",
+                color: "red",
+                email: "debrand@noctrl.edu",
+                description: "Dakota B",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "csclarke",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Carolyn C",
+                screen_name: "CarolynC",
+                icon: "apple",
+                color: "red",
+                email: "csclarke@noctrl.edu",
+                description: "Carolyn C",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "rherrera",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Robert H",
+                screen_name: "RobertH",
+                icon: "apple",
+                color: "red",
+                email: "rherrera@noctrl.edu",
+                description: "Robert H",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "dljensen",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Debra J",
+                screen_name: "DebraJ",
+                icon: "apple",
+                color: "red",
+                email: "dljensen@noctrl.edu",
+                description: "Debra J",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "mcloptien",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Michael L",
+                screen_name: "MichaelL",
+                icon: "apple",
+                color: "red",
+                email: "mcloptien@noctrl.edu",
+                description: "Michael L",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "rmedrano",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Rolando M",
+                screen_name: "RolandoM",
+                icon: "apple",
+                color: "red",
+                email: "rmedrano@noctrl.edu",
+                description: "Rolando M",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "memoore",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Meagan M",
+                screen_name: "MeaganM",
+                icon: "apple",
+                color: "red",
+                email: "memoore@noctrl.edu",
+                description: "Meagan M",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "kpmorgan",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Kevin M",
+                screen_name: "KevinM",
+                icon: "apple",
+                color: "red",
+                email: "kpmorgan@noctrl.edu",
+                description: "Kevin M",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "mjobzera",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Matthew M",
+                screen_name: "MatthewO",
+                icon: "apple",
+                color: "red",
+                email: "mjobzera@noctrl.edu",
+                description: "Matthew O",
+                powers: "Admin",
+                school_id: 1)
+                
+Teacher.create!(user_name: "aapavia",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Alex P",
+                screen_name: "AlexP",
+                icon: "apple",
+                color: "red",
+                email: "aapavia@noctrl.edu",
+                description: "Alex P",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "ecperez",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Rickey P",
+                screen_name: "RickeyP",
+                icon: "apple",
+                color: "red",
+                email: "ecperez@noctrl.edu",
+                description: "Rickey P",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "kmportland",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Kevin P",
+                screen_name: "KevinP",
+                icon: "apple",
+                color: "red",
+                email: "kmportland@noctrl.edu",
+                description: "Kevin P",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "saroyster",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Steven R",
+                screen_name: "StevenP",
+                icon: "apple",
+                color: "red",
+                email: "saroyster@noctrl.edu",
+                description: "Steven R",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "taspino",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Taylor S",
+                screen_name: "TaylorS",
+                icon: "apple",
+                color: "red",
+                email: "taspino@noctrl.edu",
+                description: "Taylor S",
+                powers: "Admin",
+                school_id: 1)
+
+Teacher.create!(user_name: "njvogel",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Nate V",
+                screen_name: "NateV",
+                icon: "apple",
+                color: "red",
+                email: "njvogel@noctrl.edu",
+                description: "Nate V",
+                powers: "Admin",
+                school_id: 1)
+                
+Teacher.create!(user_name: "seyoung",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Steve Y",
+                screen_name: "SteveY",
+                icon: "apple",
+                color: "red",
+                email: "seyoung@noctrl.edu",
+                description: "Steve Y",
+                powers: "Admin",
+                school_id: 1)
+
+
 #-----NON-TAYLOR S SEEDS. FEEL FREE TO PLANT WHATEVER YOU WANT HERE------#
 # |---------------------SEEDS FOR TEST USE-------------------------------|
 # Seed the database with a disposable test school and two teachers
@@ -293,28 +517,28 @@ Teacher.create!(user_name: "TEST_teacherSus",
                 suspended: true)
                 
 
-when "production"
+
+#when "production"
 
 # creates school Noctrl and teacher (+Super) profbill
-School.create!(full_name: "North Central",
-               screen_name: "noctrl",
-               icon: "apple",
-               color: "red",
-               email: "noctrl@noctrl.edu",
-               website: "noctrl.edu",
-               description: "It's North Central!")
+# School.create!(full_name: "North Central",
+#               screen_name: "noctrl",
+#               icon: "apple",
+#               color: "red",
+#               email: "noctrl@noctrl.edu",
+#               website: "noctrl.edu",
+#               description: "It's North Central!")
                
-Teacher.create!(user_name: "profbill",
-                password: "password",
-                password_confirmation: "password",
-                last_login: Time.now,
-                full_name: "Professor Bill",
-                screen_name: "profbill",
-                icon: "apple",
-                color: "red",
-                email: "wtktriger@noctrl.edu",
-                description: "Super user",
-                powers: "Admin",
-                school_id: 1)
-end
-                
+# Teacher.create!(user_name: "profbill",
+#                 password: "password",
+#                 password_confirmation: "password",
+#                 last_login: Time.now,
+#                 full_name: "Professor Bill",
+#                 screen_name: "profbill",
+#                 icon: "apple",
+#                 color: "red",
+#                 email: "wtktriger@noctrl.edu",
+#                 description: "Super user",
+#                 powers: "Admin",
+#                 school_id: 1)
+#end
