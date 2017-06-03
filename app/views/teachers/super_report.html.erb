@@ -18,15 +18,15 @@
 		<div class="row content-text">
 			<br>
 			<h4>
+				Welcome to GeoGem <%= DeployHelper.geogem_version =%>
+				<br><br><br>
 				<!-- Shows the total number of records present in Schools, teachers, students, squares and sessions. -->
 				There are currently <%=Teacher.count%> Teachers, helping to promote the education <%=Student.count%> students, across <%=School.count%> schools.
 				<br><br><br>
-				These <%=Teacher.count%> teachers have observed <%=Square.count%> behavior Squares, and maintained <%=Session.count%> Sessions since (Deploy Date Here)
+				These <%=Teacher.count%> teachers have observed <%=Square.count%> behavior Squares, and maintained <%=Session.count%> Sessions since <%= DeployHelper.geogem_deploy_date =%>
 				<br><br><br><br>
 			</h4>
 		</div>
 		
 	</div><!--End content col-->
 </div><!--End container-->
-
-<%= link_to 'Return to Super Dashboard', super_path %>

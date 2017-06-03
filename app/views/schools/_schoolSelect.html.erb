@@ -5,6 +5,7 @@
 				<label class="control-label col-xs-5" for="selectSch">Super focus school:</label>
 					<div class="col-xs-7">
 						<%= f.select :school_id, @schools.map{|c| [c.full_name, c.id]}, class: 'form-control'%>
+						<%= hidden_field_tag :hiddenVal, 'updatingFocus' %>
 					</div>   <!-- col-->
 	  		</div>   <!-- form group-->
 		</div>   <!-- row -->

@@ -1,23 +1,19 @@
+# authors: Ricky Perez & Michael Loptien
+# Controller for Squares 
+
 class SquaresController < ApplicationController
-  
-  # authors: Ricky Perez & Michael Loptien
-  # Controller for Squares 
-  
+
   include TeachersHelper
   
   before_action :set_square, only: [:show, :edit, :update, :destroy]
   before_action :set_school         #set up the school info for the logged in teacher
-  before_action :is_admin           #make sure only admins can reach any of this
+  before_action :is_admin, only: [:index]           #make sure only admins can reach any of this
     
   # GET /squares
   # GET /squares.json
   def index
-    # Check for Super User, shool_id == 0, list ALL squares
-    if current_teacher.school_id == 0
-      @squares = Square.all
-    else                      #school admin. Only list that schools students
-      @squares = Square.where(school_id: current_teacher.school_id)
-    end
+    #school admin. Only list that schools students
+    @squares = Square.where(school_id: current_teacher.school_id)
     
     # Paginate those squares and order by screen_name
     @squares = @squares.order('screen_name ASC')

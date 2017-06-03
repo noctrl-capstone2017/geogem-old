@@ -1,28 +1,19 @@
-class StudentsController < ApplicationController
+# authors: Ricky Perez & Michael Loptien
+# Controller for Students
   
-  # authors: Ricky Perez & Michael Loptien
-  # Controller for Students
+class StudentsController < ApplicationController
   
   include TeachersHelper
   
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :set_school   #set up the school info for the logged in teacher
-  
-  # commented out by Meagan Moore
-  # no bueno, anyone can access students
-  #before_action :is_admin     #make sure only admins can reach any of this
+  before_action :is_admin, only: [:index]       #make sure only admins can reach any of this
 
-  
   # GET /students
   # GET /students.json
   def index
-    
-    # Check for Super User, shool_id == 0, list ALL students in @students
-    if current_teacher.id == 1
-      @students = Student.all
-    else                      # Admin only, list just that schools students
-      @students = Student.where(school_id: current_teacher.school_id)
-    end
+    # Admin only, list just that schools students
+    @students = Student.where(school_id: current_teacher.school_id)
     
     # Paginate those students and order by screen_name
     @students = @students.order('screen_name ASC')
@@ -30,7 +21,6 @@ class StudentsController < ApplicationController
     
     # Make a @sessions list for each student in the @studens list
     @sessions = Session.where(session_student: @students.ids)
-
   end
 
   # GET /students/1
@@ -47,6 +37,39 @@ class StudentsController < ApplicationController
   # GET /students/1/edit
   def edit
   end
+  
+  #Author: Carolyn C
+  #For analysis purposes
+  def analysis
+    @student = Student.find(params[:id])
+    if params[:analysis_report]
+          redirect_to analysis2_student_path( @student)
+    elsif params[:analyze_csv]
+          redirect_to analysis3_student_path( @student)
+    elsif params[:analyze_charts]
+          redirect_to analysis4_student_path( @student)
+    end
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis2
+    @student = Student.find(params[:id])
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis3
+    @student = Student.find(params[:id])
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis4
+    @student = Student.find(params[:id])
+  end
+  
+  
 
   # POST /students
   # POST /students.json

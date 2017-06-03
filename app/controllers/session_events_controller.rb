@@ -45,6 +45,17 @@ class SessionEventsController < ApplicationController
       end
     end
   end
+  
+  # POST /session_events/undo
+  # POST /session_events.json
+  #author: Matthew O & Alex P
+  def undo
+    @session_event = SessionEvent.where(session_id: params[:session_id], behavior_square_id: params[:behavior_square_id]).last()
+    @session_event.destroy
+    respond_to do |format|
+      format.any { render :json => {:response => 'Success' },:status => 200  }
+    end
+  end
 
   # PATCH/PUT /session_events/1
   # PATCH/PUT /session_events/1.json

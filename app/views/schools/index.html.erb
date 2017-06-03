@@ -39,12 +39,13 @@
 					<%= will_paginate %>
 			        <% @schools.each do |school| %>
 				    <tr data-link=<%= edit_school_path(school.id) %>>	 	
-			                 <td><p class="listText">
-			                 	
-					         	<div class="table-sq i-<%= school.color %>">                 <!--Generate Student Color-->
-									<p class="fa fa-home fa-3x school-icon"> </p> <!--Generate Student Icon-->
+		        			<td>
+								<div class="table-sq i-plum" title="<%= school.full_name %>">
+									<div class="table-sq i-<%= school.color%>">
+										<i class="fa fa-home fa-2x school-icon"></i>
+									</div>
 								</div>
-		        			</td>
+							</td>
 							<td>
 						     	<%= school.screen_name %>
 		        			</td>
@@ -57,7 +58,6 @@
 								 <%= school.description %> 
 							</td>
 					</tr>
-				  		
 				    <% end %>
 				</tbody>
 			</table>

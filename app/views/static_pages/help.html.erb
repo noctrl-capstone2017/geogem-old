@@ -1,54 +1,8 @@
 <!-- Help page by Steven Young -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<!-- 1. Meta tags: The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<title>Operation Dinner Out</title>
-	<meta name="description" content="Capstone 2017 project">
-
-	<!-- 2. Bootstrap CSS: From CDN www.bootstrapcdn.com -->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- 3. Favicon + my CSS: these are optional -->
-	<link rel="icon" href="../favicon.ico">
-	<!--<link href="style.css" rel="stylesheet">-->
-	<link href="../css/general.css" rel="stylesheet">
-	<link href="../css/home.css" rel="stylesheet">
-    <link href="../css/login.css" rel="stylesheet">
-	<script src="https://use.fontawesome.com/6ac119a099.js"></script>	
-	
-	<!-- 4. Old Explorer support: HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-</head>
-<!-- This section  needs to go into the css file -->
-<style><!-- This section  needs to go into the css file -->
-
-.help-header { padding-top: 60px; padding-bottom: 20px; }
-.help-qa-letter { font-size: 1.2em; font-weight: bold; color: gray; }
-.help-line { width: 90%; border-top: 1px dotted lightgray; padding-bottom: 20px; }
-.help-small-sq { border-radius: 6px; color: white; }
-.help-answer-para { margin-left: 5%; margin-right: 5%; }
-
-</style>
-
-<body>
-
-<div class="container">
-	<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 content-col">
-
 		<!-- page header -->
 		<div class="page-header vertical-align">
 			<div class="col-xs-11">
-				<h2>Help<small> - frequently asked questions about Dinner Out</small></h2><!-- Dynamically fills in with school id -->
+				<h2>Help<small> - frequently asked questions about GeoGem</small></h2><!-- Dynamically fills in with school id -->
 			</div>
 			<div class="col-xs-1 center-block">
 				<div class="header-sq i-gray" title="Help page">
@@ -61,7 +15,7 @@
 		<div class="row content-text">
 			<p>
 				<br>
-				Here are the answers to 20 questions (frequently asked) about Dinner Out. 
+				Here are the answers to 20 questions (frequently asked) about GeoGem. 
 			</p>
 			<p>
 				Select a section icon or just scroll down for help.
@@ -106,69 +60,151 @@
 		<!-- page content, just text -->
         <!-- Getting started questions -->
 		<div class="row content-text">
-			<a name="getting-started"></a>
+			<a id="getting-started"></a>
 			<h3 class="help-header">Getting Started &nbsp; <span class="fa fa-paper-plane-o fa-fw fa-1x i-navy help-small-sq" ></span> </h3>
 			<p>
-				<span class="help-qa-letter">Q1:</span> What is Dinner Out?
+				<span class="help-qa-letter">Q1.</span> What is GeoGem?
 			</p>
 			<p class="help-answer-para">
-				<span class="help-qa-letter">A:</span> Dinner out is a web application that collects and analyzes behavioral data for students with autism.<br>
+				<span class="help-qa-letter">A:</span> GeoGem is a web application that collects and analyzes behavioral data for students with autism.<br>
 				The program was created by computer science students at <a href="http://www.noctrl.edu">North Central College</a>. 
-				You can read more at the <a href="about">About page</a>.
+				You can read more at the <%= link_to "About", about_path %>.
 			</p>
 			
 			<hr class="help-line">
 			
 			<p>
-				<span class="help-qa-letter">Q2:</span> My student behavior squares are not there.
+				<span class="help-qa-letter">Q2. My Home page doesn’t have any students? What do I do?
 			</p>
 			<p class="help-answer-para">
-				<span class="help-qa-letter">A:</span> You must talk to the admin to add a square to the session.
+				<span class="help-qa-letter">A:</span>Students are assigned by your school’s Admin users. You should ask them to assign
+				students to your roster so that you can begin your work.
+			</p>
+			
+			<hr class="help-line">
+			
+            <p>
+				<span class="help-qa-letter">Q3.</span> I’m lost! How do I get back to the Home page?
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A:</span> Select GeoGem in the upper right of the screen to return Home.
+			</p>
+			
+			<hr class="help-line">
+			<p>
+				<span class="help-qa-letter">Q4.</span> Uh-oh. I forgot my password. What now?
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A:</span> Contact your school’s Admin user. He or she can reset your password.
 			</p>
             <hr class="help-line">
             <p>
-				<span class="help-qa-letter">Q3:</span> I started a session with the wrong student.
+				<span class="help-qa-letter">Q5.</span> Can I change my password?
 			</p>
 			<p class="help-answer-para">
-				<span class="help-qa-letter">A:</span> Click the dinner out logo and pick a different student
+				<span class="help-qa-letter">A:</span> Yes. Select Profile at the top of the screen.
+				The Change Password icon is at the bottom of your profile. 
+			</p>
+            <hr class="help-line">
+            <p>
+				<span class="help-qa-letter">Q6.</span> How do I change my username? I’d prefer to login with my email.
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A:</span> Sorry. Once you have a username, it can’t be changed. Not even by your Admin.
 			</p>
 			<!-- end getting started questions -->
-			<hr class="help-line">
+            <hr class="help-line">
             <!-- Sessions questions -->
-			<a name="sessions"></a>
+			<a id="sessions"></a>
 			<h3 class="help-header">Sessions &nbsp;  <span class="fa fa-key fa-fw fa-1x i-red help-small-sq" ></span></h1>
 			<p>
-				<span class="help-qa-letter">Q3:</span> Are these question numbers working? Is 20 questions too goofy?
+				<span class="help-qa-letter">Q7.</span> Why does my Home page only show 8 student icons? I have more than 8 students.
 			</p>
 			<p class="help-answer-para">
-				<span class="help-qa-letter">A:</span> We shall see. It does make help at least <i>a little</i> more fun.<br>
-				The last question is always: how do I get more help? And the answer is my email.
+				<span class="help-qa-letter">A. The 8 student icons are the last 8 students you worked with. If you have more than 8
+				students in your roster, you can see all students in the “Student:” dropdown below the icons.
+			</p>
+			
+			<hr class="help-line">
+			<p>
+				<span class="help-qa-letter">Q8.</span> What do the different behavior squares mean?
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A. There are three types of behavior squares:
+									<ol type="1">
+  <li>Frequency squares have a lightning bolt. They simply increment each time they are pressed.</li>
+  <li>Duration squares have a timer. These squares track the length of an event. Select the square to start the timer. And select again to stop it.</li>
+  <li>Interval squares have a bullseye or concentric circles. These squares are like frequency squares, they increment. But during analysis, the counts are only shown per interval: showing whether the square pressed during an interval or not.</li>
+</ol> 
+			</p>
+            <hr class="help-line">
+            <p>
+				<span class="help-qa-letter">Q9.</span> During a session, if I mistakenly press a button, can I undo it?
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A:</span> Yes. Select the red Undo button in the lower right to undo. 
+				This undo button only works for the last behavior square you pressed. 
 			</p>
 			<!-- end sessions questions -->
-			<hr class="help-line">
+            <hr class="help-line">
             <!-- Admin powers questions-->
-            <a name="admin-powers"></a>
+            <a id="admin-powers"></a>
 			<h3 class="help-header">Admin Powers &nbsp;  <span class="fa fa-trophy fa-fw fa-1x i-yellow help-small-sq" ></span></h1>
 			<p>
-				<span class="help-qa-letter">Q3:</span> Are these question numbers working? Is 20 questions too goofy?
+				<span class="help-qa-letter">Q10.</span> I’m overwhelmed. Where do I start?
 			</p>
 			<p class="help-answer-para">
-				<span class="help-qa-letter">A:</span> We shall see. It does make help at least <i>a little</i> more fun.<br>
-				The last question is always: how do I get more help? And the answer is my email.
+				<span class="help-qa-letter">A:</span> Select Admin at the top of the page.
+				This will take you to the Admin Dashboard. You can do most things from here.
+			</p>
+            <hr class="help-line">
+            <p>
+				<span class="help-qa-letter">Q11.</span> How can I remove a remove a teacher or student from the system? 
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A:</span> There’s no way to remove things from GeoGem. We’re not...
+			</p>
+			<hr class="help-line">
+			<p>
+				<span class="help-qa-letter">Q12.</span> Wait. I can’t remove a teacher? Well, what if someone leaves the school?
+			</p>
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A. Good point! While you can’t remove the teacher (and the session data associated with that teacher),
+				you CAN suspend the login for any teacher. Here are the steps: 
+									<ol type="1">
+  <li>Goto the Admin Dashboard,</li>
+  <li>Select All Teachers,</li>
+  <li>Select the teacher,</li>
+  <li>Select the Login Setting action icon at the bottom,</li>
+  <li>Set Login Status to “Suspended” and then “Change Settings”. </li>
+</ol> 
+			<span class="help-qa-letter">After this, your suspended teacher will not be able to login to GeoGem.
+			
 			</p>
 			<!--End Admin powers questions-->
-			<hr class="help-line">
+            <hr class="help-line">
+			
             
             <!-- Ect questions-->
-            <a name="etc"></a>
-			<h3 class="help-header">Etc &nbsp;  <span class="fa fa-shower fa-fw fa-1x i-ltblue help-small-sq" ></span></h1>
-			<p>
-				<span class="help-qa-letter">Q3:</span> Are these question numbers working? Is 20 questions too goofy?
+            <p>
+				<span class="help-qa-letter">Q19.</span> What does the name GeoGem mean? I don’t get it.
 			</p>
 			<p class="help-answer-para">
-				<span class="help-qa-letter">A:</span> We shall see. It does make help at least <i>a little</i> more fun.<br>
-				The last question is always: how do I get more help? And the answer is my email.
+				<span class="help-qa-letter">A:</span> We chose GeoGem as our product name because it’s easy to spell and remember, 
+				it’s alliterative, and mostly, because it’s fun! It’s technical meaning is less important… some stuff to do with the
+				geo-shapes in our system and background wallpaper, and there are gems in the Rails framework we used to program the 
+				system.
 			</p>
+            <hr class="help-line">
+            <p>
+				<span class="help-qa-letter">Q20.</span> That wasn’t helpful enough. Is there anyone I can contact for more help?
+			</p>
+		
+			<p class="help-answer-para">
+				<span class="help-qa-letter">A:</span> Sure. You can contact the GeoGem Help Staff (um, Prof Bill) at<br>
+				 <a href="wtkrieger@noctrl.edu">wtkrieger@noctrl.edu</a>.
+			</p>
+           
 			<!--End Ect questions-->
 			<hr class="help-line">
 

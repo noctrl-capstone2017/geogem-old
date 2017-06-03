@@ -8,8 +8,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-			<!--<a class="navbar-brand" href="">Dinner Out</a>-->
-			<%= link_to home_path, class: "navbar-brand" do%><span class="fa fa-home fa-fw"></span>GeoGem<% end %>
+			
+			<!-- Icon added by Kevin M -->
+			<%= link_to home_path, class: "navbar-brand" do%>
+				<span><%= image_tag("favicon.ico", :alt => "geogem icon")%></span> GeoGem
+			<% end %>
 			</div>
 			<div id="navbar" class="collapse navbar-right navbar-collapse">
 				<ul class="nav navbar-nav ">

@@ -2,7 +2,7 @@
 # Teacher model validation, methods, and more!
 
 class Teacher < ApplicationRecord
-  attr_accessor :remember_token, :activation_token, :reset_token
+  attr_accessor :remember_token, :activation_token, :reset_token, :current_password
   before_save   :downcase_email, :color_check, :super_check
   ###REGEX###
   #Only allows legit email formatting
@@ -20,19 +20,22 @@ class Teacher < ApplicationRecord
                          format: { with: VALID_USER_NAME_REGEX }
                          
   validates :full_name, presence: true, length: { maximum: 75 }
+  
+  #https://stackoverflow.com/questions/808547/fully-custom-validation-error-message-with-rails
+  #Screen_name is seen as "Teacher ID" by the user. We change how its errors are displayed in
+  # config/locales/en.yml, check it out!
   validates :screen_name, presence: true, length: { maximum: 8 },
-                    format: { with: VALID_SCREEN_NAME_REGEX }
+                    format: { with: VALID_SCREEN_NAME_REGEX } 
   
   validates :icon,  presence: true
   validates :color, presence: true
   
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }
-  validates :description, presence: true
   validates :powers, presence: true
   validates :school_id, presence: true
 
-  validates :password, presence: true, length: { minimum: 6 }, on: :update, allow_blank: true;
+  validates :password, presence: true, length: { minimum: 6 }, allow_blank: true
   has_secure_password
   
   #Creates the relationship of what students belong to the teacher
@@ -86,10 +89,11 @@ class Teacher < ApplicationRecord
       end
     end
     
-    # Makes sure Bill doesn't accidentally remove his admin powers.
+    # Makes sure Bill doesn't accidentally remove his admin powers or suspend himself
     def super_check
-      if self.id == '1'
+      if self.user_name == 'profbill'
         self.powers = "Admin"
+        self.suspended = "false"
       end
     end
 end

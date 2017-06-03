@@ -4,31 +4,33 @@ Rails.application.routes.draw do
 
   root    'graph#main'
   get     '/home' ,           to: 'teachers#home'
-  get     '/analysis',        to: 'teachers#analysis'
   get     'static_pages/help'
-  
-  get     '/report1',         to: 'reports#report1'
 
   # Super, admin, and schools routes
   # Author: Robert Herrera
   get     '/admin_report',    to: 'teachers#admin_report' 
   get     '/super_report',    to: 'teachers#super_report'
   get     '/admin',           to: 'teachers#admin'
-  get     '/super',           to: 'schools#super' 
-  patch    '/super',           to: 'schools#updateFocus'
-  get     '/backup',          to: 'schools#backup'
-  get     '/suspend',         to: 'schools#suspend'  
-  get     '/restore',         to: 'schools#restore'
+  get     '/super',           to: 'schools#super'
+  post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
+  get     '/school_backup',   to: 'schools#backup'
+  get     '/school_suspend',  to: 'schools#suspend'  
+  post    '/school_suspend',  to: 'schools#suspend',         as: :suspend
+  get     '/school_restore',  to: 'schools#restore'
 
-  #to disguise teachers/id/edit_password as just /password
-  get     '/password',        to: 'teachers#edit_password'
+  # Teacher routes
+  # Author: Kevin M and Tommy B
+  # to disguise teachers/id/edit_password as just /password
+  get     '/password',                    to: 'teachers#edit_password'
+  patch 'teachers/:id/change_password',   to: 'teachers#change_password'
+  get     'teachers/:id/login_settings',  to: 'teachers#login_settings'
 
   # Login Session Controller Routing 
   # Author: Meagan Moore & Steven Royster
   get     'login',            to: 'login_session#new'
   post    'login',            to: 'login_session#create'
   get     'logout',           to: 'login_session#logout'
-  get     'about1',           to: 'static_pages#about1'
+  get     'about',            to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
 
   get     'help',             to: 'static_pages#help'
@@ -40,8 +42,9 @@ Rails.application.routes.draw do
   get     'graph/todo'
   get     'graph/other'
   
-  #route to create session events during the session
+  #route to create and delete session events during the session
   post    '/session_events',  to: 'session_events#create'
+  post    '/session_events/undo',  to: 'session_events#undo'
   
   #route to pdf from session page
   post    '/report1',  to: 'reports#report1'
@@ -54,7 +57,6 @@ Rails.application.routes.draw do
   resources :teachers do
     member do
       get :edit_password
-      put :update_password
     end
   end
   
@@ -65,10 +67,24 @@ Rails.application.routes.draw do
     end
   end
   
+  #Carolyn C - send student to analysis page
+  resources :students do
+    member do
+      get :analysis
+      get :analysis2
+      get :analysis3
+      get :analysis4
+    end
+  end
+  
+  #Carolyn C routes for analysis
+  get 'student/:id/analysis2', to: 'students#analysis', as: :analysis2
+  get 'student/:id/analysis3', to: 'students#analysis', as: :analysis3
+  get 'student/:id/analysis4', to: 'students#analysis', as: :analysis4
+  
   resources :roster_students
   resources :roster_squares
   resources :session_notes 
   resources :squares
-  resources :students
   resources :schools
 end
