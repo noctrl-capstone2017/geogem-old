@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get     '/home' ,           to: 'teachers#home'
   get     'static_pages/help'
   
-  get     '/report1',         to: 'reports#report1'
   get     '/csv1',            to: 'reports#csv1'
 
 
