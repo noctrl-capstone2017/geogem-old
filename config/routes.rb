@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       get :analysis2
       get :analysis3
       get :analysis4
+      get :report1
     end
   end
   
