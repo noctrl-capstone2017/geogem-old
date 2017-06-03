@@ -222,7 +222,7 @@ a = [ DateTime.new(2017,5,12,9,00, 0),
       DateTime.new(2017,5,15,9,00, 0),
       DateTime.new(2017,5,23,9,00, 0),
       DateTime.new(2017,5,27,9,00, 0) ]        #Start the session at 9:00 am
-roster_IDS2 = RosterSquare.where(student_id: 3) #roster square ids for student1
+roster_IDS2 = RosterSquare.where(student_id: 3) #roster square ids for student3
 4.times do |k|
 b = a[k]
   5.times do |l|
@@ -234,7 +234,7 @@ b = a[k]
                       duration_end_time: b + 5.0/1440,
                       session_id: (k+3) ) #session 1-2 is STUDENT 1, sessions 3-6 is STUDENT 3
   b = b + 30.0/1440
-  end
+  end 
 
 end
 
@@ -288,3 +288,4 @@ Teacher.create!(user_name: "TEST_teacherSus",
                 powers: "Teacher",
                 school_id: 32,
                 suspended: true)
+                

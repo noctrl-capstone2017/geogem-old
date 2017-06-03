@@ -1,6 +1,6 @@
 class GraphController < ApplicationController
-  def main
-    
+  def main #selects events from sessions 3 to 6
+    @graphData = SessionEvent.where(session_id:(3..6))
   end
 
   def example
