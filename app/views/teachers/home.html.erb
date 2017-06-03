@@ -3,14 +3,14 @@
 <!-- Control the selection and unselection of the student roster -->
 <script>
 	$(document).ready(function() {
-		$(".image-radio").click(function(){
+		$(".image-radio").click("click",function(){
 		     $(this).attr('checked',true);
 		     $("select[name='student_id']").val($(this).attr('id'));
 		 });
 		 $('#student_id').change(function(){ 
 		    $('input[name="student_roster"]').prop('checked', false);
-		    var button = "student" + $(this).val();
-		     $(button).attr('checked',true);
+		    var button = document.getElementById("student" + $(this).val());
+		     $(button).trigger('click');
 		});
 	});
 </script>
