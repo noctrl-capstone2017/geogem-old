@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # Cleaned up by: Michael Loptien
 
-  root    'graph#main'
+  root    'login_session#new'
   get     '/home' ,           to: 'teachers#home'
   get     'static_pages/help'
   
