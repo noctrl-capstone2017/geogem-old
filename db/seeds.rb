@@ -78,8 +78,7 @@ Teacher.create!(user_name: "admin",
                 email: "admin@noctrl.edu",
                 description: "General admin login",
                 powers: "Admin",
-                school_id: 1,
-                suspended: true)
+                school_id: 1)
 
 # Seed the database with 30 faked Students
 # They go to North Central College
@@ -125,8 +124,8 @@ end
 
 
 #So far, there are 30 students created for North Central College.
-#Put 23 of them on profbill's roster.
-23.times do |n|
+#Put 30 of them on profbill's roster.
+30.times do |n|
   RosterStudent.create!(teacher_id: 1,  #1st teacher is super prof bill,
                                         #2nd is general teacher
                         student_id: n+1)
