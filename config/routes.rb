@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   root    'login_session#new'
   get     '/home' ,           to: 'teachers#home'
   get     'static_pages/help'
-  
-  get     '/report1',         to: 'reports#report1'
 
   # Super, admin, and schools routes
   # Author: Robert Herrera
