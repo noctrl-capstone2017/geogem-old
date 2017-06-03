@@ -1,5 +1,6 @@
 # author: Kevin M, Tommy B
 # admin methods by Dakota B.
+# guards by Meagan Moore
 # Teacher methods, as well as admin, super, and home stuff.
 class TeachersController < ApplicationController
   
@@ -11,8 +12,8 @@ class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
-  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show]
-  before_action :is_super, only: [:super, :updateFocus]
+  before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings]
+  before_action :is_super, only: [:super, :updateFocus, :super_report]
 
 
 
@@ -100,6 +101,7 @@ class TeachersController < ApplicationController
   # This prepares the admin dashboard.
   def admin
     @teacher = current_teacher
+    @current_school = School.find(current_teacher.school_id)
   end 
   
   # GET /teachers/password
@@ -161,8 +163,10 @@ class TeachersController < ApplicationController
   #
   # Similarly, if suspended is in the params, then it changes their success or
   # error redirection.
-  def update
-    if params[:teacher][:current_password]
+  def update      
+    if params[:teacher][:hiddenVal]
+       redirect_to super_path    iels
+f params[:teacher][:current_password]
       change_password
     elsif params[:teacher][:suspended]
       change_login_settings
@@ -232,7 +236,7 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation, :suspended, :current_password)
+      :school_id, :password, :password_confirmation, :suspended, :current_password, :hiddenVal) #add hidden field to permited
     end
     
     #Can only access teachers and info from the same school
@@ -243,6 +247,10 @@ class TeachersController < ApplicationController
     end
     
     # Switching the focus school 
+
+  # def focus_school_params 
+  #  params.permit(:full_name)
+  # end 
     def focus_school_params 
       params.require(:full_name).permit(:school_id)
     end 
