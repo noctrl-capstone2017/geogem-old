@@ -1,7 +1,7 @@
 # Authors Alexander Pavia + Matthew O + Debra J
 module SessionsHelper
 
-#Calculates session duration from start and end times
+  #Calculates session duration from start and end times
   def calculateDuration
     @session = Session.find(params[:id])
     start = Time.at(@session.start_time)
@@ -12,15 +12,17 @@ module SessionsHelper
   end
 
   # Authors Alexander Pavia + Matthew O + Debra J
-  #If the square tracking type is an interval
-  #insert yes if the student had behavior in the interval time 
-  #Else insert no if the student did not have behavior in interval time
+  #If interval square pressed show "yes" in end session report
+  #Else show "No"
   def getInterval(square)
     @session = Session.find(params[:id])
     @student = Student.find(@session.session_student)
     @sessionEvent = SessionEvent.where(session_id: @session.id, behavior_square_id: square.id)
     answer = "No"
+    
+    
     if  @sessionEvent.length >= 1
+      #behavior happend 
       
       return answer = "Yes"
     end
@@ -29,23 +31,23 @@ module SessionsHelper
   end # end isInterval
   
   # Authors Alexander Pavia + Matthew O + Debra J
-  #display the number of times square was pressed 
-  #count where the session_id = the session_id and behavior_sq = behavior_sq
+  #display the frequency on the end session summary report
   def getFrequency(square)
     @session = Session.find(params[:id])
     
-    #should just be the total number of session events for a certain square for that session
+    # total number of session events for a square 
     @frequency = SessionEvent.where(session_id: @session.id, behavior_square_id: square.id).count
   
     return @frequency
   end # end isFrequency
   
-  #@author Alex P + Matthew O + Debra J
-  #gets the duration 
+  #Authors Alex P + Matthew O + Debra J
+  #gets the duration and display on the end session summary report
   def getDuration(square)
    
     @session = Session.find(params[:id])
     @sessionEvent = SessionEvent.where(session_id: @session.id, behavior_square_id: square.id)
+   
     #total duration for the square
     totalDuration = 0
     
@@ -58,21 +60,21 @@ module SessionsHelper
     end
    
     return totalDuration
-  end # end method
+  end
 
-end # end class 
-
- #@author Alex P + Matthew O + Debra J
- #formats the time
-def formatTime(duration)
-  #see if duration is at least a minute, if so format as minutes
-   #else format as seconds
-    if duration >= 60
+  #Authors Alex P + Matthew O + Debra J
+  #formats the time
+  def formatTime(duration)
+    #see if duration is at least a minute, if so format as minutes
+     #else format as seconds
+      if duration >= 60
         #show duration as minutes
-      durationStr = Time.at(duration).utc.strftime("%-M:%S") + " minutes"
-    else
-      durationStr = durationStr = Time.at(duration).utc.strftime("%-S") + " seconds"
-    end
-
-    return durationStr
-end
+        durationStr = Time.at(duration).utc.strftime("%-M:%S") + " minutes"
+      else
+        #show duration as seconds
+        durationStr = durationStr = Time.at(duration).utc.strftime("%-S") + " seconds"
+      end
+    
+      return durationStr
+  end
+end 

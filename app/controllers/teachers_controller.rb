@@ -1,15 +1,21 @@
 # author: Kevin M, Tommy B
 # admin methods by Dakota B.
+# guards by Meagan Moore
 # Teacher methods, as well as admin, super, and home stuff.
 class TeachersController < ApplicationController
   
   include TeachersHelper
+  
+  before_action :is_suspended
+
   #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
   #Guards added by Meagan Moore
   before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings, :show]
-  before_action :is_super, only: [:super, :updateFocus]
+  before_action :is_super, only: [:super, :updateFocus, :super_report]
+
+
 
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
@@ -17,7 +23,6 @@ class TeachersController < ApplicationController
   def index
     @current_teacher = current_teacher
     @current_school = School.find(@current_teacher.school_id)
-    
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
     @teachers = @teachers.order('screen_name ASC')
   end
@@ -96,6 +101,7 @@ class TeachersController < ApplicationController
   # This prepares the admin dashboard.
   def admin
     @teacher = current_teacher
+    @current_school = School.find(current_teacher.school_id)
   end 
   
   # GET /teachers/password
@@ -157,7 +163,7 @@ class TeachersController < ApplicationController
   #
   # Similarly, if suspended is in the params, then it changes their success or
   # error redirection.
-  def update
+  def update      
     if params[:teacher][:current_password]
       change_password
     elsif params[:teacher][:suspended]
@@ -228,7 +234,7 @@ class TeachersController < ApplicationController
     def teacher_params
       params.require(:teacher).permit(:user_name, :last_login,
       :full_name, :screen_name, :icon, :color, :email, :description, :powers, 
-      :school_id, :password, :password_confirmation, :suspended, :current_password)
+      :school_id, :password, :password_confirmation, :suspended, :current_password, :hiddenVal) #add hidden field to permited
     end
     
     #Can only access teachers and info from the same school
@@ -239,7 +245,8 @@ class TeachersController < ApplicationController
     end
     
     # Switching the focus school 
-    def focus_school_params 
-      params.require(:full_name).permit(:school_id)
-    end 
+
+  # def focus_school_params 
+  #  params.permit(:full_name)
+  # end 
 end

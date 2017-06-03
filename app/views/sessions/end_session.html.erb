@@ -15,8 +15,10 @@
       <!--End page header-->
       <div class="row">
          <div class="col-xs-10 col-xs-offset-1">
+            <!-- Display the session duration -->
            <h4>Session Duration: <%= calculateDuration =%></h4>
             <br>
+            <!-- Show end session summary report -->
             <h4>Quick Summary:</h4>
             <table class="table table-striped table-hover table-responsive">
                <thead>
@@ -27,7 +29,7 @@
                   </tr>
                </thead>
                <tbody>
-                  <!--Print students square names in the table -->
+                  <!--Print students squares names in the table -->
                   <% @squares.each do |square| %>
                   <tr>
                      <td>
