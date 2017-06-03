@@ -14,19 +14,19 @@
             </div><!--End page header-->
             <div class="row-xs-2 text-center">
                 <form class="form-horizontal text-center action-buttons-row">
-    			    <div class="form-group">
-    				    <h4>Select a Session:</h4>
-    				    <%= select_tag 'session_id', options_from_collection_for_select(@sessions, 'id', 'start_time'), {:required => true} %>
-    				    <br>
-        			</div>
-        			<div class="form-group">
+    	        	<div class="form-group">
+    		        	<h4>Select a Session:</h4>
+    				<%= select_tag 'session_id', options_from_collection_for_select(@sessions, 'id', 'start_time'), {:required => true} %>
+    				<br>
+        		</div>
+        		<div class="form-group">
                 		<%= button_tag(type: 'submit', class: "btn btn-lg btn-success", name: 'report') do %>
                 			Export to CSV
                 		<% end %>
-    			     </div>  
-    			</form>
-                </div>
-			</div><!--end form-->
-        </div>
+    			</div>  
+    		</form>
+           </div>
+	</div><!--end form-->
+      </div>
     </div>  
 </body>
