@@ -1,12 +1,7 @@
 <h1>Graph#example</h1>
 <p>Find me in app/views/graph/example.html.erb</p>
-<%= @testSes = Session.create!() %>
-<%= @testEve = SessionEvent.create!(session_id:@testSes.id) %>
-<%= @sesh1Events = SessionEvent.where(session_id:1) %>
-<%= SessionEvent.where(session_id:1) %>
-<%=debug(@sesh1Events)%>
-<%=debug(@testSes)%>
-<%= line_chart @sesh1Events.where(behavior_square_id:2).group_by_minute(:square_press_time).count %>
+
+<%= line_chart @sesh1Events.where(behavior_square_id:2).group_by_minute(:square_press_time).count,  id: "line-chart" %>
 <%= bar_chart @sesh1Events.group(:behavior_square_id).count %>
 
 <p>timeline of session events</p>
