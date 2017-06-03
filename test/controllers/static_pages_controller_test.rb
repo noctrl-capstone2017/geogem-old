@@ -36,11 +36,7 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   
   # Tests the about1 page 
   # Author: Meagan Moore & Steven Royster 
-<<<<<<< HEAD
-  test "should get about" do
-=======
   test "should get about1" do
->>>>>>> 138749f354054bfe9e03eff801542cffe53a495e
     get about_url
     assert_response :success
     assert_select "title", "GeoGem"
