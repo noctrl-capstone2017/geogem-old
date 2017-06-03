@@ -111,7 +111,6 @@ class SchoolsController < ApplicationController
       end
   end
 
-
   private
 
     def set_school
