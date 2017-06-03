@@ -55,18 +55,30 @@ class StudentsController < ApplicationController
   #For Reports purposes
   def analysis2
     @student = Student.find(params[:id])
+    @sessions = Session.where(session_student: @student.id)
+    if params[:report]
+        #redirect_to report1_path(params[:id])
+    end
   end
   
   #Author: Carolyn C
   #For Reports purposes
   def analysis3
     @student = Student.find(params[:id])
+    @sessions = Session.where(session_student: @student.id)
+    if params[:report]
+        #redirect_to report1_path(params[:id])
+    end
   end
   
   #Author: Carolyn C
   #For Reports purposes
   def analysis4
     @student = Student.find(params[:id])
+    @sessions = Session.where(session_student: @student.id)
+    if params[:report]
+        #redirect_to report1_path(params[:id])
+    end
   end
   
   

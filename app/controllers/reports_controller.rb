@@ -25,6 +25,8 @@ pdf.define_grid(:columns => 5, :rows => 8, :gutter => 10)
                       # -------Session Data---------#
 #Grabs the session based on id passed to it
 session = Session.find(params[:id])
+#session = Session.find(1)
+pdf.text "The number is " + params[:id].to_s
 student = Student.find(session.session_teacher)
 teacher = Teacher.find(session.session_student)
 
