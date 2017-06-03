@@ -5,6 +5,9 @@
 class TeachersController < ApplicationController
   
   include TeachersHelper
+  
+  before_action :is_suspended
+
   #Before actions to reduce access and prime pages to show teacher info.
   before_action :set_teacher, only: [:show, :edit, :update]
   before_action :same_school, only: [:show, :edit, :update]
@@ -12,13 +15,14 @@ class TeachersController < ApplicationController
   before_action :is_admin, only: [:admin, :admin_report, :index, :new, :create, :login_settings]
   before_action :is_super, only: [:super, :updateFocus, :super_report]
 
+
+
   # GET /teachers
   # This method prepares the index view. It sets up pagination in an ascending
   # order by their screen_name.
   def index
     @current_teacher = current_teacher
     @current_school = School.find(@current_teacher.school_id)
-    
     @teachers = Teacher.where(school_id: @current_teacher.school_id).paginate(page: params[:page], :per_page => 10)
     @teachers = @teachers.order('screen_name ASC')
   end
