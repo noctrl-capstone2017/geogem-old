@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
   
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :set_school   #set up the school info for the logged in teacher
-  before_action :is_admin     #make sure only admins can reach any of this
+  before_action :is_admin, only: [:index]       #make sure only admins can reach any of this
 
   # GET /students
   # GET /students.json
@@ -21,7 +21,6 @@ class StudentsController < ApplicationController
     
     # Make a @sessions list for each student in the @studens list
     @sessions = Session.where(session_student: @students.ids)
-
   end
 
   # GET /students/1
@@ -42,8 +41,47 @@ class StudentsController < ApplicationController
   #Author: Carolyn C
   #For analysis purposes
   def analysis
-   @student = Student.find(params[:id])
+    @student = Student.find(params[:id])
+    if params[:analysis_report]
+          redirect_to analysis2_student_path( @student)
+    elsif params[:analyze_csv]
+          redirect_to analysis3_student_path( @student)
+    elsif params[:analyze_charts]
+          redirect_to analysis4_student_path( @student)
+    end
   end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis2
+    @student = Student.find(params[:id])
+    @sessions = Session.where(session_student: @student.id)
+    if params[:report]
+        #redirect_to report1_path(params[:id])
+    end
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis3
+    @student = Student.find(params[:id])
+    @sessions = Session.where(session_student: @student.id)
+    if params[:report]
+        #redirect_to report1_path(params[:id])
+    end
+  end
+  
+  #Author: Carolyn C
+  #For Reports purposes
+  def analysis4
+    @student = Student.find(params[:id])
+    @sessions = Session.where(session_student: @student.id)
+    if params[:report]
+        #redirect_to report1_path(params[:id])
+    end
+  end
+  
+  
 
   # POST /students
   # POST /students.json

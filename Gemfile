@@ -22,6 +22,8 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'time_difference'
 gem 'chartkick'
+gem 'groupdate'
+gem 'yaml_db' #exports entire DB to yaml via console command '$ rake db:data:dump' -- Not ideal, but works! Dumps to db/data.yml.
 
 group :development, :test do
   gem 'rails-controller-testing'

@@ -19,4 +19,7 @@ class RosterSquaresControllerTest < ActionDispatch::IntegrationTest
     assert_response :found
   end
 
+  #test "should get error at student last + 1" do
+   # get "/roster_squares/#{@students.last}/edit"
+  #end
 end

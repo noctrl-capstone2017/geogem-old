@@ -2,11 +2,12 @@ Rails.application.routes.draw do
 
   # Cleaned up by: Michael Loptien
 
-  root    'login_session#new'
+  root    'graph#main'
   get     '/home' ,           to: 'teachers#home'
   get     'static_pages/help'
   
-  get     '/report1',         to: 'reports#report1'
+  get     '/csv1',            to: 'reports#csv1'
+
 
   # Super, admin, and schools routes
   # Author: Robert Herrera
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   post    '/super',           to: 'teachers#updateFocus',    as: :updateFocus
   get     '/school_backup',   to: 'schools#backup'
   get     '/school_suspend',  to: 'schools#suspend'  
+  post    '/school_suspend',  to: 'schools#suspend',         as: :suspend
   get     '/school_restore',  to: 'schools#restore'
 
   # Teacher routes
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
   get     'login',            to: 'login_session#new'
   post    'login',            to: 'login_session#create'
   get     'logout',           to: 'login_session#logout'
-  get     'about',           to: 'static_pages#about1'
+  get     'about',            to: 'static_pages#about1'
   get     'about2',           to: 'static_pages#about2'
 
   get     'help',             to: 'static_pages#help'
@@ -72,9 +74,17 @@ Rails.application.routes.draw do
   resources :students do
     member do
       get :analysis
+      get :analysis2
+      get :analysis3
+      get :analysis4
+      get :report1
     end
   end
   
+  #Carolyn C routes for analysis
+  get 'student/:id/analysis2', to: 'students#analysis', as: :analysis2
+  get 'student/:id/analysis3', to: 'students#analysis', as: :analysis3
+  get 'student/:id/analysis4', to: 'students#analysis', as: :analysis4
   
   resources :roster_students
   resources :roster_squares

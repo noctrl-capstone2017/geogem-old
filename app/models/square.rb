@@ -1,8 +1,8 @@
+# authors: Ricky Perez & Michael Loptien
+# Model for Students
+
 class Square < ApplicationRecord
-        
-    # authors: Ricky Perez & Michael Loptien
-    # Model for Students
-    
+    before_save   :color_check
     # Ensures that none of the fields are empty
     validates :screen_name, presence: true
     validates :tracking_type, presence: true
@@ -14,4 +14,14 @@ class Square < ApplicationRecord
                                      foreign_key: "square_id",
                                      dependent:   :destroy
     has_many :students, through: :passive_relationships, source: :student
+    
+ private   
+    # SOURCED FROM Kevin M & Tommy B
+    # Converts light blue to ltblue, so it can easily be drawn on in views.
+    # 'light blue' isn't a color that's recognized by bootstrap, but 'ltblue' is!
+    def color_check
+      if self.color == 'light blue'
+        self.color = 'ltblue'
+      end
+    end
 end

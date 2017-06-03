@@ -1,5 +1,6 @@
 #Author: Taylor Spino
 #If you want to add extra seeds for your own use, add them at the bottom (:
+#include ux_helper.rb
 
 stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o", 
             "gamepad","heart", "leaf","paper-plane","paw","star","graduation-cap"];
@@ -8,6 +9,9 @@ stud_icons = ["bug", "car", "puzzle-piece", "flash", "futbol-o",
 #to lt blue which is not linked here
 colors = ["red", "orange", "yellow", "green", "mint", "navy", "lavender", "plum", "pink"];
 
+case Rails.env
+
+when "development"
 # Seed the database with a School
 # School.find(1)
 School.create!(full_name: "North Central",
@@ -22,7 +26,7 @@ School.create!(full_name: "North Central",
 #School seeds added by - Dakota B
 30.times do |n|
   School.create!(full_name: Faker::University.name,
-                 screen_name: "test-#{n+1}",
+                 screen_name: "schl-#{n+2}",
                  icon: "apple",
                  color: colors.sample,
                  email: "example-#{n+1}@railstutorial.org",
@@ -82,28 +86,30 @@ Teacher.create!(user_name: "admin",
 # Seed the database with 30 faked Students
 # They go to North Central College
 30.times do |n|
-  name  = Faker::Name.first_name + " " + Faker::Name.last_name
-  Student.create!(  screen_name: "temp",
+  first_name  = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  Student.create!(  screen_name: first_name.downcase[0] + last_name.downcase,
                     contact_info: "student contact info",
                     description: "student description",
                     icon: stud_icons.sample,
                     color: colors.sample,
-                    session_interval: 20,
+                    session_interval: 15,
                     school_id: 1,
-                    full_name: name)
+                    full_name: first_name + " " + last_name)
 end
 
 # Two students with different school id's than the rest
 2.times do |n|
-  name  = Faker::Name.name
-  Student.create!(  screen_name: "temp",
+  first_name  = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  Student.create!(  screen_name: first_name.downcase[0] + last_name.downcase,
                     contact_info: "student contact info",
                     description: "student description",
                     icon: "bicycle",
                     color: "green",
-                    session_interval: 20,
+                    session_interval: 15,
                     school_id: 2,
-                    full_name: name)
+                    full_name: first_name + " " + last_name)
 end
 
 # Seed the database with 10 faked Squares
@@ -121,8 +127,8 @@ end
 
 
 #So far, there are 30 students created for North Central College.
-#Put 23 of them on profbill's roster.
-23.times do |n|
+#Put 30 of them on profbill's roster.
+30.times do |n|
   RosterStudent.create!(teacher_id: 1,  #1st teacher is super prof bill,
                                         #2nd is general teacher
                         student_id: n+1)
@@ -219,7 +225,7 @@ a = [ DateTime.new(2017,5,12,9,00, 0),
       DateTime.new(2017,5,15,9,00, 0),
       DateTime.new(2017,5,23,9,00, 0),
       DateTime.new(2017,5,27,9,00, 0) ]        #Start the session at 9:00 am
-roster_IDS2 = RosterSquare.where(student_id: 3) #roster square ids for student1
+roster_IDS2 = RosterSquare.where(student_id: 3) #roster square ids for student3
 4.times do |k|
 b = a[k]
   5.times do |l|
@@ -271,3 +277,44 @@ Teacher.create!(user_name: "TEST_teacher2",
                 description: "General teacher login",
                 powers: "Teacher",
                 school_id: 32)
+
+Teacher.create!(user_name: "TEST_teacherSus",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "TEST2",
+                screen_name: "TEST2",
+                icon: "apple",
+                color: "green",
+                email: "teacherz@soctrl.edu",
+                description: "General teacher login",
+                powers: "Teacher",
+                school_id: 32,
+                suspended: true)
+                
+
+when "production"
+
+# creates school Noctrl and teacher (+Super) profbill
+School.create!(full_name: "North Central",
+               screen_name: "noctrl",
+               icon: "apple",
+               color: "red",
+               email: "noctrl@noctrl.edu",
+               website: "noctrl.edu",
+               description: "It's North Central!")
+               
+Teacher.create!(user_name: "profbill",
+                password: "password",
+                password_confirmation: "password",
+                last_login: Time.now,
+                full_name: "Professor Bill",
+                screen_name: "profbill",
+                icon: "apple",
+                color: "red",
+                email: "wtktriger@noctrl.edu",
+                description: "Super user",
+                powers: "Admin",
+                school_id: 1)
+end
+                

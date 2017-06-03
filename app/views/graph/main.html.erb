@@ -2,10 +2,6 @@
 <h1>Graph#main</h1>
 <p>Find me in app/views/graph/main.html.erb</p>
 
-<%= timeline [
-  ["Sprint 1", "2017-04-24", "2017-05-08"],
-  ["Sprint 2", "2017-05-08", "2017-05-22"],
-] %>
-
+<%= line_chart @graphData.where(behavior_square_id:5).group_by_day(:square_press_time).count %>
 <p><a href="graph/example">Chart Examples</a></p>
 <p><a href="graph/todo">todo list</a></p>
