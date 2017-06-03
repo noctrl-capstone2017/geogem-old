@@ -160,9 +160,7 @@ class TeachersController < ApplicationController
   # Similarly, if suspended is in the params, then it changes their success or
   # error redirection.
   def update      
-    if params[:teacher][:hiddenVal]
-       redirect_to super_path    iels
-f params[:teacher][:current_password]
+    if params[:teacher][:current_password]
       change_password
     elsif params[:teacher][:suspended]
       change_login_settings
@@ -247,7 +245,4 @@ f params[:teacher][:current_password]
   # def focus_school_params 
   #  params.permit(:full_name)
   # end 
-    def focus_school_params 
-      params.require(:full_name).permit(:school_id)
-    end 
 end
