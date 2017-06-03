@@ -311,4 +311,36 @@ send_data pdf.render, :filename => "Report1.pdf", :type =>
 
 end
 
+def csv1
+    # Grabs the latest session's collection of Session Events
+    session = Session.last
+    eventsOccurred = SessionEvent.where(session_id: session.id)
+    
+
+
+    # Array used to find a square's square type
+    square_types = ["null", "Duration", "Frequency", "Interval"]
+    
+    # Uses the csv renderer to create a csv string to be updated with the 
+    # requisite values
+    csv_string = CSV.generate do |csv|
+        csv << %w(num square square_type press_time end_time)
+        eventsOccurred.each do |item|
+            # Specify the square for each given event
+            eventSquare = Square.where(id: item.behavior_square_id)
+            # Find the given square's screen name and square type
+            scrnName = eventSquare.screen_name
+            squareType = square_types[eventSquare.tracking_type]
+            # Update the csv_string
+            csv << [item.id,  scrnName, squareType, 
+                item.square_press_time, item.duration_end_time]
+        end
+    end
+    # Renders the csv file
+    respond_to do |format|
+        format.csv { render :csv => csv_string, :filename => "Report1.csv" }
+    end
+end
+
+
 end

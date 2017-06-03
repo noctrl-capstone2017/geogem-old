@@ -1,6 +1,5 @@
-# Author: Nate V
+# Author: Nate V, Taylor S
 # Reports Testing File
-# WIP, awaiting refactoring to provide full test functionality
 
 require 'test_helper'
 require 'login_session_helper'
@@ -55,36 +54,12 @@ class ReportsControllerTest < ActionDispatch::IntegrationTest
   assert_not_nil(@session.start_time, "Session1 fixture is nil") 
   end
   
-  #Commented out only because they are failing for right now
-  #NV
+  #Checks to see if a logged in teacher can get the csv file
+  test "should_get_csv" do
+    log_in_as(@teacher)
+    #send in the id for the session of interest
+    post csv_url, params: {id: @session.id}
+    assert_response :success
+  end
   
-  #test "should get data from session" do
-    #get assigns(session)
-    #assert_response :success
-  #end
-  
-
-  #test "should get pdf page" do
-    #get '/report1'
-    #assert_response :success
-  #end
-  
-  # Include test for logged in user? Is this functional in the application_controller?
-  
-  # Additional tests on the way after controller refactoring
-  # WIP
-  #test "should get refactor page #1" do
-  #  get :refactor1
-  #  assert_response :success
-  #end
-  
-  #test "should get refactor page #2" do
-  #  get :refactor2
-  #  assert_response :success
-  #end
-  
-  #test "should get refactor page #3" do
-  #  get :refactor2
-  #  assert_response :success
-  #end
 end
